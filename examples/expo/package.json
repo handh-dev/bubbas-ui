@@ -1,0 +1,34 @@
+{
+  "name": "@bubbasfw/example-expo",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start --localhost",
+    "ios": "expo start --ios --localhost",
+    "android": "expo start --android --localhost",
+    "web": "expo start --web --localhost --port 4311",
+    "export:native": "expo export --platform ios --platform android --output-dir dist-native",
+    "export:web": "expo export --platform web --output-dir dist-web",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bubbasfw/ui": "workspace:*",
+    "expo": "57.0.31",
+    "nativewind": "4.2.7",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-css-interop": "0.2.7",
+    "react-native-reanimated": "4.5.1",
+    "react-native-safe-area-context": "5.7.0",
+    "react-native-web": "0.21.4",
+    "react-native-worklets": "0.10.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "babel-preset-expo": "57.0.13",
+    "tailwindcss": "3.4.17",
+    "typescript": "6.0.3"
+  }
+}

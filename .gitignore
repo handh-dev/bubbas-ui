@@ -1,0 +1,14 @@
+node_modules/
+dist/
+dist-native/
+dist-web/
+.next/
+.expo/
+web-build/
+artifacts/
+*.tgz
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example

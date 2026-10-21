@@ -1,0 +1,36 @@
+{
+  "name": "bubbas-ui-workspace",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@11.15.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "pnpm --filter @bubbasfw/ui build",
+    "typecheck": "pnpm --filter @bubbasfw/ui typecheck && pnpm --filter './examples/*' --if-present typecheck",
+    "verify": "pnpm build && pnpm typecheck",
+    "pack": "pnpm --filter @bubbasfw/ui pack",
+    "dev:web": "pnpm --filter @bubbasfw/example-next dev",
+    "dev:expo": "pnpm --filter @bubbasfw/example-expo start",
+    "verify:package": "node scripts/verify-package.mjs",
+    "verify:web": "node scripts/verify-web.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.7",
+    "nativewind": "4.2.7",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-reanimated": "4.5.1",
+    "react-native-safe-area-context": "5.7.0",
+    "react-native-web": "0.21.4",
+    "react-native-worklets": "0.10.1",
+    "tailwindcss": "3.4.17",
+    "tsup": "8.5.0",
+    "typescript": "5.9.3",
+    "playwright": "1.64.0",
+    "@types/react-dom": "19.2.3"
+  }
+}

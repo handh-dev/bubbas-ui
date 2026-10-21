@@ -1,0 +1,32 @@
+{
+  "name": "@bubbasfw/example-next",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack --hostname 127.0.0.1 --port 4310",
+    "build": "next build --webpack",
+    "start": "next start --hostname 127.0.0.1 --port 4310",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bubbasfw/ui": "workspace:*",
+    "nativewind": "4.2.7",
+    "next": "16.4.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-reanimated": "4.5.1",
+    "react-native-safe-area-context": "5.7.0",
+    "react-native-web": "0.21.4",
+    "react-native-worklets": "0.10.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "19.2.3",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "3.4.17",
+    "typescript": "^5.9.3"
+  }
+}
