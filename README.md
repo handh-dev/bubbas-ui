@@ -6,8 +6,9 @@ iOS, and Android. The first scaffold contains a Button and pinned foundation
 tokens; it is not yet a complete component catalog.
 
 The npm package is configured for public access. It has not been published.
-The distribution license is pending the owner’s choice; source visibility does
-not grant an open-source or trademark license.
+The code is licensed under [MIT](LICENSE). Bubba’s names and marks are not
+licensed as trademarks; separately supplied fonts and artwork retain their own
+rights.
 
 ## Workspace
 
@@ -162,9 +163,9 @@ for the pinned foundation sources.
 
 Build, typecheck, inspect the tarball, verify both consumer bundlers, and review
 the result before the first public npm release. Publishing remains a deliberate
-owner-reviewed step; no script or GitHub push publishes automatically. Set the
-chosen code license and package repository metadata before release. Distribution
-rights for brand artwork and commercial fonts remain separate.
+owner-reviewed step; no script or GitHub push publishes automatically. Confirm the
+package repository metadata before release. Distribution rights for brand
+artwork and commercial fonts remain separate.
 
 Official setup references:
 [NativeWind Expo](https://www.nativewind.dev/docs/getting-started/installation),

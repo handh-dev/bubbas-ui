@@ -14,7 +14,8 @@ qualification are separate work.
 - Source ships for Tailwind scanning; exports include platform-neutral tokens and
   CJS Tailwind preset. Next example uses Pages Router and webpack explicitly.
 - Brand Studio owns approved brand. Seed values are pinned in docs/brand-sources.md.
-- No font/artwork binaries. Distribution license awaits owner selection.
+- Owner selected MIT for the code on 2026-10-21. No font/artwork binaries;
+  their distribution rights and trademark rights remain separate.
 - Package is configured public, and no npm release or deployment is automated.
 
 ## Commands and evidence
