@@ -62,6 +62,11 @@ async function checkArtifact() {
     else Object.values(entry).forEach(visit);
   };
   Object.values(manifest.exports).forEach(visit);
+  for (const name of names.filter((name) => name.startsWith('src/') && /\.tsx?$/.test(name))) {
+    const source = await readFile(path.join(publishedRoot, name), 'utf8');
+    assert.doesNotMatch(source, /<(?:div|button|input|textarea|select|span|a)(?:\s|>)/, `Native package source must not render HTML: ${name}`);
+    assert.doesNotMatch(source, /(?:from|require\()\s*["'](?:@base-ui|@radix-ui)/, `No web-only primitive dependency: ${name}`);
+  }
   for (const file of ['dist/index.js', 'dist/index.cjs']) {
     const source = await readFile(path.join(publishedRoot, file), 'utf8');
     assert.match(source, /nativewind\/jsx-runtime/, 'Compiled components must retain NativeWind JSX handling');
@@ -73,6 +78,8 @@ async function checkArtifact() {
   assert.ok(preset.theme?.extend?.colors, 'The published Tailwind preset must load');
   const { tokens } = require(path.join(publishedRoot, 'dist/tokens.cjs'));
   assert.equal(tokens.colors.red, '#CC0000', 'The platform-neutral token export must load');
+  assert.equal(Object.keys(tokens.themes.light).length, 41, 'Complete light semantic role map');
+  assert.deepEqual(Object.keys(tokens.themes.light).sort(), Object.keys(tokens.themes.dark).sort(), 'Both themes cover the same semantic roles');
   report.checks.artifact = { filename: packed.filename, files: names, bytes: packed.size, shasum: packed.shasum, integrity: packed.integrity };
   return tarball;
 }

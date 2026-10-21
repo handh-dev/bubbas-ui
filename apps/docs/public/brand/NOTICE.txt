@@ -1,0 +1,13 @@
+Bubba’s public documentation assets
+
+wordmark.svg and favicon.svg: original Bubba’s logo geometry from approved brand
+release 1.0.0. Included for identifying this design system under the owner’s
+public distribution assurance (source evidence S14). These assets are not
+licensed under the repository’s MIT software license. No trademark license is
+granted. Other uses require permission from the brand owner.
+
+fonts/montserrat.ttf: Montserrat, redistributed under SIL Open Font License 1.1.
+See fonts/OFL.txt for the full license and attribution.
+
+No Eurostile binary, mascot, generated campaign artwork, or unreviewed recovered
+website artwork is distributed by this documentation site.

@@ -3,7 +3,24 @@
     "name": "Bubba UI Example",
     "slug": "bubbas-ui-example",
     "version": "0.0.0",
-    "platforms": ["ios", "android", "web"],
-    "web": { "bundler": "metro" }
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "web": {
+      "bundler": "metro"
+    },
+    "userInterfaceStyle": "automatic",
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "enableSceneSupport": true
+          }
+        }
+      ]
+    ]
   }
 }

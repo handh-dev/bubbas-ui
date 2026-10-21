@@ -12,3 +12,10 @@ artifacts/
 .env
 .env.*
 !.env.example
+
+# Static docs output and local design decision server state.
+apps/docs/out/
+.impeccable/questions/
+
+# Local visual review captures and machine-specific reviewer packets.
+.impeccable/review/

@@ -1,9 +1,12 @@
 # @bubbasfw/ui
 
-A public universal design system scaffold for Bubba’s Fireworks. One shared
-Button implementation uses React Native primitives and NativeWind on Next.js,
-iOS, and Android. The first scaffold contains a Button and pinned foundation
-tokens; it is not yet a complete component catalog.
+Bubba’s universal design system for Next.js, Expo, iOS and Android.
+`@bubbasfw/ui@0.2.0` contains 32 components built with React Native primitives and
+NativeWind, plus semantic themes, a visual review workbench and complete
+Web/Expo galleries.
+
+[Review the design system](https://handh-dev.github.io/bubbas-ui/) ·
+[npm package](https://www.npmjs.com/package/@bubbasfw/ui)
 
 Published releases use public npm access.
 The code is licensed under [MIT](LICENSE). Bubba’s names and marks are not
@@ -13,16 +16,12 @@ rights.
 ## Workspace
 
 ```text
-packages/ui/
-  src/components/Button.tsx   Shared Pressable + Text control
-  src/tokens.ts              Platform-neutral foundation values
-  src/index.ts               Component entry with a Next.js client boundary
-  tailwind-preset.cjs         Shared colors and radius utilities
-  tsup.config.ts             Externalized ESM/CJS + TypeScript declarations
-examples/next/               React Native Web + Next.js Pages Router
-examples/expo/               NativeWind + Expo Metro/Babel configuration
-scripts/                     Packed-package and browser integration checks
-docs/brand-sources.md         Pinned source versions and asset boundaries
+packages/ui/                 Universal components, themes, tokens, ESM/CJS/types
+apps/docs/                   Static visual workbench, 32 routes and setup guides
+examples/next/               Self-contained React Native Web + Next.js gallery
+examples/expo/               Self-contained native Expo gallery
+scripts/                     Packed-package, gallery and docs browser checks
+docs/brand-sources.md         Pinned provenance and separate asset rights
 ```
 
 ## Develop
@@ -32,24 +31,48 @@ Use Node 22.13 or newer and pnpm 11.15.0.
 ```sh
 pnpm install
 pnpm verify
+pnpm dev:docs
+# Runnable consumer examples:
 pnpm dev:web
-# In another terminal, or instead of the web example:
 pnpm dev:expo
 ```
 
-The Next.js example runs at `http://127.0.0.1:4310`. Expo offers iOS, Android,
+The docs preview runs at `http://127.0.0.1:4313/bubbas-ui/`. The Next.js example runs at `http://127.0.0.1:4310`. Expo offers iOS, Android,
 and web through its normal development flow. Changes to `packages/ui/src`
 require a package rebuild (`pnpm build`) before consumers see them.
 
 ```sh
 pnpm verify:package
 pnpm verify:web
-pnpm pack
+pnpm verify:docs
+pnpm run pack
 ```
 
 The package check uses an actual npm tarball in independent consumer fixtures.
 The browser check uses Playwright’s bundled Chromium and closes its browser in
 `finally`. These checks are separate from native simulator/device acceptance.
+
+## Review the system
+
+The workbench puts a real component on a large stage, with appearance, variant,
+size and state controls. Browse or search the 32-component filmstrip. Keep/Change
+status and notes stay in your browser; Export notes downloads a JSON handback.
+Code fragments and Web/Expo setup stay behind secondary implementation guidance.
+The web preview is React Native Web; the Expo gallery demonstrates native rendering.
+
+`apps/docs/src/showcase` is the canonical universal catalog/demo source.
+`pnpm sync:showcase` copies it into both complete consumer projects so packed
+consumer verification has no cross-repository imports. Run it after demo changes.
+
+```sh
+pnpm build:docs
+pnpm preview:docs
+```
+
+The output in `apps/docs/out` is ready for the chosen GitHub Pages path,
+`https://handh-dev.github.io/bubbas-ui/`. It uses static
+export, `/bubbas-ui` base path, trailing slashes and `.nojekyll`. There is no
+GitHub Actions workflow or automatic deployment.
 
 ## Use the Button
 
@@ -80,22 +103,23 @@ export function SaveAction() {
 Children should be text or inline React Native `Text` content. Supply
 `accessibilityLabel` when the visible label needs additional context. Consumers
 own font loading and may use `style` / `textClassName` to select licensed fonts.
-The example keeps native system fonts until a consumer loads its brand font.
+The examples keep native system fonts until a consumer loads its brand font.
+The public docs self-host cleared Montserrat with its OFL license.
 
 ## Install in a consuming app
 
 Install the package alongside the app’s compatible platform dependencies.
-For local development, you can also install a tarball from `pnpm pack`.
+For local development, you can also install a tarball from `pnpm run pack`.
 React, React Native, React Native Web, NativeWind, and Tailwind are peers; they
 are not bundled into the package. React Native Web is an optional peer for a
 native-only Expo app. Web consumers must install it and React DOM.
 
-This scaffold’s baseline is React 19.2.3, React Native 0.86.3, React Native Web
+The tested example baseline is React 19.2.3, React Native 0.86.3, React Native Web
 0.21.4, NativeWind 4.2.7, and Tailwind 3.4.17. The example apps pin the platform
 versions. NativeWind v5 and Tailwind v4 require a separate migration.
 
 ```sh
-pnpm add @bubbasfw/ui nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.2.0 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -104,6 +128,7 @@ In Expo, declare NativeWind 4's Babel runtime directly in the app, then let
 
 ```sh
 pnpm add react-native-css-interop@0.2.7
+pnpm add -D @babel/plugin-transform-react-jsx@7.29.7
 npx expo install react-native-reanimated react-native-worklets react-native-safe-area-context
 ```
 
@@ -119,10 +144,10 @@ const path = require('node:path');
 const uiRoot = path.dirname(require.resolve('@bubbasfw/ui/package.json'));
 
 module.exports = {
+  darkMode: 'class',
   content: [
     './App.{js,jsx,ts,tsx}',
-    './app/**/*.{js,jsx,ts,tsx}',
-    './pages/**/*.{js,jsx,ts,tsx}',
+    './{app,pages,src}/**/*.{js,jsx,ts,tsx}',
     path.join(uiRoot, 'src/**/*.{ts,tsx}'),
   ],
   presets: [
@@ -156,7 +181,8 @@ The build compiles JSX to `nativewind/jsx-runtime` and keeps platform runtimes
 external. ESM, CJS, and their corresponding declaration files are exported.
 Source is included for Tailwind scanning; the consumer imports built JavaScript.
 There are no DOM primitives, Base UI, Radix UI, font binaries, or logo binaries
-in the shared component source. Read [brand provenance](docs/brand-sources.md)
+in the shared package. The docs separately include cleared Montserrat and original
+logo geometry with an explicit asset notice. Read [brand provenance](docs/brand-sources.md)
 for the pinned foundation sources.
 
 ## Release
@@ -171,3 +197,6 @@ Official setup references:
 [NativeWind Expo](https://www.nativewind.dev/docs/getting-started/installation),
 [NativeWind Next.js](https://www.nativewind.dev/docs/getting-started/installation/nextjs),
 [React Native Web](https://necolas.github.io/react-native-web/docs/multi-platform/).
+
+For Expo SDK57 builds with Xcode27/iOS27, follow the targeted
+[scene-lifecycle setup](docs/platform-notes.md).
