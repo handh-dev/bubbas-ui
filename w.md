@@ -3,8 +3,8 @@
 User scope: scaffold public npm package `@bubbasfw/ui` and public design system
 using React Native primitives + NativeWind for Next.js and Expo. Initial delivery
 is package/configuration, foundation tokens, and one shared Button. Full component
-catalog, consumer migration, public npm publication, and native release/device
-qualification are separate work.
+catalog, consumer migration, and native release/device qualification are separate
+work. The owner authorized the first public npm release on 2026-10-21.
 
 ## Decisions
 
@@ -17,6 +17,14 @@ qualification are separate work.
 - Owner selected MIT for the code on 2026-10-21. No font/artwork binaries;
   their distribution rights and trademark rights remain separate.
 - Package is configured public, and no npm release or deployment is automated.
+
+## First public release preparation
+
+The owner explicitly authorized publication of `@bubbasfw/ui@0.1.0` to public
+npm on 2026-10-21. This records authorization and preparation, not registry
+success. Inspect the exact tarball and preserve publication/registry readback
+evidence before recording the release as published. Future releases remain
+owner-reviewed; no push or merge publishes automatically.
 
 ## Commands and evidence
 

@@ -5,7 +5,7 @@ Button implementation uses React Native primitives and NativeWind on Next.js,
 iOS, and Android. The first scaffold contains a Button and pinned foundation
 tokens; it is not yet a complete component catalog.
 
-The npm package is configured for public access. It has not been published.
+Published releases use public npm access.
 The code is licensed under [MIT](LICENSE). Bubba’s names and marks are not
 licensed as trademarks; separately supplied fonts and artwork retain their own
 rights.
@@ -84,8 +84,8 @@ The example keeps native system fonts until a consumer loads its brand font.
 
 ## Install in a consuming app
 
-After the first npm release, install the package with the app’s compatible
-platform dependencies. Before publication, use a local tarball from `pnpm pack`.
+Install the package alongside the app’s compatible platform dependencies.
+For local development, you can also install a tarball from `pnpm pack`.
 React, React Native, React Native Web, NativeWind, and Tailwind are peers; they
 are not bundled into the package. React Native Web is an optional peer for a
 native-only Expo app. Web consumers must install it and React DOM.
@@ -162,7 +162,7 @@ for the pinned foundation sources.
 ## Release
 
 Build, typecheck, inspect the tarball, verify both consumer bundlers, and review
-the result before the first public npm release. Publishing remains a deliberate
+the result before each public npm release. Publishing remains a deliberate
 owner-reviewed step; no script or GitHub push publishes automatically. Confirm the
 package repository metadata before release. Distribution rights for brand
 artwork and commercial fonts remain separate.

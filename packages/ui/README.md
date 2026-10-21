@@ -67,6 +67,6 @@ The package exports `@bubbasfw/ui/tokens` without React runtime imports and
 `@bubbasfw/ui/tailwind-preset` for shared color/radius utilities. Platform peers
 are external; React Native Web is optional for native-only consumers.
 
-Public access is configured, but the first npm release is pending. The code is
-licensed under [MIT](LICENSE). Font and artwork binaries are excluded and retain
+Published releases use public npm access. The code is licensed under
+[MIT](LICENSE). Font and artwork binaries are excluded and retain
 their separate distribution rights. No trademark license is granted.
