@@ -4,7 +4,8 @@ User scope: scaffold public npm package `@bubbasfw/ui` and public design system
 using React Native primitives + NativeWind for Next.js and Expo. Initial delivery
 is package/configuration, foundation tokens, and one shared Button. Full component
 catalog, consumer migration, and native release/device qualification are separate
-work. The owner authorized the first public npm release on 2026-10-21.
+work. The first public npm release was owner-authorized and published on
+2026-10-21.
 
 ## Decisions
 
@@ -18,13 +19,21 @@ work. The owner authorized the first public npm release on 2026-10-21.
   their distribution rights and trademark rights remain separate.
 - Package is configured public, and no npm release or deployment is automated.
 
-## First public release preparation
+## First public release
 
-The owner explicitly authorized publication of `@bubbasfw/ui@0.1.0` to public
-npm on 2026-10-21. This records authorization and preparation, not registry
-success. Inspect the exact tarball and preserve publication/registry readback
-evidence before recording the release as published. Future releases remain
-owner-reviewed; no push or merge publishes automatically.
+`@bubbasfw/ui@0.1.0` was published to public npm on 2026-10-21 with explicit
+owner authorization. Public registry metadata reports `latest` as `0.1.0`,
+MIT licensing, and 15 package files. See the
+[npm package](https://www.npmjs.com/package/@bubbasfw/ui) and
+[release record](docs/releases/0.1.0.md). Install with `pnpm add @bubbasfw/ui`
+and follow the consumer setup for platform peers and NativeWind.
+
+Unauthenticated registry readback and a downloaded registry tarball passed:
+the tarball matches the reviewed artifact byte-for-byte and all 15 files match
+the release source. Evidence: `artifacts/verification/run-XhlD5G/published-readback.json`.
+Future releases remain owner-reviewed; no push or merge publishes automatically.
+Native simulator/device interaction and native release qualification remain
+untested.
 
 ## Commands and evidence
 
