@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[332],{1344:(_,n,u)=>{(window.__NEXT_P=window.__NEXT_P||[]).push(["/",function(){return u(1903)}])},1903:(_,n,u)=>{"use strict";u.r(n),u.d(n,{default:()=>i});var t=u(6569),e=u(7230);function i(){return(0,t.jsx)(e._,{initialSlug:"button"})}}},_=>{_.O(0,[364,566,230,636,593,792],()=>_(_.s=1344)),_N_E=_.O()}]);
