@@ -1,0 +1,550 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T21:35:07.261Z",
+  "title": "Design System: Bubba’s UI",
+  "extensions": {
+    "colorMeta": {
+      "brand-red": {
+        "role": "primary",
+        "displayName": "Bubba’s Red"
+      },
+      "brand-blue": {
+        "role": "secondary",
+        "displayName": "Bubba’s Blue"
+      },
+      "brand-navy": {
+        "role": "primary",
+        "displayName": "Bubba’s Navy"
+      },
+      "brand-gold": {
+        "role": "secondary",
+        "displayName": "Bubba’s Gold"
+      },
+      "web-selection-text": {
+        "role": "neutral",
+        "displayName": "Black selection text"
+      },
+      "light-canvas": {
+        "role": "neutral",
+        "displayName": "Light canvas"
+      },
+      "light-surface": {
+        "role": "neutral",
+        "displayName": "Light surface"
+      },
+      "light-raised": {
+        "role": "neutral",
+        "displayName": "Light raised"
+      },
+      "light-hover": {
+        "role": "neutral",
+        "displayName": "Light hover"
+      },
+      "light-selected": {
+        "role": "neutral",
+        "displayName": "Light selected"
+      },
+      "light-text": {
+        "role": "neutral",
+        "displayName": "Light text"
+      },
+      "light-heading": {
+        "role": "neutral",
+        "displayName": "Light heading"
+      },
+      "light-muted": {
+        "role": "neutral",
+        "displayName": "Light muted"
+      },
+      "light-line": {
+        "role": "neutral",
+        "displayName": "Light line"
+      },
+      "light-border": {
+        "role": "neutral",
+        "displayName": "Light border"
+      },
+      "light-link": {
+        "role": "neutral",
+        "displayName": "Light link"
+      },
+      "light-link-hover": {
+        "role": "neutral",
+        "displayName": "Light link hover"
+      },
+      "light-focus": {
+        "role": "neutral",
+        "displayName": "Light focus"
+      },
+      "light-focus-inner": {
+        "role": "neutral",
+        "displayName": "Light focus inner"
+      },
+      "light-accent": {
+        "role": "secondary",
+        "displayName": "Light accent"
+      },
+      "light-action-text": {
+        "role": "neutral",
+        "displayName": "Light action text"
+      },
+      "light-action-border": {
+        "role": "neutral",
+        "displayName": "Light action border"
+      },
+      "light-disabled-surface": {
+        "role": "neutral",
+        "displayName": "Light disabled surface"
+      },
+      "light-disabled-text": {
+        "role": "neutral",
+        "displayName": "Light disabled text"
+      },
+      "light-info": {
+        "role": "secondary",
+        "displayName": "Light info"
+      },
+      "light-info-surface": {
+        "role": "secondary",
+        "displayName": "Light info surface"
+      },
+      "light-info-border": {
+        "role": "secondary",
+        "displayName": "Light info border"
+      },
+      "light-success": {
+        "role": "secondary",
+        "displayName": "Light success"
+      },
+      "light-success-surface": {
+        "role": "secondary",
+        "displayName": "Light success surface"
+      },
+      "light-success-border": {
+        "role": "secondary",
+        "displayName": "Light success border"
+      },
+      "light-warning": {
+        "role": "secondary",
+        "displayName": "Light warning"
+      },
+      "light-warning-surface": {
+        "role": "secondary",
+        "displayName": "Light warning surface"
+      },
+      "light-warning-border": {
+        "role": "secondary",
+        "displayName": "Light warning border"
+      },
+      "light-error": {
+        "role": "secondary",
+        "displayName": "Light error"
+      },
+      "light-error-surface": {
+        "role": "secondary",
+        "displayName": "Light error surface"
+      },
+      "light-error-border": {
+        "role": "secondary",
+        "displayName": "Light error border"
+      },
+      "light-code-surface": {
+        "role": "neutral",
+        "displayName": "Light code surface"
+      },
+      "light-code-text": {
+        "role": "neutral",
+        "displayName": "Light code text"
+      },
+      "light-code-muted": {
+        "role": "neutral",
+        "displayName": "Light code muted"
+      },
+      "light-selection": {
+        "role": "neutral",
+        "displayName": "Light selection"
+      },
+      "light-selection-text": {
+        "role": "neutral",
+        "displayName": "Light selection text"
+      },
+      "light-scrollbar": {
+        "role": "neutral",
+        "displayName": "Light scrollbar"
+      },
+      "light-scrollbar-track": {
+        "role": "neutral",
+        "displayName": "Light scrollbar track"
+      },
+      "dark-canvas": {
+        "role": "neutral",
+        "displayName": "Dark canvas"
+      },
+      "dark-surface": {
+        "role": "neutral",
+        "displayName": "Dark surface"
+      },
+      "dark-raised": {
+        "role": "neutral",
+        "displayName": "Dark raised"
+      },
+      "dark-hover": {
+        "role": "neutral",
+        "displayName": "Dark hover"
+      },
+      "dark-selected": {
+        "role": "neutral",
+        "displayName": "Dark selected"
+      },
+      "dark-text": {
+        "role": "neutral",
+        "displayName": "Dark text"
+      },
+      "dark-heading": {
+        "role": "neutral",
+        "displayName": "Dark heading"
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Dark muted"
+      },
+      "dark-line": {
+        "role": "neutral",
+        "displayName": "Dark line"
+      },
+      "dark-border": {
+        "role": "neutral",
+        "displayName": "Dark border"
+      },
+      "dark-link": {
+        "role": "neutral",
+        "displayName": "Dark link"
+      },
+      "dark-link-hover": {
+        "role": "neutral",
+        "displayName": "Dark link hover"
+      },
+      "dark-focus": {
+        "role": "neutral",
+        "displayName": "Dark focus"
+      },
+      "dark-focus-inner": {
+        "role": "neutral",
+        "displayName": "Dark focus inner"
+      },
+      "dark-accent": {
+        "role": "secondary",
+        "displayName": "Dark accent"
+      },
+      "dark-action-text": {
+        "role": "neutral",
+        "displayName": "Dark action text"
+      },
+      "dark-action-border": {
+        "role": "neutral",
+        "displayName": "Dark action border"
+      },
+      "dark-disabled-surface": {
+        "role": "neutral",
+        "displayName": "Dark disabled surface"
+      },
+      "dark-disabled-text": {
+        "role": "neutral",
+        "displayName": "Dark disabled text"
+      },
+      "dark-info": {
+        "role": "secondary",
+        "displayName": "Dark info"
+      },
+      "dark-info-surface": {
+        "role": "secondary",
+        "displayName": "Dark info surface"
+      },
+      "dark-info-border": {
+        "role": "secondary",
+        "displayName": "Dark info border"
+      },
+      "dark-success": {
+        "role": "secondary",
+        "displayName": "Dark success"
+      },
+      "dark-success-surface": {
+        "role": "secondary",
+        "displayName": "Dark success surface"
+      },
+      "dark-success-border": {
+        "role": "secondary",
+        "displayName": "Dark success border"
+      },
+      "dark-warning": {
+        "role": "secondary",
+        "displayName": "Dark warning"
+      },
+      "dark-warning-surface": {
+        "role": "secondary",
+        "displayName": "Dark warning surface"
+      },
+      "dark-warning-border": {
+        "role": "secondary",
+        "displayName": "Dark warning border"
+      },
+      "dark-error": {
+        "role": "secondary",
+        "displayName": "Dark error"
+      },
+      "dark-error-surface": {
+        "role": "secondary",
+        "displayName": "Dark error surface"
+      },
+      "dark-error-border": {
+        "role": "secondary",
+        "displayName": "Dark error border"
+      },
+      "dark-code-surface": {
+        "role": "neutral",
+        "displayName": "Dark code surface"
+      },
+      "dark-code-text": {
+        "role": "neutral",
+        "displayName": "Dark code text"
+      },
+      "dark-code-muted": {
+        "role": "neutral",
+        "displayName": "Dark code muted"
+      },
+      "dark-selection": {
+        "role": "neutral",
+        "displayName": "Dark selection"
+      },
+      "dark-selection-text": {
+        "role": "neutral",
+        "displayName": "Dark selection text"
+      },
+      "dark-scrollbar": {
+        "role": "neutral",
+        "displayName": "Dark scrollbar"
+      },
+      "dark-scrollbar-track": {
+        "role": "neutral",
+        "displayName": "Dark scrollbar track"
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "headline",
+        "purpose": "Shared typography scale, with the docs’ web font binding; native font supplied by the consumer."
+      },
+      "title": {
+        "displayName": "title",
+        "purpose": "Shared typography scale, with the docs’ web font binding; native font supplied by the consumer."
+      },
+      "subtitle": {
+        "displayName": "subtitle",
+        "purpose": "Shared typography scale, with the docs’ web font binding; native font supplied by the consumer."
+      },
+      "lead": {
+        "displayName": "lead",
+        "purpose": "Shared typography scale, with the docs’ web font binding; native font supplied by the consumer."
+      },
+      "body": {
+        "displayName": "body",
+        "purpose": "Shared typography scale, with the docs’ web font binding; native font supplied by the consumer."
+      },
+      "small": {
+        "displayName": "small",
+        "purpose": "Shared typography scale, with the docs’ web font binding; native font supplied by the consumer."
+      },
+      "caption": {
+        "displayName": "caption",
+        "purpose": "Shared typography scale, with the docs’ web font binding; native font supplied by the consumer."
+      },
+      "label": {
+        "displayName": "label",
+        "purpose": "Shared typography scale, with the docs’ web font binding; native font supplied by the consumer."
+      },
+      "tag": {
+        "displayName": "tag",
+        "purpose": "Badge text, with the docs’ web font binding."
+      },
+      "button-sm": {
+        "displayName": "button sm",
+        "purpose": "Button size sm, with the docs’ web font binding."
+      },
+      "button-md": {
+        "displayName": "button md",
+        "purpose": "Button size md, with the docs’ web font binding."
+      },
+      "button-lg": {
+        "displayName": "button lg",
+        "purpose": "Button size lg, with the docs’ web font binding."
+      },
+      "code": {
+        "displayName": "code",
+        "purpose": "Text code variant."
+      }
+    },
+    "shadows": [
+      {
+        "name": "light-shadow-action",
+        "value": "0 3px 8px #CC000024",
+        "purpose": "Pinned source token; not applied by the current shared components."
+      },
+      {
+        "name": "light-shadow-panel",
+        "value": "0 2px 12px #131B2308",
+        "purpose": "Pinned source token; not applied by the current shared components."
+      },
+      {
+        "name": "light-shadow-dialog",
+        "value": "0 20px 100px #00133345",
+        "purpose": "Pinned source token; not applied by the current shared components."
+      },
+      {
+        "name": "dark-shadow-action",
+        "value": "0 3px 8px #00000040",
+        "purpose": "Pinned source token; not applied by the current shared components."
+      },
+      {
+        "name": "dark-shadow-panel",
+        "value": "0 2px 12px #00000020",
+        "purpose": "Pinned source token; not applied by the current shared components."
+      },
+      {
+        "name": "dark-shadow-dialog",
+        "value": "0 20px 100px #00000080",
+        "purpose": "Pinned source token; not applied by the current shared components."
+      }
+    ],
+    "motion": [
+      {
+        "name": "feedback",
+        "value": "140ms",
+        "purpose": "Pinned feedback duration; components do not automatically receive a transition."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact / Tailwind sm",
+        "value": "640px"
+      },
+      {
+        "name": "Tailwind md",
+        "value": "768px"
+      },
+      {
+        "name": "wide token",
+        "value": "960px"
+      },
+      {
+        "name": "Tailwind lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Button · primary",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "HTML/CSS web translation of Button variant=\"primary\" size=\"md\". Shared buttons retain the same paint on hover; focus, pressed, and disabled styles are included.",
+      "html": "<button type=\"button\" class=\"ds-button-primary\">Save changes</button>",
+      "css": ".ds-button-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 44px; min-height: 48px; padding: 12px 20px; border: 1px solid; border-radius: 4px; font-family: Montserrat, Arial, sans-serif; font-size: 16px; line-height: 24px; font-weight: 700; text-align: center; cursor: pointer; } .ds-button-primary:focus-visible { outline: 2px solid rgb(var(--bui-focus, 3 37 108)); outline-offset: 2px; } .ds-button-primary:active:not(:disabled) { opacity: .8; } .ds-button-primary:disabled { background: rgb(var(--bui-disabled-surface, 240 242 245)); border-color: rgb(var(--bui-disabled-surface, 240 242 245)); color: rgb(var(--bui-disabled-text, 107 114 126)); cursor: default; } .ds-button-primary { background: #CC0000; color: rgb(var(--bui-action-text, 255 255 255)); border-color: rgb(var(--bui-action-border, 168 0 0)); } .ds-button-primary:disabled { background: rgb(var(--bui-disabled-surface, 240 242 245)); color: rgb(var(--bui-disabled-text, 107 114 126)); border-color: rgb(var(--bui-disabled-surface, 240 242 245)); }"
+    },
+    {
+      "name": "Button · secondary",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "HTML/CSS web translation of Button variant=\"secondary\" size=\"md\". Shared buttons retain the same paint on hover; focus, pressed, and disabled styles are included.",
+      "html": "<button type=\"button\" class=\"ds-button-secondary\">Save changes</button>",
+      "css": ".ds-button-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 44px; min-height: 48px; padding: 12px 20px; border: 1px solid; border-radius: 4px; font-family: Montserrat, Arial, sans-serif; font-size: 16px; line-height: 24px; font-weight: 700; text-align: center; cursor: pointer; } .ds-button-secondary:focus-visible { outline: 2px solid rgb(var(--bui-focus, 3 37 108)); outline-offset: 2px; } .ds-button-secondary:active:not(:disabled) { opacity: .8; } .ds-button-secondary:disabled { background: rgb(var(--bui-disabled-surface, 240 242 245)); border-color: rgb(var(--bui-disabled-surface, 240 242 245)); color: rgb(var(--bui-disabled-text, 107 114 126)); cursor: default; } .ds-button-secondary { background: rgb(var(--bui-selected, 236 238 241)); color: rgb(var(--bui-text, 19 27 35)); border-color: rgb(var(--bui-border, 99 112 134)); } .ds-button-secondary:disabled { background: rgb(var(--bui-disabled-surface, 240 242 245)); color: rgb(var(--bui-disabled-text, 107 114 126)); border-color: rgb(var(--bui-disabled-surface, 240 242 245)); }"
+    },
+    {
+      "name": "Button · outline",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "HTML/CSS web translation of Button variant=\"outline\" size=\"md\". Shared buttons retain the same paint on hover; focus, pressed, and disabled styles are included.",
+      "html": "<button type=\"button\" class=\"ds-button-outline\">Save changes</button>",
+      "css": ".ds-button-outline { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 44px; min-height: 48px; padding: 12px 20px; border: 1px solid; border-radius: 4px; font-family: Montserrat, Arial, sans-serif; font-size: 16px; line-height: 24px; font-weight: 700; text-align: center; cursor: pointer; } .ds-button-outline:focus-visible { outline: 2px solid rgb(var(--bui-focus, 3 37 108)); outline-offset: 2px; } .ds-button-outline:active:not(:disabled) { opacity: .8; } .ds-button-outline:disabled { background: rgb(var(--bui-disabled-surface, 240 242 245)); border-color: rgb(var(--bui-disabled-surface, 240 242 245)); color: rgb(var(--bui-disabled-text, 107 114 126)); cursor: default; } .ds-button-outline { background: transparent; color: rgb(var(--bui-text, 19 27 35)); border-color: rgb(var(--bui-border, 99 112 134)); } .ds-button-outline:disabled { background: rgb(var(--bui-disabled-surface, 240 242 245)); color: rgb(var(--bui-disabled-text, 107 114 126)); border-color: rgb(var(--bui-disabled-surface, 240 242 245)); }"
+    },
+    {
+      "name": "Button · ghost",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "HTML/CSS web translation of Button variant=\"ghost\" size=\"md\". Shared buttons retain the same paint on hover; focus, pressed, and disabled styles are included.",
+      "html": "<button type=\"button\" class=\"ds-button-ghost\">Save changes</button>",
+      "css": ".ds-button-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 44px; min-height: 48px; padding: 12px 20px; border: 1px solid; border-radius: 4px; font-family: Montserrat, Arial, sans-serif; font-size: 16px; line-height: 24px; font-weight: 700; text-align: center; cursor: pointer; } .ds-button-ghost:focus-visible { outline: 2px solid rgb(var(--bui-focus, 3 37 108)); outline-offset: 2px; } .ds-button-ghost:active:not(:disabled) { opacity: .8; } .ds-button-ghost:disabled { background: rgb(var(--bui-disabled-surface, 240 242 245)); border-color: rgb(var(--bui-disabled-surface, 240 242 245)); color: rgb(var(--bui-disabled-text, 107 114 126)); cursor: default; } .ds-button-ghost { background: transparent; color: rgb(var(--bui-link, 3 37 108)); border-color: transparent; } .ds-button-ghost:disabled { background: rgb(var(--bui-disabled-surface, 240 242 245)); color: rgb(var(--bui-disabled-text, 107 114 126)); border-color: rgb(var(--bui-disabled-surface, 240 242 245)); }"
+    },
+    {
+      "name": "Labeled input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "HTML/CSS web translation of FormField with Input and a hint. Label, focus, invalid, disabled, and read-only visual states follow the shared components.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-field-input\">Example name</label><input class=\"ds-field-input\" id=\"ds-field-input\" placeholder=\"Enter a name\" aria-describedby=\"ds-field-hint\" /><span class=\"ds-field-hint\" id=\"ds-field-hint\">A visible label stays with the field.</span></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; font-family: Montserrat, Arial, sans-serif; color: rgb(var(--bui-text, 19 27 35)); } .ds-field-label { font-size: 16px; font-weight: 600; } .ds-field-input { box-sizing: border-box; min-height: 48px; padding: 12px; border: 1px solid rgb(var(--bui-border, 99 112 134)); border-radius: 4px; background: rgb(var(--bui-surface, 255 255 255)); color: rgb(var(--bui-text, 19 27 35)); font-family: Montserrat, Arial, sans-serif; font-size: 16px; line-height: 24px; caret-color: #007CE8; } .ds-field-input::placeholder { color: rgb(var(--bui-muted, 82 96 117)); opacity: 1; } .ds-field-input:focus-visible { outline: 2px solid rgb(var(--bui-focus, 3 37 108)); outline-offset: 2px; } .ds-field-input[aria-invalid=\"true\"] { border-color: rgb(var(--bui-error, 180 35 24)); } .ds-field-input:disabled { background: rgb(var(--bui-disabled-surface, 240 242 245)); color: rgb(var(--bui-disabled-text, 107 114 126)); } .ds-field-input::selection { background: rgb(var(--bui-selection, 217 232 251)); color: rgb(var(--bui-selection-text, 19 27 35)); } .ds-field-hint { font-size: 14px; line-height: 20px; color: rgb(var(--bui-muted, 82 96 117)); }"
+    },
+    {
+      "name": "Information badge",
+      "kind": "chip",
+      "refersTo": "badge-info",
+      "description": "HTML/CSS web translation of Badge tone=\"info\". This is a noninteractive status pill.",
+      "html": "<span class=\"ds-badge-info\">Information</span>",
+      "css": ".ds-badge-info { display: inline-block; align-self: flex-start; padding: 4px 12px; border-radius: 9999px; background: rgb(var(--bui-info-surface, 241 245 252)); color: rgb(var(--bui-info, 3 37 108)); font-family: Montserrat, Arial, sans-serif; font-size: 14px; line-height: 20px; font-weight: 600; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "HTML/CSS web translation of Card with default padding={6}, a level-2 Heading, and muted body text. Card has no hover elevation.",
+      "html": "<article class=\"ds-card\"><h2 class=\"ds-card-title\">A place for the details</h2><p class=\"ds-card-copy\">Related content, grouped with a quiet boundary.</p></article>",
+      "css": ".ds-card { padding: 24px; border: 1px solid rgb(var(--bui-line, 228 230 234)); border-radius: 12px; background: rgb(var(--bui-surface, 255 255 255)); font-family: Montserrat, Arial, sans-serif; } .ds-card-title { margin: 0 0 8px; font-size: 24px; line-height: 32px; font-weight: 700; color: rgb(var(--bui-heading, 3 37 108)); } .ds-card-copy { margin: 0; font-size: 16px; line-height: 24px; color: rgb(var(--bui-muted, 82 96 117)); }"
+    },
+    {
+      "name": "Pagination",
+      "kind": "nav",
+      "refersTo": "pagination",
+      "description": "HTML/CSS web translation of Pagination page={1} count={3}. The disabled previous direction and small outline buttons match the shared visual states; this preview has no page state handler.",
+      "html": "<nav class=\"ds-pagination\" aria-label=\"Pagination\"><button type=\"button\" class=\"ds-pagination-button\" disabled aria-label=\"Previous page\">Previous</button><span class=\"ds-pagination-label\" aria-live=\"polite\">Page 1 of 3</span><button type=\"button\" class=\"ds-pagination-button\" aria-label=\"Next page\">Next</button></nav>",
+      "css": ".ds-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-family: Montserrat, Arial, sans-serif; } .ds-pagination-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 44px; min-height: 44px; padding: 8px 12px; border: 1px solid rgb(var(--bui-border, 99 112 134)); border-radius: 4px; background: transparent; color: rgb(var(--bui-text, 19 27 35)); font-family: Montserrat, Arial, sans-serif; font-size: 14px; line-height: 20px; font-weight: 700; cursor: pointer; } .ds-pagination-button:focus-visible { outline: 2px solid rgb(var(--bui-focus, 3 37 108)); outline-offset: 2px; } .ds-pagination-button:active:not(:disabled) { opacity: .8; } .ds-pagination-button:disabled { background: rgb(var(--bui-disabled-surface, 240 242 245)); color: rgb(var(--bui-disabled-text, 107 114 126)); border-color: rgb(var(--bui-disabled-surface, 240 242 245)); cursor: default; } .ds-pagination-label { font-size: 14px; line-height: 20px; color: rgb(var(--bui-text, 19 27 35)); }"
+    },
+    {
+      "name": "Checked checkbox",
+      "kind": "custom",
+      "refersTo": "checkbox",
+      "description": "HTML/CSS web translation of a checked Checkbox with label and description. This is a static checked specimen; activation and state management belong to the shared React Native Checkbox.",
+      "html": "<button type=\"button\" role=\"checkbox\" aria-checked=\"true\" aria-describedby=\"ds-checkbox-description\" class=\"ds-checkbox\"><span class=\"ds-checkbox-box\" aria-hidden=\"true\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\"><path d=\"M3 5L5 7L9 2\" stroke=\"white\" stroke-width=\"2\" /></svg></span><span class=\"ds-checkbox-content\"><span class=\"ds-checkbox-label\">Enable updates</span><span class=\"ds-checkbox-description\" id=\"ds-checkbox-description\">A demonstration choice</span></span></button>",
+      "css": ".ds-checkbox { display: flex; align-items: center; gap: 12px; min-width: 44px; min-height: 44px; padding: 8px 0; border: 0; border-radius: 4px; background: transparent; text-align: left; font-family: Montserrat, Arial, sans-serif; cursor: pointer; } .ds-checkbox:focus-visible { outline: 2px solid rgb(var(--bui-focus, 3 37 108)); outline-offset: 2px; } .ds-checkbox-box { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border: 2px solid #CC0000; border-radius: 4px; background: #CC0000; } .ds-checkbox-content { display: flex; flex: 1; flex-direction: column; gap: 4px; min-width: 0; } .ds-checkbox-label { font-size: 16px; line-height: 24px; font-weight: 500; color: rgb(var(--bui-text, 19 27 35)); } .ds-checkbox-description { font-size: 14px; line-height: 20px; color: rgb(var(--bui-muted, 82 96 117)); } .ds-checkbox:disabled { opacity: .5; cursor: default; } .ds-checkbox[aria-invalid=\"true\"] .ds-checkbox-box { border-color: rgb(var(--bui-error, 180 35 24)); }"
+    },
+    {
+      "name": "Information alert",
+      "kind": "custom",
+      "refersTo": "alert-info",
+      "description": "HTML/CSS web translation of Alert tone=\"info\" with a title and description. The default specimen does not announce a live update.",
+      "html": "<div class=\"ds-alert-info\"><p class=\"ds-alert-title\">For your information</p><p class=\"ds-alert-copy\">A useful message with a clear next thought.</p></div>",
+      "css": ".ds-alert-info { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: rgb(var(--bui-info-surface, 241 245 252)); color: rgb(var(--bui-info, 3 37 108)); font-family: Montserrat, Arial, sans-serif; } .ds-alert-title { margin: 0; font-size: 16px; line-height: 24px; font-weight: 600; } .ds-alert-copy { margin: 0; font-size: 16px; line-height: 24px; }"
+    }
+  ],
+  "narrative": {
+    "overview": "Bubba’s UI preserves the established Brand Studio identity: Montserrat on the public web, navy headings in light appearance, blue review selections, red actions, and light or charcoal semantic surfaces. Fine borders and tonal groups separate content; controls use small corners and containers use broader corners.\n\nThe reusable package uses React Native primitives and NativeWind on web and native. Its font is supplied by the consumer; the public docs load the cleared Montserrat font. The approved logo has separate distribution terms from the MIT code.",
+    "keyCharacteristics": [
+      "Red actions and semantic feedback colors.",
+      "Light surfaces and neutral charcoal dark surfaces.",
+      "Small control corners, broader panel corners, and fine boundaries.",
+      "Visible keyboard focus and minimum touch targets."
+    ],
+    "rules": [],
+    "dos": [
+      "Do use the pinned semantic theme roles for surfaces, text, borders, focus, and feedback.",
+      "Do preserve red actions, navy light-theme headings, and the docs’ blue selections with black labels.",
+      "Do keep shared components on React Native primitives and NativeWind.",
+      "Do provide visible labels, keyboard focus, meaningful states, and minimum touch targets.",
+      "Do load a licensed font in a native consumer before reviewing font parity."
+    ],
+    "donts": [
+      "Don’t replace the charcoal dark baseline with navy or glow treatments.",
+      "Don’t add Eurostile, mascot art, or unreviewed recovered artwork to public assets.",
+      "Don’t infer MIT artwork or trademark rights from the code license.",
+      "Don’t turn the docs’ preview-and-filmstrip composition into a required application layout.",
+      "Don’t treat static HTML/CSS sidecar previews as shared native component implementations."
+    ]
+  }
+}

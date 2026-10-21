@@ -1,0 +1,56 @@
+'use client';
+
+import { createContext, useContext, useMemo, type ReactNode } from 'react';
+import { View, useColorScheme, type ViewProps } from 'react-native';
+import { vars } from 'nativewind';
+import { tokens } from './tokens';
+import { cn } from './internal/utils';
+
+export type Appearance = 'light' | 'dark' | 'system';
+export type ResolvedAppearance = 'light' | 'dark';
+export type ThemeColor = Exclude<keyof typeof tokens.themes.light, `shadow-${string}`>;
+export type ThemeColors = { [Key in ThemeColor]: string };
+
+function rgb(hex: string) {
+  return [1, 3, 5].map((start) => parseInt(hex.slice(start, start + 2), 16)).join(' ');
+}
+
+export function themeVariables(appearance: ResolvedAppearance) {
+  return vars(Object.fromEntries(Object.entries(tokens.themes[appearance])
+    .filter(([, value]) => value.startsWith('#'))
+    .map(([key, value]) => [`--bui-${key}`, rgb(value)])));
+}
+
+function themeValue(appearance: Appearance, resolvedAppearance: ResolvedAppearance) {
+  return {
+    appearance,
+    resolvedAppearance,
+    colors: Object.fromEntries(Object.entries(tokens.themes[resolvedAppearance])
+      .filter(([, value]) => value.startsWith('#'))) as ThemeColors,
+    variables: themeVariables(resolvedAppearance),
+  };
+}
+
+const ThemeContext = createContext(themeValue('light', 'light'));
+
+export interface ThemeProviderProps extends ViewProps {
+  children: ReactNode;
+  appearance?: Appearance;
+  className?: string;
+}
+
+/** Scoped variables support nested themes without changing global appearance. */
+export function ThemeProvider({ appearance = 'light', children, className, style, ...props }: ThemeProviderProps) {
+  const system = useColorScheme();
+  const resolved = appearance === 'system' ? system === 'dark' ? 'dark' : 'light' : appearance;
+  const value = useMemo(() => themeValue(appearance, resolved), [appearance, resolved]);
+  return (
+    <ThemeContext.Provider value={value}>
+      <View {...props} className={cn('bg-ui-canvas', className)} style={[value.variables, style]}>
+        {children}
+      </View>
+    </ThemeContext.Provider>
+  );
+}
+
+export function useTheme() { return useContext(ThemeContext); }

@@ -3,6 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
+import { verifyGallery, verifyOverlayFixture } from './verify-gallery.mjs';
 
 export async function verifyWeb(url, evidenceDirectory) {
   await mkdir(evidenceDirectory, { recursive: true });
@@ -54,12 +55,16 @@ export async function verifyWeb(url, evidenceDirectory) {
     await loading.click({ force: true });
     assert.equal(await count.textContent(), 'Button presses: 2', 'Inactive buttons must not invoke onPress');
 
+    const gallery = await verifyGallery(page);
+    const overlayFixture = await verifyOverlayFixture(page, url);
+    await page.goto(url, { waitUntil: 'networkidle' });
+    await page.getByTestId('select-button').click();
     await page.screenshot({ path: path.join(evidenceDirectory, 'next-desktop.png'), fullPage: true });
     await page.setViewportSize({ width: 390, height: 844 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Mobile layout must not overflow');
     await page.screenshot({ path: path.join(evidenceDirectory, 'next-mobile.png'), fullPage: true });
     assert.deepEqual(errors, [], 'No browser runtime errors');
-    const result = { url, paint, compact, focus, pointerPress: true, keyboardPress: true, disabled: true, loading: true, mobileWidth: 390, errors };
+    const result = { url, paint, compact, focus, pointerPress: true, keyboardPress: true, disabled: true, loading: true, mobileWidth: 390, gallery, overlayFixture, errors };
     await writeFile(path.join(evidenceDirectory, 'web.json'), `${JSON.stringify(result, null, 2)}\n`);
     return result;
   } finally {

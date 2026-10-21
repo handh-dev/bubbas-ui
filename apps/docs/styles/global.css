@@ -1,0 +1,48 @@
+@font-face {
+  font-family: Montserrat;
+  src: url("/bubbas-ui/fonts/montserrat.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,
+body,
+#__next {
+  min-height: 100%;
+  margin: 0;
+}
+body {
+  font-family: Montserrat, Arial, sans-serif;
+}
+body [dir] {
+  font-family: Montserrat, Arial, sans-serif;
+}
+body [class*="font-mono"] {
+  font-family: ui-monospace, SFMono-Regular, monospace;
+}
+::selection {
+  background: #007ce8;
+  color: #000;
+}
+input,
+textarea {
+  caret-color: #007ce8;
+}
+*:focus-visible {
+  outline-offset: 3px;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #637086 transparent;
+}
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

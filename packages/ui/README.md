@@ -1,72 +1,95 @@
 # @bubbasfw/ui
 
-Bubba’s universal React Native design system scaffold. The same NativeWind
-Button uses `Pressable`, `Text`, and `ActivityIndicator` on native platforms and
-React Native Web. This initial package contains the Button and foundation tokens.
+Bubba’s universal component library for React Native, Expo and React Native Web.
+All components use native primitives and NativeWind. React and platform runtimes
+are peers, with no Base UI, Radix UI or DOM component implementation.
+
+Version 0.2.0 includes 32 components, scoped light/dark/system themes and shared
+design tokens. Use the same imports in Next.js/React Native Web and Expo.
+
+[Browse the visual workbench and setup guides](https://handh-dev.github.io/bubbas-ui/)
 
 ```tsx
-import { Button } from '@bubbasfw/ui';
+import { Button, ThemeProvider } from '@bubbasfw/ui';
 
-<Button onPress={save} loading={saving} loadingLabel="Saving…">
-  Save changes
-</Button>
+<ThemeProvider appearance="system">
+  <Button onPress={save} loading={saving} loadingLabel="Saving…">
+    Save changes
+  </Button>
+</ThemeProvider>
 ```
 
-Variants: `primary`, `secondary`, `outline`, `ghost`. Sizes: `sm`, `md`, `lg`.
-Use `className` for the Pressable and `textClassName` for the label. Native
-Pressable props and refs are forwarded. Loading and disabled states block presses
-and expose accessibility state. Label content should be text or inline native Text.
+## Catalog
+
+- Foundations: Text, Heading, Stack, Inline, Container, Card, Divider.
+- Actions: Button, IconButton, Link.
+- Content: Badge, Avatar, ListItem, EmptyState.
+- Forms: Input, Textarea, FormField, Checkbox, Switch, RadioGroup, Select.
+- Navigation: Tabs, Breadcrumbs, Pagination.
+- Disclosure: Accordion, Dialog, Sheet.
+- Feedback: Alert, Toast, Spinner, Progress, Skeleton.
+
+Native props and refs are forwarded where supported. Interactive components
+expose accessible names and state. A consuming app still owns content, routing,
+font loading and acceptance on its devices and assistive technologies.
+
+`Button` variants are primary, secondary, outline and ghost; sizes are sm, md and
+lg. Disabled and loading block presses. `ThemeProvider` scopes semantic colors
+for light, dark or system appearance and supports nested previews. Native-only
+apps may omit the optional React Native Web peer.
 
 ## Consumer setup
 
 Baseline: React 19.2.3, React Native 0.86.3, React Native Web 0.21.4,
-NativeWind 4.2.7, Tailwind 3.4.17. Configure the host app for NativeWind and scan
-this package’s source so its utilities are generated:
+NativeWind 4.2.7, Tailwind 3.4.17. Install alongside the app’s compatible peers:
 
 ```sh
-pnpm add @bubbasfw/ui nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.2.0 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
-Expo apps must also declare NativeWind 4's Babel runtime directly:
-
-```sh
-pnpm add react-native-css-interop@0.2.7
-npx expo install react-native-reanimated react-native-worklets react-native-safe-area-context
-```
-
-The Babel preset emits `react-native-css-interop` imports into app files. Its
-transitive dependency through NativeWind does not resolve from those files in
-pnpm's isolated dependency layout.
+The host compiles the package’s utility classes. Include the published source:
 
 ```js
 const path = require('node:path');
 const uiRoot = path.dirname(require.resolve('@bubbasfw/ui/package.json'));
-
 module.exports = {
+  darkMode: 'class',
   content: [
     './App.{js,jsx,ts,tsx}',
-    './app/**/*.{js,jsx,ts,tsx}',
-    './pages/**/*.{js,jsx,ts,tsx}',
+    './{app,pages,src}/**/*.{js,jsx,ts,tsx}',
     path.join(uiRoot, 'src/**/*.{ts,tsx}'),
   ],
-  presets: [
-    require('nativewind/preset'),
-    require('@bubbasfw/ui/tailwind-preset'),
-  ],
+  presets: [require('nativewind/preset'), require('@bubbasfw/ui/tailwind-preset')],
 };
 ```
 
-Expo requires NativeWind’s Metro/Babel setup and compatible native dependencies.
-Next.js requires React Native Web aliasing, NativeWind’s JSX import source,
-Tailwind 3/PostCSS, and runtime transpilation. App Router interactive consumers
-need a client boundary. See the repository’s
-[complete setup and runnable examples](https://github.com/handh-dev/bubbas-ui#readme).
+Import the global CSS at the app entry with Tailwind base, components and
+utilities. Expo requires NativeWind’s Metro/Babel setup and compatible native
+dependencies. Declare `react-native-css-interop@0.2.7` directly because NativeWind
+4’s Babel preset emits this import into app files under pnpm’s isolated layout:
 
-The package exports `@bubbasfw/ui/tokens` without React runtime imports and
-`@bubbasfw/ui/tailwind-preset` for shared color/radius utilities. Platform peers
-are external; React Native Web is optional for native-only consumers.
+```sh
+pnpm add react-native-css-interop@0.2.7
+pnpm add -D @babel/plugin-transform-react-jsx@7.29.7
+npx expo install react-native-reanimated react-native-worklets react-native-safe-area-context
+```
 
-Published releases use public npm access. The code is licensed under
-[MIT](LICENSE). Font and artwork binaries are excluded and retain
-their separate distribution rights. No trademark license is granted.
+Next.js requires exact React Native → React Native Web aliasing, web extension
+priority, NativeWind’s JSX import source and Tailwind 3/PostCSS. The runnable
+Pages Router example uses webpack and Tailwind `important: true`. Interactive
+App Router consumers need a client boundary. Turbopack is not configured.
+
+See the [complete runnable examples](https://github.com/handh-dev/bubbas-ui/tree/main/examples)
+and the [visual workbench](https://handh-dev.github.io/bubbas-ui/) for component previews and platform setup.
+Both example apps include every catalog component from the real package entry.
+
+## Exports and rights
+
+ESM, CJS and declarations ship together. Source ships for Tailwind scanning.
+`@bubbasfw/ui/tokens` is independent of React; `@bubbasfw/ui/tailwind-preset` is
+CommonJS. The package bundles no platform runtime, font or artwork binary.
+
+Software is [MIT](LICENSE). Bubba’s names and marks retain separate rights; no
+trademark license is granted. Publication remains an explicit owner-reviewed
+step, with no automatic npm release on push or merge.
