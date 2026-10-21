@@ -1,15 +1,17 @@
 # Bubba’s universal UI workspace
 
-Current scope: expand public `@bubbasfw/ui` to a 32-component universal catalog,
+Current scope: public `@bubbasfw/ui` has a 32-component universal catalog,
 complete Web/Expo examples and a public static visual review workbench. Shared
 components use React Native primitives + NativeWind. Shane’s confirmed primary
 use is inspecting and correcting appearance; simple implementation guidance is
 secondary. The chosen workbench composition is Preview + filmstrip. GitHub Pages
-at `handh-dev.github.io/bubbas-ui` is the selected host.
+is live at [handh-dev.github.io/bubbas-ui](https://handh-dev.github.io/bubbas-ui/).
 
-The `0.2.0` source is an owner-approved release candidate. At qualification
-closeout, public npm remains `0.1.0`; the owner has now approved publishing
-`0.2.0` and the docs. Publication and deployment still require verified receipts.
+The owner-approved npm `0.2.0` release and public docs deployment are verified.
+The public registry reports `latest: 0.2.0`, MIT licensing, and a tarball matching
+the approved artifact byte-for-byte. Install with `pnpm add @bubbasfw/ui@0.2.0`.
+See the [current release record](docs/releases/0.2.0.md) for separate publication,
+deployment and qualification receipts.
 Browser-local Keep/Change notes and JSON export provide feedback without a backend.
 
 ## Decisions
@@ -23,7 +25,8 @@ Browser-local Keep/Change notes and JSON export provide feedback without a backe
 - Owner selected MIT for the code on 2026-10-21. Shared package ships no font/artwork
   binaries. Docs separately include cleared Montserrat/OFL and original logo geometry
   under an explicit notice; trademark rights remain separate.
-- Package is configured public, and no npm release or deployment is automated.
+- npm publication remains an explicit owner-reviewed step. Pages builds the
+  approved static `gh-pages` branch; source pushes do not publish the package.
 
 ## First public release
 
@@ -42,7 +45,7 @@ Future releases remain owner-reviewed; no push or merge publishes automatically.
 For that first release, native simulator/device interaction and native release
 qualification were untested. The current candidate has separate evidence below.
 
-## 0.2.0 candidate validation
+## 0.2.0 qualification and publication
 
 The reviewed tarball contains 34 files and matches the installed native proof
 artifact: SHA256 `53b55a108ed85542035d899c6b61b3a3e8e453c5f0cf70be6b6d5ce473242a2e`.
@@ -65,8 +68,19 @@ light/dark safe-area/status-bar rendering checked. See
 `artifacts/native-review/report.json` for method and limits. This does not qualify
 Android runtime, physical devices or native assistive technologies. The owned
 simulator was deleted, unrelated states stayed unchanged, and heavy fixtures were
-moved to recoverable Trash. Publication and public docs deployment are now
-owner-approved and pending verified publication receipts.
+moved to recoverable Trash.
+
+Feature [PR #1](https://github.com/handh-dev/bubbas-ui/pull/1) merged as
+`64d436b21022612e53bea9e4b88797318674d654`. Pages serves static deployment
+`ffc3d823bf95520fb55769aba181443dec5af72d` from `gh-pages:/`. All 91 public files
+byte-match the approved output; all 35 live routes and representative browser
+interactions passed. The final npm artifact is 34 files / 51,199 bytes, SHA256
+`9dcbc90c28de2e0f68ad104995b6b5a3b27d865a86401af9d3ce4c4a3ca7cae1`.
+Only its README differs from the runtime-qualified 53 artifact; all 33 other files
+match byte-for-byte. Fresh unauthenticated registry readback and the downloaded
+tarball both returned HTTP 200; `latest` is `0.2.0`, and the registry artifact
+matches that final hash. Receipt:
+`artifacts/releases/0.2.0/published-readback.json`.
 
 ## Commands and evidence
 
