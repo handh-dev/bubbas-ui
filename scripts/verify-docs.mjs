@@ -192,6 +192,20 @@ try {
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Patterns fit ${width}`);
     await page.screenshot({ path: path.join(evidence, `patterns-${width}.png`), fullPage: true });
   }
+  await page.goto(base, { waitUntil: 'networkidle' });
+  await page.getByRole('button', { name: 'Appearance: dark', exact: true }).click();
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 1000 });
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Dark workbench fits ${width}`);
+    await page.screenshot({ path: path.join(evidence, `workbench-dark-${width}.png`), fullPage: true });
+  }
+  await page.goto(`${base}patterns/`, { waitUntil: 'networkidle' });
+  await page.getByTestId('patterns-demo').getByRole('radio', { name: 'Dark', exact: true }).click();
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 1000 });
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Dark patterns fit ${width}`);
+    await page.screenshot({ path: path.join(evidence, `patterns-dark-${width}.png`), fullPage: true });
+  }
   const storageFailures = await verifyReviewStorage(browser, base);
   assert.deepEqual(errors, []);
   await writeFile(
@@ -202,6 +216,7 @@ try {
         names,
         routes: 38,
         patterns,
+        darkCaptures: ['workbench-dark-1440.png', 'workbench-dark-390.png', 'patterns-dark-1440.png', 'patterns-dark-390.png'],
         search: true,
         controls: true,
         themePersistence: true,

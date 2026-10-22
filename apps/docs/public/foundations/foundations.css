@@ -158,3 +158,22 @@
 @media (prefers-reduced-motion: reduce) {
   :root { --bubba-motion-feedback: 0ms; }
 }
+/* Bubba web section recipes 1.0.0 — semantic HTML, no artwork or font binary. */
+.bubba-section { padding: clamp(32px, 6vw, 64px) max(16px, calc((100% - 1200px) / 2)); background: var(--bubba-ui-surface); color: var(--bubba-ui-text); font-family: var(--bubba-font-body); }
+.bubba-content { width: 100%; max-width: 720px; margin-inline: auto; overflow-wrap: anywhere; }
+.bubba-content > :first-child { margin-top: 0; }
+.bubba-content > :last-child { margin-bottom: 0; }
+.bubba-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 24px; }
+.bubba-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; max-width: 100%; box-sizing: border-box; padding: 12px 20px; border: 1px solid var(--bubba-ui-action-border); border-radius: var(--bubba-radius-control); background: var(--bubba-color-action); color: var(--bubba-ui-on-primary); font: 700 16px/1.4 var(--bubba-font-body); text-align: center; text-decoration: none; overflow-wrap: anywhere; cursor: pointer; }
+.bubba-button:hover { background: var(--bubba-color-action-hover); color: #FFFFFF; }
+.bubba-button:focus-visible { outline: 3px solid var(--bubba-ui-focus); outline-offset: 3px; box-shadow: 0 0 0 3px var(--bubba-ui-focus-inner); }
+.bubba-button:disabled, .bubba-button[aria-disabled="true"] { background: var(--bubba-ui-disabled-surface); color: var(--bubba-ui-disabled-text); border-color: var(--bubba-ui-border); cursor: not-allowed; }
+.bubba-campaign-header, .bubba-campaign-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; padding: 24px max(16px, calc((100% - 1200px) / 2)); background: var(--bubba-ui-surface); color: var(--bubba-ui-text); font-family: var(--bubba-font-body); }
+.bubba-campaign-header img, .bubba-campaign-footer img { display: block; max-width: min(100%, 240px); height: auto; }
+.bubba-campaign-header nav, .bubba-campaign-footer nav { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.bubba-campaign-header nav a, .bubba-campaign-footer nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.bubba-campaign-header a:not(.bubba-button), .bubba-campaign-footer a:not(.bubba-button) { color: var(--bubba-ui-link); text-underline-offset: 4px; }
+.bubba-section[data-bubba-composition="after-dark"] { background: var(--bubba-color-dark); color: #FFFFFF; }
+.bubba-section[data-bubba-composition="after-dark"] a:not(.bubba-button) { color: #8DC7FF; }
+.bubba-section[data-bubba-composition="after-dark"] .bubba-button:focus-visible { outline-color: #FFFFFF; box-shadow: 0 0 0 3px #171717; }
+@media (prefers-reduced-motion: reduce) { .bubba-section *, .bubba-campaign-header *, .bubba-campaign-footer * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

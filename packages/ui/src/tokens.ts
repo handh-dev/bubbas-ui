@@ -2,8 +2,8 @@
 export const tokens = {
   "brandVersion": "1.0.0",
   "systemVersion": "0.4.0",
-  "foundationDigest": "945a265777faa2a465afacc19f59c5dfdf0a271e65077059d8af27d8b5574579",
-  "sourceCommit": "0aed73a90256ff7c443e00b4da6cfd901982c415",
+  "foundationDigest": "256ff37b35361afefaad4655aee5eb5c669901a4a2cd0a829a3953d4abce922f",
+  "sourceCommit": "eabb939785648624888a35f5f4a8c4d4607fd858",
   "colors": {
     "blue": "#007CE8",
     "red": "#CC0000",
@@ -146,6 +146,13 @@ export const tokens = {
     "overlay": {
       "light": 0.4,
       "dark": 0.6
+    }
+  },
+  "recipes": {
+    "web": {
+      "version": "1.0.0",
+      "description": "Framework-free section, content, campaign band and action layout; business facts remain app-owned.",
+      "css": "/* Bubba web section recipes 1.0.0 — semantic HTML, no artwork or font binary. */\n.bubba-section { padding: clamp(32px, 6vw, 64px) max(16px, calc((100% - 1200px) / 2)); background: var(--bubba-ui-surface); color: var(--bubba-ui-text); font-family: var(--bubba-font-body); }\n.bubba-content { width: 100%; max-width: 720px; margin-inline: auto; overflow-wrap: anywhere; }\n.bubba-content > :first-child { margin-top: 0; }\n.bubba-content > :last-child { margin-bottom: 0; }\n.bubba-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 24px; }\n.bubba-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; max-width: 100%; box-sizing: border-box; padding: 12px 20px; border: 1px solid var(--bubba-ui-action-border); border-radius: var(--bubba-radius-control); background: var(--bubba-color-action); color: var(--bubba-ui-on-primary); font: 700 16px/1.4 var(--bubba-font-body); text-align: center; text-decoration: none; overflow-wrap: anywhere; cursor: pointer; }\n.bubba-button:hover { background: var(--bubba-color-action-hover); color: #FFFFFF; }\n.bubba-button:focus-visible { outline: 3px solid var(--bubba-ui-focus); outline-offset: 3px; box-shadow: 0 0 0 3px var(--bubba-ui-focus-inner); }\n.bubba-button:disabled, .bubba-button[aria-disabled=\"true\"] { background: var(--bubba-ui-disabled-surface); color: var(--bubba-ui-disabled-text); border-color: var(--bubba-ui-border); cursor: not-allowed; }\n.bubba-campaign-header, .bubba-campaign-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; padding: 24px max(16px, calc((100% - 1200px) / 2)); background: var(--bubba-ui-surface); color: var(--bubba-ui-text); font-family: var(--bubba-font-body); }\n.bubba-campaign-header img, .bubba-campaign-footer img { display: block; max-width: min(100%, 240px); height: auto; }\n.bubba-campaign-header nav, .bubba-campaign-footer nav { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }\n.bubba-campaign-header nav a, .bubba-campaign-footer nav a { display: inline-flex; align-items: center; min-height: 44px; }\n.bubba-campaign-header a:not(.bubba-button), .bubba-campaign-footer a:not(.bubba-button) { color: var(--bubba-ui-link); text-underline-offset: 4px; }\n.bubba-section[data-bubba-composition=\"after-dark\"] { background: var(--bubba-color-dark); color: #FFFFFF; }\n.bubba-section[data-bubba-composition=\"after-dark\"] a:not(.bubba-button) { color: #8DC7FF; }\n.bubba-section[data-bubba-composition=\"after-dark\"] .bubba-button:focus-visible { outline-color: #FFFFFF; box-shadow: 0 0 0 3px #171717; }\n@media (prefers-reduced-motion: reduce) { .bubba-section *, .bubba-campaign-header *, .bubba-campaign-footer * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }\n"
     }
   },
   "contrastPairs": [
