@@ -15,8 +15,8 @@ export default function Setup() {
       description="Start with a runnable example. Both platforms import the same components."
     >
       <Alert
-        title="Candidate: 32 controls, icons and 15 reusable sections"
-        description={`Unreleased candidate @bubbasfw/ui@${candidateVersion}; install its reviewed archive until publication. Vite and Astro use the web entry; Expo and the Next.js universal example keep their NativeWind host setup.`}
+        title="32 controls, icons and 15 reusable sections"
+        description={`Install the published @bubbasfw/ui@${candidateVersion}. Vite and Astro use the web entry; Expo and the Next.js universal example keep their NativeWind host setup.`}
         tone="info"
       />
       <View className="gap-4">

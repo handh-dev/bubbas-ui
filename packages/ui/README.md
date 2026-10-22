@@ -4,7 +4,7 @@ Bubba’s universal component library for React Native, Expo and React Native We
 All components use native primitives and NativeWind. React and platform runtimes
 are peers, with no Base UI, Radix UI or DOM component implementation.
 
-Candidate 0.6.0 includes 32 controls, the shared Icon library, 15 reusable sections, scoped light/dark/system
+Version 0.6.0 includes 32 controls, the shared Icon library, 15 reusable sections, scoped light/dark/system
 themes and shared design tokens. Expo and the existing Next.js universal example
 use the root entry; Vite and Astro use the browser entry described below.
 
@@ -189,9 +189,9 @@ Hydrate the shared SiteHeader and other interactive sections with the same data
 to enable menus and galleries. Hosts retain their own routing, authentication,
 data and actions.
 
-## Annotated web candidate 0.6.0
+## Annotated web release 0.6.0
 
-This is an unreleased design candidate. Foundation system 0.5.0 and its immutable
+The owner-approved 0.6.0 artifact is published. Foundation system 0.5.0 and its immutable
 source/digest remain unchanged. Marketing variants now use the original blue,
 compact red/blue actions with hover glow, centered desktop navigation, full-height
 white hero, equal compact product cards, and caller-labelled gold badges.
@@ -216,3 +216,5 @@ with lift/press feedback and a white-separated focus ring. Inactive controls hav
 no glow or movement; reduced motion removes travel. Native keeps the same sizing,
 solid brand fill, label, semantics and restrained native shadow without a new
 gradient dependency. Default application controls retain their previous design.
+
+The [0.6.0 release record](https://github.com/handh-dev/bubbas-ui/blob/main/docs/releases/0.6.0.md) binds owner approval, source, archive hash and publication proof. New design versions still require owner review; each app adopts and deploys deliberately.

@@ -1,3 +1,13 @@
+## Current UI release — 0.6.0 · October 22, 2026
+
+Owner-approved UI source `87a4843701acf0ab3395e1a827682bea0ddebb20` is merged as
+`9d9aceac4b68bf4ac9535522890a5cda092b8634` and published at npm 0.6.0. Registry
+SHA256 `5890c144a318afb619da02826e52aeb97e5fd1f84006c7958138b6e9bfcb13f4`
+byte-matches the approved 90-member archive. Read [the exact release record](docs/releases/0.6.0.md).
+Foundation system 0.5.0 and brand 1.0.0 remain unchanged. App adoption/deployment
+is separate; this record does not claim Studio/website deployment or native device paint.
+The public reference deployment has its own exact live verification receipt.
+
 ## Current web release — 0.5.0 · October 22, 2026
 
 UI 0.5.0 is owner-approved and published. Read [the exact release record](docs/releases/0.5.0.md)

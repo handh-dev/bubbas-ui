@@ -243,9 +243,9 @@ Official setup references:
 For Expo SDK57 builds with Xcode27/iOS27, follow the targeted
 [scene-lifecycle setup](docs/platform-notes.md).
 
-## Annotated web candidate 0.6.0
+## Annotated web release 0.6.0
 
-This is an unreleased design candidate. Foundation system 0.5.0 and its immutable
+The owner-approved 0.6.0 artifact is published. Foundation system 0.5.0 and its immutable
 source/digest remain unchanged. Marketing variants now use the original blue,
 compact red/blue actions with hover glow, centered desktop navigation, full-height
 white hero, equal compact product cards, and caller-labelled gold badges.
@@ -270,3 +270,5 @@ with lift/press feedback and a white-separated focus ring. Inactive controls hav
 no glow or movement; reduced motion removes travel. Native keeps the same sizing,
 solid brand fill, label, semantics and restrained native shadow without a new
 gradient dependency. Default application controls retain their previous design.
+
+The [0.6.0 release record](https://github.com/handh-dev/bubbas-ui/blob/main/docs/releases/0.6.0.md) binds owner approval, source, archive hash and publication proof. New design versions still require owner review; each app adopts and deploys deliberately.
