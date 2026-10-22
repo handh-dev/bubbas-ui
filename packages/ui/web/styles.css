@@ -44,7 +44,8 @@
 
 }
 @media (prefers-reduced-motion:reduce) {
- [data-bubba-action],.bubba-nav-link::after { transition:none; transform:none!important; }
+ [data-bubba-action] { transition:none; transform:none!important; }
+ .bubba-nav-link::after { transition:none; }
  .bubba-flag-ticker[data-bubba-animated="true"] .bubba-ticker-track { animation:none; width:auto; flex-wrap:wrap; }
  .bubba-flag-ticker[data-bubba-animated="true"] .bubba-flag-field,.bubba-product-badge::after,.bubba-promo-spark { animation:none; }
  .bubba-product-badge::after { display:none; }
