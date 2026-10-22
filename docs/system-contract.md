@@ -112,7 +112,7 @@ assistive semantics, text scaling, narrow layouts, appearance, installed shells
 and source honesty in scope. Next production behavior and Expo exports are
 separate from installed-device or native assistive-technology acceptance.
 
-## Browser hosts and reusable sections — 0.5.0 candidate
+## Browser hosts and reusable sections — 0.5.0
 
 `@bubbasfw/ui/web` is the same RN/NativeWind implementation compiled for Vite and
 Astro/Node SSR. Import `@bubbasfw/ui/web.css` once; no framework rewrite or host
@@ -121,7 +121,9 @@ entry includes upstream MIT NativeWind web interop; the universal entry keeps
 its existing external native runtime. The public-safe foundation is Studio
 0.5.0 at source `31be2db4c6626f5a48d871d6a7a27bac8b7a04b9`, with custody recorded
 in `foundations.lock.json`. Foundation provenance does not approve this new UI
-candidate's design or authorize app deployment.
+candidate's design or authorize app deployment. The exact owner-approved 0.5.0
+artifact and its separate publication/deployment proof are recorded in
+[the release record](releases/0.5.0.md).
 
 SiteHeader/Footer, HeroSection, ContentSection, ProductCard/Grid, CategoryCard/Grid,
 LocationCard/Grid, ProductDetail and PromotionBanner own reusable presentation.
@@ -188,7 +190,8 @@ ProductDetail places artwork before text and uses image thumbnails. SiteFooter
 accepts `linkGroups`, `socialLinks` and `copyright`, with children for caller-owned
 season information. Missing facts remain absent. Every existing catalog section
 shows both variants using clearly labelled synthetic fixtures under the same
-stable component ID. Marketing remains a new review candidate until owner review.
+stable component ID. The exact 0.5.0 marketing artifact has owner approval;
+new revisions still require owner review before publication or app deployment.
 
 Marketing sections scope the complete light palette through a nested provider,
 including shared badges and Dialog content; the host font is inherited. Hidden
