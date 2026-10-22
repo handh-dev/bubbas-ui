@@ -258,5 +258,5 @@ marks, rendered through RN Image with 96px transparent sources. Use 24px control
 and 22px social marks inside targets at least 44px wide/high. Provide accessible
 labels on the parent control, or `accessibilityLabel` for a standalone image.
 Vector sources, licenses and SHA256 hashes ship under `icons/`; the reproducible
-ImageMagick recipe is `scripts/build-icons.mjs`. Social trademarks remain with
+bundled Chromium recipe is `scripts/build-icons.mjs`. Social trademarks remain with
 their owners. This subset introduces no native SVG peer or font dependency.

@@ -1,68 +1,68 @@
 {
   "lucide": "lucide-static@1.61.0",
   "simpleIcons": "simple-icons@16.35.0",
-  "rasterizer": "Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org",
+  "rasterizer": "Playwright bundled Chromium 156.0.8078.4",
   "icons": {
     "search": {
       "source": "lucide/search.svg",
       "sourceSha256": "e0d89f53155655032f5c07fd8da930800b62b69a778d1dd76b388b9b78bf1d3f",
-      "pngSha256": "67f067d0981f1cc3a85d670d36a5fb6e5740e7e673baa0c5d210b99f32682603",
+      "pngSha256": "8fb5b450bccd25a102969e35e6a9d214ee08fdb2c39fb5587cbb45ac85e4bcd5",
       "width": 96,
       "height": 96
     },
     "menu": {
       "source": "lucide/menu.svg",
       "sourceSha256": "3e3092b465149d003381a210467fe4e9f9c2b135d5d4c638d84489b6cd848d68",
-      "pngSha256": "67f067d0981f1cc3a85d670d36a5fb6e5740e7e673baa0c5d210b99f32682603",
+      "pngSha256": "6887b94a2ba8f3d43af13bb4566d8d2019e231db010d1589ab29d87af134c92c",
       "width": 96,
       "height": 96
     },
     "close": {
       "source": "lucide/x.svg",
       "sourceSha256": "a611112e8946480120e5e96f1d849651df76fa502f6190e293defaf6c4f56b07",
-      "pngSha256": "67f067d0981f1cc3a85d670d36a5fb6e5740e7e673baa0c5d210b99f32682603",
+      "pngSha256": "30e8e80c5bfdface3c86b3e4106c83b9108e437d2c752d1e95b56769d1b4aa41",
       "width": 96,
       "height": 96
     },
     "sparkles": {
       "source": "lucide/sparkles.svg",
       "sourceSha256": "5ff7dc6557dbe5068a18feb080df81e090eb0a495fa1a05e3abd8179ba53c52d",
-      "pngSha256": "67f067d0981f1cc3a85d670d36a5fb6e5740e7e673baa0c5d210b99f32682603",
+      "pngSha256": "1a3795b8c75de9f7373b9988262ff76fda50d96ea8c4486cef55fbed198fe25e",
       "width": 96,
       "height": 96
     },
     "pause": {
       "source": "lucide/pause.svg",
       "sourceSha256": "d318ce2717e5094811b3b59fb340f66813e59714d1d2968adeeef099a1c890c5",
-      "pngSha256": "67f067d0981f1cc3a85d670d36a5fb6e5740e7e673baa0c5d210b99f32682603",
+      "pngSha256": "b6c78406606ce8c4895a1073aae2bdfca20bb8c53bf791e5efa7e82176f2000c",
       "width": 96,
       "height": 96
     },
     "play": {
       "source": "lucide/play.svg",
       "sourceSha256": "b18a8512edbdefc1eb4005bd95a94c5f4d68d9fc3528214437701df4f6514d08",
-      "pngSha256": "67f067d0981f1cc3a85d670d36a5fb6e5740e7e673baa0c5d210b99f32682603",
+      "pngSha256": "b5468aadd5796d713f16a9d3437dad02dfff04b6428333bb6bf7b75c6c24b0da",
       "width": 96,
       "height": 96
     },
     "arrowRight": {
       "source": "lucide/arrow-right.svg",
       "sourceSha256": "78af91b2c9d7cf8ea9564c3ca28a4f9021cced57aee0bc3bc801d68555d5b8e1",
-      "pngSha256": "67f067d0981f1cc3a85d670d36a5fb6e5740e7e673baa0c5d210b99f32682603",
+      "pngSha256": "ce909a1361d7e64c88daca7c46e16c0ae93bed5d4973274a4e33df45b70d0298",
       "width": 96,
       "height": 96
     },
     "instagram": {
       "source": "simple-icons/instagram.svg",
       "sourceSha256": "f53af2d1fc5292ba1433b5c1faf50005ce6a997fa302d1816989929f379a59dc",
-      "pngSha256": "e2303ce2262e4f9a173b5a0c50f56b5c862a559f0a4931ac25b35598fd24e255",
+      "pngSha256": "0909830e13f53b677552f93521dccd2980b8d1e9b2698800c8ec8cfea89003dc",
       "width": 96,
       "height": 96
     },
     "facebook": {
       "source": "simple-icons/facebook.svg",
       "sourceSha256": "b06d18d844ed621b89faffb1a33440cc0ec4f1ffea9f36191f50db19a47c59a6",
-      "pngSha256": "c204b8fd6f78b63e54b03250dc2adbf5649de8fbe39f502aee9280da1d54e19c",
+      "pngSha256": "aa45f35b1a90a20e067010176c5391f837385af5a0f052a0cdc332f640467817",
       "width": 96,
       "height": 96
     }

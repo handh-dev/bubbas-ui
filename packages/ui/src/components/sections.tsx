@@ -44,7 +44,7 @@ export function HeroSection({ title, description, eyebrow, image, imageNativeID,
 export interface ProductPresentation { id: string; title: string; href: string; image?: SectionImage; priceLabel?: string; description?: string; badge?: string; typeLabel?: string; gallery?: readonly SectionImage[]; videoHref?: string; actions?: readonly SectionAction[] }
 export interface ProductCardProps extends SectionProps { product: ProductPresentation }
 export function ProductCard({ product, className, variant, ...props }: ProductCardProps) {
-  if (variant === 'marketing') return <MarketingScope><MarketingProductCard {...props} {...{product, className}} /></MarketingScope>;
+  if (variant === 'marketing') return <MarketingScope className="h-full flex-1"><MarketingProductCard {...props} {...{product, className}} /></MarketingScope>;
   return <Card {...props} className={cn('gap-4', className)}>{product.image ? <Image source={{ uri: product.image.uri }} accessibilityLabel={product.image.alt} resizeMode="contain" className="h-48 w-full" /> : null}{product.badge ? <Badge>{product.badge}</Badge> : null}<Heading level={3}><Link href={product.href} textClassName="font-bold no-underline">{product.title}</Link></Heading>{product.description ? <Text tone="muted">{product.description}</Text> : null}{product.priceLabel ? <Text variant="label">{product.priceLabel}</Text> : null}</Card>;
 }
 export interface ProductGridProps extends SectionProps { items: readonly ProductPresentation[]; emptyLabel?: string }

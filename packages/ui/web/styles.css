@@ -34,11 +34,11 @@
 @keyframes bubba-badge-gleam { to { transform:translateX(120%); } }
 @keyframes bubba-spark { 50% { transform:rotate(12deg) scale(1.12); opacity:.75; } }
 @media (min-width:1350px) {
- .bubba-header-row { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); }
+ .bubba-header-row { display:grid!important; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); }
  .bubba-header-nav { position:relative!important; inset:auto!important; margin:0!important; padding:0!important; width:auto!important; z-index:auto!important; background:transparent!important; border:0!important; box-shadow:none!important; }
 }
 @media (min-width:761px) {
- .bubba-marketing-hero { min-height:calc(100svh - var(--bubbas-header-height,124px) - 24px); justify-content:center; }
+ .bubba-marketing-hero { min-height:calc(100svh - var(--bubbas-header-height,124px) - 24px)!important; justify-content:center; }
  .bubba-hero-mascot { height:clamp(500px,70svh,800px); }
 
 }
