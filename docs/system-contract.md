@@ -291,7 +291,9 @@ Ticker endcaps are navy with white stars only. Hover no longer pauses motion.
 A shared Motion on/off switch remains pointer/touch/keyboard operable in marketing
 navigation and footer and controls ticker, announcement, honor/product gleams, spark emission and
 promotion bursts. It also removes decorative action movement while preserving
-static interaction/focus feedback. Standalone
+static interaction/focus feedback. The browser hook mirrors its namespaced motion
+preference onto the document root so static server-rendered hero/cards/promotion
+receive the same CSS stop state without hydrating every presentation section. Standalone
 examples include the same control. The visitor choice persists across ordinary page loads, with caught storage failures
 and an in-memory fallback for sandboxed Studio previews. Reduced motion defaults off and overrides all
 decorative animation. Manual stop reveals the complete wrapped ticker and manually
