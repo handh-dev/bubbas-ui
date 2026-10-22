@@ -7,6 +7,7 @@ import { pathToFileURL } from 'node:url';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ts from 'typescript';
+import { verifyStaticFonts } from './verify-static-fonts.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const options = process.argv.slice(2);
@@ -41,6 +42,7 @@ import * as UI from ${JSON.stringify(componentEntry)};
 import {ComponentDemo} from ${JSON.stringify(path.join(root, 'apps/docs/src/showcase/Demo.tsx'))};
 import {components} from ${JSON.stringify(path.join(root, 'apps/docs/src/showcase/catalog.ts'))};
 import {PatternsDemo} from ${JSON.stringify(path.join(root, 'apps/docs/src/showcase/PatternsDemo.tsx'))};
+export {registeredBodyFamily} from ${JSON.stringify(path.join(root, 'examples/expo/native-fonts.ts'))};
 const e=React.createElement;
 export function All(){return e(UI.ThemeProvider,{fontFamily:'BubbasBody'},
   ...components.map(item=>e(ComponentDemo,{key:item.name,name:item.name})),e(PatternsDemo),
@@ -60,16 +62,27 @@ try {
   await writeFile(shimFile, shim);
   const output = path.join(directory, 'fixture.mjs');
   await build({ stdin: { contents: entry, resolveDir: root, loader: 'tsx' }, outfile: output, bundle: true, format: 'esm', platform: 'node',
-    jsx: 'automatic', jsxImportSource: 'react', tsconfigRaw: { compilerOptions: { jsx: 'react-jsx', jsxImportSource: 'react' } },
+    loader: { '.ttf': 'dataurl' }, jsx: 'automatic', jsxImportSource: 'react', tsconfigRaw: { compilerOptions: { jsx: 'react-jsx', jsxImportSource: 'react' } },
     external: ['react', 'react/jsx-runtime'], logLevel: 'silent', plugins: [{ name: 'native-font-boundary', setup(plugin) {
       plugin.onResolve({ filter: /^react-native$/ }, () => ({ path: shimFile }));
       plugin.onResolve({ filter: /^@bubbasfw\/ui$/ }, () => ({ path: componentEntry }));
       plugin.onResolve({ filter: /^nativewind\/jsx-runtime$/ }, () => ({ path: 'react/jsx-runtime', external: true }));
       plugin.onResolve({ filter: /^tailwind-merge$/ }, () => ({ path: packageRequire.resolve('tailwind-merge') }));
+      plugin.onResolve({ filter: /^expo-font$/ }, () => ({ path: 'expo-font', namespace: 'font-shim' }));
+      plugin.onLoad({ filter: /^expo-font$/, namespace: 'font-shim' }, () => ({ contents: 'export const getLoadedFonts = () => globalThis.__bubbaLoadedFonts;', loader: 'js' }));
       plugin.onResolve({ filter: /^nativewind$/ }, () => ({ path: 'native-vars', namespace: 'font-shim' }));
       plugin.onLoad({ filter: /.*/, namespace: 'font-shim' }, () => ({ contents: 'export const vars = values => values;', loader: 'js' }));
     } }] });
   const fixture = await import(pathToFileURL(output).href);
+  for (const platform of ['ios', 'android']) {
+    globalThis.__bubbaFontPlatform = platform;
+    globalThis.__bubbaLoadedFonts = [];
+    assert.equal(fixture.registeredBodyFamily(), undefined, 'Missing native family retains host fallback');
+    globalThis.__bubbaLoadedFonts = platform === 'ios' ? ['Montserrat-Regular', 'Montserrat-Medium', 'Montserrat-SemiBold', 'Montserrat-Bold', 'Montserrat-Black'] : ['BubbasBody'];
+    assert.equal(fixture.registeredBodyFamily(), platform === 'ios' ? 'Montserrat' : 'BubbasBody');
+    if (platform === 'ios') { globalThis.__bubbaLoadedFonts.pop(); assert.equal(fixture.registeredBodyFamily(), undefined, 'Incomplete iOS weight registration is not accepted'); }
+  }
+  report.checks.registeredHostFamilyResolution = true;
   const render = (Component, platform) => {
     globalThis.__bubbaFontProps = []; globalThis.__bubbaFontPlatform = platform;
     renderToStaticMarkup(React.createElement(Component));
@@ -107,13 +120,14 @@ try {
         `Shared native text must use the scoped adapter: ${file}`);
     }
   }
+  report.checks.staticNativeFonts = await verifyStaticFonts(root);
   report.checks.licensedExpoExample = true;
   report.checks.nativeTextBoundary = true;
   assert.deepEqual(identity(), report.sourceIdentity, 'Source changed during forwarding verification');
   report.status = 'passed';
 } catch (error) { report.status = 'failed'; report.error = error.stack; process.exitCode = 1; }
 finally {
-  delete globalThis.__bubbaFontProps; delete globalThis.__bubbaFontPlatform;
+  delete globalThis.__bubbaLoadedFonts; delete globalThis.__bubbaFontProps; delete globalThis.__bubbaFontPlatform;
   await writeFile(path.join(directory, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
   await writeFile(path.join(base, 'font-forwarding-latest.json'), `${JSON.stringify({ ...report, evidence: path.relative(root, directory) }, null, 2)}\n`);
   console.log(`${report.status}: ${path.relative(root, directory)}/report.json`);

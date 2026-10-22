@@ -1,0 +1,45 @@
+{
+  "android": {
+    "fonts": [
+      {
+        "fontFamily": "BubbasBody",
+        "fontDefinitions": [
+          {
+            "path": "./assets/fonts/native/Montserrat-Regular.ttf",
+            "weight": 400,
+            "style": "normal"
+          },
+          {
+            "path": "./assets/fonts/native/Montserrat-Medium.ttf",
+            "weight": 500,
+            "style": "normal"
+          },
+          {
+            "path": "./assets/fonts/native/Montserrat-SemiBold.ttf",
+            "weight": 600,
+            "style": "normal"
+          },
+          {
+            "path": "./assets/fonts/native/Montserrat-Bold.ttf",
+            "weight": 700,
+            "style": "normal"
+          },
+          {
+            "path": "./assets/fonts/native/Montserrat-Black.ttf",
+            "weight": 900,
+            "style": "normal"
+          }
+        ]
+      }
+    ]
+  },
+  "ios": {
+    "fonts": [
+      "./assets/fonts/native/Montserrat-Regular.ttf",
+      "./assets/fonts/native/Montserrat-Medium.ttf",
+      "./assets/fonts/native/Montserrat-SemiBold.ttf",
+      "./assets/fonts/native/Montserrat-Bold.ttf",
+      "./assets/fonts/native/Montserrat-Black.ttf"
+    ]
+  }
+}

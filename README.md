@@ -1,14 +1,14 @@
 # @bubbasfw/ui
 
 Bubba’s universal design system for Next.js, Expo, iOS and Android.
-`@bubbasfw/ui@0.3.1` contains 32 components built with React Native primitives and
+`@bubbasfw/ui@0.3.2` contains 32 components built with React Native primitives and
 NativeWind, plus semantic themes, a visual review workbench and complete
 Web/Expo galleries.
 
 Version 0.3 adds AppearanceControl, PageHeader and AsyncState, complete public
-references and mechanically verified Studio foundation custody. The 0.3.1 patch
-adds scoped host fonts for all shared native text and inputs, with an actual
-font-loading Expo example. Publication/deployment receipts remain separate.
+references and mechanically verified Studio foundation custody. The 0.3.2 patch
+fixes narrow horizontal radio choices and the Expo SDK 57 static-weight font
+recipe, retaining scoped host fonts for all shared native text and inputs. Publication/deployment receipts remain separate.
 
 [Review the design system](https://handh-dev.github.io/bubbas-ui/) ·
 [npm package](https://www.npmjs.com/package/@bubbasfw/ui)
@@ -128,7 +128,7 @@ The tested example baseline is React 19.2.3, React Native 0.86.3, React Native W
 versions. NativeWind v5 and Tailwind v4 require a separate migration.
 
 ```sh
-pnpm add @bubbasfw/ui@0.3.1 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.3.2 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 

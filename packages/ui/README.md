@@ -4,7 +4,7 @@ Bubba’s universal component library for React Native, Expo and React Native We
 All components use native primitives and NativeWind. React and platform runtimes
 are peers, with no Base UI, Radix UI or DOM component implementation.
 
-Version 0.3.1 includes 32 components, scoped light/dark/system themes and shared
+Version 0.3.2 includes 32 components, scoped light/dark/system themes and shared
 design tokens. Use the same imports in Next.js/React Native Web and Expo.
 
 Three task patterns cover appearance settings, page introductions and explicit
@@ -49,7 +49,7 @@ Baseline: React 19.2.3, React Native 0.86.3, React Native Web 0.21.4,
 NativeWind 4.2.7, Tailwind 3.4.17. Install alongside the app’s compatible peers:
 
 ```sh
-pnpm add @bubbasfw/ui@0.3.1 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.3.2 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -95,20 +95,31 @@ React Native Views do not inherit font family. Load the font in your app, then
 pass its registered name to `ThemeProvider`. Every shared text and input,
 including form labels, feedback and modal content, resolves that scoped default.
 
+On Expo SDK 57, use static faces and the `expo-font` config plugin. The
+[canonical Expo example](https://github.com/handh-dev/bubbas-ui/tree/main/examples/expo)
+registers Montserrat 400/500/600/700/900 as Android's `BubbasBody` XML family;
+iOS reads the embedded `Montserrat` family and PostScript face names. Rebuild the
+native app after changing registration. Then pass the platform's registered
+family to the shared provider:
+
 ```tsx
-const [loaded, error] = useFonts({
-  BubbasBody: require('./assets/fonts/montserrat.ttf'),
-});
-if (!loaded && !error) return null;
-return <ThemeProvider fontFamily={loaded ? 'BubbasBody' : undefined}>
+// registeredBodyFamily checks expo-font.getLoadedFonts; see the complete example.
+const family = registeredBodyFamily();
+return <ThemeProvider fontFamily={family}>
   <PageHeader title="Find your Bubba’s" />
   <FormField label="Search stands"><Input placeholder="Name, city or ZIP" /></FormField>
 </ThemeProvider>;
 ```
 
-Import `useFonts` from `expo-font` and retain the font license in the host.
-The complete Expo example includes cleared Montserrat/OFL; npm contains no font
-binary. Web hosts can pass their loaded CSS family or retain document inheritance.
+Do not runtime-load a single file under the same Android family alias: that
+replaces the multiweight XML family. SDK 57 does not support variable-font or
+multi-file-family `useFonts` registration; see [Expo's font guidance](https://docs.expo.dev/develop/user-interface/fonts/).
+The example's separately named regular preview fallback helps Expo Go or older
+hosts, and does not qualify the real weight family. Missing fonts keep platform
+fallback. Static derivatives retain source hashes, the pinned generator recipe
+and OFL license; npm contains no font binary.
+
+Web hosts can pass their loaded CSS family or retain document inheritance.
 Nested providers inherit the font. Explicit native `style.fontFamily` overrides
 the default; `Text variant="code"` retains monospace. An omitted `fontFamily`
 preserves existing defaults. Raw app-owned native text/navigation remains the

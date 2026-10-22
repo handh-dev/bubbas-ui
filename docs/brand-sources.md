@@ -37,8 +37,12 @@ assets marked proposed/unreviewed are excluded. Existing website layout and
 interaction patterns informed implementation without copying those artworks.
 
 The Expo example loads the exact cleared Montserrat/OFL bytes already used by
-the docs, retained in `examples/expo/assets/fonts/`. Its loaded `BubbasBody` alias
+the docs, retained in `examples/expo/assets/fonts/`. Its registered native family
 is passed to the shared ThemeProvider font contract. `pnpm verify:fonts` checks
 the byte equality and React-to-native-primitive font prop forwarding; it does
 not prove native font resolution or paint. The web docs load cleared Montserrat.
 Font parity still needs installed consumer review.
+
+The Expo SDK 57 example also contains mechanical static OFL instances at weights
+400/500/600/700/900. Their manifest preserves original source/license/output SHA256,
+fontTools recipe and PostScript metadata; no original identity asset is edited.

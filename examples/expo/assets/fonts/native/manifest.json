@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "kind": "mechanical-static-font-instances",
+  "source": {
+    "repository": "https://github.com/handh-dev/bubbas-ui",
+    "path": "examples/expo/assets/fonts/montserrat.ttf",
+    "sha256": "498dc34d0fa45288e0ac5345bd385c98bf81c56ee70209aacfb4a22a6510697c"
+  },
+  "license": {
+    "identifier": "OFL-1.1",
+    "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e"
+  },
+  "generator": {
+    "script": "scripts/instantiate-native-fonts.py",
+    "fontTools": "4.67.0",
+    "axis": "wght",
+    "fontNamesUpdated": true,
+    "sourceTimestampPreserved": true
+  },
+  "files": [
+    {
+      "path": "Montserrat-Regular.ttf",
+      "weight": 400,
+      "family": "Montserrat",
+      "postScriptName": "Montserrat-Regular",
+      "sha256": "a0b956236ddd85fa56ce42a033bd71df282895e5c18117bcf99166d9c2f0b02a",
+      "bytes": 344672
+    },
+    {
+      "path": "Montserrat-Medium.ttf",
+      "weight": 500,
+      "family": "Montserrat",
+      "postScriptName": "Montserrat-Medium",
+      "sha256": "1a1a3c1300ba788a092b037c16f37568a4818c221022e720e88ec69a4225b1cf",
+      "bytes": 344524
+    },
+    {
+      "path": "Montserrat-SemiBold.ttf",
+      "weight": 600,
+      "family": "Montserrat",
+      "postScriptName": "Montserrat-SemiBold",
+      "sha256": "cf17d708783f622ed3eaaa055879ea0902f338ee8d8ce3ec0d3ed7105302ba05",
+      "bytes": 344844
+    },
+    {
+      "path": "Montserrat-Bold.ttf",
+      "weight": 700,
+      "family": "Montserrat",
+      "postScriptName": "Montserrat-Bold",
+      "sha256": "abdfdf65ca59d36a82d833a3979fd05ef5662ab381b6f9eb5a40a56e614895e0",
+      "bytes": 344812
+    },
+    {
+      "path": "Montserrat-Black.ttf",
+      "weight": 900,
+      "family": "Montserrat",
+      "postScriptName": "Montserrat-Black",
+      "sha256": "0871960a585dd08c54e91632599cac52893244c69e4a80124095396cf30b119e",
+      "bytes": 344144
+    }
+  ]
+}
