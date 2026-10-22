@@ -1,7 +1,7 @@
 # @bubbasfw/ui
 
 Bubba’s universal design system for Next.js, Vite, Astro, Expo, iOS and Android.
-`@bubbasfw/ui@0.6.0` contains 32 controls, the shared Icon library, 15 reusable sections and three task
+The unpublished `@bubbasfw/ui@0.6.1` patch candidate contains 32 controls, the shared Icon library, 15 reusable sections and three task
 patterns built with React Native primitives and NativeWind, plus semantic
 themes, a visual review workbench and complete Web/Expo galleries.
 
@@ -123,7 +123,7 @@ Next.js universal example.
 ### Vite and Astro
 
 ```sh
-pnpm add @bubbasfw/ui@0.6.0 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
+pnpm add @bubbasfw/ui@0.6.1 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
 ```
 
 Import controls and sections from `@bubbasfw/ui/web` and load
@@ -154,7 +154,7 @@ The tested example baseline is React 19.2.3, React Native 0.86.3, React Native W
 versions. NativeWind v5 and Tailwind v4 require a separate migration.
 
 ```sh
-pnpm add @bubbasfw/ui@0.6.0 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.6.1 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -243,9 +243,13 @@ Official setup references:
 For Expo SDK57 builds with Xcode27/iOS27, follow the targeted
 [scene-lifecycle setup](docs/platform-notes.md).
 
-## Annotated web candidate 0.6.0
+## Annotated web patch candidate 0.6.1
 
-This is an unreleased design candidate. Foundation system 0.5.0 and its immutable
+This is an unpublished compatibility patch candidate preserving the owner-approved
+0.6.0 design. Use its exact reviewed archive for qualification; the install
+commands below apply only after publication. Published 0.6.0 is deprecated for
+dropped web Button caller styles; npm latest has been restored to 0.5.0.
+See [the patch record](docs/releases/0.6.1-candidate.md). Foundation system 0.5.0 and its immutable
 source/digest remain unchanged. Marketing variants now use the original blue,
 compact red/blue actions with hover glow, centered desktop navigation, full-height
 white hero, equal compact product cards, and caller-labelled gold badges.
