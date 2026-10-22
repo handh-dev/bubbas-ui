@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef, type ElementRef, type ReactNode } from 'react';
-import { ActivityIndicator, Pressable, type PressableProps } from 'react-native';
+import { ActivityIndicator, Linking, Platform, Pressable, type PressableProps } from 'react-native';
 import { NativeText as Text } from '../internal/native-text';
 import { cn, focusRing } from '../internal/utils';
 import { useTheme } from '../theme';
@@ -12,6 +12,11 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export interface ButtonProps extends Omit<PressableProps, 'children' | 'className'> {
   /** Text content, or inline React Native Text content. */
   children: ReactNode;
+  /** A navigational action; web renders an anchor, native opens through Linking. */
+  href?: string;
+  external?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  onOpenError?: (error: unknown) => void;
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -48,6 +53,7 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
   function Button(
     {
       children,
+      href, external = false, type = 'button', onOpenError, onPress,
       variant = 'primary',
       size = 'md',
       loading = false,
@@ -74,7 +80,13 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
       <Pressable
         {...props}
         ref={ref}
-        accessibilityRole="button"
+        {...(Platform.OS === 'web' ? { type, href: isDisabled ? undefined : href,
+          hrefAttrs: href && external ? { target: '_blank', rel: 'noopener noreferrer' } : undefined } : {})}
+        accessibilityRole={href ? 'link' : 'button'}
+        onPress={(event) => {
+          onPress?.(event);
+          if (href && Platform.OS !== 'web' && !isDisabled && !event.isDefaultPrevented()) void Linking.openURL(href).catch((error: unknown) => onOpenError?.(error));
+        }}
         accessibilityState={{ ...accessibilityState, disabled: isDisabled, busy: isBusy }}
         aria-busy={isBusy}
         aria-disabled={isDisabled}

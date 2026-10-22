@@ -25,3 +25,6 @@ export type { AppearanceControlProps, PageHeaderProps, AsyncStateProps, AsyncSta
 export * from './components/forms';
 export { tokens } from './tokens';
 export type { BubbaTokens } from './tokens';
+
+export * from './components/sections';
+export * from './catalog';

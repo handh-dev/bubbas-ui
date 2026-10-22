@@ -1,12 +1,12 @@
 /** Generated from the pinned Brand Studio public-safe release. Run pnpm sync:foundations. */
 export const tokens = {
   "brandVersion": "1.0.0",
-  "systemVersion": "0.4.0",
-  "foundationDigest": "87bd2d88507662443d7cc12a63b7c98c5cef6bfc53f43c5c4bc52fd9d65bf18f",
-  "sourceCommit": "78cb5bd276378e3da138a815859d5948aa4f7a98",
+  "systemVersion": "0.5.0",
+  "foundationDigest": "6519085b9a56c315f7f2994f562ed6c0d7c0d260f05c687cd47f38020a37cd77",
+  "sourceCommit": "31be2db4c6626f5a48d871d6a7a27bac8b7a04b9",
   "colors": {
-    "blue": "#007CE8",
-    "red": "#CC0000",
+    "blue": "#0866FF",
+    "red": "#D40000",
     "redHover": "#A80000",
     "navy": "#03256C",
     "night": "#001845",
@@ -114,8 +114,8 @@ export const tokens = {
     }
   ],
   "colorRoles": {
-    "brand-blue": "Brand fields, civic stripes and the bright endpoint of the campaign gradient. Small text uses black or a white/charcoal information surface.",
-    "action": "Decisive red primary actions. The red depth recipe uses this accessible starting color and the darker action-hover endpoint.",
+    "brand-blue": "Official brand blue from the original logo ink. Brand fields, civic stripes and the bright endpoint of the campaign gradient; use white on-brand text.",
+    "action": "Official brand red from the original logo ink. Primary actions and emphasis; white labels remain readable through the darker hover endpoint.",
     "action-hover": "Primary action hover and pressed feedback.",
     "heading": "Headings and underlined links on white; the deep endpoint of the campaign-blue artwork treatment.",
     "ink": "Body text and one-color artwork on light fields.",
@@ -130,16 +130,16 @@ export const tokens = {
     "success": "Confirmed success with a text label, not stock or stand status inferred from hours.",
     "warning": "Attention or unavailable verification with explanatory text.",
     "error": "Validation and failure messages with a useful next step.",
-    "on-brand": "Black text for small information directly on brand blue (5.05:1). Prefer white information panels for longer copy.",
+    "on-brand": "White text on the official logo blue (4.82:1). Use opaque information surfaces for longer copy and check every gradient region behind text.",
     "surface-subtle": "Quiet preview wells and utility surfaces around expressive brand examples.",
     "border-subtle": "Decorative separators and panel outlines. Use the border token for meaningful control boundaries."
   },
   "effects": {
-    "campaign-blue": "linear-gradient(120deg, #03256C 0%, #007CE8 100%)",
-    "action-red": "linear-gradient(180deg, #CC0000 0%, #A80000 100%)"
+    "campaign-blue": "linear-gradient(120deg, #03256C 0%, #0866FF 100%)",
+    "action-red": "linear-gradient(180deg, #D40000 0%, #A80000 100%)"
   },
   "shadows": {
-    "action": "0 3px 8px #CC000024",
+    "action": "0 3px 8px #D4000024",
     "panel": "0 2px 12px #131B2308"
   },
   "opacity": {
@@ -158,7 +158,7 @@ export const tokens = {
   "contrastPairs": [
     {
       "foreground": "#FFFFFF",
-      "background": "#CC0000",
+      "background": "#D40000",
       "minimum": 4.5,
       "usage": "Primary action labels"
     },
@@ -193,8 +193,8 @@ export const tokens = {
       "usage": "Secondary copy"
     },
     {
-      "foreground": "#000000",
-      "background": "#007CE8",
+      "foreground": "#FFFFFF",
+      "background": "#0866FF",
       "minimum": 4.5,
       "usage": "Small text on brand blue"
     },
@@ -212,9 +212,9 @@ export const tokens = {
     },
     {
       "foreground": "#FFFFFF",
-      "background": "#007CE8",
-      "minimum": 3,
-      "usage": "Large display only: 24px regular or 19px bold minimum"
+      "background": "#0866FF",
+      "minimum": 4.5,
+      "usage": "White text on official logo blue"
     }
   ],
   "themeContrastPairs": [
@@ -589,7 +589,7 @@ export const tokens = {
       "link-hover": "#A80000",
       "focus": "#03256C",
       "focus-inner": "#FFFFFF",
-      "accent": "#CC0000",
+      "accent": "#D40000",
       "action-text": "#FFFFFF",
       "action-border": "#A80000",
       "disabled-surface": "#F0F2F5",
@@ -613,11 +613,11 @@ export const tokens = {
       "selection-text": "#131B23",
       "scrollbar": "#637086",
       "scrollbar-track": "#F7F8FA",
-      "shadow-action": "0 3px 8px #CC000024",
+      "shadow-action": "0 3px 8px #D4000024",
       "shadow-panel": "0 2px 12px #131B2308",
       "shadow-dialog": "0 20px 100px #00133345",
       "content": "#131B23",
-      "primary": "#CC0000",
+      "primary": "#D40000",
       "primary-hover": "#A80000",
       "on-primary": "#FFFFFF",
       "overlay": "#001333"
@@ -665,7 +665,7 @@ export const tokens = {
       "shadow-panel": "0 2px 12px #00000020",
       "shadow-dialog": "0 20px 100px #00000080",
       "content": "#FFFFFF",
-      "primary": "#CC0000",
+      "primary": "#D40000",
       "primary-hover": "#A80000",
       "on-primary": "#FFFFFF",
       "overlay": "#000000"

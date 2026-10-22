@@ -76,11 +76,16 @@ async function checkArtifact() {
     assert.match(source, /["']react-native["']/, 'React Native must remain external');
     assert.match(source, /["']use client["']/, 'Next.js must retain the component client boundary');
   }
+  const webSource = await readFile(path.join(publishedRoot, 'dist/web.js'), 'utf8');
+  assert.match(webSource, /from ["']react-native-web["']/, 'The same-source browser entry retains RN Web as an external');
+  assert.doesNotMatch(webSource, /from ["']react-native["']|require\(["']react-native["']\)/, 'Browser entry must not import native Flow source');
+  assert.doesNotMatch(webSource, /__require\(["']react["']\)/, 'ESM web artifact must not dynamically require React');
+  assert.ok((await readFile(path.join(publishedRoot, 'dist/web.css'), 'utf8')).includes('--bui-primary'), 'Prebuilt browser styles include shared theme roles');
   const require = createRequire(path.join(publishedRoot, 'package.json'));
   const preset = require(path.join(publishedRoot, 'tailwind-preset.cjs'));
   assert.ok(preset.theme?.extend?.colors, 'The published Tailwind preset must load');
   const { tokens } = require(path.join(publishedRoot, 'dist/tokens.cjs'));
-  assert.equal(tokens.colors.red, '#CC0000', 'The platform-neutral token export must load');
+  assert.equal(tokens.colors.red, '#D40000', 'Current approved Studio original action ink must load');
   assert.ok(Object.keys(tokens.themes.light).length >= 46, 'Complete light semantic role map and canonical aliases');
   assert.equal(tokens.systemVersion, manifest.bubba.systemVersion);
   assert.equal(tokens.foundationDigest, manifest.bubba.foundationDigest);

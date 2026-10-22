@@ -154,3 +154,12 @@ Features: [FEATURES.md](FEATURES.md)
 Terms: [GLOSSARY.md](GLOSSARY.md)
 CLI: `pnpm run`
 <!-- wstack:end setup -->
+
+## Web cutover candidate — October22,2026
+
+UI implementation for Studio/main website only. Candidate0.5.0 imports approved
+Studio foundation0.5.0 and provides same-source browser adapter, complete reusable
+sections and package-owned catalog. See docs/releases/0.5.0-candidate.md and
+system-contract.md. Owner review remains required before publication; no npm or
+Pages publication occurs on this branch. Excluded mobile/HQ/Bulk/social apps
+retain their own pins. Existing dirty AGENTS.md was preserved separately.

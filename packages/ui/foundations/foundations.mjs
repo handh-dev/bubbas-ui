@@ -3,14 +3,14 @@
 /** @typedef {"canvas" | "surface" | "raised" | "hover" | "selected" | "text" | "heading" | "muted" | "line" | "border" | "link" | "link-hover" | "focus" | "focus-inner" | "accent" | "action-text" | "action-border" | "disabled-surface" | "disabled-text" | "info" | "info-surface" | "info-border" | "success" | "success-surface" | "success-border" | "warning" | "warning-surface" | "warning-border" | "error" | "error-surface" | "error-border" | "code-surface" | "code-text" | "code-muted" | "selection" | "selection-text" | "scrollbar" | "scrollbar-track" | "shadow-action" | "shadow-panel" | "shadow-dialog" | "content" | "primary" | "primary-hover" | "on-primary" | "overlay"} BubbaRole */
 export const foundations = {
   "name": "bubbas",
-  "version": "0.4.0",
-  "status": "release candidate",
+  "version": "0.5.0",
+  "status": "owner-directed foundation update",
   "brand_release": "1.0.0",
   "reviewed_at": "2026-10-22",
   "source": "tokens/brand.tokens.json",
   "colors": {
-    "brand-blue": "#007CE8",
-    "action": "#CC0000",
+    "brand-blue": "#0866FF",
+    "action": "#D40000",
     "action-hover": "#A80000",
     "heading": "#03256C",
     "ink": "#131B23",
@@ -25,13 +25,13 @@ export const foundations = {
     "success": "#23633F",
     "warning": "#805500",
     "error": "#B42318",
-    "on-brand": "#000000",
+    "on-brand": "#FFFFFF",
     "surface-subtle": "#F6F7F9",
     "border-subtle": "#E4E6EA"
   },
   "color_roles": {
-    "brand-blue": "Brand fields, civic stripes and the bright endpoint of the campaign gradient. Small text uses black or a white/charcoal information surface.",
-    "action": "Decisive red primary actions. The red depth recipe uses this accessible starting color and the darker action-hover endpoint.",
+    "brand-blue": "Official brand blue from the original logo ink. Brand fields, civic stripes and the bright endpoint of the campaign gradient; use white on-brand text.",
+    "action": "Official brand red from the original logo ink. Primary actions and emphasis; white labels remain readable through the darker hover endpoint.",
     "action-hover": "Primary action hover and pressed feedback.",
     "heading": "Headings and underlined links on white; the deep endpoint of the campaign-blue artwork treatment.",
     "ink": "Body text and one-color artwork on light fields.",
@@ -46,7 +46,7 @@ export const foundations = {
     "success": "Confirmed success with a text label, not stock or stand status inferred from hours.",
     "warning": "Attention or unavailable verification with explanatory text.",
     "error": "Validation and failure messages with a useful next step.",
-    "on-brand": "Black text for small information directly on brand blue (5.05:1). Prefer white information panels for longer copy.",
+    "on-brand": "White text on the official logo blue (4.82:1). Use opaque information surfaces for longer copy and check every gradient region behind text.",
     "surface-subtle": "Quiet preview wells and utility surfaces around expressive brand examples.",
     "border-subtle": "Decorative separators and panel outlines. Use the border token for meaningful control boundaries."
   },
@@ -158,7 +158,7 @@ export const foundations = {
   "contrast_pairs": [
     {
       "foreground": "#FFFFFF",
-      "background": "#CC0000",
+      "background": "#D40000",
       "minimum": 4.5,
       "usage": "Primary action labels"
     },
@@ -193,8 +193,8 @@ export const foundations = {
       "usage": "Secondary copy"
     },
     {
-      "foreground": "#000000",
-      "background": "#007CE8",
+      "foreground": "#FFFFFF",
+      "background": "#0866FF",
       "minimum": 4.5,
       "usage": "Small text on brand blue"
     },
@@ -212,17 +212,17 @@ export const foundations = {
     },
     {
       "foreground": "#FFFFFF",
-      "background": "#007CE8",
-      "minimum": 3,
-      "usage": "Large display only: 24px regular or 19px bold minimum"
+      "background": "#0866FF",
+      "minimum": 4.5,
+      "usage": "White text on official logo blue"
     }
   ],
   "effects": {
-    "campaign-blue": "linear-gradient(120deg, #03256C 0%, #007CE8 100%)",
-    "action-red": "linear-gradient(180deg, #CC0000 0%, #A80000 100%)"
+    "campaign-blue": "linear-gradient(120deg, #03256C 0%, #0866FF 100%)",
+    "action-red": "linear-gradient(180deg, #D40000 0%, #A80000 100%)"
   },
   "shadows": {
-    "action": "0 3px 8px #CC000024",
+    "action": "0 3px 8px #D4000024",
     "panel": "0 2px 12px #131B2308"
   },
   "themes": {
@@ -241,7 +241,7 @@ export const foundations = {
       "link-hover": "#A80000",
       "focus": "#03256C",
       "focus-inner": "#FFFFFF",
-      "accent": "#CC0000",
+      "accent": "#D40000",
       "action-text": "#FFFFFF",
       "action-border": "#A80000",
       "disabled-surface": "#F0F2F5",
@@ -265,11 +265,11 @@ export const foundations = {
       "selection-text": "#131B23",
       "scrollbar": "#637086",
       "scrollbar-track": "#F7F8FA",
-      "shadow-action": "0 3px 8px #CC000024",
+      "shadow-action": "0 3px 8px #D4000024",
       "shadow-panel": "0 2px 12px #131B2308",
       "shadow-dialog": "0 20px 100px #00133345",
       "content": "#131B23",
-      "primary": "#CC0000",
+      "primary": "#D40000",
       "primary-hover": "#A80000",
       "on-primary": "#FFFFFF",
       "overlay": "#001333"
@@ -317,7 +317,7 @@ export const foundations = {
       "shadow-panel": "0 2px 12px #00000020",
       "shadow-dialog": "0 20px 100px #00000080",
       "content": "#FFFFFF",
-      "primary": "#CC0000",
+      "primary": "#D40000",
       "primary-hover": "#A80000",
       "on-primary": "#FFFFFF",
       "overlay": "#000000"
