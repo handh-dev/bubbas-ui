@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { Appearance } from "@bubbasfw/ui";
-import { components } from "./showcase/catalog";
+import { components, candidateVersion } from "./showcase/catalog";
 export type ReviewStatus = "pending" | "keep" | "change";
 export interface Review {
   status: ReviewStatus;
@@ -177,7 +177,7 @@ export function useReview() {
     const content = JSON.stringify(
       {
         package: "@bubbasfw/ui",
-        version: "0.3.2",
+        version: candidateVersion,
         exportedAt: new Date().toISOString(),
         appearance: latestAppearance,
         reviews: latest,

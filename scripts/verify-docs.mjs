@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { chromium } from "playwright";
 import { serveDocs } from "./serve-docs.mjs";
@@ -138,6 +138,14 @@ try {
   const file = await download;
   await file.saveAs(path.join(evidence, "review-export.json"));
   assert.equal(file.suggestedFilename(), "bubbas-ui-review.json");
+  const exportedReview = JSON.parse(
+    await readFile(path.join(evidence, "review-export.json"), "utf8"),
+  );
+  const packageManifest = JSON.parse(
+    await readFile(new URL("../packages/ui/package.json", import.meta.url), "utf8"),
+  );
+  assert.equal(exportedReview.package, packageManifest.name);
+  assert.equal(exportedReview.version, packageManifest.version);
   await page
     .getByRole("button", { name: "Implementation · Web & Expo", exact: true })
     .click();
