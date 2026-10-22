@@ -2,6 +2,8 @@
 import { Icon } from './components/Icon';
 import { FlagTicker, CampaignSection, SocialSection } from './components/campaigns';
 import { Inline } from './components/layout';
+import { Button } from './components/Button';
+import { ThemeProvider } from './theme';
 import { View } from 'react-native';
 import { components } from './showcase/catalog';
 import { ComponentDemo } from './showcase/Demo';
@@ -43,8 +45,11 @@ export function SectionDemo({ name, variant = 'default' }: { name: string; varia
   if (name === 'ContentSection') return <ContentSection variant={variant} title="Sample information"><Text>Caller-owned content supplied to a shared section.</Text></ContentSection>;
   return <ProductGrid variant={variant} items={products} />;
 }
+function MarketingButtonExamples() {
+ return <ThemeProvider appearance="light" className="gap-4 bg-white p-4"><Text variant="label">Public marketing actions · simulated examples</Text><Inline align="start"><Button appearance="marketing" size="lg">Example primary action</Button><Button appearance="marketing" size="lg" variant="secondary">Example location action</Button></Inline><Inline><Button appearance="marketing" variant="secondary">Compact action</Button><Button appearance="marketing" variant="secondary" loading loadingLabel="Working">Example busy action</Button><Button appearance="marketing" variant="secondary" disabled>Example disabled action</Button></Inline></ThemeProvider>;
+}
 export interface UIReviewCatalogProps { componentId?: string }
 export function UIReviewCatalog({ componentId }: UIReviewCatalogProps) {
   const entries = componentId ? reviewCatalog.filter((item) => item.id === componentId || item.name === componentId) : reviewCatalog;
-  return <View className="gap-8">{entries.length ? entries.map((entry) => <View key={entry.id} testID={`review-${entry.id}`} className="gap-4"><Heading level={2}>{entry.name}</Heading><Text variant="small" tone="muted">Local demonstration fixture · simulated actions</Text>{entry.category === 'Sections' ? <View className="gap-6"><SectionDemo name={entry.name} /><Text variant="label">Public marketing variant · example content</Text><SectionDemo name={entry.name} variant="marketing" /></View> : entry.id === 'patterns' ? <PatternsDemo /> : <ComponentDemo name={entry.name as typeof components[number]['name']} />}</View>) : <Text>No matching review specimen.</Text>}</View>;
+  return <View className="gap-8">{entries.length ? entries.map((entry) => <View key={entry.id} testID={`review-${entry.id}`} className="gap-4"><Heading level={2}>{entry.name}</Heading><Text variant="small" tone="muted">Local demonstration fixture · simulated actions</Text>{entry.category === 'Sections' ? <View className="gap-6"><SectionDemo name={entry.name} /><Text variant="label">Public marketing variant · example content</Text><SectionDemo name={entry.name} variant="marketing" /></View> : entry.id === 'patterns' ? <PatternsDemo /> : <><ComponentDemo name={entry.name as typeof components[number]['name']} />{entry.name==='Button'?<MarketingButtonExamples/>:null}</>}</View>) : <Text>No matching review specimen.</Text>}</View>;
 }

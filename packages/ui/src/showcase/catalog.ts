@@ -40,7 +40,7 @@ export const catalog = [
     "Button",
     "Actions",
     "Clear actions, in every size and state.",
-    "variant, size, loading, disabled, onPress",
+    "variant, appearance, size (marketing lg: featured), loading, disabled, onPress",
   ],
   [
     "IconButton",

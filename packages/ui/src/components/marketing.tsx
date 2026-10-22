@@ -8,12 +8,12 @@ import { Link, IconButton } from './actions';
 import { Dialog } from './overlays';
 import { cn } from '../internal/utils';
 import { ThemeProvider } from '../theme';
-import { Button } from './Button';
+import { Button, type ButtonSize } from './Button';
 import { Icon } from './Icon';
 import type { SiteHeaderProps, SiteFooterProps, HeroSectionProps, ContentSectionProps, ProductCardProps, ProductDetailProps, PromotionBannerProps, SectionAction, SectionProps } from './sections';
 
-export function MarketingAction({ action }: { action: SectionAction }) {
-  return <Button appearance="marketing" variant={action.tone === 'blue' ? 'secondary' : action.tone === 'white' ? 'outline' : 'primary'} href={action.href} external={action.external} className={cn('max-w-full self-stretch', action.tone === 'white' && 'border-white bg-white')} textClassName={action.tone === 'white' ? 'text-bubba-navy' : undefined}>{action.label}</Button>;
+export function MarketingAction({ action, size='md' }: { action: SectionAction; size?:ButtonSize }) {
+  return <Button appearance="marketing" size={size} variant={action.tone === 'blue' ? 'secondary' : action.tone === 'white' ? 'outline' : 'primary'} href={action.href} external={action.external} className={cn('max-w-full self-stretch', action.tone === 'white' && 'border-white bg-white')} textClassName={action.tone === 'white' ? 'text-bubba-navy' : undefined}>{action.label}</Button>;
 }
 export function MarketingScope({children,className}: {children: React.ReactNode;className?:string}) { return <ThemeProvider appearance="light" className={cn("min-w-0 bg-transparent",className)}>{children}</ThemeProvider>; }
 export function SocialLinks({links,color='#131B23'}:{links:readonly SectionAction[];color?:string}) {
@@ -40,7 +40,7 @@ export function MarketingHero({title,description,eyebrow,image,imageNativeID,act
       <Heading level={1} className={logoImage?'sr-only':'text-3xl font-black uppercase italic min-[761px]:text-5xl bubba-wide:text-5xl'}>{title}</Heading>
       {logoImage?<Image source={{uri:logoImage.uri}} accessibilityLabel={logoImage.alt} resizeMode="contain" className="h-32 w-full max-w-[280px] min-[761px]:h-[280px] min-[761px]:max-w-[560px]"/>:null}
       {description?<Text variant="caption" className="text-sm font-extrabold uppercase leading-5 min-[761px]:text-[21px] min-[761px]:leading-8">{description}</Text>:null}
-      <Stack gap={3} className="items-stretch min-[761px]:flex-row min-[761px]:flex-wrap">{allActions.map((item,index)=><MarketingAction key={item.href} action={{...item,tone:item.tone??(index===1?'blue':'red')}}/>)}{children}</Stack>
+      <Stack gap={3} className="items-stretch min-[761px]:flex-row min-[761px]:flex-wrap">{allActions.map((item,index)=><MarketingAction key={item.href} size="lg" action={{...item,tone:item.tone??(index===1?'blue':'red')}}/>)}{children}</Stack>
     </Stack>
     {image?<View className="min-w-0 flex-[0.9] items-center min-[761px]:flex-1"><Image nativeID={imageNativeID} source={{uri:image.uri}} accessibilityLabel={image.alt} resizeMode="contain" className="bubba-hero-mascot h-[260px] w-full max-w-[300px] min-[761px]:max-w-[440px] min-[761px]:h-[650px]"/></View>:null}
   </Inline></Container></View>;

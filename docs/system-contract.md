@@ -230,3 +230,15 @@ RN Image renders generated 96px sources on all platforms without a font/SVG peer
 Default 24px icons are decorative within a labeled control; standalone icons need
 accessibilityLabel. Source and raster checksums are checked by verify:shared.
 The original brand artwork remains caller supplied and retains its own rights.
+
+### Marketing button refinement
+
+The existing marketing appearance interprets `size="lg"` as a featured action;
+HeroSection selects it automatically. sm/md retain compact repeated actions.
+The reference-inspired design uses 12px featured corners / 6px compact corners,
+60px desktop / 56px phone featured minimum height, and 44px compact targets.
+Original red/blue gradient shading and ambient glow are web effects; universal
+native controls retain solid fills, the same geometry and subtle native shadow.
+No gradient dependency or default application-control redesign is introduced.
+Hover/press, white-separated focus, disabled/busy and reduced-motion states remain
+part of the exact reviewed candidate. Labels wrap rather than truncate.
