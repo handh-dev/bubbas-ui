@@ -242,3 +242,12 @@ native controls retain solid fills, the same geometry and subtle native shadow.
 No gradient dependency or default application-control redesign is introduced.
 Hover/press, white-separated focus, disabled/busy and reduced-motion states remain
 part of the exact reviewed candidate. Labels wrap rather than truncate.
+
+### Ribbon ticker refinement
+
+FlagTicker now renders a white text lane with navy words, red rails and reserved
+navy star endcaps on both ends. Decorative angled trim stays inside the caps;
+the 44px pause/play control has its own flow slot. Existing caller copy and order
+are unchanged. Only the text track scrolls after web hydration; hover, focus and
+manual pause stop it. No-JS, native and reduced-motion layouts wrap the complete
+sequence, allowing the band to grow. There are no duplicate announcements.

@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState, type ReactNode } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Container, Inline, Stack } from './layout';
 import { Heading, Text } from './typography';
 import { Icon } from './Icon';
@@ -22,10 +22,14 @@ export function SocialSection({links,...props}:SocialSectionProps) {
  return <CampaignSection {...props}><SocialLinks links={links} color="#FFFFFF"/></CampaignSection>;
 }
 export interface FlagTickerProps extends SectionProps { items:readonly string[] }
-/** Animated flag behind readable copy. Pause and reduced-motion keep all content available. */
+/** Patriotic ribbon with caller-owned copy; native/no-JS/reduced motion keep every item readable. */
+function TickerEndcap({side}:{side:'left'|'right'}) {
+ return <View accessible={false} aria-hidden pointerEvents="none" className={cn('bubba-ticker-endcap w-10 shrink-0 items-center justify-center bg-bubba-navy px-1 min-[761px]:w-24',side==='left'?'bubba-ticker-endcap-left':'bubba-ticker-endcap-right')}><Text variant="caption" className="text-center text-[8px] leading-3 text-white min-[761px]:text-xs min-[761px]:leading-4">{'★ ★ ★\n ★ ★\n★ ★ ★'}</Text></View>;
+}
 export function FlagTicker({items,className,variant,...props}:FlagTickerProps) {
  const [paused,setPaused]=useState(false);
  const [hydrated,setHydrated]=useState(false);
  useEffect(()=>setHydrated(true),[]);
- return <MarketingScope><View {...props} {...{dataSet:{...props.dataSet,bubbaPaused:paused?'true':'false',bubbaAnimated:hydrated?'true':'false'}}} className={cn('bubba-flag-ticker relative flex-row items-center overflow-hidden bg-bubba-blue',className)}><View accessible={false} aria-hidden className="bubba-flag-field absolute inset-0"><View className="absolute bottom-0 left-0 top-0 w-28 justify-center px-2" style={{backgroundColor:'#03256C'}}><Text variant="caption" className="text-center text-[10px] leading-3 text-white">{'★  ★  ★  ★  ★\n ★  ★  ★  ★\n★  ★  ★  ★  ★'}</Text></View></View><View className="bubba-ticker-viewport min-w-0 flex-1 overflow-hidden py-2"><View className="bubba-ticker-track flex-row items-center gap-10 px-4">{items.map((item,index)=><Text key={index} variant="caption" className="bubba-ticker-word shrink-0 text-xs font-black uppercase italic text-white">{item}</Text>)}</View></View>{hydrated?<IconButton accessibilityLabel={paused?'Play scrolling announcement':'Pause scrolling announcement'} aria-pressed={paused} onPress={()=>setPaused(!paused)} className="bubba-ticker-pause shrink-0 bg-bubba-navy"><Icon name={paused?'play':'pause'} size={18} color="#FFFFFF"/></IconButton>:null}</View></MarketingScope>;
+ const animated=hydrated&&Platform.OS==='web';
+ return <MarketingScope><View {...props} {...{dataSet:{...props.dataSet,bubbaPaused:paused?'true':'false',bubbaAnimated:animated?'true':'false'}}} className={cn('bubba-flag-ticker relative flex-row items-stretch overflow-hidden border-y-[6px] border-bubba-red bg-white min-[761px]:border-y-8',className)}><TickerEndcap side="left"/><View className="bubba-ticker-viewport min-h-11 min-w-0 flex-1 justify-center overflow-hidden bg-white py-2 min-[761px]:min-h-12"><View className="bubba-ticker-track flex-row flex-wrap items-center gap-x-4 gap-y-2 px-3 min-[761px]:gap-x-6 min-[761px]:px-5">{items.map((item,index)=><View key={index} className="bubba-ticker-item min-w-0 max-w-full flex-row items-center gap-4"><Text variant="caption" className="bubba-ticker-word min-w-0 shrink text-sm font-black uppercase italic leading-5 text-bubba-navy min-[761px]:text-base min-[761px]:leading-6">{item}</Text>{index<items.length-1?<Text accessible={false} aria-hidden variant="caption" className="shrink-0 text-lg text-bubba-red">★</Text>:null}</View>)}</View></View>{animated?<IconButton accessibilityLabel={paused?'Play scrolling announcement':'Pause scrolling announcement'} aria-pressed={paused} onPress={()=>setPaused(!paused)} className="bubba-ticker-pause h-11 w-11 shrink-0 self-center bg-white"><Icon name={paused?'play':'pause'} size={18} color="#03256C"/></IconButton>:null}<TickerEndcap side="right"/></View></MarketingScope>;
 }
