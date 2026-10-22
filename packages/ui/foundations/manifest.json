@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "systemVersion": "0.4.0",
+  "systemVersion": "0.5.0",
   "brandRelease": "1.0.0",
   "scope": "public-safe",
   "source": {
     "repository": "https://github.com/handh-dev/bubbas-brand-studio",
-    "commit": "78cb5bd276378e3da138a815859d5948aa4f7a98",
+    "commit": "31be2db4c6626f5a48d871d6a7a27bac8b7a04b9",
     "path": "design-system/tokens.json"
   },
-  "foundationDigest": "87bd2d88507662443d7cc12a63b7c98c5cef6bfc53f43c5c4bc52fd9d65bf18f",
+  "foundationDigest": "6519085b9a56c315f7f2994f562ed6c0d7c0d260f05c687cd47f38020a37cd77",
   "files": [
     {
       "path": "NOTICE.txt",
@@ -27,7 +27,7 @@
     },
     {
       "path": "foundations.css",
-      "sha256": "ad613ddb5acceab633b2737fbf2817eef92ae955c791d0c34240f19570f5c414",
+      "sha256": "b55a418262680bf3e402ffdd1a52b3c8e24f7f5d94054ebcd385e1789976d756",
       "bytes": 9610,
       "distribution": "public-safe",
       "approval": {
@@ -42,8 +42,8 @@
     },
     {
       "path": "foundations.json",
-      "sha256": "87bd2d88507662443d7cc12a63b7c98c5cef6bfc53f43c5c4bc52fd9d65bf18f",
-      "bytes": 24065,
+      "sha256": "6519085b9a56c315f7f2994f562ed6c0d7c0d260f05c687cd47f38020a37cd77",
+      "bytes": 24112,
       "distribution": "public-safe",
       "approval": {
         "status": "approved",
@@ -57,8 +57,8 @@
     },
     {
       "path": "foundations.mjs",
-      "sha256": "2dc8e9500979d6823348f55c72113114d29ee32754247bbf72803844da0735f9",
-      "bytes": 25013,
+      "sha256": "98e92948685579b86c36ad3a7330b2b9e9d42a9d94099b58f72c62e4ae316037",
+      "bytes": 25060,
       "distribution": "public-safe",
       "approval": {
         "status": "approved",

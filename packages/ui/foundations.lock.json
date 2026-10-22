@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "systemVersion": "0.4.0",
+  "systemVersion": "0.5.0",
   "brandRelease": "1.0.0",
-  "foundationDigest": "87bd2d88507662443d7cc12a63b7c98c5cef6bfc53f43c5c4bc52fd9d65bf18f",
-  "manifestSha256": "268efdb71f8e7f6e4a9074b3f0b0f85db54f8dd0ad495f350626cbbd831d2dbe",
-  "sourceCommit": "78cb5bd276378e3da138a815859d5948aa4f7a98"
+  "foundationDigest": "6519085b9a56c315f7f2994f562ed6c0d7c0d260f05c687cd47f38020a37cd77",
+  "manifestSha256": "99d7a898ba19c936064d6d7ecd09b2264de5cffe87484aea278fd128a8428ad8",
+  "sourceCommit": "31be2db4c6626f5a48d871d6a7a27bac8b7a04b9"
 }

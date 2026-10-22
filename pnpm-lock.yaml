@@ -233,6 +233,9 @@ importers:
       react-native:
         specifier: ^0.86.3
         version: 0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.7)(react@19.2.3)(supports-color@8.1.1)
+      react-native-css-interop:
+        specifier: ^0.2.7
+        version: 0.2.7(b08291efb6f37a52d24d569c669bb0b9)
       react-native-web:
         specifier: ^0.21.4
         version: 0.21.4(react-dom@19.2.3(react@19.2.3))(react@19.2.3)

@@ -1,7 +1,7 @@
 {
   "name": "@bubbasfw/ui",
-  "version": "0.3.2",
-  "description": "Bubba’s universal React Native and web design system, styled with NativeWind.",
+  "version": "0.5.0",
+  "description": "Bubba\u2019s universal React Native and web design system, styled with NativeWind.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -40,7 +40,44 @@
     "./foundations": "./foundations/foundations.json",
     "./foundation-manifest": "./foundations/manifest.json",
     "./foundation-lock": "./foundations.lock.json",
-    "./foundations.css": "./foundations/foundations.css"
+    "./foundations.css": "./foundations/foundations.css",
+    "./web": {
+      "browser": {
+        "import": {
+          "types": "./dist/web.d.ts",
+          "default": "./dist/web.browser.js"
+        },
+        "require": {
+          "types": "./dist/web.d.cts",
+          "default": "./dist/web.browser.cjs"
+        }
+      },
+      "import": {
+        "types": "./dist/web.d.ts",
+        "default": "./dist/web.js"
+      },
+      "require": {
+        "types": "./dist/web.d.cts",
+        "default": "./dist/web.cjs"
+      }
+    },
+    "./web.css": "./dist/web.css",
+    "./web-primitives": {
+      "browser": {
+        "import": "./dist/web-native.browser.js",
+        "require": "./dist/web-native.browser.cjs"
+      },
+      "import": "./dist/web-native.js",
+      "require": "./dist/web-native.cjs"
+    },
+    "./web-runtime": {
+      "browser": {
+        "import": "./dist/web-runtime.browser.js",
+        "require": "./dist/web-runtime.browser.cjs"
+      },
+      "import": "./dist/web-runtime.js",
+      "require": "./dist/web-runtime.cjs"
+    }
   },
   "files": [
     "dist",
@@ -49,7 +86,8 @@
     "README.md",
     "LICENSE",
     "foundations",
-    "foundations.lock.json"
+    "foundations.lock.json",
+    "web"
   ],
   "sideEffects": [
     "**/*.css"
@@ -73,7 +111,7 @@
     "bubbas"
   ],
   "scripts": {
-    "build": "node ../../scripts/foundations.mjs --check && tsup",
+    "build": "node ../../scripts/foundations.mjs --check && tsup && node ../../scripts/build-web.mjs",
     "typecheck": "tsc --noEmit",
     "prepack": "pnpm build"
   },
@@ -85,7 +123,8 @@
     "react-native": "^0.86.3",
     "react-native-web": "^0.21.4",
     "nativewind": "^4.2.7",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "react-native-css-interop": "^0.2.7"
   },
   "peerDependenciesMeta": {
     "react-native-web": {
@@ -93,9 +132,9 @@
     }
   },
   "bubba": {
-    "systemVersion": "0.4.0",
+    "systemVersion": "0.5.0",
     "brandRelease": "1.0.0",
-    "foundationDigest": "87bd2d88507662443d7cc12a63b7c98c5cef6bfc53f43c5c4bc52fd9d65bf18f",
-    "sourceCommit": "78cb5bd276378e3da138a815859d5948aa4f7a98"
+    "foundationDigest": "6519085b9a56c315f7f2994f562ed6c0d7c0d260f05c687cd47f38020a37cd77",
+    "sourceCommit": "31be2db4c6626f5a48d871d6a7a27bac8b7a04b9"
   }
 }

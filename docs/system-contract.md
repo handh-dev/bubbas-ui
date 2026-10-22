@@ -111,3 +111,58 @@ Keep secondary forms/dialogs, loading/empty/error/offline states, keyboard and
 assistive semantics, text scaling, narrow layouts, appearance, installed shells
 and source honesty in scope. Next production behavior and Expo exports are
 separate from installed-device or native assistive-technology acceptance.
+
+## Browser hosts and reusable sections — 0.5.0 candidate
+
+`@bubbasfw/ui/web` is the same RN/NativeWind implementation compiled for Vite and
+Astro/Node SSR. Import `@bubbasfw/ui/web.css` once; no framework rewrite or host
+Tailwind build is needed. React and React Native Web remain peers. The browser
+entry includes upstream MIT NativeWind web interop; the universal entry keeps
+its existing external native runtime. The public-safe foundation is Studio
+0.5.0 at source `31be2db4c6626f5a48d871d6a7a27bac8b7a04b9`, with custody recorded
+in `foundations.lock.json`. Foundation provenance does not approve this new UI
+candidate's design or authorize app deployment.
+
+SiteHeader/Footer, HeroSection, ContentSection, ProductCard/Grid, CategoryCard/Grid,
+LocationCard/Grid, ProductDetail and PromotionBanner own reusable presentation.
+Callers supply links, cleared image URIs/alt text, content, preformatted retail
+prices, addresses, published-hours labels and separately qualified reported
+stand-status labels. Missing optional facts stay absent; grids have explicit
+empty labels. No component fetches Core or infers facts from the clock.
+`ContentSection headingLevel` preserves page hierarchy. Header links wrap visibly
+at narrow widths. `ProductDetail` gallery actions need a hydrated host; server
+consumers must retain their own checked gallery behavior until hydrated.
+
+Button `href` renders a real navigational anchor on web and uses native Linking
+on devices. `type` preserves native form intent through the `/web` entry, including submit, reset and browser validation. The universal root entry remains an app-action primitive; hosts requiring HTML form semantics use `/web`. Disabled links omit their href;
+loading/disabled actions remain inert. Host workflows own form submission,
+authorization and persistence. Do not restyle section internals in consumers.
+
+The canonical catalog now ships in the package: `reviewCatalog` supplies stable
+component/section IDs and `UIReviewCatalog componentId` renders the actual
+implementation with visibly labelled sample data. Docs, both examples and Studio
+consume those same examples. Studio stores review comments outside this package,
+keyed to its exact candidate identity and catalog ID. This package grants no
+owner approval and creates no runtime dependency on Studio.
+
+### Server-rendered browser styles
+
+React Native Web produces structural rules as well as the prebuilt utility CSS.
+A Node/Astro SSR host must include `StyleSheet.getSheet()` from its same installed
+`react-native-web` instance in the server document (both returned id and textContent),
+after rendering shared content. This preserves image positioning and RNW layout
+before hydration; importing web.css alone supplies only the shared utilities.
+Do not run a second RNW or React instance for server components. The `/web` adapter
+keeps upstream internals external so style extraction sees the same registry.
+Known caller images render their URI in SSR without waiting for an effect.
+
+`pnpm verify:web:forms` checks built `/web` server button types, image source
+preservation, real browser click/Enter submission, required validation, reset,
+preventDefault, default app actions and inactive controls. It uses a local
+fixture without changing business records and closes its browser/server.
+
+Browser bundlers select `/web` and `/web-primitives` browser conditions, which
+share the host RNW ESM contexts. Node SSR selects the default CJS-backed contexts.
+Import package subpaths rather than aliasing direct dist files across environments.
+The packed browser fixture also checks that inherited RTL logical padding agrees
+with an upstream host Pressable; the SSR fixture checks the same inherited RTL.

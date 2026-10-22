@@ -142,3 +142,25 @@ composition and generation contracts.
 Software is [MIT](LICENSE). Bubba’s names and marks retain separate rights; no
 trademark license is granted. Publication remains an explicit owner-reviewed
 step, with no automatic npm release on push or merge.
+
+### Vite / Astro / server-rendered web hosts
+
+For browser hosts that cannot parse React Native's native entry, import the
+same universal implementation from `@bubbasfw/ui/web` and import
+`@bubbasfw/ui/web.css` once. Supply React, React DOM and React Native Web as host
+peers. Wrap a scoped region with `ThemeProvider appearance="light"` (or dark /
+system). This entry retains SSR text, semantic headings and real navigation
+anchors. It includes NativeWind's MIT web interop helper; React/RNW stay external.
+
+Reusable sections are SiteHeader, SiteFooter, HeroSection, ContentSection,
+ProductCard/Grid, CategoryCard/Grid, LocationCard/Grid, ProductDetail and
+PromotionBanner. All content, assets and actions come from the host. Core remains
+responsible for changing facts. `reviewCatalog` and `UIReviewCatalog` expose
+real component and section examples for an isolated candidate review. Candidate
+comments and approval remain in Studio, keyed to the exact release artifact.
+
+For Node/Astro SSR, render shared content first and include the host RNW
+`StyleSheet.getSheet()` id/textContent in the document alongside web.css. This
+supplies structural RNW CSS before hydration. Use the same React/RNW instance
+throughout. Native form submit/reset intent is supported through `/web`'s Button
+`type`; the universal root entry remains an app-action primitive.

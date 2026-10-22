@@ -7,7 +7,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "build": "pnpm verify:foundations && pnpm --filter @bubbasfw/ui build",
+    "build": "pnpm verify:shared && pnpm verify:foundations && pnpm --filter @bubbasfw/ui build",
     "typecheck": "pnpm --filter @bubbasfw/ui typecheck && pnpm --filter './examples/*' --if-present typecheck && pnpm --filter './apps/*' --if-present typecheck",
     "verify": "pnpm build && pnpm typecheck && pnpm verify:fonts",
     "verify:fonts": "node scripts/verify-fonts.mjs",
@@ -22,7 +22,9 @@
     "sync:showcase": "node scripts/sync-showcase.mjs",
     "preview:docs": "node scripts/serve-docs.mjs",
     "sync:foundations": "node scripts/foundations.mjs",
-    "verify:foundations": "node scripts/foundations.mjs --check"
+    "verify:foundations": "node scripts/foundations.mjs --check",
+    "verify:shared": "node scripts/verify-shared.mjs",
+    "verify:web:forms": "node scripts/verify-web-forms.mjs"
   },
   "devDependencies": {
     "@types/node": "24.10.1",

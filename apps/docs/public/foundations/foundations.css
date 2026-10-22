@@ -1,7 +1,7 @@
-/* bubbas 0.4.0 — versioned foundations; original artwork remains unchanged. */
+/* bubbas 0.5.0 — versioned foundations; original artwork remains unchanged. */
 :root {
-  --bubba-color-brand-blue: #007CE8;
-  --bubba-color-action: #CC0000;
+  --bubba-color-brand-blue: #0866FF;
+  --bubba-color-action: #D40000;
   --bubba-color-action-hover: #A80000;
   --bubba-color-heading: #03256C;
   --bubba-color-ink: #131B23;
@@ -16,7 +16,7 @@
   --bubba-color-success: #23633F;
   --bubba-color-warning: #805500;
   --bubba-color-error: #B42318;
-  --bubba-color-on-brand: #000000;
+  --bubba-color-on-brand: #FFFFFF;
   --bubba-color-surface-subtle: #F6F7F9;
   --bubba-color-border-subtle: #E4E6EA;
   --bubba-space-1: 4px;
@@ -45,9 +45,9 @@
   --bubba-type-supporting-desktop: 14px;
   --bubba-type-display-weight: 400;
   --bubba-type-display-line-height: 1.15;
-  --bubba-effect-campaign-blue: linear-gradient(120deg, #03256C 0%, #007CE8 100%);
-  --bubba-effect-action-red: linear-gradient(180deg, #CC0000 0%, #A80000 100%);
-  --bubba-shadow-action: 0 3px 8px #CC000024;
+  --bubba-effect-campaign-blue: linear-gradient(120deg, #03256C 0%, #0866FF 100%);
+  --bubba-effect-action-red: linear-gradient(180deg, #D40000 0%, #A80000 100%);
+  --bubba-shadow-action: 0 3px 8px #D4000024;
   --bubba-shadow-panel: 0 2px 12px #131B2308;
   --bubba-motion-feedback: 140ms;
   --bubba-target-minimum: 44px;
@@ -71,7 +71,7 @@
   --bubba-ui-link-hover: #A80000;
   --bubba-ui-focus: #03256C;
   --bubba-ui-focus-inner: #FFFFFF;
-  --bubba-ui-accent: #CC0000;
+  --bubba-ui-accent: #D40000;
   --bubba-ui-action-text: #FFFFFF;
   --bubba-ui-action-border: #A80000;
   --bubba-ui-disabled-surface: #F0F2F5;
@@ -95,11 +95,11 @@
   --bubba-ui-selection-text: #131B23;
   --bubba-ui-scrollbar: #637086;
   --bubba-ui-scrollbar-track: #F7F8FA;
-  --bubba-ui-shadow-action: 0 3px 8px #CC000024;
+  --bubba-ui-shadow-action: 0 3px 8px #D4000024;
   --bubba-ui-shadow-panel: 0 2px 12px #131B2308;
   --bubba-ui-shadow-dialog: 0 20px 100px #00133345;
   --bubba-ui-content: #131B23;
-  --bubba-ui-primary: #CC0000;
+  --bubba-ui-primary: #D40000;
   --bubba-ui-primary-hover: #A80000;
   --bubba-ui-on-primary: #FFFFFF;
   --bubba-ui-overlay: #001333;
@@ -149,7 +149,7 @@
   --bubba-ui-shadow-panel: 0 2px 12px #00000020;
   --bubba-ui-shadow-dialog: 0 20px 100px #00000080;
   --bubba-ui-content: #FFFFFF;
-  --bubba-ui-primary: #CC0000;
+  --bubba-ui-primary: #D40000;
   --bubba-ui-primary-hover: #A80000;
   --bubba-ui-on-primary: #FFFFFF;
   --bubba-ui-overlay: #000000;

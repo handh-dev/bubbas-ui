@@ -5,6 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { verifyGallery, verifyOverlayFixture } from './verify-gallery.mjs';
 import { verifyPatterns } from './verify-patterns.mjs';
+import { tokens } from '../packages/ui/dist/tokens.js';
 
 export async function verifyWeb(url, evidenceDirectory) {
   await mkdir(evidenceDirectory, { recursive: true });
@@ -28,7 +29,7 @@ export async function verifyWeb(url, evidenceDirectory) {
         height: element.getBoundingClientRect().height,
       };
     });
-    assert.equal(paint.background, 'rgb(204, 0, 0)', 'NativeWind package styles must reach the browser');
+    assert.equal(paint.background, `rgb(${[1, 3, 5].map((start) => parseInt(tokens.themes.light.primary.slice(start, start + 2), 16)).join(', ')})`, 'NativeWind package styles must reach the browser');
     assert.ok(paint.height >= 44, 'The default touch target must be at least 44px tall');
     assert.ok(parseFloat(paint.paddingLeft) > 0, 'Package spacing utilities must be compiled');
     const compact = await page.getByTestId('compact-button').boundingBox();
