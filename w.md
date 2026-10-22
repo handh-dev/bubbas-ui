@@ -1,3 +1,11 @@
+## Current web release — 0.5.0 · October 22, 2026
+
+UI 0.5.0 is owner-approved and published. Read [the exact release record](docs/releases/0.5.0.md)
+for immutable artifact/source identities, live Pages proof and known visible
+limits. Current setup guidance is in README.md and the public setup page. The
+published tarball retains disclosed legacy README examples; it was not repacked.
+Older candidate and native-patch checklists below are historical.
+
 ## HH-51 native visual correction — 0.3.2
 
 - [x] Preserve vertical/form/roving semantics; horizontal radio choices wrap with readable width.
