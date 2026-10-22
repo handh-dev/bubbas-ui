@@ -1,7 +1,7 @@
 'use client';
 
 import { Children, useEffect, useState } from 'react';
-import { Image, Platform, Pressable, View } from 'react-native';
+import { Image, Platform, View } from 'react-native';
 import { Inline, Stack, Container } from './layout';
 import { Heading, Text } from './typography';
 import { Link, IconButton } from './actions';
@@ -12,10 +12,11 @@ import { Button, type ButtonSize } from './Button';
 import { Icon } from './Icon';
 import { useMarketingMotion } from '../internal/marketing-motion';
 import { focusRing } from '../internal/utils';
+import { Switch } from './forms/Choice';
 import type { SiteHeaderProps, SiteFooterProps, HeroSectionProps, ContentSectionProps, ProductCardProps, ProductDetailProps, PromotionBannerProps, SectionAction, SectionProps } from './sections';
 
-export function MarketingAction({ action, size='md' }: { action: SectionAction; size?:ButtonSize }) {
-  return <Button appearance="marketing" size={size} variant={action.tone === 'blue' ? 'secondary' : action.tone === 'white' ? 'outline' : 'primary'} href={action.href} external={action.external} className={cn('bubba-marketing-action max-w-full self-start', action.tone === 'white' && 'border-white bg-white')} textClassName={action.tone === 'white' ? 'text-bubba-navy' : undefined}>{action.label}</Button>;
+export function MarketingAction({ action, size='md', className }: { action: SectionAction; size?:ButtonSize; className?:string }) {
+  return <Button appearance="marketing" size={size} variant={action.tone === 'blue' ? 'secondary' : action.tone === 'white' ? 'outline' : 'primary'} href={action.href} external={action.external} className={cn('bubba-marketing-action max-w-full self-start', action.tone === 'white' && 'border-white bg-white',className)} textClassName={action.tone === 'white' ? 'text-bubba-navy' : undefined}>{action.label}</Button>;
 }
 export function MarketingScope({children,className}: {children: React.ReactNode;className?:string}) { return <ThemeProvider appearance="light" className={cn("min-w-0 bg-transparent",className)}>{children}</ThemeProvider>; }
 export function SocialLinks({links,color='#131B23'}:{links:readonly SectionAction[];color?:string}) {
@@ -23,7 +24,7 @@ export function SocialLinks({links,color='#131B23'}:{links:readonly SectionActio
 }
 export function MarketingMotionControl({ dark=false }: { dark?:boolean }) {
  const [motion,toggle,reduced]=useMarketingMotion();
- return <Pressable accessibilityRole="switch" accessibilityLabel={reduced?"Decorative motion; disabled by system reduced motion":"Decorative motion"} accessibilityState={{checked:motion,disabled:reduced}} aria-checked={motion} aria-disabled={reduced} disabled={reduced} onPress={toggle} className={cn('bubba-motion-control min-h-11 self-start flex-row items-center gap-2 rounded border border-transparent px-2',focusRing,dark&&'bubba-motion-control-dark focus:border-white web:focus-visible:outline-white')}><Icon name={motion?'pause':'play'} size={16} color={dark?'#FFFFFF':'#03256C'}/><Text variant="caption" className={cn('text-xs font-bold',dark?'text-white':'text-bubba-navy')}>{motion?'Motion on':'Motion off'}</Text></Pressable>;
+ return <Switch checked={motion} onCheckedChange={toggle} disabled={reduced} accessibilityLabel={reduced?"Decorative motion; disabled by system reduced motion":"Decorative motion"} label={motion?'Motion on':'Motion off'} className={cn('bubba-motion-control self-start gap-2 border border-transparent px-2',focusRing,dark&&'bubba-motion-control-dark focus:border-white web:focus-visible:outline-white')} textClassName={cn('text-xs font-bold',dark?'text-white':'text-bubba-navy')}/>;
 }
 function MarketingAnnouncement({copy}:{copy:string}) {
  const [motion]=useMarketingMotion();
@@ -47,14 +48,14 @@ export function MarketingHeader({brand,links,action,announcement,auxiliaryLinks,
 }
 export function MarketingHero({title,description,eyebrow,image,imageNativeID,action,actions,logoImage,children,className,...props}:HeroSectionProps) {
   const allActions=actions??(action?[action]:[]);
-  return <View {...props} className={cn('bubba-marketing-hero bg-white px-4 py-10 sm:py-12',className)}><Container className="bubba-hero-inner max-w-[1184px] px-0"><Inline wrap={false} align="center" className="bubba-hero-layout flex-col gap-6 min-[761px]:flex-row min-[761px]:gap-12">
-    <Stack className="bubba-hero-copy w-full min-w-0 min-[761px]:flex-[1.5]" gap={6}>{eyebrow?<View className="bubba-honor-badge self-center rounded-full border border-[#C39424] bg-[#FFF4C8] px-4 py-2 min-[761px]:self-start"><Text variant="caption" className="text-center text-xs font-extrabold uppercase text-[#654800]">{eyebrow}</Text></View>:null}
+  return <View {...props} className={cn('bubba-marketing-hero bg-white px-4 py-6 min-[761px]:py-12',className)}><Container className="bubba-hero-inner max-w-[1184px] px-0"><Inline wrap={false} align="center" className="bubba-hero-layout flex-col gap-5 min-[761px]:flex-row min-[761px]:gap-12">
+    <Stack className="bubba-hero-copy w-full min-w-0 min-[761px]:flex-[1.5] min-[761px]:gap-6" gap={4}>{eyebrow?<View className="bubba-honor-badge self-center rounded-full border border-[#C39424] bg-[#FFF4C8] px-4 py-2 min-[761px]:self-start"><Text variant="caption" className="text-center text-xs font-extrabold uppercase text-[#654800]">{eyebrow}</Text></View>:null}
       <Heading level={1} className={logoImage?'sr-only':'text-3xl font-black uppercase italic min-[761px]:text-5xl bubba-wide:text-5xl'}>{title}</Heading>
       {logoImage?<Image source={{uri:logoImage.uri}} accessibilityLabel={logoImage.alt} resizeMode="contain" className="bubba-hero-logo hidden w-full min-[761px]:flex min-[761px]:h-[280px] min-[761px]:max-w-[560px]"/>:null}
       {description?<Text variant="caption" className="text-sm font-extrabold uppercase leading-5 min-[761px]:text-[21px] min-[761px]:leading-8">{description}</Text>:null}
-      <Stack gap={3} className={cn("bubba-hero-actions items-center min-[761px]:items-start min-[761px]:flex-row min-[761px]:flex-wrap",allActions.length>1&&!children&&"bubba-hero-action-pair")}>{allActions.map((item,index)=><MarketingAction key={item.href} size="lg" action={{...item,tone:item.tone??(index===1?'blue':'red')}}/>)}{children}</Stack>
+      <Stack gap={3} className={cn("bubba-hero-actions items-center min-[761px]:items-start min-[761px]:flex-row min-[761px]:flex-wrap",allActions.length>1&&!children&&"bubba-hero-action-pair")}>{allActions.map((item,index)=><MarketingAction key={item.href} className="self-center min-[761px]:self-start" size="lg" action={{...item,tone:item.tone??(index===1?'blue':'red')}}/>)}{children}</Stack>
     </Stack>
-    {image?<View className="bubba-hero-art order-first w-full min-w-0 items-center min-[761px]:order-none min-[761px]:w-0 min-[761px]:flex-1"><Image nativeID={imageNativeID} source={{uri:image.uri}} accessibilityLabel={image.alt} resizeMode="contain" className="bubba-hero-mascot h-[250px] w-full max-w-[300px] min-[761px]:max-w-[440px] min-[761px]:h-[650px]"/></View>:null}
+    {image?<View className="bubba-hero-art order-first w-full min-w-0 items-center min-[761px]:order-none min-[761px]:w-0 min-[761px]:flex-1"><Image nativeID={imageNativeID} source={{uri:image.uri}} accessibilityLabel={image.alt} resizeMode="contain" className="bubba-hero-mascot h-[220px] w-full max-w-[280px] min-[761px]:max-w-[440px] min-[761px]:h-[650px]"/></View>:null}
   </Inline></Container></View>;
 }
 export function MarketingContent({title,description,headingLevel=1,eyebrow,children,className,...props}:ContentSectionProps) {
