@@ -55,7 +55,15 @@ export async function verifyPatterns(page) {
     for (const scale of [1, 2]) {
       for (const name of ['Light', 'Dark', 'System']) {
         const label = appearance.getByRole('radio', { name, exact: true }).getByText(name, { exact: true });
-        await label.evaluate((element, scale) => { element.style.fontSize = `${16 * scale}px`; element.style.lineHeight = `${24 * scale}px`; }, scale);
+        await label.evaluate((element, scale) => {
+          // The consumer uses important:true; ordinary inline values lose to
+          // NativeWind's stylesheet. Prove the effective scale before fit.
+          element.style.setProperty('font-size', `${16 * scale}px`, 'important');
+          element.style.setProperty('line-height', `${24 * scale}px`, 'important');
+        }, scale);
+        const computed = await label.evaluate(element => ({ fontSize: getComputedStyle(element).fontSize, lineHeight: getComputedStyle(element).lineHeight }));
+        assert.equal(computed.fontSize, `${16 * scale}px`, 'Measure effective scaled text, not a defeated inline declaration');
+        assert.equal(computed.lineHeight, `${24 * scale}px`);
       }
       await appearance.scrollIntoViewIfNeeded();
       const boxes = await Promise.all(['Light', 'Dark', 'System'].map(async name => {
@@ -64,7 +72,8 @@ export async function verifyPatterns(page) {
         const bounds = await radio.boundingBox(), text = await label.boundingBox();
         assert.ok(bounds.width >= 144 && bounds.width <= (await appearance.boundingBox()).width + 1, 'Choice has readable basis and bounded width');
         assert.ok(text.width >= 75 && text.height <= 48 + 1, 'Scaled appearance label must not collapse into individual letters');
-        return { name, width: bounds.width, textWidth: text.width, textHeight: text.height };
+        const computed = await label.evaluate(element => ({ fontSize: getComputedStyle(element).fontSize, lineHeight: getComputedStyle(element).lineHeight }));
+        return { name, ...computed, width: bounds.width, textWidth: text.width, textHeight: text.height };
       }));
       radioLayout.push({ viewport: width, textScale: scale, boxes });
     }
