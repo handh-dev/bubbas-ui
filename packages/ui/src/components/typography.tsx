@@ -7,7 +7,7 @@ import { cn } from '../internal/utils';
 export type TextTone = 'default' | 'muted' | 'info' | 'success' | 'warning' | 'error';
 export type TextVariant = 'body' | 'lead' | 'small' | 'label' | 'caption' | 'code';
 const tones = { default: 'text-ui-text', muted: 'text-ui-muted', info: 'text-ui-info', success: 'text-ui-success', warning: 'text-ui-warning', error: 'text-ui-error' };
-const variants = { body: 'text-base leading-6', lead: 'text-lg leading-7', small: 'text-sm leading-5', label: 'text-base leading-6 font-semibold', caption: 'text-xs leading-4', code: 'font-mono text-sm leading-6' };
+const variants = { body: 'font-normal text-bubba-body bubba-wide:text-bubba-body-wide', lead: 'text-lg leading-7', small: 'font-medium text-bubba-supporting', label: 'font-bold text-bubba-label', caption: 'text-xs leading-4', code: 'font-mono text-sm leading-6' };
 
 export interface TextProps extends NativeTextProps {
   tone?: TextTone;
@@ -23,7 +23,7 @@ export interface HeadingProps extends NativeTextProps {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   className?: string;
 }
-const levels = { 1: 'text-3xl leading-10', 2: 'text-2xl leading-8', 3: 'text-xl leading-7', 4: 'text-lg leading-6', 5: 'text-base leading-6', 6: 'text-sm leading-5' };
+const levels = { 1: 'text-bubba-page bubba-wide:text-bubba-page-wide', 2: 'text-bubba-section bubba-wide:text-bubba-section-wide', 3: 'text-xl leading-7', 4: 'text-lg leading-6', 5: 'text-base leading-6', 6: 'text-sm leading-5' };
 
 export const Heading = forwardRef<ElementRef<typeof NativeText>, HeadingProps>(function Heading({ level = 2, className, ...props }, ref) {
   const webLevel = Platform.OS === 'web' ? { 'aria-level': level } : {};

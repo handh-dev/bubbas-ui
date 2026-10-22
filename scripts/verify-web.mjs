@@ -4,6 +4,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { verifyGallery, verifyOverlayFixture } from './verify-gallery.mjs';
+import { verifyPatterns } from './verify-patterns.mjs';
 
 export async function verifyWeb(url, evidenceDirectory) {
   await mkdir(evidenceDirectory, { recursive: true });
@@ -56,15 +57,24 @@ export async function verifyWeb(url, evidenceDirectory) {
     assert.equal(await count.textContent(), 'Button presses: 2', 'Inactive buttons must not invoke onPress');
 
     const gallery = await verifyGallery(page);
+    const patterns = await verifyPatterns(page);
     const overlayFixture = await verifyOverlayFixture(page, url);
     await page.goto(url, { waitUntil: 'networkidle' });
     await page.getByTestId('select-button').click();
     await page.screenshot({ path: path.join(evidenceDirectory, 'next-desktop.png'), fullPage: true });
     await page.setViewportSize({ width: 390, height: 844 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Mobile layout must not overflow');
+    // RNW ScrollView clips offscreen children. Paint the whole native scroll
+    // surface after a viewport change before retaining a full-page specimen.
+    await page.getByTestId('pattern-appearance').scrollIntoViewIfNeeded();
+    await page.getByTestId('pattern-theme').getByRole('heading', { name: 'Campaign review', exact: true }).waitFor();
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    await page.getByTestId('patterns-demo').screenshot({ path: path.join(evidenceDirectory, 'next-mobile-patterns.png') });
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     await page.screenshot({ path: path.join(evidenceDirectory, 'next-mobile.png'), fullPage: true });
     assert.deepEqual(errors, [], 'No browser runtime errors');
-    const result = { url, paint, compact, focus, pointerPress: true, keyboardPress: true, disabled: true, loading: true, mobileWidth: 390, gallery, overlayFixture, errors };
+    const result = { url, paint, compact, focus, pointerPress: true, keyboardPress: true, disabled: true, loading: true, mobileWidth: 390, gallery, patterns, overlayFixture, errors };
     await writeFile(path.join(evidenceDirectory, 'web.json'), `${JSON.stringify(result, null, 2)}\n`);
     return result;
   } finally {

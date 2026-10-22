@@ -4,8 +4,13 @@ Bubba’s universal component library for React Native, Expo and React Native We
 All components use native primitives and NativeWind. React and platform runtimes
 are peers, with no Base UI, Radix UI or DOM component implementation.
 
-Version 0.2.0 includes 32 components, scoped light/dark/system themes and shared
+Version 0.3.0 includes 32 components, scoped light/dark/system themes and shared
 design tokens. Use the same imports in Next.js/React Native Web and Expo.
+
+Three task patterns cover appearance settings, page introductions and explicit
+loading/empty/error/offline/ready states: AppearanceControl, PageHeader and
+AsyncState. Their runnable examples preserve source/freshness/missing/zero
+distinctions. Hosts own persistence and product data.
 
 [Browse the visual workbench and setup guides](https://handh-dev.github.io/bubbas-ui/)
 
@@ -44,7 +49,7 @@ Baseline: React 19.2.3, React Native 0.86.3, React Native Web 0.21.4,
 NativeWind 4.2.7, Tailwind 3.4.17. Install alongside the app’s compatible peers:
 
 ```sh
-pnpm add @bubbasfw/ui@0.2.0 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.3.0 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -89,6 +94,14 @@ Both example apps include every catalog component from the real package entry.
 ESM, CJS and declarations ship together. Source ships for Tailwind scanning.
 `@bubbasfw/ui/tokens` is independent of React; `@bubbasfw/ui/tailwind-preset` is
 CommonJS. The package bundles no platform runtime, font or artwork binary.
+
+Foundation system 0.4.0 and brand release 1.0.0 remain separately versioned.
+The immutable Studio release, file approvals/rights, hashes and lock ship under
+`foundations/`. Portable exports are `/foundations`, `/foundation-manifest`,
+`/foundation-lock`, and `/foundations.css`. The server-safe tokens export exposes
+foundationDigest/sourceCommit; package.json#bubba exposes matching consumer pins.
+See the public reference for complete typography, layout, motion, accessibility,
+composition and generation contracts.
 
 Software is [MIT](LICENSE). Bubba’s names and marks retain separate rights; no
 trademark license is granted. Publication remains an explicit owner-reviewed

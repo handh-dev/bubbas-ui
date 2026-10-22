@@ -1,0 +1,11 @@
+Bubba’s Fireworks design system — software foundations
+Owner-authorized system source distribution, 22 October 2026.
+Brand Studio owns reviewed identity and foundations; Core owns business facts.
+The immutable approved asset release remains 1.0.0. This export contains no
+artwork or font binary. Preserve original logo geometry and source inks.
+Montserrat is SIL Open Font License 1.1; keep OFL.txt with any font binary.
+Eurostile and rights-incomplete private artwork are excluded. Availability of a
+private asset is not permission to distribute it. Generated art stays private
+and draft until human approval; these software exports do not approve artwork.
+Pin system version, source commit, foundation digest and every member checksum.
+No running Brand Studio dependency is required or permitted in consumer builds.

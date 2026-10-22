@@ -20,7 +20,7 @@ export interface ButtonProps extends Omit<PressableProps, 'children' | 'classNam
 }
 
 const containerVariants: Record<ButtonVariant, string> = {
-  primary: 'border-ui-action-border bg-bubba-red',
+  primary: 'border-ui-action-border bg-ui-primary hover:bg-ui-primary-hover active:bg-ui-primary-hover',
   secondary: 'border-ui-border bg-ui-selected',
   outline: 'border-ui-border bg-transparent',
   ghost: 'border-transparent bg-transparent',

@@ -39,7 +39,9 @@ export interface ThemeProviderProps extends ViewProps {
   className?: string;
 }
 
-/** Scoped variables support nested themes without changing global appearance. */
+/** Scoped variables support nested themes without changing global appearance.
+ * The host owns persistence and applies the same theme to safe areas/install shells.
+ */
 export function ThemeProvider({ appearance = 'light', children, className, style, ...props }: ThemeProviderProps) {
   const system = useColorScheme();
   const resolved = appearance === 'system' ? system === 'dark' ? 'dark' : 'light' : appearance;

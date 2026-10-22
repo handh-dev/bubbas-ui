@@ -5,6 +5,7 @@ import { Modal, Platform, Pressable, ScrollView, View, type ViewProps } from 're
 import { cn, focusRing, useControllableState } from '../internal/utils';
 import { useWebScrollLock } from '../internal/scroll-lock';
 import { useTheme } from '../theme';
+import { tokens } from '../tokens';
 import { Heading, Text } from './typography';
 
 export interface DialogProps extends Omit<ViewProps, 'children'> {
@@ -22,7 +23,7 @@ export interface DialogProps extends Omit<ViewProps, 'children'> {
 
 function Overlay({ open, defaultOpen = false, onOpenChange, title, description, children, closeLabel = 'Close', dismissOnBackdropPress = true, className, contentClassName, testID, style, sheet = false, ...props }: DialogProps & { sheet?: boolean }) {
   const [isOpen, setOpen] = useControllableState({ value: open, defaultValue: defaultOpen, onChange: onOpenChange });
-  const { variables } = useTheme();
+  const { variables, colors, resolvedAppearance } = useTheme();
   const titleID = useId();
   const descriptionID = useId();
   const [webMounted, setWebMounted] = useState(false);
@@ -42,7 +43,7 @@ function Overlay({ open, defaultOpen = false, onOpenChange, title, description, 
   if (!isOpen || !canRender) return null;
   return <Modal transparent visible animationType="none" onRequestClose={() => setOpen(false)} accessibilityLabel={title} aria-labelledby={titleID} {...(description ? { 'aria-describedby': descriptionID } : {})}>
     <View className={cn('flex-1 px-4 py-6', sheet ? 'justify-end' : 'justify-center')} style={variables}>
-      <View testID={testID ? `${testID}-backdrop` : undefined} accessible={false} onStartShouldSetResponder={() => dismissOnBackdropPress} onResponderRelease={() => { if (dismissOnBackdropPress) setOpen(false); }} className="absolute inset-0 bg-black/50" />
+      <View testID={testID ? `${testID}-backdrop` : undefined} accessible={false} onStartShouldSetResponder={() => dismissOnBackdropPress} onResponderRelease={() => { if (dismissOnBackdropPress) setOpen(false); }} className="absolute inset-0" style={{ backgroundColor: colors.overlay, opacity: tokens.opacity.overlay[resolvedAppearance] }} />
       <View {...props} testID={testID} accessibilityViewIsModal className={cn('w-full self-center bg-ui-surface p-6', sheet ? 'max-h-[85%] max-w-[720px] rounded-t-xl' : 'max-h-[85%] max-w-[560px] rounded-xl', className)} style={style}>
         <View className="mb-4 flex-row items-start justify-between gap-4">
           <View className="min-w-0 flex-1 gap-2">

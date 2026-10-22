@@ -7,10 +7,10 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "build": "pnpm --filter @bubbasfw/ui build",
+    "build": "pnpm verify:foundations && pnpm --filter @bubbasfw/ui build",
     "typecheck": "pnpm --filter @bubbasfw/ui typecheck && pnpm --filter './examples/*' --if-present typecheck && pnpm --filter './apps/*' --if-present typecheck",
     "verify": "pnpm build && pnpm typecheck",
-    "pack": "pnpm --filter @bubbasfw/ui pack",
+    "pack": "pnpm verify:foundations && pnpm --filter @bubbasfw/ui pack",
     "dev:web": "pnpm --filter @bubbasfw/example-next dev",
     "dev:expo": "pnpm --filter @bubbasfw/example-expo start",
     "verify:package": "node scripts/verify-package.mjs",
@@ -19,7 +19,9 @@
     "build:docs": "pnpm build && pnpm --filter @bubbasfw/docs build",
     "verify:docs": "pnpm build:docs && node scripts/verify-docs.mjs",
     "sync:showcase": "node scripts/sync-showcase.mjs",
-    "preview:docs": "node scripts/serve-docs.mjs"
+    "preview:docs": "node scripts/serve-docs.mjs",
+    "sync:foundations": "node scripts/foundations.mjs",
+    "verify:foundations": "node scripts/foundations.mjs --check"
   },
   "devDependencies": {
     "@types/node": "24.10.1",

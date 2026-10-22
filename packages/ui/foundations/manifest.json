@@ -1,0 +1,355 @@
+{
+  "schemaVersion": 1,
+  "systemVersion": "0.4.0",
+  "brandRelease": "1.0.0",
+  "scope": "public-safe",
+  "source": {
+    "repository": "https://github.com/handh-dev/bubbas-brand-studio",
+    "commit": "78cb5bd276378e3da138a815859d5948aa4f7a98",
+    "path": "design-system/tokens.json"
+  },
+  "foundationDigest": "87bd2d88507662443d7cc12a63b7c98c5cef6bfc53f43c5c4bc52fd9d65bf18f",
+  "files": [
+    {
+      "path": "NOTICE.txt",
+      "sha256": "3be8989664b04fe7d5d153964529c3ada28c8b5923edda3e627e3dfd16b9de7b",
+      "bytes": 822,
+      "distribution": "public-safe",
+      "approval": {
+        "status": "approved",
+        "source": "Owner-authorized complete Bubba’s system release, 2026-10-22",
+        "scope": "software foundations; artwork approval unchanged"
+      },
+      "rights": {
+        "public_distribution": true,
+        "license": "Owner-authorized system source distribution; asset licenses remain separate"
+      }
+    },
+    {
+      "path": "foundations.css",
+      "sha256": "ad613ddb5acceab633b2737fbf2817eef92ae955c791d0c34240f19570f5c414",
+      "bytes": 9610,
+      "distribution": "public-safe",
+      "approval": {
+        "status": "approved",
+        "source": "Owner-authorized complete Bubba’s system release, 2026-10-22",
+        "scope": "software foundations; artwork approval unchanged"
+      },
+      "rights": {
+        "public_distribution": true,
+        "license": "Owner-authorized system source distribution; asset licenses remain separate"
+      }
+    },
+    {
+      "path": "foundations.json",
+      "sha256": "87bd2d88507662443d7cc12a63b7c98c5cef6bfc53f43c5c4bc52fd9d65bf18f",
+      "bytes": 24065,
+      "distribution": "public-safe",
+      "approval": {
+        "status": "approved",
+        "source": "Owner-authorized complete Bubba’s system release, 2026-10-22",
+        "scope": "software foundations; artwork approval unchanged"
+      },
+      "rights": {
+        "public_distribution": true,
+        "license": "Owner-authorized system source distribution; asset licenses remain separate"
+      }
+    },
+    {
+      "path": "foundations.mjs",
+      "sha256": "2dc8e9500979d6823348f55c72113114d29ee32754247bbf72803844da0735f9",
+      "bytes": 25013,
+      "distribution": "public-safe",
+      "approval": {
+        "status": "approved",
+        "source": "Owner-authorized complete Bubba’s system release, 2026-10-22",
+        "scope": "software foundations; artwork approval unchanged"
+      },
+      "rights": {
+        "public_distribution": true,
+        "license": "Owner-authorized system source distribution; asset licenses remain separate"
+      }
+    },
+    {
+      "path": "tailwind.cjs",
+      "sha256": "3e7472c87873cb2174c95ca97096ddf199272b5e5626ac27bbe332960c802fab",
+      "bytes": 3001,
+      "distribution": "public-safe",
+      "approval": {
+        "status": "approved",
+        "source": "Owner-authorized complete Bubba’s system release, 2026-10-22",
+        "scope": "software foundations; artwork approval unchanged"
+      },
+      "rights": {
+        "public_distribution": true,
+        "license": "Owner-authorized system source distribution; asset licenses remain separate"
+      }
+    }
+  ],
+  "brandSources": [
+    {
+      "id": "bubbas-font-montserrat",
+      "version": "1.0.0",
+      "sha256": "498dc34d0fa45288e0ac5345bd385c98bf81c56ee70209aacfb4a22a6510697c",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Typography designated in the owner-approved core guide; redistribution is separate.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "licensed",
+        "license": "SIL-OFL-1.1",
+        "evidence": "library/legacy/assets/fonts/OFL.txt",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Distribute with the OFL license; do not sell the font by itself."
+      }
+    },
+    {
+      "id": "bubbas-app-icon",
+      "version": "1.0.0",
+      "sha256": "4d883647c1d5f9283853c65ff317be9106534ebbfd7868f8ad73473c23b42dd1",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Core 01 owner approval; source-specific use notes still apply.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "owner-assurance",
+        "license": null,
+        "evidence": "library/legacy/research/sources.json#S14",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Owner reports the logo designer said the logo has no restrictions. Applies to logo geometry, not unrelated art."
+      }
+    },
+    {
+      "id": "bubbas-descriptor",
+      "version": "1.0.0",
+      "sha256": "e92417f2691ed0db042e65a07cca7be9bfd635ba1bde10d9fb1698f5bbec5445",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Core 01 owner approval; source-specific use notes still apply.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "owner-assurance",
+        "license": null,
+        "evidence": "library/legacy/research/sources.json#S14",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Owner reports the logo designer said the logo has no restrictions. Applies to logo geometry, not unrelated art."
+      }
+    },
+    {
+      "id": "bubbas-favicon",
+      "version": "1.0.0",
+      "sha256": "eeb4507606246fd9b01b57a781569709ac917ea6600b8d4b2013078b88936201",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Core 01 owner approval; source-specific use notes still apply.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "owner-assurance",
+        "license": null,
+        "evidence": "library/legacy/research/sources.json#S14",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Owner reports the logo designer said the logo has no restrictions. Applies to logo geometry, not unrelated art."
+      }
+    },
+    {
+      "id": "bubbas-logo-monochrome-white",
+      "version": "1.0.0",
+      "sha256": "e87e97f72dcd3a4d0da2e5cbdb365a42a13936d5567b769b94f0d509bd569ad3",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Core 01 owner approval; source-specific use notes still apply.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "owner-assurance",
+        "license": null,
+        "evidence": "library/legacy/research/sources.json#S14",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Owner reports the logo designer said the logo has no restrictions. Applies to logo geometry, not unrelated art."
+      }
+    },
+    {
+      "id": "bubbas-logo-monochrome",
+      "version": "1.0.0",
+      "sha256": "5b6a08a1a58d5fa5b3783f3afedb271d5ef57edb6b9bd6383b128da9b9b2a01e",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Core 01 owner approval; source-specific use notes still apply.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "owner-assurance",
+        "license": null,
+        "evidence": "library/legacy/research/sources.json#S14",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Owner reports the logo designer said the logo has no restrictions. Applies to logo geometry, not unrelated art."
+      }
+    },
+    {
+      "id": "bubbas-logo-primary",
+      "version": "1.0.0",
+      "sha256": "4d45c1d7e7cf4c5e9efbfcbd8bc0be69e8b9a5a5c3a74ea610fd093f34498ee8",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Core 01 owner approval; source-specific use notes still apply.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "owner-assurance",
+        "license": null,
+        "evidence": "library/legacy/research/sources.json#S14",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Owner reports the logo designer said the logo has no restrictions. Applies to logo geometry, not unrelated art."
+      }
+    },
+    {
+      "id": "bubbas-logo-reverse",
+      "version": "1.0.0",
+      "sha256": "73b489feaa8678d208bbf410020d828d2b55dc4110d18f88f99e4594bb421f05",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Core 01 owner approval; source-specific use notes still apply.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "owner-assurance",
+        "license": null,
+        "evidence": "library/legacy/research/sources.json#S14",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Owner reports the logo designer said the logo has no restrictions. Applies to logo geometry, not unrelated art."
+      }
+    },
+    {
+      "id": "bubbas-symbol-b",
+      "version": "1.0.0",
+      "sha256": "6f695712a5a42e5ec5bf1daa4a8adeaced8ff02fd8e8aa8e157b2e5b727a7260",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Core 01 owner approval; source-specific use notes still apply.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "owner-assurance",
+        "license": null,
+        "evidence": "library/legacy/research/sources.json#S14",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Owner reports the logo designer said the logo has no restrictions. Applies to logo geometry, not unrelated art."
+      }
+    },
+    {
+      "id": "bubbas-symbol-rocket",
+      "version": "1.0.0",
+      "sha256": "6f1d18dfea86fda3424bd7fc201dff81abfa04aa13151755912cae7c61297044",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Core 01 owner approval; source-specific use notes still apply.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "owner-assurance",
+        "license": null,
+        "evidence": "library/legacy/research/sources.json#S14",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Owner reports the logo designer said the logo has no restrictions. Applies to logo geometry, not unrelated art."
+      }
+    },
+    {
+      "id": "bubbas-wordmark",
+      "version": "1.0.0",
+      "sha256": "47e44e49f3e9410583b39da85c8f33fc401f4c3dbd4b34befb0fb83807e9b9f7",
+      "approval": {
+        "status": "approved",
+        "source_id": "S15",
+        "evidence": {
+          "source_id": "S15",
+          "record": "library/legacy/research/sources.json#S15",
+          "summary": "Owner approval, 8 October 2026"
+        },
+        "notes": "Core 01 owner approval; source-specific use notes still apply.",
+        "date": "2026-10-08"
+      },
+      "rights": {
+        "status": "owner-assurance",
+        "license": null,
+        "evidence": "library/legacy/research/sources.json#S14",
+        "internal_distribution": true,
+        "public_distribution": true,
+        "notes": "Owner reports the logo designer said the logo has no restrictions. Applies to logo geometry, not unrelated art."
+      }
+    }
+  ]
+}

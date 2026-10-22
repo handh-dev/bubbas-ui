@@ -1,0 +1,8 @@
+---
+description: Bubba’s shared design sources and reusable workflow
+globs: ["**/*.tsx", "**/*.jsx", "**/*.css", "**/design-system/**", "**/brand/**", "**/templates/**"]
+alwaysApply: false
+---
+Load `~/.cursor/skills/bubba-design/SKILL.md` for relevant Bubba’s design work.
+Use its maintained sources, shared reuse/extension workflow and provenance
+contract. Keep app business behavior in this repository.
