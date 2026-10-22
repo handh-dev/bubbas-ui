@@ -15,7 +15,7 @@ export default function Setup() {
     >
       <Alert
         title="32 components for Web and Expo"
-        description="Install @bubbasfw/ui@0.3.0 in your app, configure NativeWind, and use the same component imports on both platforms."
+        description="Install @bubbasfw/ui@0.3.1 in your app, configure NativeWind, and use the same component imports on both platforms."
         tone="info"
       />
       <View className="gap-4">
@@ -54,7 +54,7 @@ export default function Setup() {
           className="rounded-lg bg-ui-surface p-5"
         >
           {
-            "pnpm add @bubbasfw/ui@0.3.0 nativewind@4.2.7\npnpm add -D tailwindcss@3.4.17"
+            "pnpm add @bubbasfw/ui@0.3.1 nativewind@4.2.7\npnpm add -D tailwindcss@3.4.17"
           }
         </Text>
         <Text tone="muted">
@@ -143,6 +143,36 @@ export default function Setup() {
                   Appearance accepts light, dark or system. The provider scopes
                   semantic colors and may be nested. Load fonts in the host app;
                   components do not bundle a commercial font.
+                </Text>
+                <Text>
+                  Native Views do not inherit fontFamily. After loading the
+                  licensed font, pass its registered name to the provider. This
+                  reaches every shared heading, label, state, button and input,
+                  including modal content. Nested providers inherit the family.
+                  Explicit text/input style.fontFamily wins; code stays monospace.
+                  Raw app-owned native text still needs its own font style.
+                </Text>
+                <Text selectable variant="code" className="rounded-lg bg-ui-surface p-5">
+                  {`import { useFonts } from 'expo-font';
+import { ThemeProvider, PageHeader, FormField, Input } from '@bubbasfw/ui';
+
+function App() {
+  const [loaded, error] = useFonts({
+    BubbasBody: require('./assets/fonts/montserrat.ttf'),
+  });
+  if (!loaded && !error) return null;
+  return <ThemeProvider appearance="system" fontFamily={loaded ? 'BubbasBody' : undefined}>
+    <PageHeader title="Find your Bubba’s" />
+    <FormField label="Search stands"><Input placeholder="Name, city or ZIP" /></FormField>
+  </ThemeProvider>;
+}`}
+                </Text>
+                <Text>
+                  Retain the font’s license in the host. The complete Expo
+                  gallery demonstrates this with cleared Montserrat/OFL. Web
+                  hosts may pass their loaded CSS font name or keep existing
+                  document font inheritance. An omitted fontFamily preserves
+                  the host/platform defaults.
                 </Text>
               </View>
             ),

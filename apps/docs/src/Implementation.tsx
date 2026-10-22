@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View } from "react-native";
 import { Accordion, Alert, Link, Text } from "@bubbasfw/ui";
 import { Choice } from "./Choice";
-import { components } from "./showcase/catalog";
+import { components, candidateVersion } from "./showcase/catalog";
 import { snippetFor } from "./snippets";
 export function Implementation({
   item,
@@ -19,7 +19,7 @@ export function Implementation({
           content: (
             <View className="gap-4">
               <Alert
-                title="Use @bubbasfw/ui@0.2.0"
+                title={`Use @bubbasfw/ui@${candidateVersion}`}
                 description="Web and Expo use the same component imports. Configure NativeWind and the platform peers in your app, then add the example below."
                 tone="neutral"
               />

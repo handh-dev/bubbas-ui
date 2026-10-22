@@ -16,15 +16,17 @@ function UniversalFrame({ children }: { children: ReactNode }) {
 export function Gallery({
   platform,
   Frame = UniversalFrame,
+  fontFamily,
 }: {
   platform: "Web" | "Expo";
   Frame?: ComponentType<{ children: ReactNode }>;
+  fontFamily?: string;
 }) {
   const [name, setName] = useState<ComponentName>("Button");
   const [appearance, setAppearance] = useState<Appearance>("light");
   const [presses, setPresses] = useState(0);
   return (
-    <ThemeProvider appearance={appearance} className="flex-1">
+    <ThemeProvider appearance={appearance} fontFamily={fontFamily} className="flex-1">
       <Frame>
         <ScrollView keyboardShouldPersistTaps="handled">
           <View className="mx-auto w-full max-w-4xl gap-8 px-5 py-8">

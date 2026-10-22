@@ -1,7 +1,8 @@
 'use client';
 
 import { forwardRef, useEffect, useId, useState, type ElementRef } from 'react';
-import { Platform, Pressable, Text, View, type PressableProps } from 'react-native';
+import { Platform, Pressable, View, type PressableProps } from 'react-native';
+import { NativeText as Text } from '../../internal/native-text';
 import { cn, focusRing, useControllableState } from '../../internal/utils';
 import { Dialog } from '../overlays';
 import { useFormField } from './FormField';

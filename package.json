@@ -9,7 +9,8 @@
   "scripts": {
     "build": "pnpm verify:foundations && pnpm --filter @bubbasfw/ui build",
     "typecheck": "pnpm --filter @bubbasfw/ui typecheck && pnpm --filter './examples/*' --if-present typecheck && pnpm --filter './apps/*' --if-present typecheck",
-    "verify": "pnpm build && pnpm typecheck",
+    "verify": "pnpm build && pnpm typecheck && pnpm verify:fonts",
+    "verify:fonts": "node scripts/verify-fonts.mjs",
     "pack": "pnpm verify:foundations && pnpm --filter @bubbasfw/ui pack",
     "dev:web": "pnpm --filter @bubbasfw/example-next dev",
     "dev:expo": "pnpm --filter @bubbasfw/example-expo start",

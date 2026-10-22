@@ -1,7 +1,8 @@
 'use client';
 
 import { createContext, forwardRef, useContext, useId, type ElementRef, type ReactNode } from 'react';
-import { Platform, Text, View, type ViewProps } from 'react-native';
+import { Platform, View, type ViewProps } from 'react-native';
+import { NativeText as Text } from '../../internal/native-text';
 import { cn } from '../../internal/utils';
 
 interface FieldContextValue {

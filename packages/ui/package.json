@@ -1,6 +1,6 @@
 {
   "name": "@bubbasfw/ui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Bubba’s universal React Native and web design system, styled with NativeWind.",
   "license": "MIT",
   "type": "module",

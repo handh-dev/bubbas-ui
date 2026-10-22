@@ -177,7 +177,7 @@ export function useReview() {
     const content = JSON.stringify(
       {
         package: "@bubbasfw/ui",
-        version: "0.2.0",
+        version: "0.3.1",
         exportedAt: new Date().toISOString(),
         appearance: latestAppearance,
         reviews: latest,

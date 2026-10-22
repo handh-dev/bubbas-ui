@@ -1,7 +1,8 @@
 'use client';
 
 import { forwardRef, type ElementRef } from 'react';
-import { Text as NativeText, Platform, type TextProps as NativeTextProps } from 'react-native';
+import { Platform, type TextProps as NativeTextProps } from 'react-native';
+import { NativeText } from '../internal/native-text';
 import { cn } from '../internal/utils';
 
 export type TextTone = 'default' | 'muted' | 'info' | 'success' | 'warning' | 'error';
@@ -16,7 +17,7 @@ export interface TextProps extends NativeTextProps {
 }
 
 export const Text = forwardRef<ElementRef<typeof NativeText>, TextProps>(function Text({ tone = 'default', variant = 'body', className, ...props }, ref) {
-  return <NativeText {...props} ref={ref} className={cn(variants[variant], tones[tone], className)} />;
+  return <NativeText {...props} ref={ref} inheritFont={variant !== 'code'} className={cn(variants[variant], tones[tone], className)} />;
 });
 
 export interface HeadingProps extends NativeTextProps {
