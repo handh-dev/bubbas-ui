@@ -86,6 +86,16 @@ export default function Foundations() {
           Eurostile display font is not redistributed.
         </Text>
         <Link href="/bubbas-ui/fonts/OFL.txt">Montserrat license</Link>
+        {tokens.typeScale.map((role) => <View key={role.role} className="gap-1 border-t border-ui-line pt-3">
+          <Text variant="label">{role.role}</Text>
+          <Text variant="small" tone="muted">{`${role.mobile_px}px phone / ${role.desktop_px}px wide · ${role.line_height} line height · ${role.weight} weight`}</Text>
+        </View>)}
+      </View>
+      <View className="gap-4">
+        <Heading level={2}>Layout and motion</Heading>
+        <Text>{`${tokens.layout.maxWidth}px page · ${tokens.layout.readingWidth}px reading · ${tokens.layout.gutters.join('/')}px gutters · ${tokens.layout.breakpoints.compact}/${tokens.layout.breakpoints.wide}px layout breakpoints.`}</Text>
+        <Text>{`${tokens.motion.feedback}ms feedback. ${tokens.motion.reducedMotion}`}</Text>
+        <Link href="/bubbas-ui/reference/">Accessibility, states, and interaction contract</Link>
       </View>
       <View className="gap-4">
         <Heading level={2}>Space and shape</Heading>
@@ -105,8 +115,8 @@ export default function Foundations() {
       <View className="gap-3 border-t border-ui-line pt-6">
         <Heading level={2}>Source and rights</Heading>
         <Text>
-          Foundations are pinned from Brand Studio brand release 1.0.0 and
-          interface system 0.3.0. Reviewing a proposed change here does not
+          Foundations are pinned from Brand Studio brand release {tokens.brandVersion} and
+          interface system {tokens.systemVersion}. Reviewing a proposed change here does not
           approve or edit the Studio source.
         </Text>
         <Text tone="muted">
@@ -115,6 +125,10 @@ export default function Foundations() {
           font binary is included.
         </Text>
         <Link href="/bubbas-ui/brand/NOTICE.txt">Public asset notice</Link>
+        <Text selectable variant="code">{`Foundation SHA256\n${tokens.foundationDigest}\nSource commit\n${tokens.sourceCommit}`}</Text>
+        <Link href="/bubbas-ui/foundations/manifest.json">Download the versioned source manifest</Link>
+        <Link href="/bubbas-ui/foundations/foundations.json">Download platform-neutral tokens</Link>
+        <Link href="/bubbas-ui/foundations/foundations.css">Download portable CSS variables</Link>
       </View>
     </Guide>
   );

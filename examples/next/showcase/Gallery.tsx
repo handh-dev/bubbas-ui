@@ -9,6 +9,7 @@ import {
 } from "@bubbasfw/ui";
 import { components, type ComponentName } from "./catalog";
 import { ComponentDemo } from "./Demo";
+import { PatternsDemo } from "./PatternsDemo";
 function UniversalFrame({ children }: { children: ReactNode }) {
   return <View className="flex-1">{children}</View>;
 }
@@ -112,6 +113,8 @@ export function Gallery({
                 <ComponentDemo key={name} name={name} />
               </View>
             </View>
+            <Heading level={2}>Shared task patterns</Heading>
+            <PatternsDemo />
           </View>
         </ScrollView>
       </Frame>

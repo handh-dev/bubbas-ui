@@ -15,7 +15,7 @@ export default function Setup() {
     >
       <Alert
         title="32 components for Web and Expo"
-        description="Install @bubbasfw/ui@0.2.0 in your app, configure NativeWind, and use the same component imports on both platforms."
+        description="Install @bubbasfw/ui@0.3.0 in your app, configure NativeWind, and use the same component imports on both platforms."
         tone="info"
       />
       <View className="gap-4">
@@ -54,7 +54,7 @@ export default function Setup() {
           className="rounded-lg bg-ui-surface p-5"
         >
           {
-            "pnpm add @bubbasfw/ui@0.2.0 nativewind@4.2.7\npnpm add -D tailwindcss@3.4.17"
+            "pnpm add @bubbasfw/ui@0.3.0 nativewind@4.2.7\npnpm add -D tailwindcss@3.4.17"
           }
         </Text>
         <Text tone="muted">

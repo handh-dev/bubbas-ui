@@ -1,5 +1,12 @@
 import { useCallback, useRef, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { extendTailwindMerge } from 'tailwind-merge';
+
+// Named foundation sizes are font sizes, not text colors. Keep both classes.
+const twMerge = extendTailwindMerge({ extend: { classGroups: {
+  'font-size': [{ text: ['bubba-display', 'bubba-display-wide', 'bubba-page', 'bubba-page-wide',
+    'bubba-section', 'bubba-section-wide', 'bubba-body', 'bubba-body-wide', 'bubba-label',
+    'bubba-label-wide', 'bubba-supporting', 'bubba-supporting-wide'] }],
+} } });
 
 export function cn(...values: (string | false | null | undefined)[]) {
   return twMerge(values.filter(Boolean).join(' '));

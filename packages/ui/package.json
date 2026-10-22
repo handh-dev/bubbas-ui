@@ -1,7 +1,7 @@
 {
   "name": "@bubbasfw/ui",
-  "version": "0.2.0",
-  "description": "Bubba\u2019s universal React Native and web design system, styled with NativeWind.",
+  "version": "0.3.0",
+  "description": "Bubba’s universal React Native and web design system, styled with NativeWind.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -36,16 +36,24 @@
       "default": "./dist/tokens.js"
     },
     "./tailwind-preset": "./tailwind-preset.cjs",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./foundations": "./foundations/foundations.json",
+    "./foundation-manifest": "./foundations/manifest.json",
+    "./foundation-lock": "./foundations.lock.json",
+    "./foundations.css": "./foundations/foundations.css"
   },
   "files": [
     "dist",
     "src",
     "tailwind-preset.cjs",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "foundations",
+    "foundations.lock.json"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -83,5 +91,11 @@
     "react-native-web": {
       "optional": true
     }
+  },
+  "bubba": {
+    "systemVersion": "0.4.0",
+    "brandRelease": "1.0.0",
+    "foundationDigest": "945a265777faa2a465afacc19f59c5dfdf0a271e65077059d8af27d8b5574579",
+    "sourceCommit": "0aed73a90256ff7c443e00b4da6cfd901982c415"
   }
 }

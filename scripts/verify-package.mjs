@@ -39,6 +39,7 @@ async function run(command, args, cwd, name) {
 }
 
 async function checkArtifact() {
+  await run('pnpm', ['run', 'verify:foundations'], root, 'verify-foundations');
   await run('pnpm', ['--filter', '@bubbasfw/ui', 'build'], root, 'build-package');
   const packed = JSON.parse(await run('npm', ['pack', '--json', '--ignore-scripts', '--pack-destination', evidence], ui, 'pack'))[0];
   const names = packed.files.map(({ path: name }) => name);
@@ -78,7 +79,10 @@ async function checkArtifact() {
   assert.ok(preset.theme?.extend?.colors, 'The published Tailwind preset must load');
   const { tokens } = require(path.join(publishedRoot, 'dist/tokens.cjs'));
   assert.equal(tokens.colors.red, '#CC0000', 'The platform-neutral token export must load');
-  assert.equal(Object.keys(tokens.themes.light).length, 41, 'Complete light semantic role map');
+  assert.ok(Object.keys(tokens.themes.light).length >= 46, 'Complete light semantic role map and canonical aliases');
+  assert.equal(tokens.systemVersion, manifest.bubba.systemVersion);
+  assert.equal(tokens.foundationDigest, manifest.bubba.foundationDigest);
+  assert.equal(tokens.brandVersion, manifest.bubba.brandRelease);
   assert.deepEqual(Object.keys(tokens.themes.light).sort(), Object.keys(tokens.themes.dark).sort(), 'Both themes cover the same semantic roles');
   report.checks.artifact = { filename: packed.filename, files: names, bytes: packed.size, shasum: packed.shasum, integrity: packed.integrity };
   return tarball;

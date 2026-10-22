@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "systemVersion": "0.4.0",
+  "brandRelease": "1.0.0",
+  "foundationDigest": "945a265777faa2a465afacc19f59c5dfdf0a271e65077059d8af27d8b5574579",
+  "manifestSha256": "e0fb15b2806e65dc5c71e54219f1e190f1e074a959307c6a050e4c05e64f1f7b",
+  "sourceCommit": "0aed73a90256ff7c443e00b4da6cfd901982c415"
+}

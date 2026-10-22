@@ -1,12 +1,20 @@
 # @bubbasfw/ui
 
 Bubba’s universal design system for Next.js, Expo, iOS and Android.
-`@bubbasfw/ui@0.2.0` contains 32 components built with React Native primitives and
+`@bubbasfw/ui@0.3.0` contains 32 components built with React Native primitives and
 NativeWind, plus semantic themes, a visual review workbench and complete
 Web/Expo galleries.
 
+The 0.3.0 candidate adds AppearanceControl, PageHeader and AsyncState, complete
+public system/pattern/composition references, and mechanically verified Studio
+foundation custody. Publication and deployment receipts are recorded separately.
+
 [Review the design system](https://handh-dev.github.io/bubbas-ui/) ·
 [npm package](https://www.npmjs.com/package/@bubbasfw/ui)
+
+[System reference](https://handh-dev.github.io/bubbas-ui/reference/) ·
+[Task patterns](https://handh-dev.github.io/bubbas-ui/patterns/) ·
+[Composition guidance](https://handh-dev.github.io/bubbas-ui/compositions/)
 
 Published releases use public npm access.
 The code is licensed under [MIT](LICENSE). Bubba’s names and marks are not
@@ -17,7 +25,7 @@ rights.
 
 ```text
 packages/ui/                 Universal components, themes, tokens, ESM/CJS/types
-apps/docs/                   Static visual workbench, 32 routes and setup guides
+apps/docs/                   Static workbench, 38 routes and complete system guides
 examples/next/               Self-contained React Native Web + Next.js gallery
 examples/expo/               Self-contained native Expo gallery
 scripts/                     Packed-package, gallery and docs browser checks
@@ -119,7 +127,7 @@ The tested example baseline is React 19.2.3, React Native 0.86.3, React Native W
 versions. NativeWind v5 and Tailwind v4 require a separate migration.
 
 ```sh
-pnpm add @bubbasfw/ui@0.2.0 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.3.0 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -176,6 +184,13 @@ boundary. The published component entry already preserves that directive;
 `@bubbasfw/ui/tokens` stays independent of React and can be read on the server.
 
 ## Package and brand boundaries
+
+See [the maintained system contract](docs/system-contract.md) for foundation
+refresh, file approval/rights gates, source digests, platform adapters and
+contribution workflow. `@bubbasfw/ui/foundations`, `/foundation-manifest`,
+`/foundation-lock` and `/foundations.css` expose pinned portable sources for
+existing platform adapters. The token export includes foundationDigest and
+sourceCommit. Native consumers continue to use the RN components.
 
 The build compiles JSX to `nativewind/jsx-runtime` and keeps platform runtimes
 external. ESM, CJS, and their corresponding declaration files are exported.

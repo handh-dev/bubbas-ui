@@ -11,6 +11,11 @@
 - Brand Studio owns approved sources. Preserve source pins; never add restricted
   fonts or artwork, secrets, credentials, or private source catalogs to this
   public repository or package. Code license and trademark rights are distinct.
+- Read docs/system-contract.md before design changes. Immutable public-safe
+  foundations live in packages/ui/foundations; refresh with sync:foundations,
+  never hand-edit src/tokens.ts. Build checks reject stale outputs, rights or
+  digest drift. Reuse/extend shared components and patterns, integrate the
+  requesting app, and update canonical showcase/examples/reference together.
 - Publishing requires owner review. No automatic npm publication on push/merge.
 - Preserve other contributors’ changes. Use implementation subagents and a fresh
   independent read-only review for code changes while Wstack is active.

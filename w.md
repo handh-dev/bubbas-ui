@@ -1,5 +1,29 @@
 # Bubba’s universal UI workspace
 
+## Complete-system delivery — October 22, 2026
+
+Owner: universal UI implementation agent, branch
+`codex/bubba-design-system-20261022`. Parent chat coordinates a fresh independent
+review, integration, publication and public deployment. Prior 0.2.0 receipts
+below remain historical and do not qualify the 0.3.0 candidate.
+
+- [x] Preserve 32 React Native/NativeWind components and platform externals.
+- [x] Implement AppearanceControl, PageHeader and AsyncState with honest source,
+  freshness, missing/zero and retained-content behavior.
+- [x] Complete public reference, patterns, composition/asset/generation guidance.
+- [x] Import/pin initial Studio public-safe foundation 0.4.0, generate and verify custody.
+- [x] Qualify initial exact package through independent Next install/behavior and Expo exports.
+- [x] Qualify public docs routes, review workflows and phone/desktop layouts.
+- [ ] Re-pin final independently reviewed Studio export/website recipes and requalify final artifact.
+- [ ] Fresh independent implementation/design review and consequential fixes.
+- [ ] Merge reviewed source, publish npm candidate, deploy Pages through gh-pages.
+- [ ] Verify exact public tarball and live documentation at final identities.
+
+Maintained contracts: docs/system-contract.md and packages/ui/foundations.lock.json.
+Current qualification and remaining source dependency: docs/releases/0.3.0-candidate.md.
+No art/font binary enters the shared package. Restricted assets stay with their
+owning private source and public docs retain only separately cleared assets.
+
 Current scope: public `@bubbasfw/ui` has a 32-component universal catalog,
 complete Web/Expo examples and a public static visual review workbench. Shared
 components use React Native primitives + NativeWind. Shane’s confirmed primary

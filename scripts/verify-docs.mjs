@@ -4,6 +4,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { serveDocs } from "./serve-docs.mjs";
 import { verifyReviewStorage } from "./verify-review-storage.mjs";
+import { verifyPatterns } from "./verify-patterns.mjs";
 const evidence = path.resolve("artifacts/verification/docs");
 await mkdir(evidence, { recursive: true });
 const owned = process.argv[2] ? null : await serveDocs(0);
@@ -172,7 +173,7 @@ try {
       fullPage: true,
     });
   }
-  for (const route of ["foundations/", "setup/"]) {
+  for (const route of ["foundations/", "setup/", "reference/", "patterns/", "compositions/"]) {
     const response = await page.goto(`${base}${route}`, {
       waitUntil: "networkidle",
     });
@@ -184,6 +185,13 @@ try {
       `No overflow on ${route}`,
     );
   }
+  await page.goto(`${base}patterns/`, { waitUntil: 'networkidle' });
+  const patterns = await verifyPatterns(page);
+  for (const width of [1440, 390, 320]) {
+    await page.setViewportSize({ width, height: 1000 });
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Patterns fit ${width}`);
+    await page.screenshot({ path: path.join(evidence, `patterns-${width}.png`), fullPage: true });
+  }
   const storageFailures = await verifyReviewStorage(browser, base);
   assert.deepEqual(errors, []);
   await writeFile(
@@ -192,7 +200,8 @@ try {
       {
         status: "passed",
         names,
-        routes: 35,
+        routes: 38,
+        patterns,
         search: true,
         controls: true,
         themePersistence: true,

@@ -20,6 +20,8 @@ export { Breadcrumbs, Pagination } from './components/navigation';
 export type { BreadcrumbItem, BreadcrumbsProps, PaginationProps } from './components/navigation';
 export { ThemeProvider, useTheme, themeVariables } from './theme';
 export type { ThemeProviderProps, Appearance, ResolvedAppearance, ThemeColor, ThemeColors } from './theme';
+export { AppearanceControl, PageHeader, AsyncState } from './components/patterns';
+export type { AppearanceControlProps, PageHeaderProps, AsyncStateProps, AsyncStatus } from './components/patterns';
 export * from './components/forms';
 export { tokens } from './tokens';
 export type { BubbaTokens } from './tokens';

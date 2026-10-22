@@ -276,7 +276,10 @@ export function Workbench({ initialSlug }: { initialSlug: string }) {
           <Text variant="small" tone="muted">
             Bubba’s UI · Universal components, reviewed by eye.
           </Text>
-          <View className="flex-row gap-6">
+          <View className="w-full min-w-0 flex-row flex-wrap gap-6 md:w-auto">
+            <Link href="/bubbas-ui/reference/" textClassName="text-sm">Reference</Link>
+            <Link href="/bubbas-ui/patterns/" textClassName="text-sm">Patterns</Link>
+            <Link href="/bubbas-ui/compositions/" textClassName="text-sm">Compositions</Link>
             <Link
               href="https://github.com/handh-dev/bubbas-ui"
               external

@@ -36,8 +36,11 @@ export function Guide({
           </Text>
         </View>
         {children}
-        <View className="border-t border-ui-line py-5">
+        <View className="flex-row flex-wrap gap-6 border-t border-ui-line py-5">
           <Link href="/bubbas-ui/">Review components</Link>
+          <Link href="/bubbas-ui/reference/">System reference</Link>
+          <Link href="/bubbas-ui/patterns/">Task patterns</Link>
+          <Link href="/bubbas-ui/compositions/">Compositions</Link>
         </View>
       </View>
     </ThemeProvider>

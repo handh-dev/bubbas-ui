@@ -6,10 +6,15 @@ and release time; it has no runtime dependency on Studio or a private backend.
 | Source | Version | SHA256 |
 | --- | --- | --- |
 | `bubbas-brand-studio/tokens/brand.tokens.json` | Brand release `1.0.0` | `4c478d32c7eeedb31de0de77873829a7b327235e301325bacde3dc672534ebc4` |
-| `bubbas-brand-studio/design-system/tokens.json` | Working system `0.3.0`, reviewed 2026-10-21 | `59fb9908294ef1c5b29ef21829a8371f2da0b2c54f69fb9a52c94bf0fc168dec` |
+| Studio public-safe `foundations.json` | System `0.4.0`, owner-authorized scope 2026-10-22 | `945a265777faa2a465afacc19f59c5dfdf0a271e65077059d8af27d8b5574579` |
 
 `packages/ui/src/tokens.ts` pins brand colors, spacing, radii, touch targets,
-layout and motion plus the complete light/dark semantic role maps. The working
+layout and motion plus the complete light/dark semantic role maps. It is generated
+from the immutable release in `packages/ui/foundations/`, with file approval,
+rights and byte hashes in the original manifest. Source commit:
+`0aed73a90256ff7c443e00b4da6cfd901982c415`. The lock and package.json metadata
+pin the same source digest. `pnpm verify:foundations` rejects stale generation,
+changed files, invalid contrast, role mismatch and custody drift. The working
 interface baseline uses light surfaces and neutral charcoal dark surfaces;
 old navy/glow recipes are not the dark interface baseline. A review note in the
 workbench does not change or approve Studio source.
