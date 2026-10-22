@@ -1,7 +1,8 @@
 'use client';
 
 import { forwardRef, useId, type ElementRef, type ReactNode } from 'react';
-import { Platform, Pressable, Text, View, type ViewProps } from 'react-native';
+import { Platform, Pressable, View, type ViewProps } from 'react-native';
+import { NativeText as Text } from '../../internal/native-text';
 import { cn, focusRing, useControllableState } from '../../internal/utils';
 import { useSelectionNavigation } from './selection';
 

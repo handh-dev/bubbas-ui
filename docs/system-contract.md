@@ -6,6 +6,24 @@ shared task patterns. Apps own their data, authorization, routing, persistence,
 business rules and native/service boundaries. No consumer reaches a Studio
 runtime or imports a mutable sibling checkout during its build.
 
+## Host typography
+
+`ThemeProvider fontFamily` is the loaded host font name, inherited by nested
+providers. Every shared native text/input resolves it explicitly: Views cannot
+provide RN font inheritance. This includes control labels, form hints/errors,
+feedback and Modal content. Explicit `style.fontFamily` overrides the default;
+the code variant keeps monospace. Omission preserves prior platform/host defaults.
+Hosts load and license fonts, and style app-owned raw native text/navigation.
+`useTheme().fontFamily` exposes the resolved default. The Expo example loads the
+same cleared Montserrat/OFL bytes as the docs, then supplies its registered alias.
+No font binary enters the npm package.
+
+`pnpm verify:fonts` renders the real component catalog/patterns into RN primitive
+shims and records supplied native props. It covers inherited/nested/modal/explicit
+fonts and inputs on iOS/Android branches, plus unchanged defaults and code intent.
+It proves component prop forwarding; installed font resolution, weights, glyphs,
+large-text fit and paint require actual device/emulator acceptance.
+
 The public reference is maintained with this implementation:
 
 - [Foundations](https://handh-dev.github.io/bubbas-ui/foundations/): source pins,

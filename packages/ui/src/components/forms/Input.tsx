@@ -15,10 +15,10 @@ export interface InputProps extends TextInputProps {
 
 /** Native TextInput with field association and matching light/dark paint. */
 export const Input = forwardRef<TextInput, InputProps>(function Input({ disabled, invalid, required,
-  readOnly = false, editable, className, nativeID, accessibilityLabel, accessibilityHint,
+  readOnly = false, editable, className, style, nativeID, accessibilityLabel, accessibilityHint,
   accessibilityState, 'aria-label': ariaLabel, 'aria-disabled': ariaDisabled, placeholderTextColor, selectionColor, ...props }, ref) {
   const field = useFormField();
-  const { colors } = useTheme();
+  const { colors, fontFamily } = useTheme();
   const isDisabled = Boolean(disabled || ariaDisabled || accessibilityState?.disabled || field?.disabled);
   const isReadOnly = readOnly || (editable === false && !isDisabled);
   const isInvalid = invalid ?? field?.invalid ?? false;
@@ -41,6 +41,7 @@ export const Input = forwardRef<TextInput, InputProps>(function Input({ disabled
     accessibilityHint={nativeHint} accessibilityState={{ ...accessibilityState, disabled: isDisabled }}
     aria-disabled={isDisabled} editable={!isDisabled && !isReadOnly}
     placeholderTextColor={placeholderTextColor ?? colors.muted} selectionColor={selectionColor ?? colors.selection}
+    style={[fontFamily ? { fontFamily } : undefined, style]}
     className={cn('min-h-[48px] rounded-[4px] border border-ui-border bg-ui-surface px-3 py-3 text-base text-ui-text',
       focusRing, isInvalid && 'border-ui-error', isDisabled && 'bg-ui-disabled-surface text-ui-disabled-text', className)} />;
 });

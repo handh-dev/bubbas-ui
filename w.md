@@ -1,5 +1,21 @@
 # Bubba’s universal UI workspace
 
+## HH-51 native host-font patch — 0.3.1
+
+Branch `codex/HH-51-native-font-contract`, starting at merged `762bfa3`.
+Immutable 0.3.0 publication is preserved; parent owns fresh patch review and
+publication, followed by mobile’s exact registry adoption and native acceptance.
+
+- [x] Reproduce missing native font props; add scoped provider font contract.
+- [x] Cover all shared native text/inputs, nested providers/Modals and overrides.
+- [x] Load cleared Montserrat/OFL in canonical Expo example; no npm font binary.
+- [x] Update public setup/reference/package guidance and forwarding regression.
+- [ ] Exact clean-head package/docs qualification and independent fresh review.
+- [ ] Publish 0.3.1, integrate mobile registry pin/provider and verify installed font.
+
+Contract/release scope: [0.3.1 candidate](docs/releases/0.3.1-candidate.md).
+Generated receipts stay under ignored `artifacts/verification/`.
+
 ## Complete-system delivery — October 22, 2026
 
 Owner: universal UI implementation agent, branch
@@ -108,7 +124,9 @@ matches that final hash. Receipt:
 
 ## Commands and evidence
 
-`pnpm verify`: package build + package/example typechecks.
+`pnpm verify`: package build + package/example typechecks + font forwarding.
+`pnpm verify:fonts`: compiled component/RN-shim prop forwarding and font provenance;
+not installed font resolution or paint.
 `pnpm verify:package`: installed tarball and independent consumer bundler checks.
 `pnpm verify:web`: actual browser Button behavior and visual styles.
 `pnpm dev:web` / `pnpm dev:expo`: owned local example previews.

@@ -1,7 +1,8 @@
 'use client';
 
 import { forwardRef, type ElementRef, type ReactNode } from 'react';
-import { ActivityIndicator, Pressable, Text, type PressableProps } from 'react-native';
+import { ActivityIndicator, Pressable, type PressableProps } from 'react-native';
+import { NativeText as Text } from '../internal/native-text';
 import { cn, focusRing } from '../internal/utils';
 import { useTheme } from '../theme';
 

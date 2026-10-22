@@ -36,6 +36,9 @@ artwork, generated campaign work, private source catalogs and recovered website
 assets marked proposed/unreviewed are excluded. Existing website layout and
 interaction patterns informed implementation without copying those artworks.
 
-Native examples use their platform font until a consuming app loads a licensed
-font. The web docs load cleared Montserrat. Font parity must be reviewed in a
-consumer after its chosen font is installed.
+The Expo example loads the exact cleared Montserrat/OFL bytes already used by
+the docs, retained in `examples/expo/assets/fonts/`. Its loaded `BubbasBody` alias
+is passed to the shared ThemeProvider font contract. `pnpm verify:fonts` checks
+the byte equality and React-to-native-primitive font prop forwarding; it does
+not prove native font resolution or paint. The web docs load cleared Montserrat.
+Font parity still needs installed consumer review.

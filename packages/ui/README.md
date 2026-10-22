@@ -4,7 +4,7 @@ Bubba’s universal component library for React Native, Expo and React Native We
 All components use native primitives and NativeWind. React and platform runtimes
 are peers, with no Base UI, Radix UI or DOM component implementation.
 
-Version 0.3.0 includes 32 components, scoped light/dark/system themes and shared
+Version 0.3.1 includes 32 components, scoped light/dark/system themes and shared
 design tokens. Use the same imports in Next.js/React Native Web and Expo.
 
 Three task patterns cover appearance settings, page introductions and explicit
@@ -49,7 +49,7 @@ Baseline: React 19.2.3, React Native 0.86.3, React Native Web 0.21.4,
 NativeWind 4.2.7, Tailwind 3.4.17. Install alongside the app’s compatible peers:
 
 ```sh
-pnpm add @bubbasfw/ui@0.3.0 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.3.1 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -88,6 +88,31 @@ App Router consumers need a client boundary. Turbopack is not configured.
 See the [complete runnable examples](https://github.com/handh-dev/bubbas-ui/tree/main/examples)
 and the [visual workbench](https://handh-dev.github.io/bubbas-ui/) for component previews and platform setup.
 Both example apps include every catalog component from the real package entry.
+
+### Loaded host fonts
+
+React Native Views do not inherit font family. Load the font in your app, then
+pass its registered name to `ThemeProvider`. Every shared text and input,
+including form labels, feedback and modal content, resolves that scoped default.
+
+```tsx
+const [loaded, error] = useFonts({
+  BubbasBody: require('./assets/fonts/montserrat.ttf'),
+});
+if (!loaded && !error) return null;
+return <ThemeProvider fontFamily={loaded ? 'BubbasBody' : undefined}>
+  <PageHeader title="Find your Bubba’s" />
+  <FormField label="Search stands"><Input placeholder="Name, city or ZIP" /></FormField>
+</ThemeProvider>;
+```
+
+Import `useFonts` from `expo-font` and retain the font license in the host.
+The complete Expo example includes cleared Montserrat/OFL; npm contains no font
+binary. Web hosts can pass their loaded CSS family or retain document inheritance.
+Nested providers inherit the font. Explicit native `style.fontFamily` overrides
+the default; `Text variant="code"` retains monospace. An omitted `fontFamily`
+preserves existing defaults. Raw app-owned native text/navigation remains the
+host’s responsibility; `useTheme().fontFamily` exposes the current name.
 
 ## Exports and rights
 

@@ -21,10 +21,11 @@ export function themeVariables(appearance: ResolvedAppearance) {
     .map(([key, value]) => [`--bui-${key}`, rgb(value)])));
 }
 
-function themeValue(appearance: Appearance, resolvedAppearance: ResolvedAppearance) {
+function themeValue(appearance: Appearance, resolvedAppearance: ResolvedAppearance, fontFamily?: string) {
   return {
     appearance,
     resolvedAppearance,
+    fontFamily,
     colors: Object.fromEntries(Object.entries(tokens.themes[resolvedAppearance])
       .filter(([, value]) => value.startsWith('#'))) as ThemeColors,
     variables: themeVariables(resolvedAppearance),
@@ -36,16 +37,23 @@ const ThemeContext = createContext(themeValue('light', 'light'));
 export interface ThemeProviderProps extends ViewProps {
   children: ReactNode;
   appearance?: Appearance;
+  /** Loaded host font name for shared text and inputs. Inherits through nested
+   * providers; explicit text/input style.fontFamily overrides this default.
+   * Font loading and licensing remain the host's responsibility.
+   */
+  fontFamily?: string;
   className?: string;
 }
 
 /** Scoped variables support nested themes without changing global appearance.
  * The host owns persistence and applies the same theme to safe areas/install shells.
  */
-export function ThemeProvider({ appearance = 'light', children, className, style, ...props }: ThemeProviderProps) {
+export function ThemeProvider({ appearance = 'light', fontFamily, children, className, style, ...props }: ThemeProviderProps) {
+  const parent = useContext(ThemeContext);
   const system = useColorScheme();
   const resolved = appearance === 'system' ? system === 'dark' ? 'dark' : 'light' : appearance;
-  const value = useMemo(() => themeValue(appearance, resolved), [appearance, resolved]);
+  const family = fontFamily ?? parent.fontFamily;
+  const value = useMemo(() => themeValue(appearance, resolved, family), [appearance, resolved, family]);
   return (
     <ThemeContext.Provider value={value}>
       <View {...props} className={cn('bg-ui-canvas', className)} style={[value.variables, style]}>

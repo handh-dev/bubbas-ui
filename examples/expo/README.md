@@ -3,7 +3,11 @@
 This complete consumer imports all 32 components from `@bubbasfw/ui`. From the
 repository root, run `pnpm build`, then `pnpm dev:expo`. Use the component strip
 to select a specimen and Light/Dark/System to review appearance. Native typography
-uses the platform font until the host loads its own licensed font.
+loads cleared Montserrat with `expo-font`, then passes its `BubbasBody` alias
+through Gallery to `ThemeProvider fontFamily`. This covers shared labels,
+headings, states, fields and modal text. The exact public font bytes and SIL OFL
+are copied from the approved docs source into `assets/fonts/`; no font binary is
+included in the npm component package. Font failure preserves platform fallback.
 
 The example keeps Expo 57.0.31, React Native 0.86.3 and NativeWind 4.2.7. It declares
 the Babel runtime/JSX plugin directly for pnpm resolution. Source is synchronized

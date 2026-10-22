@@ -59,6 +59,7 @@ async function checkArtifact() {
   assert.notEqual(manifest.private, true);
   assert.ok(names.some((name) => name.startsWith('src/') && name.endsWith('.tsx')), 'Consumers need published class sources');
   assert.ok(!names.some((name) => /(^|\/)(node_modules|examples|artifacts|\.env|\.git)(\/|$)/.test(name)));
+  assert.ok(!names.some((name) => /\.(ttf|otf|woff2?|png|jpe?g|webp)$/i.test(name)), 'The npm component package includes no font/art binary');
   const visit = (entry) => {
     if (typeof entry === 'string') assert.ok(names.includes(entry.replace(/^\.\//, '')), `Missing export ${entry}`);
     else Object.values(entry).forEach(visit);
@@ -151,6 +152,10 @@ async function checkNext(directory) {
 
 try {
   const tarball = await checkArtifact();
+  await run(process.execPath, ['scripts/verify-fonts.mjs', '--package-root', path.join(evidence, 'artifact/package')], root, 'font-forwarding');
+  report.checks.fontForwarding = JSON.parse(await readFile(path.join(base, 'font-forwarding-latest.json'), 'utf8'));
+  assert.equal(report.checks.fontForwarding.status, 'passed');
+  assert.deepEqual(report.checks.fontForwarding.sourceIdentity, report.sourceIdentity);
   if (!process.argv.includes('--artifact-only')) {
     if (!process.argv.includes('--native-only')) {
       const next = await prepareConsumer('next', tarball);

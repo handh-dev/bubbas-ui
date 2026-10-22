@@ -1,7 +1,8 @@
 'use client';
 
 import { forwardRef, useId, type ElementRef, type KeyboardEvent, type SyntheticEvent } from 'react';
-import { Platform, Pressable, Text, View, type GestureResponderEvent, type PressableProps } from 'react-native';
+import { Platform, Pressable, View, type GestureResponderEvent, type PressableProps } from 'react-native';
+import { NativeText as Text } from '../../internal/native-text';
 import { cn, focusRing, useControllableState } from '../../internal/utils';
 import { useFormField } from './FormField';
 
