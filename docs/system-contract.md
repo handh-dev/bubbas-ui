@@ -289,7 +289,9 @@ All product facts, descriptions, gallery/video and actions remain available.
 
 Ticker endcaps are navy with white stars only. Hover no longer pauses motion.
 A shared Motion on/off switch remains pointer/touch/keyboard operable in marketing
-navigation and footer and controls both ticker and announcement. Standalone
+navigation and footer and controls ticker, announcement, honor/product gleams, spark emission and
+promotion bursts. It also removes decorative action movement while preserving
+static interaction/focus feedback. Standalone
 examples include the same control. The visitor choice persists across ordinary page loads, with caught storage failures
 and an in-memory fallback for sandboxed Studio previews. Reduced motion defaults off and overrides all
 decorative animation. Manual stop reveals the complete wrapped ticker and manually

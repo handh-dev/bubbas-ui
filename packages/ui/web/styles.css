@@ -108,3 +108,16 @@
 .bubba-marketing-footer :focus-visible,.bubba-motion-control-dark:focus-visible { outline:3px solid #FFFFFF!important; outline-offset:3px!important; box-shadow:0 0 0 3px #171717; }
 
 .bubba-campaign-badge-scroll:focus-visible { outline:3px solid #FFFFFF!important; outline-offset:3px!important; }
+
+/* One-shot badge effects can be seen again when a product is reached/interacted with. */
+.bubba-product-card:hover .bubba-product-badge::after,.bubba-product-card:focus-within .bubba-product-badge::after,.bubba-product-detail:hover .bubba-product-badge::after,.bubba-product-detail:focus-within .bubba-product-badge::after { animation:bubba-badge-gleam-replay 1800ms ease-out 1; }
+.bubba-product-card:hover .bubba-product-badge::before,.bubba-product-card:focus-within .bubba-product-badge::before,.bubba-product-detail:hover .bubba-product-badge::before,.bubba-product-detail:focus-within .bubba-product-badge::before { animation:bubba-badge-spark-replay 1800ms ease-out 1; }
+@keyframes bubba-badge-gleam-replay { from { background-position:150% 0; } to { background-position:-150% 0; } }
+@keyframes bubba-badge-spark-replay { 0% { transform:translate(0,4px) scale(.6); opacity:0; } 35% { opacity:1; } 100% { transform:translate(3px,-3px) scale(1); opacity:.5; } }
+/* The persistent preference governs every decorative marketing effect. */
+[data-bubba-motion="off"] .bubba-honor-badge::after,[data-bubba-motion="off"] .bubba-product-badge::after,[data-bubba-motion="off"] .bubba-product-badge::before,[data-bubba-motion="off"] .bubba-promo-burst { animation:none!important; }
+[data-bubba-motion="off"] .bubba-honor-badge::after,[data-bubba-motion="off"] .bubba-product-badge::after,[data-bubba-motion="off"] .bubba-promo-burst { display:none!important; }
+[data-bubba-motion="off"] [data-bubba-action] { transition:none!important; transform:none!important; }
+@media (prefers-reduced-motion:reduce) {
+ .bubba-product-card .bubba-product-badge::after,.bubba-product-card .bubba-product-badge::before,.bubba-product-detail .bubba-product-badge::after,.bubba-product-detail .bubba-product-badge::before { animation:none!important; }
+}
