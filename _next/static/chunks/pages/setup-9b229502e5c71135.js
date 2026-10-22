@@ -1,0 +1,43 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[271],{1716:(e,t,n)=>{(window.__NEXT_P=window.__NEXT_P||[]).push(["/setup",function(){return n(5396)}])},4861:(e,t,n)=>{"use strict";n.d(t,{L:()=>d});var s=n(6569),a=n(2616),i=n.n(a),r=n(9774),o=n(5659),l=n(5510),c=n(5507);function d({title:e,description:t,children:n}){let{appearance:a,setAppearance:p}=(0,c.A)();return(0,s.jsxs)(o.NP,{appearance:a,className:"min-h-screen",children:[(0,s.jsx)(i(),{children:(0,s.jsx)("title",{children:`${e} \xb7 Bubba’s UI`})}),(0,s.jsxs)(r.A,{className:"mx-auto w-full max-w-[1200px] gap-10 px-5 py-6 md:px-8",children:[(0,s.jsxs)(r.A,{className:"flex-row flex-wrap items-center justify-between gap-4 border-b border-ui-line pb-5",children:[(0,s.jsx)(o.N_,{href:"/bubbas-ui/",children:"Back to the workbench"}),(0,s.jsx)(l.G,{label:"Appearance",options:["light","dark","system"],value:a,onChange:p})]}),(0,s.jsxs)(r.A,{className:"gap-3",children:[(0,s.jsx)(o.DZ,{level:1,children:e}),(0,s.jsx)(o.EY,{tone:"muted",variant:"lead",children:t})]}),n,(0,s.jsxs)(r.A,{className:"flex-row flex-wrap gap-6 border-t border-ui-line py-5",children:[(0,s.jsx)(o.N_,{href:"/bubbas-ui/",children:"Review components"}),(0,s.jsx)(o.N_,{href:"/bubbas-ui/reference/",children:"System reference"}),(0,s.jsx)(o.N_,{href:"/bubbas-ui/patterns/",children:"Task patterns"}),(0,s.jsx)(o.N_,{href:"/bubbas-ui/compositions/",children:"Compositions"})]})]})]})}},5396:(e,t,n)=>{"use strict";n.r(t),n.d(t,{default:()=>u});var s=n(6569),a=n(4361),i=n(9774),r=n(5659),o=n(4861),l=n(5510);let c=`const path = require('node:path');
+const uiRoot = path.dirname(require.resolve('@bubbasfw/ui/package.json'));
+module.exports = {
+  darkMode: 'class',
+  content: ['./App.{js,jsx,ts,tsx}', './{app,pages,src}/**/*.{js,jsx,ts,tsx}',
+    path.join(uiRoot, 'src/**/*.{ts,tsx}')],
+  presets: [require('nativewind/preset'), require('@bubbasfw/ui/tailwind-preset')],
+};`,d=`// next.config.js — run Next with --webpack
+module.exports = {
+  transpilePackages: ['@bubbasfw/ui', 'nativewind',
+    'react-native-css-interop', 'react-native', 'react-native-web'],
+  webpack(config) {
+    config.resolve.alias = { ...config.resolve.alias, 'react-native$': 'react-native-web' };
+    config.resolve.extensions = ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', ...config.resolve.extensions];
+    return config;
+  },
+};
+// tsconfig.json: jsx = "react-jsx", jsxImportSource = "nativewind"
+// postcss.config.cjs: plugins = { tailwindcss: {}, autoprefixer: {} }`,p=`// metro.config.js
+const { getDefaultConfig } = require('expo/metro-config');
+const { withNativeWind } = require('nativewind/metro');
+module.exports = withNativeWind(getDefaultConfig(__dirname), { input: './global.css' });
+
+// babel.config.js
+module.exports = function(api) {
+  api.cache(true);
+  return { presets: [
+    ['babel-preset-expo', { jsxImportSource: 'nativewind' }],
+    'nativewind/babel',
+  ] };
+};`;function u(){let[e,t]=(0,a.useState)("Web");return(0,s.jsxs)(o.L,{title:"Use the system",description:"Start with a runnable example. Both platforms import the same components.",children:[(0,s.jsx)(r.Fc,{title:"32 components for Web and Expo",description:"Install @bubbasfw/ui@0.3.1 in your app, configure NativeWind, and use the same component imports on both platforms.",tone:"info"}),(0,s.jsxs)(i.A,{className:"gap-4",children:[(0,s.jsx)(r.DZ,{level:2,children:"Run the examples"}),(0,s.jsx)(r.EY,{selectable:!0,variant:"code",className:"rounded-lg bg-ui-surface p-5",children:"git clone https://github.com/handh-dev/bubbas-ui.git\ncd bubbas-ui\npnpm install\npnpm build\npnpm dev:web\n# Or: pnpm dev:expo"}),(0,s.jsx)(r.EY,{tone:"muted",children:"Use Node 22.13+ and pnpm 11.15.0. The Next example runs on port 4310. Expo opens its normal development flow. The package must be rebuilt after component source changes."}),(0,s.jsx)(r.N_,{href:"https://github.com/handh-dev/bubbas-ui/tree/main/examples",external:!0,children:"Open the complete example projects"})]}),(0,s.jsxs)(i.A,{className:"gap-4",children:[(0,s.jsx)(r.DZ,{level:2,children:"Add it to an app"}),(0,s.jsx)(r.EY,{children:"React, React Native, NativeWind and Tailwind remain peer dependencies. Web also needs React Native Web and React DOM. Native-only apps can omit React Native Web."}),(0,s.jsx)(r.EY,{selectable:!0,variant:"code",className:"rounded-lg bg-ui-surface p-5",children:"pnpm add @bubbasfw/ui@0.3.1 nativewind@4.2.7\npnpm add -D tailwindcss@3.4.17"}),(0,s.jsx)(r.EY,{tone:"muted",children:"Pinned example baseline: React 19.2.3, RN 0.86.3, RNW 0.21.4, NativeWind 4.2.7, Tailwind 3.4.17. NativeWind 5 and Tailwind 4 need a separate migration."})]}),(0,s.jsx)(r.nD,{defaultValue:"scan",items:[{value:"scan",title:"Compile the shared utilities",content:(0,s.jsxs)(i.A,{className:"gap-4",children:[(0,s.jsx)(r.EY,{children:"The host app scans the package’s published source and loads both presets."}),(0,s.jsx)(r.EY,{selectable:!0,variant:"code",className:"rounded-lg bg-ui-surface p-5",children:c}),(0,s.jsx)(r.EY,{children:"Import global CSS from the entry, with @tailwind base, @tailwind components and @tailwind utilities. Web sets important: true in its Tailwind config so utilities override RNW defaults."})]})},{value:"platform",title:"Platform configuration",content:(0,s.jsxs)(i.A,{className:"gap-4",children:[(0,s.jsx)(l.G,{label:"Setup platform",options:["Web","Expo"],value:e,onChange:t}),(0,s.jsx)(r.EY,{selectable:!0,variant:"code",className:"rounded-lg bg-ui-surface p-5",children:"Web"===e?d:p}),"Expo"===e?(0,s.jsx)(r.EY,{selectable:!0,variant:"code",children:"pnpm add react-native-css-interop@0.2.7\npnpm add -D @babel/plugin-transform-react-jsx@7.29.7\nnpx expo install react-native-reanimated react-native-worklets react-native-safe-area-context"}):(0,s.jsx)(r.EY,{children:"Pages Router is the runnable baseline. App Router consumers need an interactive “use client” boundary. This configuration uses webpack; Turbopack is not configured."})]})},{value:"theme",title:"Choose appearance",content:(0,s.jsxs)(i.A,{className:"gap-4",children:[(0,s.jsx)(r.EY,{selectable:!0,variant:"code",className:"rounded-lg bg-ui-surface p-5",children:'import { ThemeProvider, Button } from "@bubbasfw/ui";\n\n<ThemeProvider appearance="system">\n  <Button onPress={save}>Save changes</Button>\n</ThemeProvider>'}),(0,s.jsx)(r.EY,{children:"Appearance accepts light, dark or system. The provider scopes semantic colors and may be nested. Load fonts in the host app; components do not bundle a commercial font."}),(0,s.jsx)(r.EY,{children:"Native Views do not inherit fontFamily. After loading the licensed font, pass its registered name to the provider. This reaches every shared heading, label, state, button and input, including modal content. Nested providers inherit the family. Explicit text/input style.fontFamily wins; code stays monospace. Raw app-owned native text still needs its own font style."}),(0,s.jsx)(r.EY,{selectable:!0,variant:"code",className:"rounded-lg bg-ui-surface p-5",children:`import { useFonts } from 'expo-font';
+import { ThemeProvider, PageHeader, FormField, Input } from '@bubbasfw/ui';
+
+function App() {
+  const [loaded, error] = useFonts({
+    BubbasBody: require('./assets/fonts/montserrat.ttf'),
+  });
+  if (!loaded && !error) return null;
+  return <ThemeProvider appearance="system" fontFamily={loaded ? 'BubbasBody' : undefined}>
+    <PageHeader title="Find your Bubba’s" />
+    <FormField label="Search stands"><Input placeholder="Name, city or ZIP" /></FormField>
+  </ThemeProvider>;
+}`}),(0,s.jsx)(r.EY,{children:"Retain the font’s license in the host. The complete Expo gallery demonstrates this with cleared Montserrat/OFL. Web hosts may pass their loaded CSS font name or keep existing document font inheritance. An omitted fontFamily preserves the host/platform defaults."})]})}]}),(0,s.jsxs)(i.A,{className:"gap-3",children:[(0,s.jsx)(r.DZ,{level:2,children:"Building with Xcode 27"}),(0,s.jsx)(r.EY,{children:"Expo SDK 57 needs the scene-lifecycle opt-in for an iOS 27 build. Install a compatible expo-build-properties plugin and configure ios.enableSceneSupport: true before regenerating a native project. Expo 57.0.23 or newer is required; this example pins 57.0.31."}),(0,s.jsx)(r.N_,{href:"https://github.com/expo/fyi/blob/main/ios-scene-lifecycle.md#staying-on-sdk-57-with-xcode-27",external:!0,children:"Expo’s SDK 57 and Xcode 27 setup"})]}),(0,s.jsx)(r.EY,{tone:"muted",children:"Browser and Metro checks cover their observed behavior. Device, assistive technology and release acceptance remain separate checks for each consuming app."})]})}}},e=>{e.O(0,[364,566,636,593,792],()=>e(e.s=1716)),_N_E=e.O()}]);
