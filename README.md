@@ -1,7 +1,7 @@
 # @bubbasfw/ui
 
 Bubba’s universal design system for Next.js, Vite, Astro, Expo, iOS and Android.
-The unpublished `@bubbasfw/ui@0.6.1` patch candidate contains 32 controls, the shared Icon library, 15 reusable sections and three task
+`@bubbasfw/ui@0.6.1` contains 32 controls, the shared Icon library, 15 reusable sections and three task
 patterns built with React Native primitives and NativeWind, plus semantic
 themes, a visual review workbench and complete Web/Expo galleries.
 
@@ -243,13 +243,13 @@ Official setup references:
 For Expo SDK57 builds with Xcode27/iOS27, follow the targeted
 [scene-lifecycle setup](docs/platform-notes.md).
 
-## Annotated web patch candidate 0.6.1
+## Approved annotated web release 0.6.1
 
-This is an unpublished compatibility patch candidate preserving the owner-approved
-0.6.0 design. Use its exact reviewed archive for qualification; the install
-commands below apply only after publication. Published 0.6.0 is deprecated for
-dropped web Button caller styles; npm latest has been restored to 0.5.0.
-See [the patch record](docs/releases/0.6.1-candidate.md). Foundation system 0.5.0 and its immutable
+The owner approved the exact 0.6.1 compatibility patch preserving the reviewed
+annotated web design. It fixes dropped web Button caller styles; 0.6.0 remains
+deprecated and immutable. The published archive retains its historical candidate
+README wording; these current repository guides do not repack that archive.
+See [the release record](docs/releases/0.6.1.md). Foundation system 0.5.0 and its immutable
 source/digest remain unchanged. Marketing variants now use the original blue,
 compact red/blue actions with hover glow, centered desktop navigation, full-height
 white hero, equal compact product cards, and caller-labelled gold badges.

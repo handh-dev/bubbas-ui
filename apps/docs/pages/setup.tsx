@@ -15,8 +15,8 @@ export default function Setup() {
       description="Start with a runnable example. Both platforms import the same components."
     >
       <Alert
-        title="Patch candidate: 32 controls, icons and 15 reusable sections"
-        description={`Unpublished patch @bubbasfw/ui@${candidateVersion}; install its exact reviewed archive for qualification. 0.6.0 is deprecated for dropped web Button caller styles; npm latest is 0.5.0. Vite and Astro use the web entry; Expo and the Next.js universal example keep their NativeWind host setup.`}
+        title="32 controls, icons and 15 reusable sections"
+        description={`Owner-approved @bubbasfw/ui@${candidateVersion} fixes web Button caller style forwarding. Version 0.6.0 is deprecated. Vite and Astro use the web entry; Expo and the Next.js universal example keep their NativeWind host setup.`}
         tone="info"
       />
       <View className="gap-4">

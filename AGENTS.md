@@ -34,3 +34,15 @@ source is `handh-dev/bubbas-brand-studio/skills/bubba-design/SKILL.md`.
 Reuse/extend the shared system, pin reviewed exports, integrate this app, and
 update shared examples/contracts. Preserve Core boundaries and artwork rights.
 <!-- bubba-design:end -->
+
+## Current shared web release
+
+Read [the exact 0.6.1 release record](docs/releases/0.6.1.md) before changing a pin
+or claiming adoption. Published 0.6.0 is deprecated for dropped web Button caller
+styles and remains immutable. 0.6.1 preserves its approved visual design with the
+reviewed style-forwarding fix. Run `pnpm verify:web:forms` for the separate SSR,
+RTL, caller-style, state and form contract as well as applicable package/font,
+installed-consumer and docs gates. A gallery build alone does not cover it.
+Repository docs may clarify historical candidate wording retained inside a
+published archive; never repack/replace an already-published version. App pins,
+app deployment and live acceptance stay in their owning repositories.
