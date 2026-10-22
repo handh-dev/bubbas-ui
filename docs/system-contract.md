@@ -189,3 +189,10 @@ accepts `linkGroups`, `socialLinks` and `copyright`, with children for caller-ow
 season information. Missing facts remain absent. Every existing catalog section
 shows both variants using clearly labelled synthetic fixtures under the same
 stable component ID. Marketing remains a new review candidate until owner review.
+
+Marketing sections scope the complete light palette through a nested provider,
+including shared badges and Dialog content; the host font is inherited. Hidden
+auxiliary navigation destinations remain available in the menu. The compact
+header bounds semantic navigation against host-wide `nav` rules. Link's optional
+`textVariant` selects its shared text scale; marketing captions avoid inheriting
+the responsive body scale. Existing Link defaults are unchanged.
