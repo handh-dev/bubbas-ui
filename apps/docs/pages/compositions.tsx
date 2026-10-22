@@ -1,12 +1,12 @@
 import { View } from 'react-native';
-import { Card, Heading, Link, Text } from '@bubbasfw/ui';
+import { Card, Heading, Link, Text, SectionDemo, UIReviewCatalog } from '@bubbasfw/ui';
 import { Guide } from '../src/Guide';
 
 const sections = [
-  ['Brand opening', 'Open on white with the original outlined logo, the current red-cap mascot, a short licensed display headline and one red action. A thin red–white–blue civic stripe frames the opening. Keep the figure proportional and preserve its entire silhouette. Move artwork above the copy on narrow screens when a side column would shrink it too far.'],
+  ['Brand opening', 'Open on white with the full-color original logo, the current red-cap mascot, a short licensed display headline and one red action. A thin red–white–blue civic stripe frames the opening. Keep the figure proportional and preserve its entire silhouette. Move artwork above the copy on narrow screens when a side column would shrink it too far.'],
   ['Stand finder section', 'Keep the invitation beside the stand’s verified facts. Show address, directions, published seasonal hours and local timezone, then separate reported status. Use an explicit missing-data state. The illustration supports the invitation; readable facts and the next action remain the focus.'],
   ['Category and product sections', 'Place existing category illustrations in circular fields with genuine text labels and destinations. Product panels keep original product artwork, identity, qualified retail price and availability together. Use a readable information surface; illustrations are never evidence of current stock or product specifications.'],
-  ['Campaign band', 'One headline and one next step. Use the named navy-to-blue artwork treatment with the appropriate original logo variant. Put small copy on white or charcoal; inspect contrast across the complete gradient region. Keep gold subordinate. A campaign’s terms, dates/timezone, destination and source must be current before distribution.'],
+  ['Campaign band', 'One headline and one next step. Use the original logo blue with the full-color original logo. Put small copy on white or charcoal; inspect contrast across the complete gradient region. Keep gold subordinate. A campaign’s terms, dates/timezone, destination and source must be current before distribution.'],
   ['Operational page', 'Use a quiet page header, task navigation, generous field labels and a small number of independent information groups. Keep red for the decisive action. Show connection health, source and freshness where decisions depend on them. Mobile, HQ, Bulk, Social and Studio share the foundations while retaining their own platform and service boundaries.'],
   ['Policy and campaign details', 'Give long text a 720 px reading measure, ordered headings and visible navigation. Use the source’s approved wording and effective dates. Keep policy content separate from campaign urgency. Ended or unavailable destinations retain an honest explanation and a useful fallback.'],
 ] as const;
@@ -34,6 +34,7 @@ export default function Compositions() {
       <Text>Find a suitable approved asset before generating. Brief the message, audience, medium, composition, approved source IDs, current mascot family and forbidden changes. Generate the mascot and scene together when coherence depends on it; overlay original logo geometry and editable text afterward. Use fictional sample content while live facts are unverified.</Text>
       <Text>Record tool/model/version, seed when available, prompt, source assets, edit lineage and output hash. Mark unknown metadata as unavailable. Generated work remains a private draft until independent review and explicit identity/campaign approval. Generation never grants artwork or font distribution rights.</Text>
     </View>
+    <View className="gap-6"><Heading level={2}>Annotated web candidate</Heading><Text>Unreleased 0.6.0 examples. Content below is synthetic; owner review is required.</Text><UIReviewCatalog componentId="button"/>{['Icon','CampaignSection','SocialSection','FlagTicker','PromotionBanner'].map(name=><View key={name} className="gap-3"><Heading level={3}>{name}</Heading><SectionDemo name={name} variant="marketing"/></View>)}</View>
     <View className="gap-4 border-t border-ui-line pt-6">
       <Heading level={2}>Reusable section contract</Heading>
       <Text>A shared section declares its heading level, content fields, source IDs, layout widths, image treatment, actions, missing/error/offline behavior, appearance, accessibility and acceptance evidence. Add a real consumer example when extending it. Keep live product facts in Core’s interface and approved identity in Brand Studio.</Text>

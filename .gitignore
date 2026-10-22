@@ -19,3 +19,6 @@ apps/docs/out/
 
 # Local visual review captures and machine-specific reviewer packets.
 .impeccable/review/
+
+# Owned local implementation evidence and downloaded icon source archives.
+.local/

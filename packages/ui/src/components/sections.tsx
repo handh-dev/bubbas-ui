@@ -12,15 +12,15 @@ import { MarketingScope, MarketingHeader, MarketingFooter, MarketingHero, Market
 
 /** Caller supplies cleared assets and real content. These sections never fetch business facts. */
 export interface SectionImage { uri: string; alt: string }
-export interface SectionAction { label: string; href: string; external?: boolean }
-export interface SectionProps extends ViewProps { className?: string; variant?: 'default' | 'marketing' }
+export interface SectionAction { label: string; href: string; external?: boolean; tone?: 'red' | 'blue' | 'white'; icon?: 'instagram' | 'facebook' }
+export interface SectionProps extends ViewProps { dataSet?: Record<string,string>; className?: string; variant?: 'default' | 'marketing' }
 export interface BrandLink { label: string; href: string; image?: SectionImage }
 function SectionActionLink({ action }: { action: SectionAction }) {
   return <Link href={action.href} external={action.external} className="rounded-bubba-control border border-ui-action-border bg-ui-primary px-5 py-3" textClassName="font-bold text-ui-action-text no-underline">{action.label}</Link>;
 }
-export interface SiteHeaderProps extends SectionProps { brand: BrandLink; links: readonly SectionAction[]; action?: SectionAction; children?: ReactNode; announcement?: string; auxiliaryLinks?: readonly SectionAction[]; currentPath?: string }
-export function SiteHeader({ brand, links, action, children, className, variant, announcement, auxiliaryLinks, currentPath, ...props }: SiteHeaderProps) {
-  if (variant === 'marketing') return <MarketingScope><MarketingHeader {...props} {...{brand, links, action, children, className, announcement, auxiliaryLinks, currentPath}} /></MarketingScope>;
+export interface SiteHeaderProps extends SectionProps { brand: BrandLink; links: readonly SectionAction[]; action?: SectionAction; children?: ReactNode; announcement?: string; auxiliaryLinks?: readonly SectionAction[]; currentPath?: string; socialLinks?: readonly SectionAction[] }
+export function SiteHeader({ brand, links, action, children, className, variant, announcement, auxiliaryLinks, currentPath, socialLinks, ...props }: SiteHeaderProps) {
+  if (variant === 'marketing') return <MarketingScope><MarketingHeader {...props} {...{brand, links, action, children, className, announcement, auxiliaryLinks, currentPath, socialLinks}} /></MarketingScope>;
   return <View {...props} role="banner" className={cn('border-b border-ui-line bg-ui-surface py-4', className)}><Container><Inline justify="between" gap={6}>
     <Link href={brand.href} accessibilityLabel={brand.label}>{brand.image ? <Image source={{ uri: brand.image.uri }} accessibilityLabel={brand.image.alt} resizeMode="contain" className="h-16 w-48" /> : brand.label}</Link>
     <Inline role="navigation" accessibilityLabel="Main navigation" gap={4}>{links.map((link) => <Link key={link.href} href={link.href} external={link.external} textClassName="font-bold no-underline">{link.label}</Link>)}{action ? <SectionActionLink action={action} /> : null}</Inline>{children}
@@ -44,7 +44,7 @@ export function HeroSection({ title, description, eyebrow, image, imageNativeID,
 export interface ProductPresentation { id: string; title: string; href: string; image?: SectionImage; priceLabel?: string; description?: string; badge?: string; typeLabel?: string; gallery?: readonly SectionImage[]; videoHref?: string; actions?: readonly SectionAction[] }
 export interface ProductCardProps extends SectionProps { product: ProductPresentation }
 export function ProductCard({ product, className, variant, ...props }: ProductCardProps) {
-  if (variant === 'marketing') return <MarketingScope><MarketingProductCard {...props} {...{product, className}} /></MarketingScope>;
+  if (variant === 'marketing') return <MarketingScope className="h-full flex-1"><MarketingProductCard {...props} {...{product, className}} /></MarketingScope>;
   return <Card {...props} className={cn('gap-4', className)}>{product.image ? <Image source={{ uri: product.image.uri }} accessibilityLabel={product.image.alt} resizeMode="contain" className="h-48 w-full" /> : null}{product.badge ? <Badge>{product.badge}</Badge> : null}<Heading level={3}><Link href={product.href} textClassName="font-bold no-underline">{product.title}</Link></Heading>{product.description ? <Text tone="muted">{product.description}</Text> : null}{product.priceLabel ? <Text variant="label">{product.priceLabel}</Text> : null}</Card>;
 }
 export interface ProductGridProps extends SectionProps { items: readonly ProductPresentation[]; emptyLabel?: string }
@@ -81,8 +81,8 @@ export function ProductDetail({ product, children, legacyGalleryHooks = false, c
     <Inline>{product.actions?.map((action) => <SectionActionLink key={action.href} action={action} />)}</Inline>{children}
   </HeroSection>;
 }
-export interface PromotionBannerProps extends SectionProps { title: string; description?: string; action?: SectionAction }
-export function PromotionBanner({ title, description, action, className, variant, ...props }: PromotionBannerProps) {
-  if (variant === 'marketing') return <MarketingScope><MarketingPromotion {...props} {...{title, description, action, className}} /></MarketingScope>;
+export interface PromotionBannerProps extends SectionProps { title: string; description?: string; action?: SectionAction; emphasis?: 'default' | 'sparkler' }
+export function PromotionBanner({ title, description, action, className, variant, emphasis, ...props }: PromotionBannerProps) {
+  if (variant === 'marketing') return <MarketingScope><MarketingPromotion {...props} {...{title, description, action, className, emphasis}} /></MarketingScope>;
   return <Card {...props} className={cn('gap-4 bg-ui-selected', className)}><Heading level={2}>{title}</Heading>{description ? <Text>{description}</Text> : null}{action ? <SectionActionLink action={action} /> : null}</Card>;
 }

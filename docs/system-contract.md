@@ -206,3 +206,48 @@ phone width; desktop retains the image/text columns. Hero actions follow the sam
 phone constraint. Browser qualification measures every visible interactive
 control's bounds, since an app's overflow clipping can hide a layout failure.
 Catalog SVG fixtures use fully encoded data URIs and must decode successfully.
+
+## Annotated web candidate — 0.6.0
+
+Candidate only, awaiting owner design review and consumer release qualification.
+The pinned Studio 0.5.0 foundation and default/native control variants remain.
+Marketing buttons accept `appearance="marketing"`; secondary actions use original
+blue. SectionAction accepts optional tone and social icon; absent facts remain absent.
+Desktop header balances equal side tracks around its navigation and switches to
+the accessible menu before collisions. All icon controls retain 44px minimum targets.
+Hero marketing is white and fills almost the desktop fold; mobile remains content
+driven. Product marketing image wells use 4:3, cards fill their row, prices rest at
+the bottom, and supplied badges use gold with a single short gleam.
+
+CampaignSection, SocialSection and FlagTicker render supplied copy, destinations
+and badges. Ticker has pause/play, pauses on hover/focus, and reduced motion stops
+all decorative movement while retaining the content. Never put aria-hidden on the
+whole ticker because it contains a real pause control. RN's nativeID supplies
+indexable anchors. No component fetches or infers seasonal/business data.
+
+Icons come from licensed pinned Lucide and Simple Icons subsets under icons/.
+RN Image renders generated 96px sources on all platforms without a font/SVG peer.
+Default 24px icons are decorative within a labeled control; standalone icons need
+accessibilityLabel. Source and raster checksums are checked by verify:shared.
+The original brand artwork remains caller supplied and retains its own rights.
+
+### Marketing button refinement
+
+The existing marketing appearance interprets `size="lg"` as a featured action;
+HeroSection selects it automatically. sm/md retain compact repeated actions.
+The reference-inspired design uses 12px featured corners / 6px compact corners,
+60px desktop / 56px phone featured minimum height, and 44px compact targets.
+Original red/blue gradient shading and ambient glow are web effects; universal
+native controls retain solid fills, the same geometry and subtle native shadow.
+No gradient dependency or default application-control redesign is introduced.
+Hover/press, white-separated focus, disabled/busy and reduced-motion states remain
+part of the exact reviewed candidate. Labels wrap rather than truncate.
+
+### Ribbon ticker refinement
+
+FlagTicker now renders a white text lane with navy words, red rails and reserved
+navy star endcaps on both ends. Decorative angled trim stays inside the caps;
+the 44px pause/play control has its own flow slot. Existing caller copy and order
+are unchanged. Only the text track scrolls after web hydration; hover, focus and
+manual pause stop it. No-JS, native and reduced-motion layouts wrap the complete
+sequence, allowing the band to grow. There are no duplicate announcements.

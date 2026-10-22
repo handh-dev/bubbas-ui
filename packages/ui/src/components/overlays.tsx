@@ -7,6 +7,7 @@ import { useWebScrollLock } from '../internal/scroll-lock';
 import { useTheme } from '../theme';
 import { tokens } from '../tokens';
 import { Heading, Text } from './typography';
+import { Icon } from './Icon';
 
 export interface DialogProps extends Omit<ViewProps, 'children'> {
   open?: boolean;
@@ -50,7 +51,7 @@ function Overlay({ open, defaultOpen = false, onOpenChange, title, description, 
             <Heading nativeID={titleID} level={2}>{title}</Heading>
             {description ? <Text nativeID={descriptionID} tone="muted">{description}</Text> : null}
           </View>
-          <Pressable accessibilityRole="button" accessibilityLabel={closeLabel} onPress={() => setOpen(false)} className={cn('min-h-[44px] min-w-[44px] items-center justify-center rounded px-2', focusRing)}><Text variant="small" className="font-semibold text-ui-link">{closeLabel}</Text></Pressable>
+          <Pressable accessibilityRole="button" accessibilityLabel={closeLabel} onPress={() => setOpen(false)} className={cn('min-h-[44px] min-w-[44px] items-center justify-center rounded px-2', focusRing)}><Icon name="close" size={24} color={colors.link}/></Pressable>
         </View>
         <ScrollView keyboardShouldPersistTaps="handled" className={cn('shrink', contentClassName)}>{children}</ScrollView>
       </View>

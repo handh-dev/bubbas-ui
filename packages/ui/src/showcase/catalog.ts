@@ -40,7 +40,7 @@ export const catalog = [
     "Button",
     "Actions",
     "Clear actions, in every size and state.",
-    "variant, size, loading, disabled, onPress",
+    "variant, appearance, size (marketing lg: featured), loading, disabled, onPress",
   ],
   [
     "IconButton",
@@ -200,4 +200,4 @@ export const components = catalog.map(
   }),
 );
 export const categories = [...new Set(components.map((item) => item.category))];
-export const candidateVersion = "0.5.0";
+export const candidateVersion = "0.6.0";

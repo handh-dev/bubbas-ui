@@ -5,6 +5,7 @@ import { ActivityIndicator, Linking, Platform, Pressable, type PressableProps } 
 import { NativeText as Text } from '../internal/native-text';
 import { cn, focusRing } from '../internal/utils';
 import { useTheme } from '../theme';
+import { tokens } from '../tokens';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
@@ -12,6 +13,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export interface ButtonProps extends Omit<PressableProps, 'children' | 'className'> {
   /** Text content, or inline React Native Text content. */
   children: ReactNode;
+  dataSet?: Record<string,string>;
   /** A navigational action; web renders an anchor, native opens through Linking. */
   href?: string;
   external?: boolean;
@@ -19,6 +21,8 @@ export interface ButtonProps extends Omit<PressableProps, 'children' | 'classNam
   type?: 'button' | 'submit' | 'reset';
   onOpenError?: (error: unknown) => void;
   variant?: ButtonVariant;
+  /** Fixed-brand action; secondary is blue. Size lg is a featured hero action. */
+  appearance?: 'default' | 'marketing';
   size?: ButtonSize;
   loading?: boolean;
   loadingLabel?: string;
@@ -43,6 +47,11 @@ const containerSizes: Record<ButtonSize, string> = {
   md: 'min-h-[48px] px-5 py-3',
   lg: 'min-h-[56px] px-6 py-4',
 };
+const marketingContainerSizes: Record<ButtonSize,string> = {
+ sm:'min-h-[44px] rounded-[6px] px-4 py-2.5',
+ md:'min-h-[44px] rounded-[6px] px-4 py-2.5',
+ lg:'min-h-[56px] rounded-xl px-[18px] py-[14px] min-[761px]:min-h-[60px] min-[761px]:px-[26px] min-[761px]:py-4',
+};
 const textSizes: Record<ButtonSize, string> = {
   sm: 'text-sm',
   md: 'text-base',
@@ -56,12 +65,14 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
       children,
       href, external = false, type = 'button', onOpenError, onPress,
       variant = 'primary',
+      appearance = 'default',
       size = 'md',
       loading = false,
       loadingLabel,
       disabled = false,
       className,
       textClassName,
+      style,
       accessibilityState,
       'aria-busy': ariaBusy,
       'aria-disabled': ariaDisabled,
@@ -75,14 +86,16 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
     const isBusy = loading || (ariaBusy ?? accessibilityState?.busy ?? false);
     const spinnerColor = explicitlyDisabled
       ? colors['disabled-text']
-      : variant === 'primary' ? colors['action-text'] : colors.text;
+      : appearance === 'marketing' && (variant === 'primary' || variant === 'secondary') ? '#FFFFFF' : variant === 'primary' ? colors['action-text'] : colors.text;
 
     return (
       <Pressable
         {...props}
         ref={ref}
+        {...{dataSet:{...props.dataSet, ...(appearance === 'marketing' ? {bubbaAction: variant,bubbaActionSize:size} : {})}}}
         {...(Platform.OS === 'web' ? { type, href: isDisabled ? undefined : href,
           hrefAttrs: href && external ? { target: '_blank', rel: 'noopener noreferrer' } : undefined } : {})}
+        style={(state)=>[appearance === 'marketing' && Platform.OS !== 'web' && !isDisabled && (variant==='primary'||variant==='secondary') ? {shadowColor:variant==='secondary'?tokens.colors.blue:tokens.colors.red,shadowOpacity:.22,shadowRadius:9,shadowOffset:{width:0,height:5},elevation:4}:undefined,typeof style==='function'?style(state):style]}
         accessibilityRole={href ? 'link' : 'button'}
         onPress={(event) => {
           onPress?.(event);
@@ -97,6 +110,9 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
           focusRing,
           containerVariants[variant],
           containerSizes[size],
+          appearance === 'marketing' && marketingContainerSizes[size],
+          appearance === 'marketing' && variant === 'primary' && 'border-bubba-red bg-bubba-red hover:bg-bubba-redHover',
+          appearance === 'marketing' && variant === 'secondary' && 'border-bubba-blue bg-bubba-blue hover:bg-bubba-navy',
           explicitlyDisabled && 'border-ui-disabled-surface bg-ui-disabled-surface',
           className,
         )}
@@ -107,6 +123,9 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
             'font-bold text-center',
             textVariants[variant],
             textSizes[size],
+            appearance === 'marketing' && 'font-extrabold uppercase tracking-wide',
+            appearance === 'marketing' && (size==='lg'?'text-base leading-5 tracking-normal min-[761px]:text-lg min-[761px]:leading-[22px] min-[761px]:tracking-wide':'text-sm leading-5'),
+            appearance === 'marketing' && (variant === 'primary' || variant === 'secondary') && 'text-white',
             explicitlyDisabled && 'text-ui-disabled-text',
             textClassName,
           )}
