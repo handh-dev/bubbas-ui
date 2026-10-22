@@ -1,14 +1,13 @@
 # @bubbasfw/ui
 
-Bubba’s universal design system for Next.js, Expo, iOS and Android.
-`@bubbasfw/ui@0.3.2` contains 32 components built with React Native primitives and
-NativeWind, plus semantic themes, a visual review workbench and complete
-Web/Expo galleries.
+Bubba’s universal design system for Next.js, Vite, Astro, Expo, iOS and Android.
+`@bubbasfw/ui@0.5.0` contains 32 controls, 12 reusable sections and three task
+patterns built with React Native primitives and NativeWind, plus semantic
+themes, a visual review workbench and complete Web/Expo galleries.
 
-Version 0.3 adds AppearanceControl, PageHeader and AsyncState, complete public
-references and mechanically verified Studio foundation custody. The 0.3.2 patch
-fixes narrow horizontal radio choices and the Expo SDK 57 static-weight font
-recipe, retaining scoped host fonts for all shared native text and inputs. Publication/deployment receipts remain separate.
+Version 0.5 adds browser and server-rendered web entries, public marketing
+section variants and the package-owned catalog. Existing native font and input
+contracts remain supported. Publication/deployment receipts remain separate.
 
 [Review the design system](https://handh-dev.github.io/bubbas-ui/) ·
 [npm package](https://www.npmjs.com/package/@bubbasfw/ui)
@@ -69,9 +68,9 @@ status and notes stay in your browser; Export notes downloads a JSON handback.
 Code fragments and Web/Expo setup stay behind secondary implementation guidance.
 The web preview is React Native Web; the Expo gallery demonstrates native rendering.
 
-`apps/docs/src/showcase` is the canonical universal catalog/demo source.
-`pnpm sync:showcase` copies it into both complete consumer projects so packed
-consumer verification has no cross-repository imports. Run it after demo changes.
+`packages/ui/src/catalog.tsx` and its showcase modules own the universal
+catalog/demo source. Docs and both complete consumer projects import those
+package exports, so previews use the implementation consumers install.
 
 ```sh
 pnpm build:docs
@@ -117,10 +116,37 @@ The public docs self-host cleared Montserrat with its OFL license.
 
 ## Install in a consuming app
 
+For Vite, Astro and other browser hosts, use the browser setup below. The
+NativeWind host configuration that follows remains for Expo and the existing
+Next.js universal example.
+
+### Vite and Astro
+
+```sh
+pnpm add @bubbasfw/ui@0.5.0 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
+```
+
+Import controls and sections from `@bubbasfw/ui/web` and load
+`@bubbasfw/ui/web.css` once. This entry supplies the shared utility CSS and web
+interop; it needs no host NativeWind Babel or Tailwind configuration. Keep the
+package's declared peers compatible and use one React/React Native Web instance.
+Wrap shared regions in `ThemeProvider`; apps supply content, assets, links and
+actions. Choose `variant="marketing"` for public marketing sections.
+
+For Astro/Node SSR, render the shared content before collecting
+`StyleSheet.getSheet()` from the same installed `react-native-web` instance.
+Include its returned `id` and `textContent` in the document alongside web.css;
+this supplies structural styles before hydration. Hydrate the shared header
+and other interactive sections with the same data to enable menus and galleries.
+See the [browser/SSR contract](docs/system-contract.md#server-rendered-browser-styles).
+
+### Expo and the Next.js universal example
+
 Install the package alongside the app’s compatible platform dependencies.
 For local development, you can also install a tarball from `pnpm run pack`.
-React, React Native, React Native Web, NativeWind, and Tailwind are peers; they
-are not bundled into the package. React Native Web is an optional peer for a
+React, React Native, React Native Web, NativeWind, and Tailwind are peers. The
+universal entry keeps its platform runtimes external; the browser entry includes
+its NativeWind web interop. React Native Web is an optional peer for a
 native-only Expo app. Web consumers must install it and React DOM.
 
 The tested example baseline is React 19.2.3, React Native 0.86.3, React Native Web
@@ -128,7 +154,7 @@ The tested example baseline is React 19.2.3, React Native 0.86.3, React Native W
 versions. NativeWind v5 and Tailwind v4 require a separate migration.
 
 ```sh
-pnpm add @bubbasfw/ui@0.3.2 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.5.0 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
