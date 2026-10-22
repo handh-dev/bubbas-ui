@@ -158,3 +158,9 @@ PromotionBanner. All content, assets and actions come from the host. Core remain
 responsible for changing facts. `reviewCatalog` and `UIReviewCatalog` expose
 real component and section examples for an isolated candidate review. Candidate
 comments and approval remain in Studio, keyed to the exact release artifact.
+
+For Node/Astro SSR, render shared content first and include the host RNW
+`StyleSheet.getSheet()` id/textContent in the document alongside web.css. This
+supplies structural RNW CSS before hydration. Use the same React/RNW instance
+throughout. Native form submit/reset intent is supported through `/web`'s Button
+`type`; the universal root entry remains an app-action primitive.

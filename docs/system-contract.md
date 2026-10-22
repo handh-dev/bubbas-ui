@@ -134,7 +134,7 @@ at narrow widths. `ProductDetail` gallery actions need a hydrated host; server
 consumers must retain their own checked gallery behavior until hydrated.
 
 Button `href` renders a real navigational anchor on web and uses native Linking
-on devices. `type` preserves web form intent. Disabled links omit their href;
+on devices. `type` preserves native form intent through the `/web` entry, including submit, reset and browser validation. The universal root entry remains an app-action primitive; hosts requiring HTML form semantics use `/web`. Disabled links omit their href;
 loading/disabled actions remain inert. Host workflows own form submission,
 authorization and persistence. Do not restyle section internals in consumers.
 
@@ -144,3 +144,19 @@ implementation with visibly labelled sample data. Docs, both examples and Studio
 consume those same examples. Studio stores review comments outside this package,
 keyed to its exact candidate identity and catalog ID. This package grants no
 owner approval and creates no runtime dependency on Studio.
+
+### Server-rendered browser styles
+
+React Native Web produces structural rules as well as the prebuilt utility CSS.
+A Node/Astro SSR host must include `StyleSheet.getSheet()` from its same installed
+`react-native-web` instance in the server document (both returned id and textContent),
+after rendering shared content. This preserves image positioning and RNW layout
+before hydration; importing web.css alone supplies only the shared utilities.
+Do not run a second RNW or React instance for server components. The `/web` adapter
+keeps upstream internals external so style extraction sees the same registry.
+Known caller images render their URI in SSR without waiting for an effect.
+
+`pnpm verify:web:forms` checks built `/web` server button types, image source
+preservation, real browser click/Enter submission, required validation, reset,
+preventDefault, default app actions and inactive controls. It uses a local
+fixture without changing business records and closes its browser/server.

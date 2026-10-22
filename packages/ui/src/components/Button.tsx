@@ -15,6 +15,7 @@ export interface ButtonProps extends Omit<PressableProps, 'children' | 'classNam
   /** A navigational action; web renders an anchor, native opens through Linking. */
   href?: string;
   external?: boolean;
+  /** Native web form intent in @bubbasfw/ui/web. The root native entry is an app action. */
   type?: 'button' | 'submit' | 'reset';
   onOpenError?: (error: unknown) => void;
   variant?: ButtonVariant;
