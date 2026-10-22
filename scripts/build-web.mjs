@@ -16,9 +16,10 @@ assert.equal(JSON.parse(await readFile(path.join(rnwRoot, 'package.json'), 'utf8
 const formSources = { Pressable: await readFile(path.join(rnwRoot, 'dist/exports/Pressable/index.js'), 'utf8'), View: await readFile(path.join(rnwRoot, 'dist/exports/View/index.js'), 'utf8') };
 assert.equal(formSources.View.split('href: true,').length, 2, 'RNW View forward allowlist changed');
 formSources.View = formSources.View.replace('href: true,', 'href: true, type: true,');
+for (const host of ['node', 'browser']) {
 for (const format of ['esm', 'cjs']) {
  for (const [name, entry] of [['web', 'packages/ui/src/index.ts'], ['web-native', 'packages/ui/web/native.ts'], ['web-runtime', webAPI]]) {
-  await build({ entryPoints: [entry], tsconfigRaw: { compilerOptions: { jsx: 'react-jsx', jsxImportSource: 'react' } }, outfile: `packages/ui/dist/${name}.${format === 'esm' ? 'js' : 'cjs'}`, bundle: true, format,
+  await build({ entryPoints: [entry], tsconfigRaw: { compilerOptions: { jsx: 'react-jsx', jsxImportSource: 'react' } }, outfile: `packages/ui/dist/${name}${host === 'browser' ? '.browser' : ''}.${format === 'esm' ? 'js' : 'cjs'}`, bundle: true, format,
     platform: 'browser', target: 'es2022', jsx: 'automatic', jsxImportSource: 'react', banner: { js: '"use client";' },
     external: ['react', 'react/*', 'react-native-web', 'tailwind-merge'],
     plugins: [{ name: 'universal-web', setup(build) {
@@ -30,8 +31,12 @@ for (const format of ['esm', 'cjs']) {
         const name = relative.endsWith('.js') ? relative : existsSync(path.join(rnwRoot, 'dist', `${relative}.js`)) ? `${relative}.js` : `${relative}/index.js`;
         return { path: name, namespace: 'rnw-external' };
       });
-      build.onLoad({ filter: /.*/, namespace: 'rnw-external' }, (args) => {
-        const external = `react-native-web/dist/cjs/${args.path}`;
+      build.onLoad({ filter: /.*/, namespace: 'rnw-external' }, async (args) => {
+        const external = `react-native-web/dist/${host === 'node' ? 'cjs/' : ''}${args.path}`;
+        if (host === 'browser') {
+          const source = await readFile(path.join(rnwRoot, 'dist', args.path), 'utf8');
+          return { contents: `export * from '${external}'; ${source.includes('export default') ? `export { default } from '${external}';` : ''}`, loader: 'js' };
+        }
         return { contents: `import * as mod from '${external}'; const api = mod.default ?? mod; export default api.default ?? api; export * from '${external}';`, loader: 'js' };
       });
       build.onResolve({ filter: /^react-native-web\// }, (args) => ({ path: args.path, external: true }));
@@ -41,6 +46,7 @@ for (const format of ['esm', 'cjs']) {
     }}],
   });
  }
+}
 }
 await writeFile('packages/ui/dist/web.d.ts', "export * from './index';\n");
 await writeFile('packages/ui/dist/web.d.cts', "export * from './index.cjs';\n");

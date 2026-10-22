@@ -160,3 +160,9 @@ Known caller images render their URI in SSR without waiting for an effect.
 preservation, real browser click/Enter submission, required validation, reset,
 preventDefault, default app actions and inactive controls. It uses a local
 fixture without changing business records and closes its browser/server.
+
+Browser bundlers select `/web` and `/web-primitives` browser conditions, which
+share the host RNW ESM contexts. Node SSR selects the default CJS-backed contexts.
+Import package subpaths rather than aliasing direct dist files across environments.
+The packed browser fixture also checks that inherited RTL logical padding agrees
+with an upstream host Pressable; the SSR fixture checks the same inherited RTL.

@@ -16,3 +16,9 @@ forwarding patch target. Other RNW internals remain external to preserve the
 host StyleSheet/context singleton. The upstream MIT license is retained as
 REACT-NATIVE-WEB-LICENSE. Initial Image defaultSource uses the caller's supplied
 source when no fallback is provided, preserving real artwork in unhydrated SSR.
+
+Browser conditional exports reference RNW's ESM internals, matching browser hosts'
+root RNW import. Node defaults reference RNW's CJS internals, matching Node's root
+import. This keeps inherited locale/direction and structural styling contexts
+shared with the host on both paths. Do not alias a browser bundle to the Node
+file or vice versa; import the exported package subpath.

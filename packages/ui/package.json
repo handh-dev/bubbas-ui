@@ -42,6 +42,16 @@
     "./foundation-lock": "./foundations.lock.json",
     "./foundations.css": "./foundations/foundations.css",
     "./web": {
+      "browser": {
+        "import": {
+          "types": "./dist/web.d.ts",
+          "default": "./dist/web.browser.js"
+        },
+        "require": {
+          "types": "./dist/web.d.cts",
+          "default": "./dist/web.browser.cjs"
+        }
+      },
       "import": {
         "types": "./dist/web.d.ts",
         "default": "./dist/web.js"
@@ -53,10 +63,18 @@
     },
     "./web.css": "./dist/web.css",
     "./web-primitives": {
+      "browser": {
+        "import": "./dist/web-native.browser.js",
+        "require": "./dist/web-native.browser.cjs"
+      },
       "import": "./dist/web-native.js",
       "require": "./dist/web-native.cjs"
     },
     "./web-runtime": {
+      "browser": {
+        "import": "./dist/web-runtime.browser.js",
+        "require": "./dist/web-runtime.browser.cjs"
+      },
       "import": "./dist/web-runtime.js",
       "require": "./dist/web-runtime.cjs"
     }
