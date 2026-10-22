@@ -279,7 +279,8 @@ Phones hide only the repeated hero logo, retain the accessible H1 and supplied
 mascot, and use a readable gold honor badge. Announcement uses original blue
 #0866FF and a >=12px single-line track after hydration. Its complete copy is one
 accessible text node; manual motion-off mode supports horizontal scrolling.
-No-JS/native views wrap the complete text. Campaign badges stay in a single
+No-JS web retains the same one-line, manually scrollable full text; native keeps
+a static wrapping adaptation. Campaign badges stay in a single
 nonshrinking row inside a native ScrollView; the rail scrolls when required.
 Footer uses brand/full-width, two link columns, then full-width season content
 through 760px, retaining the original logo source without an added white well.

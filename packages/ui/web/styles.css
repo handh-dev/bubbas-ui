@@ -22,8 +22,7 @@
 [data-bubba-action][aria-disabled="true"] { background-image:none; box-shadow:none; transform:none; }
 .bubba-announcement { background:#0866FF!important; }
 .bubba-announcement-viewport { container-type:inline-size; overflow:auto; }
-.bubba-announcement-copy { color:#FFFFFF; min-width:100%; }
-.bubba-announcement[data-bubba-animated="true"] .bubba-announcement-copy { width:max-content; white-space:nowrap; }
+.bubba-announcement-copy { color:#FFFFFF; min-width:100%; width:max-content; white-space:nowrap; }
 .bubba-announcement[data-bubba-animated="true"][data-bubba-motion="on"] .bubba-announcement-viewport { overflow:hidden; }
 .bubba-announcement[data-bubba-animated="true"][data-bubba-motion="on"] .bubba-announcement-copy { animation:bubba-announcement-scroll 28s linear infinite alternate; }
 .bubba-announcement-viewport:focus-visible { outline:2px solid #FFFFFF; outline-offset:-3px; }
