@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { Accordion, Alert, Heading, Link, Text } from "@bubbasfw/ui";
 import { Guide } from "../src/Guide";
 import { Choice } from "../src/Choice";
+import { candidateVersion } from "../src/showcase/catalog";
 const tailwind = `const path = require('node:path');\nconst uiRoot = path.dirname(require.resolve('@bubbasfw/ui/package.json'));\nmodule.exports = {\n  darkMode: 'class',\n  content: ['./App.{js,jsx,ts,tsx}', './{app,pages,src}/**/*.{js,jsx,ts,tsx}',\n    path.join(uiRoot, 'src/**/*.{ts,tsx}')],\n  presets: [require('nativewind/preset'), require('@bubbasfw/ui/tailwind-preset')],\n};`;
 const next = `// next.config.js — run Next with --webpack\nmodule.exports = {\n  transpilePackages: ['@bubbasfw/ui', 'nativewind',\n    'react-native-css-interop', 'react-native', 'react-native-web'],\n  webpack(config) {\n    config.resolve.alias = { ...config.resolve.alias, 'react-native$': 'react-native-web' };\n    config.resolve.extensions = ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', ...config.resolve.extensions];\n    return config;\n  },\n};\n// tsconfig.json: jsx = "react-jsx", jsxImportSource = "nativewind"\n// postcss.config.cjs: plugins = { tailwindcss: {}, autoprefixer: {} }`;
 const expo = `// metro.config.js\nconst { getDefaultConfig } = require('expo/metro-config');\nconst { withNativeWind } = require('nativewind/metro');\nmodule.exports = withNativeWind(getDefaultConfig(__dirname), { input: './global.css' });\n\n// babel.config.js\nmodule.exports = function(api) {\n  api.cache(true);\n  return { presets: [\n    ['babel-preset-expo', { jsxImportSource: 'nativewind' }],\n    'nativewind/babel',\n  ] };\n};`;
@@ -14,8 +15,8 @@ export default function Setup() {
       description="Start with a runnable example. Both platforms import the same components."
     >
       <Alert
-        title="32 components for Web and Expo"
-        description="Install @bubbasfw/ui@0.3.2 in your app, configure NativeWind, and use the same component imports on both platforms."
+        title="32 controls and 12 reusable sections"
+        description={`Install @bubbasfw/ui@${candidateVersion}. Vite and Astro use the web entry; Expo and the Next.js universal example keep their NativeWind host setup.`}
         tone="info"
       />
       <View className="gap-4">
@@ -42,7 +43,34 @@ export default function Setup() {
         </Link>
       </View>
       <View className="gap-4">
-        <Heading level={2}>Add it to an app</Heading>
+        <Heading level={2}>Vite and Astro</Heading>
+        <Text selectable variant="code" className="rounded-lg bg-ui-surface p-5">
+          {`pnpm add @bubbasfw/ui@${candidateVersion} react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4`}
+        </Text>
+        <Text selectable variant="code" className="rounded-lg bg-ui-surface p-5">
+          {'import { ThemeProvider, HeroSection } from "@bubbasfw/ui/web";\nimport "@bubbasfw/ui/web.css";\n\n<ThemeProvider appearance="light">\n  <HeroSection variant="marketing" title="Your page title" />\n</ThemeProvider>'}
+        </Text>
+        <Text>
+          Import the shared CSS once. This browser entry includes the web
+          interop and utility styles; it needs no host NativeWind Babel or
+          Tailwind configuration. Keep declared peers compatible and use one
+          React/React Native Web instance. Apps provide content, cleared assets,
+          links and actions.
+        </Text>
+        <Text>
+          Astro and Node SSR hosts render shared content before collecting
+          StyleSheet.getSheet() from the same installed react-native-web instance.
+          Include its returned id and textContent in the document alongside
+          web.css so structural styles exist before hydration. Hydrate the shared
+          header and interactive sections with the same data to enable their
+          menus and galleries.
+        </Text>
+        <Link href="https://github.com/handh-dev/bubbas-ui/blob/main/docs/system-contract.md#server-rendered-browser-styles" external>
+          Read the browser and SSR contract
+        </Link>
+      </View>
+      <View className="gap-4">
+        <Heading level={2}>Expo and the Next.js universal example</Heading>
         <Text>
           React, React Native, NativeWind and Tailwind remain peer dependencies.
           Web also needs React Native Web and React DOM. Native-only apps can
@@ -54,7 +82,7 @@ export default function Setup() {
           className="rounded-lg bg-ui-surface p-5"
         >
           {
-            "pnpm add @bubbasfw/ui@0.3.2 nativewind@4.2.7\npnpm add -D tailwindcss@3.4.17"
+            `pnpm add @bubbasfw/ui@${candidateVersion} nativewind@4.2.7\npnpm add -D tailwindcss@3.4.17`
           }
         </Text>
         <Text tone="muted">

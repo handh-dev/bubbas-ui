@@ -4,8 +4,9 @@ Bubba’s universal component library for React Native, Expo and React Native We
 All components use native primitives and NativeWind. React and platform runtimes
 are peers, with no Base UI, Radix UI or DOM component implementation.
 
-Version 0.3.2 includes 32 components, scoped light/dark/system themes and shared
-design tokens. Use the same imports in Next.js/React Native Web and Expo.
+Version 0.5.0 includes 32 controls, 12 reusable sections, scoped light/dark/system
+themes and shared design tokens. Expo and the existing Next.js universal example
+use the root entry; Vite and Astro use the browser entry described below.
 
 Three task patterns cover appearance settings, page introductions and explicit
 loading/empty/error/offline/ready states: AppearanceControl, PageHeader and
@@ -45,11 +46,14 @@ apps may omit the optional React Native Web peer.
 
 ## Consumer setup
 
+Vite and Astro use the browser-host setup below. This section describes the
+universal root entry used by Expo and the existing Next.js example.
+
 Baseline: React 19.2.3, React Native 0.86.3, React Native Web 0.21.4,
 NativeWind 4.2.7, Tailwind 3.4.17. Install alongside the app’s compatible peers:
 
 ```sh
-pnpm add @bubbasfw/ui@0.3.2 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.5.0 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -129,9 +133,10 @@ host’s responsibility; `useTheme().fontFamily` exposes the current name.
 
 ESM, CJS and declarations ship together. Source ships for Tailwind scanning.
 `@bubbasfw/ui/tokens` is independent of React; `@bubbasfw/ui/tailwind-preset` is
-CommonJS. The package bundles no platform runtime, font or artwork binary.
+CommonJS. The universal entry keeps platform runtimes external; the browser
+entry includes its NativeWind web interop. No font or artwork binary ships.
 
-Foundation system 0.4.0 and brand release 1.0.0 remain separately versioned.
+Foundation system 0.5.0 and brand release 1.0.0 remain separately versioned.
 The immutable Studio release, file approvals/rights, hashes and lock ship under
 `foundations/`. Portable exports are `/foundations`, `/foundation-manifest`,
 `/foundation-lock`, and `/foundations.css`. The server-safe tokens export exposes
@@ -145,12 +150,28 @@ step, with no automatic npm release on push or merge.
 
 ### Vite / Astro / server-rendered web hosts
 
+```sh
+pnpm add @bubbasfw/ui@0.5.0 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
+```
+
 For browser hosts that cannot parse React Native's native entry, import the
 same universal implementation from `@bubbasfw/ui/web` and import
 `@bubbasfw/ui/web.css` once. Supply React, React DOM and React Native Web as host
 peers. Wrap a scoped region with `ThemeProvider appearance="light"` (or dark /
 system). This entry retains SSR text, semantic headings and real navigation
 anchors. It includes NativeWind's MIT web interop helper; React/RNW stay external.
+Keep the package's declared peers compatible. Import package subpaths so browser
+bundlers and Node select the appropriate runtime conditions. This entry requires
+no host NativeWind Babel or Tailwind configuration.
+
+```tsx
+import { ThemeProvider, HeroSection } from '@bubbasfw/ui/web';
+import '@bubbasfw/ui/web.css';
+
+<ThemeProvider appearance="light">
+  <HeroSection variant="marketing" title="Your page title" />
+</ThemeProvider>
+```
 
 Reusable sections are SiteHeader, SiteFooter, HeroSection, ContentSection,
 ProductCard/Grid, CategoryCard/Grid, LocationCard/Grid, ProductDetail and
@@ -164,3 +185,6 @@ For Node/Astro SSR, render shared content first and include the host RNW
 supplies structural RNW CSS before hydration. Use the same React/RNW instance
 throughout. Native form submit/reset intent is supported through `/web`'s Button
 `type`; the universal root entry remains an app-action primitive.
+Hydrate the shared SiteHeader and other interactive sections with the same data
+to enable menus and galleries. Hosts retain their own routing, authentication,
+data and actions.
