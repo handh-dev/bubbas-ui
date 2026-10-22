@@ -4,7 +4,7 @@ Bubba’s universal component library for React Native, Expo and React Native We
 All components use native primitives and NativeWind. React and platform runtimes
 are peers, with no Base UI, Radix UI or DOM component implementation.
 
-Candidate 0.6.1 includes 32 controls, the shared Icon library, 15 reusable sections, scoped light/dark/system
+Version 0.6.1 includes 32 controls, the shared Icon library, 15 reusable sections, scoped light/dark/system
 themes and shared design tokens. Expo and the existing Next.js universal example
 use the root entry; Vite and Astro use the browser entry described below.
 
@@ -189,13 +189,13 @@ Hydrate the shared SiteHeader and other interactive sections with the same data
 to enable menus and galleries. Hosts retain their own routing, authentication,
 data and actions.
 
-## Annotated web patch candidate 0.6.1
+## Approved annotated web release 0.6.1
 
-This is an unpublished compatibility patch candidate preserving the owner-approved
-0.6.0 design. Use its exact reviewed archive for qualification; the install
-commands below apply only after publication. Published 0.6.0 is deprecated for
-dropped web Button caller styles; npm latest has been restored to 0.5.0.
-See [the patch record](https://github.com/handh-dev/bubbas-ui/blob/main/docs/releases/0.6.1-candidate.md). Foundation system 0.5.0 and its immutable
+The owner approved the exact 0.6.1 compatibility patch preserving the reviewed
+annotated web design. It fixes dropped web Button caller styles; 0.6.0 remains
+deprecated and immutable. The published archive retains its historical candidate
+README wording; these current repository guides do not repack that archive.
+See [the release record](https://github.com/handh-dev/bubbas-ui/blob/main/docs/releases/0.6.1.md). Foundation system 0.5.0 and its immutable
 source/digest remain unchanged. Marketing variants now use the original blue,
 compact red/blue actions with hover glow, centered desktop navigation, full-height
 white hero, equal compact product cards, and caller-labelled gold badges.

@@ -212,7 +212,9 @@ Catalog SVG fixtures use fully encoded data URIs and must decode successfully.
 The owner approved the exact 0.6.0 design, which remains unchanged in the 0.6.1
 compatibility patch. 0.6.0 was published, then deprecated after an existing web
 form/SSR gate exposed dropped Button caller styles. npm latest returned to 0.5.0;
-0.6.1 requires exact patch review and consumer qualification before publication.
+The owner subsequently approved exact 0.6.1 source/archive after fresh independent
+review and consumer qualification; it supersedes the deprecated release. See
+[the release record](releases/0.6.1.md). Later revisions require their own review.
 The pinned Studio 0.5.0 foundation and default/native control variants remain.
 Marketing buttons accept `appearance="marketing"`; secondary actions use original
 blue. SectionAction accepts optional tone and social icon; absent facts remain absent.
