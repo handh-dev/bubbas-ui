@@ -71,10 +71,10 @@ export const RadioGroup = forwardRef<ElementRef<typeof View>, RadioGroupProps>(f
           accessibilityState={{ checked, disabled: optionDisabled }} aria-checked={checked} aria-disabled={optionDisabled}
           {...(Platform.OS === 'web' ? { 'aria-describedby': option.description ? `${optionID}-description` : undefined } : {})}
           disabled={optionDisabled} onPress={() => select(option.value)}
-          className={cn('min-h-[44px] min-w-[44px] flex-row items-center gap-3 rounded-[4px] py-2',
-            focusRing, optionDisabled && 'opacity-50', optionClassName)}>
+          className={cn('min-h-[44px] min-w-[44px] max-w-full flex-row items-center gap-3 rounded-[4px] py-2',
+            orientation === 'horizontal' && 'basis-36 grow', focusRing, optionDisabled && 'opacity-50', optionClassName)}>
           <View accessible={false} importantForAccessibility="no-hide-descendants"
-            className={cn('h-5 w-5 items-center justify-center rounded-full border-2 border-ui-border', checked && 'border-bubba-red')}>
+            className={cn('h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-ui-border', checked && 'border-bubba-red')}>
             {checked ? <View className="h-2.5 w-2.5 rounded-full bg-bubba-red" /> : null}
           </View>
           <View className="min-w-0 flex-1 gap-1">

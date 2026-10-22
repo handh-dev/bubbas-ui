@@ -1,3 +1,14 @@
+## HH-51 native visual correction — 0.3.2
+
+- [x] Preserve vertical/form/roving semantics; horizontal radio choices wrap with readable width.
+- [x] Derive approved OFL static 400/500/600/700/900; preserve original source and private fonts.
+- [x] Canonical SDK 57 native weight registration and separately scoped preview fallback.
+- [ ] Exact clean source/full package/docs gates and independent review.
+- [ ] Parent publication, mobile exact registry integration and real installed paint.
+
+[Candidate contract](docs/releases/0.3.2-candidate.md). Native compile cap is exhausted;
+source/prebuild-only metadata does not qualify a new native binary.
+
 # Bubba’s universal UI workspace
 
 ## HH-51 native host-font patch — 0.3.1

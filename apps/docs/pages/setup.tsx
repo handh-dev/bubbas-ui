@@ -15,7 +15,7 @@ export default function Setup() {
     >
       <Alert
         title="32 components for Web and Expo"
-        description="Install @bubbasfw/ui@0.3.1 in your app, configure NativeWind, and use the same component imports on both platforms."
+        description="Install @bubbasfw/ui@0.3.2 in your app, configure NativeWind, and use the same component imports on both platforms."
         tone="info"
       />
       <View className="gap-4">
@@ -54,7 +54,7 @@ export default function Setup() {
           className="rounded-lg bg-ui-surface p-5"
         >
           {
-            "pnpm add @bubbasfw/ui@0.3.1 nativewind@4.2.7\npnpm add -D tailwindcss@3.4.17"
+            "pnpm add @bubbasfw/ui@0.3.2 nativewind@4.2.7\npnpm add -D tailwindcss@3.4.17"
           }
         </Text>
         <Text tone="muted">
@@ -153,23 +153,28 @@ export default function Setup() {
                   Raw app-owned native text still needs its own font style.
                 </Text>
                 <Text selectable variant="code" className="rounded-lg bg-ui-surface p-5">
-                  {`import { useFonts } from 'expo-font';
+                  {`import { registeredBodyFamily } from './native-fonts';
 import { ThemeProvider, PageHeader, FormField, Input } from '@bubbasfw/ui';
 
 function App() {
-  const [loaded, error] = useFonts({
-    BubbasBody: require('./assets/fonts/montserrat.ttf'),
-  });
-  if (!loaded && !error) return null;
-  return <ThemeProvider appearance="system" fontFamily={loaded ? 'BubbasBody' : undefined}>
+  // Registered by expo-font config plugin in a native build.
+  const family = registeredBodyFamily();
+  return <ThemeProvider appearance="system" fontFamily={family}>
     <PageHeader title="Find your Bubba’s" />
     <FormField label="Search stands"><Input placeholder="Name, city or ZIP" /></FormField>
   </ThemeProvider>;
 }`}
                 </Text>
                 <Text>
-                  Retain the font’s license in the host. The complete Expo
-                  gallery demonstrates this with cleared Montserrat/OFL. Web
+                  On Expo SDK 57, register static faces with the expo-font config
+                  plugin and rebuild the native app. The complete gallery keeps
+                  OFL Montserrat 400/500/600/700/900, hashes and the pinned
+                  generation recipe. Android uses its BubbasBody XML family;
+                  iOS uses Montserrat’s embedded family/PostScript names. Never
+                  overwrite that Android family with a single runtime font alias.
+                  SDK 57 variable-font runtime aliases do not preserve real weights.
+                  The separate Regular preview fallback in Expo Go is not native
+                  weight qualification. Retain the font’s license in the host. Web
                   hosts may pass their loaded CSS font name or keep existing
                   document font inheritance. An omitted fontFamily preserves
                   the host/platform defaults.

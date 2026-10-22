@@ -37,6 +37,14 @@ layout can resolve Babel-emitted runtime and plugin imports during native embedd
 
 ## Fonts
 
-Native examples use the system font. The public web workbench self-hosts cleared
-Montserrat under SIL OFL. A consuming app loads its own licensed fonts and reviews
-its final native typography. No Eurostile binary is distributed.
+The Expo SDK 57 example registers static OFL Montserrat 400/500/600/700/900
+using the expo-font config plugin: Android uses the BubbasBody XML weight family;
+iOS uses the embedded Montserrat family and PostScript names. Rebuild native apps
+when registrations change. A single runtime alias for the variable source selects
+its Thin default on SDK 57; it does not qualify the intended weight family. Never
+overwrite an Android XML family with a runtime alias of the same name.
+The separate Regular preview fallback in Expo Go/older hosts is not installed
+weight proof. Per-file metadata, source/license hashes and the pinned generator
+are retained with the canonical example. The web workbench separately self-hosts
+cleared Montserrat under OFL. No Eurostile binary is distributed.
+See [Expo font guidance](https://docs.expo.dev/develop/user-interface/fonts/).

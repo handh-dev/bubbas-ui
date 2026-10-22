@@ -14,8 +14,13 @@ provide RN font inheritance. This includes control labels, form hints/errors,
 feedback and Modal content. Explicit `style.fontFamily` overrides the default;
 the code variant keeps monospace. Omission preserves prior platform/host defaults.
 Hosts load and license fonts, and style app-owned raw native text/navigation.
-`useTheme().fontFamily` exposes the resolved default. The Expo example loads the
-same cleared Montserrat/OFL bytes as the docs, then supplies its registered alias.
+`useTheme().fontFamily` exposes the resolved default. The Expo SDK 57 example derives static Montserrat 400/500/600/700/900 from the
+unchanged approved variable font using a pinned fontTools recipe, with OFL and
+per-file source/weight/PostScript hashes. Its expo-font plugin registers Android's
+BubbasBody XML weight family and iOS's embedded Montserrat family. App code checks
+native registration before supplying the platform family; it never replaces an
+XML family with a single-file runtime alias. The separate regular preview alias
+is only a fallback for Expo Go/older hosts, not multiweight native qualification.
 No font binary enters the npm package.
 
 `pnpm verify:fonts` renders the real component catalog/patterns into RN primitive
@@ -86,6 +91,12 @@ retry only when supplied. Retained content after failure is identified as saved
 or unverified. Missing is never converted to zero; timestamp presence does not
 prove freshness. Live hours/status, retail/case prices, offer expiry and data
 source qualification stay in the owning business boundary.
+
+Horizontal RadioGroup choices reserve readable label space, wrap whole choices
+and constrain their width to the parent. The radio indicator cannot shrink.
+Vertical layout, explicit option/text classes, form hints, disabled state and
+roving keyboard navigation remain supported. Check narrow and scaled text in the
+actual native host as well as the web specimen.
 
 ## Extending the system
 

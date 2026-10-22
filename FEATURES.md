@@ -2,10 +2,10 @@
 
 The 32-component docs are live at
 [handh-dev.github.io/bubbas-ui](https://handh-dev.github.io/bubbas-ui/).
-The verified public registry release is `@bubbasfw/ui@0.3.0`; its publication
-receipt is retained in `artifacts/releases/0.3.0/`. The current 0.3.1 host-font
+The verified public registry release is `@bubbasfw/ui@0.3.1`; its publication
+receipt is retained in `artifacts/releases/0.3.1/`. The current 0.3.2 native layout/font-recipe
 patch is a candidate until independently reviewed and published. Current scope
-and qualification paths are in the [candidate record](docs/releases/0.3.1-candidate.md).
+and qualification paths are in the [candidate record](docs/releases/0.3.2-candidate.md).
 Earlier [0.2.0 receipts](docs/releases/0.2.0.md) remain historical.
 
 | Feature | Implementation | Verification |

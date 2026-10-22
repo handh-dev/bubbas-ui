@@ -2,12 +2,21 @@
 
 This complete consumer imports all 32 components from `@bubbasfw/ui`. From the
 repository root, run `pnpm build`, then `pnpm dev:expo`. Use the component strip
-to select a specimen and Light/Dark/System to review appearance. Native typography
-loads cleared Montserrat with `expo-font`, then passes its `BubbasBody` alias
-through Gallery to `ThemeProvider fontFamily`. This covers shared labels,
-headings, states, fields and modal text. The exact public font bytes and SIL OFL
-are copied from the approved docs source into `assets/fonts/`; no font binary is
-included in the npm component package. Font failure preserves platform fallback.
+to select a specimen and Light/Dark/System to review appearance. Native typography uses static Montserrat 400/500/600/700/900 registered by the
+`expo-font` config plugin in app.config.js/native-fonts.json. Android uses the
+BubbasBody XML family; iOS uses the embedded Montserrat family. These static OFL
+instances preserve actual weight intent on SDK 57, including black headings.
+Run `uv run scripts/instantiate-native-fonts.py` from the repository root to
+reproduce them using pinned fontTools 4.67.0. The original approved variable source
+is unchanged; assets/fonts/native/manifest.json records source/license/output
+hashes, weights and PostScript names. No font binary ships in npm.
+
+Run `npx expo run:android` or `npx expo run:ios` for a native development build
+with these registrations. Expo Go cannot load a config plugin: its separate
+BubbasBodyPreview regular alias offers readable specimen previews, without
+qualifying actual native weights. Do not runtime-load a single file under the
+Android BubbasBody alias, which would overwrite its XML family. Failed loading
+retains platform defaults. See [Expo font guidance](https://docs.expo.dev/develop/user-interface/fonts/).
 
 The example keeps Expo 57.0.31, React Native 0.86.3 and NativeWind 4.2.7. It declares
 the Babel runtime/JSX plugin directly for pnpm resolution. Source is synchronized
