@@ -35,12 +35,12 @@ export function MarketingHeader({brand,links,action,announcement,auxiliaryLinks,
 }
 export function MarketingHero({title,description,eyebrow,image,imageNativeID,action,actions,logoImage,children,className,...props}:HeroSectionProps) {
   const allActions=actions??(action?[action]:[]);
-  return <View {...props} className={cn('bubba-marketing-hero bg-white px-4 py-10 sm:py-12',className)}><Container className="bubba-hero-inner max-w-[1184px] px-0"><Inline wrap={false} align="center" className="gap-4 min-[761px]:gap-12">
+  return <View {...props} className={cn('bubba-marketing-hero bg-white px-4 py-10 sm:py-12',className)}><Container className="bubba-hero-inner max-w-[1184px] px-0"><Inline wrap={false} align="center" className="gap-0 min-[761px]:gap-12">
     <Stack className="min-w-0 flex-[1.5]" gap={6}>{eyebrow?<Text variant="caption" className="text-[10px] font-extrabold uppercase text-ui-muted min-[761px]:text-xs">{eyebrow}</Text>:null}
       <Heading level={1} className={logoImage?'sr-only':'text-3xl font-black uppercase italic min-[761px]:text-5xl bubba-wide:text-5xl'}>{title}</Heading>
       {logoImage?<Image source={{uri:logoImage.uri}} accessibilityLabel={logoImage.alt} resizeMode="contain" className="h-32 w-full max-w-[280px] min-[761px]:h-[280px] min-[761px]:max-w-[560px]"/>:null}
       {description?<Text variant="caption" className="text-sm font-extrabold uppercase leading-5 min-[761px]:text-[21px] min-[761px]:leading-8">{description}</Text>:null}
-      <Stack gap={3} className="items-stretch min-[761px]:flex-row min-[761px]:flex-wrap">{allActions.map((item,index)=><MarketingAction key={item.href} size="lg" action={{...item,tone:item.tone??(index===1?'blue':'red')}}/>)}{children}</Stack>
+      <Stack gap={3} className={cn("items-stretch min-[761px]:flex-row min-[761px]:flex-wrap",allActions.length>1&&!children&&"bubba-hero-action-pair")}>{allActions.map((item,index)=><MarketingAction key={item.href} size="lg" action={{...item,tone:item.tone??(index===1?'blue':'red')}}/>)}{children}</Stack>
     </Stack>
     {image?<View className="min-w-0 flex-[0.9] items-center min-[761px]:flex-1"><Image nativeID={imageNativeID} source={{uri:image.uri}} accessibilityLabel={image.alt} resizeMode="contain" className="bubba-hero-mascot h-[260px] w-full max-w-[300px] min-[761px]:max-w-[440px] min-[761px]:h-[650px]"/></View>:null}
   </Inline></Container></View>;

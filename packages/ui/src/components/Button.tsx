@@ -50,7 +50,7 @@ const containerSizes: Record<ButtonSize, string> = {
 const marketingContainerSizes: Record<ButtonSize,string> = {
  sm:'min-h-[44px] rounded-[6px] px-4 py-2.5',
  md:'min-h-[44px] rounded-[6px] px-4 py-2.5',
- lg:'min-h-[56px] rounded-xl px-[22px] py-[14px] min-[761px]:min-h-[60px] min-[761px]:px-[26px] min-[761px]:py-4',
+ lg:'min-h-[56px] rounded-xl px-[18px] py-[14px] min-[761px]:min-h-[60px] min-[761px]:px-[26px] min-[761px]:py-4',
 };
 const textSizes: Record<ButtonSize, string> = {
   sm: 'text-sm',
@@ -124,7 +124,7 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
             textVariants[variant],
             textSizes[size],
             appearance === 'marketing' && 'font-extrabold uppercase tracking-wide',
-            appearance === 'marketing' && (size==='lg'?'text-base leading-5 min-[761px]:text-lg min-[761px]:leading-[22px]':'text-sm leading-5'),
+            appearance === 'marketing' && (size==='lg'?'text-base leading-5 tracking-normal min-[761px]:text-lg min-[761px]:leading-[22px] min-[761px]:tracking-wide':'text-sm leading-5'),
             appearance === 'marketing' && (variant === 'primary' || variant === 'secondary') && 'text-white',
             explicitlyDisabled && 'text-ui-disabled-text',
             textClassName,
