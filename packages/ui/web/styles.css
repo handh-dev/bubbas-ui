@@ -4,6 +4,10 @@
 
 /* Fixed public marketing composition, with a native background fallback. */
 .bubba-marketing-banner { background-color:#0866FF; }
+/* Fixed shared campaign appearance survives host legacy ID backgrounds. */
+.bubba-campaign-section { background-image:none!important; }
+.bubba-campaign-blue { background-color:#0866FF!important; }
+.bubba-campaign-red { background-color:#D40000!important; }
 
 /* Shared marketing variants, never consumer overrides. Brand token source is pinned. */
 [data-bubba-action] { transition: box-shadow 180ms ease, transform 180ms ease, background-color 180ms ease; }
