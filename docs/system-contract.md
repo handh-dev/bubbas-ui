@@ -129,6 +129,8 @@ Callers supply links, cleared image URIs/alt text, content, preformatted retail
 prices, addresses, published-hours labels and separately qualified reported
 stand-status labels. Missing optional facts stay absent; grids have explicit
 empty labels. No component fetches Core or infers facts from the clock.
+`ProductCard` and `ProductGrid` render caller-supplied badge text through the
+existing neutral `Badge`; an absent badge adds no label or inferred claim.
 `ContentSection headingLevel` preserves page hierarchy. Header links wrap visibly
 at narrow widths. `ProductDetail` gallery actions need a hydrated host; server
 consumers must retain their own checked gallery behavior until hydrated.
@@ -166,3 +168,38 @@ share the host RNW ESM contexts. Node SSR selects the default CJS-backed context
 Import package subpaths rather than aliasing direct dist files across environments.
 The packed browser fixture also checks that inherited RTL logical padding agrees
 with an upstream host Pressable; the SSR fixture checks the same inherited RTL.
+
+### Public marketing variants
+
+Sections accept `variant="marketing"` for the existing public composition. The
+normal variant retains its prior layout. SiteHeader owns the compact announcement
+and desktop navigation plus an accessible mobile Dialog; Astro hosts hydrate the
+actual header with identical data to enable its menu. Shared Dialog supplies
+Escape dismissal, focus containment and focus return. Caller search controls and
+real navigation links remain caller supplied. The footer retains indexable links
+when scripting is unavailable.
+
+HeroSection accepts caller-owned `logoImage` and `actions`. Its title remains an
+indexable, visually hidden H1 when the original logo is shown. The caller supplies
+cleared artwork; this package distributes no brand image or licensed font.
+ContentSection supplies the navy/blue route title band; Product/Category grids
+use four desktop columns and two phone columns, with full-width square artwork.
+ProductDetail places artwork before text and uses image thumbnails. SiteFooter
+accepts `linkGroups`, `socialLinks` and `copyright`, with children for caller-owned
+season information. Missing facts remain absent. Every existing catalog section
+shows both variants using clearly labelled synthetic fixtures under the same
+stable component ID. Marketing remains a new review candidate until owner review.
+
+Marketing sections scope the complete light palette through a nested provider,
+including shared badges and Dialog content; the host font is inherited. Hidden
+auxiliary navigation destinations remain available in the menu. The compact
+header bounds semantic navigation against host-wide `nav` rules. Link's optional
+`textVariant` selects its shared text scale; marketing captions avoid inheriting
+the responsive body scale. Existing Link defaults are unchanged.
+
+Marketing location-card theme wrappers retain the grid item's minimum-width and
+flex constraints. Product detail columns and actions stack within the available
+phone width; desktop retains the image/text columns. Hero actions follow the same
+phone constraint. Browser qualification measures every visible interactive
+control's bounds, since an app's overflow clipping can hide a layout failure.
+Catalog SVG fixtures use fully encoded data URIs and must decode successfully.

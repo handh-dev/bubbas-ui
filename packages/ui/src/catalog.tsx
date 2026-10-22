@@ -17,26 +17,27 @@ export { renderFeedbackDemo } from './showcase/FeedbackDemo';
 export const sectionCatalog = ['SiteHeader', 'SiteFooter', 'HeroSection', 'ContentSection', 'ProductCard', 'ProductGrid', 'CategoryCard', 'CategoryGrid', 'LocationCard', 'LocationGrid', 'ProductDetail', 'PromotionBanner'] as const;
 export const reviewCatalog = [...components.map((entry) => ({ id: entry.slug, name: entry.name, category: entry.category })), ...sectionCatalog.map((name) => ({ id: name, name, category: 'Sections' })), { id: 'patterns', name: 'Task patterns', category: 'Patterns' }];
 /** Fixtures are visibly examples and never imply catalog, prices, hours or availability. */
-export function SectionDemo({ name }: { name: string }) {
-  const brand = { label: 'Bubba’s · sample navigation', href: '#sample' };
+export function SectionDemo({ name, variant = 'default' }: { name: string; variant?: 'default' | 'marketing' }) {
+  const sampleImage = { uri: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="280"><rect width="400" height="280" fill="#d9e8fb"/><text x="40" y="150" font-size="36">SAMPLE ART</text></svg>'), alt: 'Sample artwork fixture' };
+  const brand = { image: variant === 'marketing' ? sampleImage : undefined, label: 'Bubba’s · sample navigation', href: '#sample' };
   const links = [{ label: 'Sample destination', href: '#sample' }];
-  const products = [{ id: 'sample', title: 'Example product', href: '#sample', description: 'Presentation fixture · no real retail facts.', priceLabel: 'Price unavailable' }];
+  const products = [{ id: 'sample', title: 'Example product', href: '#sample', description: 'Presentation fixture · no real retail facts.', priceLabel: 'Price unavailable', badge: 'Example label', image: variant === 'marketing' ? sampleImage : undefined }];
   const locations = [{ id: 'sample', title: 'Example location', address: ['Example address · not a real stand'], hoursLabel: 'Published hours unavailable', statusLabel: 'Reported stand status unavailable', actions: links }];
-  if (name === 'SiteHeader') return <SiteHeader brand={brand} links={links} />;
-  if (name === 'SiteFooter') return <SiteFooter brand={brand} links={links} description="Sample footer" />;
-  if (name === 'ProductDetail') return <ProductDetail product={products[0]} />;
-  if (name === 'HeroSection') return <HeroSection title="Make a memory." description="Evergreen sample copy for owner review." action={links[0]} />;
-  if (name === 'PromotionBanner') return <PromotionBanner title="Sample campaign message" description="No live promotion, price or expiry is implied." action={links[0]} />;
-  if (name === 'LocationCard') return <LocationCard location={locations[0]} />;
-  if (name === 'LocationGrid') return <LocationGrid items={locations} />;
-  if (name === 'ProductCard') return <ProductCard product={products[0]} />;
-  if (name === 'CategoryCard') return <CategoryCard category={products[0]} />;
-  if (name === 'CategoryGrid') return <CategoryGrid items={products} />;
-  if (name === 'ContentSection') return <ContentSection title="Sample information"><Text>Caller-owned content supplied to a shared section.</Text></ContentSection>;
-  return <ProductGrid items={products} />;
+  if (name === 'SiteHeader') return <SiteHeader variant={variant} brand={brand} links={links} announcement={variant === 'marketing' ? 'Example announcement · no live campaign' : undefined} />;
+  if (name === 'SiteFooter') return <SiteFooter variant={variant} brand={brand} links={links} description="Sample footer" />;
+  if (name === 'ProductDetail') return <ProductDetail variant={variant} product={products[0]} />;
+  if (name === 'HeroSection') return <HeroSection variant={variant} logoImage={variant === 'marketing' ? sampleImage : undefined} image={variant === 'marketing' ? sampleImage : undefined} title="Make a memory." description="Evergreen sample copy for owner review." action={links[0]} />;
+  if (name === 'PromotionBanner') return <PromotionBanner variant={variant} title="Sample campaign message" description="No live promotion, price or expiry is implied." action={links[0]} />;
+  if (name === 'LocationCard') return <LocationCard variant={variant} location={locations[0]} />;
+  if (name === 'LocationGrid') return <LocationGrid variant={variant} items={locations} />;
+  if (name === 'ProductCard') return <ProductCard variant={variant} product={products[0]} />;
+  if (name === 'CategoryCard') return <CategoryCard variant={variant} category={products[0]} />;
+  if (name === 'CategoryGrid') return <CategoryGrid variant={variant} items={products} />;
+  if (name === 'ContentSection') return <ContentSection variant={variant} title="Sample information"><Text>Caller-owned content supplied to a shared section.</Text></ContentSection>;
+  return <ProductGrid variant={variant} items={products} />;
 }
 export interface UIReviewCatalogProps { componentId?: string }
 export function UIReviewCatalog({ componentId }: UIReviewCatalogProps) {
   const entries = componentId ? reviewCatalog.filter((item) => item.id === componentId || item.name === componentId) : reviewCatalog;
-  return <View className="gap-8">{entries.length ? entries.map((entry) => <View key={entry.id} testID={`review-${entry.id}`} className="gap-4"><Heading level={2}>{entry.name}</Heading><Text variant="small" tone="muted">Local demonstration fixture · simulated actions</Text>{entry.category === 'Sections' ? <SectionDemo name={entry.name} /> : entry.id === 'patterns' ? <PatternsDemo /> : <ComponentDemo name={entry.name as typeof components[number]['name']} />}</View>) : <Text>No matching review specimen.</Text>}</View>;
+  return <View className="gap-8">{entries.length ? entries.map((entry) => <View key={entry.id} testID={`review-${entry.id}`} className="gap-4"><Heading level={2}>{entry.name}</Heading><Text variant="small" tone="muted">Local demonstration fixture · simulated actions</Text>{entry.category === 'Sections' ? <View className="gap-6"><SectionDemo name={entry.name} /><Text variant="label">Public marketing variant · example content</Text><SectionDemo name={entry.name} variant="marketing" /></View> : entry.id === 'patterns' ? <PatternsDemo /> : <ComponentDemo name={entry.name as typeof components[number]['name']} />}</View>) : <Text>No matching review specimen.</Text>}</View>;
 }
