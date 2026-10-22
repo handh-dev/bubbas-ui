@@ -266,3 +266,37 @@ class merging with the actual RNW interaction state. The existing web form gate
 covers SSR/RTL styles, pointer/keyboard state, focus, inactive states and forms.
 Run `pnpm verify:web:forms` in addition to package, font, consumer and docs gates;
 a package build or Next gallery does not establish this distinct host contract.
+
+## Mobile marketing refinement candidate — 0.7.0
+
+Unpublished; exact owner design review remains required. Existing section props
+and the 0.6.1 web Button style/RTL/form contract remain. Marketing actions use
+intrinsic widths, a 48px phone minimum, one readable label line, a restrained red
+or blue glow, and distinct hover/focus/press/inactive states. Callers keep action
+labels short; they never add app-local styles to repair a shared layout.
+
+Phones hide only the repeated hero logo, retain the accessible H1 and supplied
+mascot, and use a readable gold honor badge. Announcement uses original blue
+#0866FF and a >=12px single-line track after hydration. Its complete copy is one
+accessible text node; manual motion-off mode supports horizontal scrolling.
+No-JS/native views wrap the complete text. Campaign badges stay in a single
+nonshrinking row inside a native ScrollView; the rail scrolls when required.
+Footer uses brand/full-width, two link columns, then full-width season content
+through 760px, retaining the original logo source without an added white well.
+PDP artwork is contained within min(60vw,280px) on phones, with 48px thumbnails.
+All product facts, descriptions, gallery/video and actions remain available.
+
+Ticker endcaps are navy with white stars only. Hover no longer pauses motion.
+A shared Motion on/off switch remains pointer/touch/keyboard operable in marketing
+navigation and footer and controls both ticker and announcement. Standalone
+examples include the same control. The visitor choice persists across ordinary page loads, with caught storage failures
+and an in-memory fallback for sandboxed Studio previews. Reduced motion defaults off and overrides all
+decorative animation. Manual stop reveals the complete wrapped ticker and manually
+scrollable announcement; no duplicate text or hidden announcement substitutes.
+
+Promotion side bursts are independently authored, bounded, noninteractive radial
+CSS effects inspired by the owner's Info Links reference. They run once per hover,
+focus or touch activation, away from copy/actions. Native retains the static gold
+spark icon; reduced motion retains static color/glow without particle movement.
+Shared Dialog retains its web portal/focus trap/scroll lock for a 200ms opacity
+and 10px exit, then restores trigger focus. Reduced motion unmounts immediately.

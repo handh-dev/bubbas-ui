@@ -220,3 +220,24 @@ with lift/press feedback and a white-separated focus ring. Inactive controls hav
 no glow or movement; reduced motion removes travel. Native keeps the same sizing,
 solid brand fill, label, semantics and restrained native shadow without a new
 gradient dependency. Default application controls retain their previous design.
+
+## Mobile marketing refinement candidate 0.7.0
+
+This source contains an unpublished design candidate. The approved registry
+release remains 0.6.1 until exact owner review and deliberate publication.
+The marketing sections keep their existing props: apps supply content/actions;
+the website omits the optional Hero description. Phones show the caller's mascot
+without a repeated hero logo, use intrinsic 48px actions, a readable announcement,
+a horizontal badge rail, a two-column footer and a compact product gallery.
+
+Announcement and ticker animation share a visible **Motion on/off** switch in
+marketing navigation and footer. Hover does not stop the ribbon. The choice survives ordinary page loads with a caught storage/in-memory fallback
+for restricted browser contexts. Reduced motion starts static; with motion off the complete ribbon wraps and the single-line
+announcement can be scrolled manually. Native and no-JS layouts retain all copy.
+Standalone ticker consumers must provide the shared motion control alongside the
+ribbon, as the canonical catalog does; do not remove access to the stop mechanism.
+
+Gold badges and the promotion's brief side bursts are decorative and preserve
+content/actions. All new motion stops for reduced motion. No art/font binary or
+Info Links runtime is included. See the [candidate contract](https://github.com/handh-dev/bubbas-ui/blob/main/docs/releases/0.7.0-candidate.md)
+for rights, behavior and separate publication/consumer acceptance gates.

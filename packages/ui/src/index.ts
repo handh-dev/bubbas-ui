@@ -32,3 +32,5 @@ export * from './catalog';
 export { Icon } from './components/Icon';
 export type { IconProps, IconName } from './components/Icon';
 export * from './components/campaigns';
+
+export { MarketingMotionControl } from './components/marketing';

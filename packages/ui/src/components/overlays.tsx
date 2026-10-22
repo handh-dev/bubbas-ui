@@ -3,6 +3,7 @@
 import { useEffect, useId, useReducer, useState, type ReactNode } from 'react';
 import { Modal, Platform, Pressable, ScrollView, View, type ViewProps } from 'react-native';
 import { cn, focusRing, useControllableState } from '../internal/utils';
+import { reducedMotionQuery } from '../internal/marketing-motion';
 import { useWebScrollLock } from '../internal/scroll-lock';
 import { useTheme } from '../theme';
 import { tokens } from '../tokens';
@@ -38,14 +39,24 @@ function Overlay({ open, defaultOpen = false, onOpenChange, title, description, 
     // One ordinary rerender recreates it while preserving the Modal's identity.
     if (Platform.OS === 'web' && isOpen && webMounted) refreshPortal();
   }, [isOpen, webMounted]);
+  // Keep the web portal/focus trap alive through its short exit animation.
+  const [webPresent, setWebPresent] = useState(isOpen);
+  useEffect(() => {
+    if (Platform.OS !== 'web') return;
+    if (isOpen) { setWebPresent(true); return; }
+    if (reducedMotionQuery()?.matches) { setWebPresent(false); return; }
+    const timeout = setTimeout(() => setWebPresent(false), 200);
+    return () => clearTimeout(timeout);
+  }, [isOpen]);
+  const present = isOpen || (Platform.OS === 'web' && webPresent);
   const canRender = Platform.OS !== 'web' || webMounted;
-  useWebScrollLock(isOpen && canRender);
+  useWebScrollLock(present && canRender);
   // RNW captures the current trigger on mount and restores it on unmount.
-  if (!isOpen || !canRender) return null;
+  if (!present || !canRender) return null;
   return <Modal transparent visible animationType="none" onRequestClose={() => setOpen(false)} accessibilityLabel={title} aria-labelledby={titleID} {...(description ? { 'aria-describedby': descriptionID } : {})}>
-    <View className={cn('flex-1 px-4 py-6', sheet ? 'justify-end' : 'justify-center')} style={variables}>
-      <View testID={testID ? `${testID}-backdrop` : undefined} accessible={false} onStartShouldSetResponder={() => dismissOnBackdropPress} onResponderRelease={() => { if (dismissOnBackdropPress) setOpen(false); }} className="absolute inset-0" style={{ backgroundColor: colors.overlay, opacity: tokens.opacity.overlay[resolvedAppearance] }} />
-      <View {...props} testID={testID} accessibilityViewIsModal className={cn('w-full self-center bg-ui-surface p-6', sheet ? 'max-h-[85%] max-w-[720px] rounded-t-xl' : 'max-h-[85%] max-w-[560px] rounded-xl', className)} style={style}>
+    <View {...{dataSet:{bubbaOverlay:isOpen?'open':'closing'}}} className={cn('bubba-overlay flex-1 px-4 py-6', sheet ? 'justify-end' : 'justify-center')} style={variables}>
+      <View testID={testID ? `${testID}-backdrop` : undefined} accessible={false} onStartShouldSetResponder={() => dismissOnBackdropPress} onResponderRelease={() => { if (dismissOnBackdropPress) setOpen(false); }} className="bubba-overlay-backdrop absolute inset-0" style={{ backgroundColor: colors.overlay, opacity: tokens.opacity.overlay[resolvedAppearance] }} />
+      <View {...props} testID={testID} accessibilityViewIsModal className={cn('bubba-overlay-panel w-full self-center bg-ui-surface p-6', sheet ? 'max-h-[85%] max-w-[720px] rounded-t-xl' : 'max-h-[85%] max-w-[560px] rounded-xl', className)} style={style}>
         <View className="mb-4 flex-row items-start justify-between gap-4">
           <View className="min-w-0 flex-1 gap-2">
             <Heading nativeID={titleID} level={2}>{title}</Heading>

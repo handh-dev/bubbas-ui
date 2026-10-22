@@ -187,3 +187,11 @@ sections and package-owned catalog. See docs/releases/0.5.0-candidate.md and
 system-contract.md. Owner review remains required before publication; no npm or
 Pages publication occurs on this branch. Excluded mobile/HQ/Bulk/social apps
 retain their own pins. Existing dirty AGENTS.md was preserved separately.
+
+## Mobile marketing refinement — 0.7.0 candidate
+
+Extends the shared marketing implementation in an isolated worktree. Public
+0.6.1 stays approved; no npm/Pages/app publication occurs during preparation.
+Read docs/releases/0.7.0-candidate.md for the 18-item behavior scope, reference
+provenance, required gates and review boundary. Existing framework/dependency
+versions, native primitives, foundation custody and web Button forwarding remain.
