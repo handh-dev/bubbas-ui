@@ -7,9 +7,9 @@
 
 /* Shared marketing variants, never consumer overrides. Brand token source is pinned. */
 [data-bubba-action] { transition: box-shadow 180ms ease, transform 180ms ease, background-color 180ms ease; }
-[data-bubba-action="primary"]:hover { box-shadow:0 4px 16px #D4000047; transform:translateY(-1px); }
-[data-bubba-action="secondary"]:hover { box-shadow:0 4px 16px #0866FF47; transform:translateY(-1px); }
-[data-bubba-action]:active { transform:translateY(1px); }
+[data-bubba-action="primary"]:not([aria-disabled="true"]):hover { box-shadow:0 4px 16px #D4000047; transform:translateY(-1px); }
+[data-bubba-action="secondary"]:not([aria-disabled="true"]):hover { box-shadow:0 4px 16px #0866FF47; transform:translateY(-1px); }
+[data-bubba-action]:not([aria-disabled="true"]):active { transform:translateY(1px); }
 .bubba-announcement { background-image:linear-gradient(110deg,#D40000 0 27%,#FFFFFF 27% 34%,#0866FF 34% 66%,#FFFFFF 66% 73%,#D40000 73%); }
 .bubba-announcement-copy { background:#03256C; border-radius:4px; padding:4px 12px; max-width:100%; }
 .bubba-header-row { min-height:80px; }
@@ -23,8 +23,10 @@
 .bubba-promo-spark { animation:bubba-spark 1500ms ease-in-out 2; }
 .bubba-sparkler-promo { border-left:8px solid #FED766; }
 .bubba-ticker-viewport { container-type:inline-size; }
-.bubba-ticker-track { width:max-content; min-width:100%; animation:bubba-ticker-scroll 28s linear infinite alternate; }
-.bubba-flag-field { background:repeating-linear-gradient(0deg,#D40000 0 9px,#FFFFFF 9px 18px); opacity:.45; animation:bubba-flag-wave 6s ease-in-out infinite alternate; }
+.bubba-ticker-track { width:auto; min-width:100%; flex-wrap:wrap; }
+.bubba-flag-ticker[data-bubba-animated="true"] .bubba-ticker-track { width:max-content; flex-wrap:nowrap; animation:bubba-ticker-scroll 28s linear infinite alternate; }
+.bubba-flag-field { background:repeating-linear-gradient(0deg,#D40000 0 9px,#FFFFFF 9px 18px); opacity:.45;  }
+.bubba-flag-ticker[data-bubba-animated="true"] .bubba-flag-field { animation:bubba-flag-wave 6s ease-in-out infinite alternate; }
 .bubba-ticker-word { background:#03256C; padding:4px 8px; border-radius:4px; white-space:nowrap; }
 .bubba-flag-ticker:hover .bubba-ticker-track,.bubba-flag-ticker:focus-within .bubba-ticker-track,.bubba-flag-ticker[data-bubba-paused="true"] .bubba-ticker-track,.bubba-flag-ticker[data-bubba-paused="true"] .bubba-flag-field { animation-play-state:paused; }
 @keyframes bubba-ticker-scroll { from { transform:translateX(0); } to { transform:translateX(min(0px,calc(-100% + 100cqw))); } }
@@ -36,14 +38,14 @@
  .bubba-header-nav { position:relative!important; inset:auto!important; margin:0!important; padding:0!important; width:auto!important; z-index:auto!important; background:transparent!important; border:0!important; box-shadow:none!important; }
 }
 @media (min-width:761px) {
- .bubba-marketing-hero { min-height:calc(100svh - var(--bubba-header-height,124px) - 24px); justify-content:center; }
+ .bubba-marketing-hero { min-height:calc(100svh - var(--bubbas-header-height,124px) - 24px); justify-content:center; }
  .bubba-hero-mascot { height:clamp(500px,70svh,800px); }
 
 }
 @media (prefers-reduced-motion:reduce) {
  [data-bubba-action],.bubba-nav-link::after { transition:none; transform:none!important; }
- .bubba-ticker-track { animation:none; width:auto; flex-wrap:wrap; }
- .bubba-flag-field,.bubba-product-badge::after,.bubba-promo-spark { animation:none; }
+ .bubba-flag-ticker[data-bubba-animated="true"] .bubba-ticker-track { animation:none; width:auto; flex-wrap:wrap; }
+ .bubba-flag-ticker[data-bubba-animated="true"] .bubba-flag-field,.bubba-product-badge::after,.bubba-promo-spark { animation:none; }
  .bubba-product-badge::after { display:none; }
 }
 

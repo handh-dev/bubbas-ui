@@ -1,5 +1,5 @@
 'use client';
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { View } from 'react-native';
 import { Container, Inline, Stack } from './layout';
 import { Heading, Text } from './typography';
@@ -25,5 +25,7 @@ export interface FlagTickerProps extends SectionProps { items:readonly string[] 
 /** Animated flag behind readable copy. Pause and reduced-motion keep all content available. */
 export function FlagTicker({items,className,variant,...props}:FlagTickerProps) {
  const [paused,setPaused]=useState(false);
- return <MarketingScope><View {...props} {...{dataSet:{...props.dataSet,bubbaPaused:paused?'true':'false'}}} className={cn('bubba-flag-ticker relative flex-row items-center overflow-hidden bg-bubba-blue',className)}><View accessible={false} aria-hidden className="bubba-flag-field absolute inset-0"/><View className="bubba-ticker-viewport min-w-0 flex-1 overflow-hidden py-2"><View className="bubba-ticker-track flex-row items-center gap-10 px-4">{items.map((item,index)=><Text key={index} variant="caption" className="bubba-ticker-word shrink-0 text-xs font-black uppercase italic text-white">{item}</Text>)}</View></View><IconButton accessibilityLabel={paused?'Play scrolling announcement':'Pause scrolling announcement'} aria-pressed={paused} onPress={()=>setPaused(!paused)} className="bubba-ticker-pause shrink-0 bg-bubba-navy"><Icon name={paused?'play':'pause'} size={18} color="#FFFFFF"/></IconButton></View></MarketingScope>;
+ const [hydrated,setHydrated]=useState(false);
+ useEffect(()=>setHydrated(true),[]);
+ return <MarketingScope><View {...props} {...{dataSet:{...props.dataSet,bubbaPaused:paused?'true':'false',bubbaAnimated:hydrated?'true':'false'}}} className={cn('bubba-flag-ticker relative flex-row items-center overflow-hidden bg-bubba-blue',className)}><View accessible={false} aria-hidden className="bubba-flag-field absolute inset-0"/><View className="bubba-ticker-viewport min-w-0 flex-1 overflow-hidden py-2"><View className="bubba-ticker-track flex-row items-center gap-10 px-4">{items.map((item,index)=><Text key={index} variant="caption" className="bubba-ticker-word shrink-0 text-xs font-black uppercase italic text-white">{item}</Text>)}</View></View>{hydrated?<IconButton accessibilityLabel={paused?'Play scrolling announcement':'Pause scrolling announcement'} aria-pressed={paused} onPress={()=>setPaused(!paused)} className="bubba-ticker-pause shrink-0 bg-bubba-navy"><Icon name={paused?'play':'pause'} size={18} color="#FFFFFF"/></IconButton>:null}</View></MarketingScope>;
 }

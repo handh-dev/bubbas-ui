@@ -79,7 +79,7 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
     const isBusy = loading || (ariaBusy ?? accessibilityState?.busy ?? false);
     const spinnerColor = explicitlyDisabled
       ? colors['disabled-text']
-      : variant === 'primary' ? colors['action-text'] : colors.text;
+      : appearance === 'marketing' && (variant === 'primary' || variant === 'secondary') ? '#FFFFFF' : variant === 'primary' ? colors['action-text'] : colors.text;
 
     return (
       <Pressable
@@ -103,6 +103,7 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
           containerVariants[variant],
           containerSizes[size],
           appearance === 'marketing' && 'min-h-[44px] rounded-bubba-control px-4 py-2',
+          appearance === 'marketing' && variant === 'primary' && 'border-bubba-red bg-bubba-red hover:bg-bubba-redHover',
           appearance === 'marketing' && variant === 'secondary' && 'border-bubba-blue bg-bubba-blue hover:bg-bubba-navy',
           explicitlyDisabled && 'border-ui-disabled-surface bg-ui-disabled-surface',
           className,
@@ -115,7 +116,7 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
             textVariants[variant],
             textSizes[size],
             appearance === 'marketing' && 'text-sm font-extrabold uppercase tracking-wide',
-            appearance === 'marketing' && variant === 'secondary' && 'text-white',
+            appearance === 'marketing' && (variant === 'primary' || variant === 'secondary') && 'text-white',
             explicitlyDisabled && 'text-ui-disabled-text',
             textClassName,
           )}
