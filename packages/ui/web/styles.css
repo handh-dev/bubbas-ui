@@ -25,7 +25,7 @@
 .bubba-ticker-viewport { container-type:inline-size; }
 .bubba-ticker-track { width:auto; min-width:100%; flex-wrap:wrap; }
 .bubba-flag-ticker[data-bubba-animated="true"] .bubba-ticker-track { width:max-content; flex-wrap:nowrap; animation:bubba-ticker-scroll 28s linear infinite alternate; }
-.bubba-flag-field { background:repeating-linear-gradient(0deg,#D40000 0 9px,#FFFFFF 9px 18px); opacity:.45;  }
+.bubba-flag-field { background:repeating-linear-gradient(0deg,#D40000 0 9px,#FFFFFF 9px 18px); opacity:1; }
 .bubba-flag-ticker[data-bubba-animated="true"] .bubba-flag-field { animation:bubba-flag-wave 6s ease-in-out infinite alternate; }
 .bubba-flag-ticker[data-bubba-animated="false"] .bubba-ticker-word { white-space:normal; flex-shrink:1; max-width:100%; }
 .bubba-ticker-word { background:#03256C; padding:4px 8px; border-radius:4px; white-space:nowrap; }
