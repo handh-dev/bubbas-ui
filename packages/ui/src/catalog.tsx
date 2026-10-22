@@ -20,7 +20,7 @@ export const reviewCatalog = [...components.map((entry) => ({ id: entry.slug, na
 export function SectionDemo({ name }: { name: string }) {
   const brand = { label: 'Bubba’s · sample navigation', href: '#sample' };
   const links = [{ label: 'Sample destination', href: '#sample' }];
-  const products = [{ id: 'sample', title: 'Example product', href: '#sample', description: 'Presentation fixture · no real retail facts.', priceLabel: 'Price unavailable' }];
+  const products = [{ id: 'sample', title: 'Example product', href: '#sample', description: 'Presentation fixture · no real retail facts.', priceLabel: 'Price unavailable', badge: 'Example label' }];
   const locations = [{ id: 'sample', title: 'Example location', address: ['Example address · not a real stand'], hoursLabel: 'Published hours unavailable', statusLabel: 'Reported stand status unavailable', actions: links }];
   if (name === 'SiteHeader') return <SiteHeader brand={brand} links={links} />;
   if (name === 'SiteFooter') return <SiteFooter brand={brand} links={links} description="Sample footer" />;

@@ -129,6 +129,8 @@ Callers supply links, cleared image URIs/alt text, content, preformatted retail
 prices, addresses, published-hours labels and separately qualified reported
 stand-status labels. Missing optional facts stay absent; grids have explicit
 empty labels. No component fetches Core or infers facts from the clock.
+`ProductCard` and `ProductGrid` render caller-supplied badge text through the
+existing neutral `Badge`; an absent badge adds no label or inferred claim.
 `ContentSection headingLevel` preserves page hierarchy. Header links wrap visibly
 at narrow widths. `ProductDetail` gallery actions need a hydrated host; server
 consumers must retain their own checked gallery behavior until hydrated.

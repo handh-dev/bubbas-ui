@@ -4,6 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { Image, View, type ViewProps } from 'react-native';
 import { Card, Container, Inline, Stack } from './layout';
 import { Button } from './Button';
+import { Badge } from './content';
 import { Heading, Text } from './typography';
 import { Link } from './actions';
 import { cn } from '../internal/utils';
@@ -38,7 +39,7 @@ export function HeroSection({ title, description, eyebrow, image, imageNativeID,
 export interface ProductPresentation { id: string; title: string; href: string; image?: SectionImage; priceLabel?: string; description?: string; badge?: string; typeLabel?: string; gallery?: readonly SectionImage[]; videoHref?: string; actions?: readonly SectionAction[] }
 export interface ProductCardProps extends SectionProps { product: ProductPresentation }
 export function ProductCard({ product, className, ...props }: ProductCardProps) {
-  return <Card {...props} className={cn('gap-4', className)}>{product.image ? <Image source={{ uri: product.image.uri }} accessibilityLabel={product.image.alt} resizeMode="contain" className="h-48 w-full" /> : null}<Heading level={3}><Link href={product.href} textClassName="font-bold no-underline">{product.title}</Link></Heading>{product.description ? <Text tone="muted">{product.description}</Text> : null}{product.priceLabel ? <Text variant="label">{product.priceLabel}</Text> : null}</Card>;
+  return <Card {...props} className={cn('gap-4', className)}>{product.image ? <Image source={{ uri: product.image.uri }} accessibilityLabel={product.image.alt} resizeMode="contain" className="h-48 w-full" /> : null}{product.badge ? <Badge>{product.badge}</Badge> : null}<Heading level={3}><Link href={product.href} textClassName="font-bold no-underline">{product.title}</Link></Heading>{product.description ? <Text tone="muted">{product.description}</Text> : null}{product.priceLabel ? <Text variant="label">{product.priceLabel}</Text> : null}</Card>;
 }
 export interface ProductGridProps extends SectionProps { items: readonly ProductPresentation[]; emptyLabel?: string }
 export function ProductGrid({ items, emptyLabel = 'No products to display.', className, ...props }: ProductGridProps) {
