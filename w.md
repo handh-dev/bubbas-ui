@@ -14,7 +14,7 @@ below remain historical and do not qualify the 0.3.0 candidate.
 - [x] Import/pin initial Studio public-safe foundation 0.4.0, generate and verify custody.
 - [x] Qualify initial exact package through independent Next install/behavior and Expo exports.
 - [x] Qualify public docs routes, review workflows and phone/desktop layouts.
-- [x] Re-pin corrected Studio source eabb9397/website recipes and requalify package; final independent review pending.
+- [x] Re-pin corrected Studio source 78cb5bd2/scoped website recipes and requalify package; final independent review pending.
 - [ ] Fresh independent implementation/design review and consequential fixes.
 - [ ] Merge reviewed source, publish npm candidate, deploy Pages through gh-pages.
 - [ ] Verify exact public tarball and live documentation at final identities.

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { createWriteStream } from 'node:fs';
 import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
@@ -16,7 +16,8 @@ await mkdir(base, { recursive: true });
 const evidence = await mkdtemp(path.join(base, 'run-'));
 const fixtures = path.join(evidence, 'consumers');
 const mode = process.argv.includes('--artifact-only') ? 'artifact' : process.argv.includes('--native-only') ? 'native' : 'full';
-const report = { package: '@bubbasfw/ui', mode, checks: {}, nativeDeviceRuntime: 'not tested' };
+const sourceIdentity = () => ({ commit: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(), dirty: Boolean(execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8' }).trim()) });
+const report = { package: '@bubbasfw/ui', mode, sourceIdentity: sourceIdentity(), checks: {}, nativeDeviceRuntime: 'not tested' };
 const env = { ...process.env, CI: '1', NEXT_TELEMETRY_DISABLED: '1', EXPO_NO_TELEMETRY: '1' };
 
 async function run(command, args, cwd, name) {
@@ -83,8 +84,13 @@ async function checkArtifact() {
   assert.equal(tokens.systemVersion, manifest.bubba.systemVersion);
   assert.equal(tokens.foundationDigest, manifest.bubba.foundationDigest);
   assert.equal(tokens.brandVersion, manifest.bubba.brandRelease);
+  assert.equal(tokens.sourceCommit, manifest.bubba.sourceCommit, 'Packed source identity must match the generated tokens');
+  const lock = JSON.parse(await readFile(path.join(publishedRoot, 'foundations.lock.json'), 'utf8'));
+  const foundationManifest = JSON.parse(await readFile(path.join(publishedRoot, 'foundations/manifest.json'), 'utf8'));
+  assert.equal(manifest.bubba.sourceCommit, lock.sourceCommit, 'Packed package source must match lock');
+  assert.equal(manifest.bubba.sourceCommit, foundationManifest.source.commit, 'Packed package source must match Studio manifest');
   assert.deepEqual(Object.keys(tokens.themes.light).sort(), Object.keys(tokens.themes.dark).sort(), 'Both themes cover the same semantic roles');
-  report.checks.artifact = { filename: packed.filename, files: names, bytes: packed.size, shasum: packed.shasum, integrity: packed.integrity };
+  report.checks.artifact = { filename: packed.filename, files: names, bytes: packed.size, sha256: createHash('sha256').update(await readFile(tarball)).digest('hex'), shasum: packed.shasum, integrity: packed.integrity };
   return tarball;
 }
 
@@ -164,6 +170,7 @@ try {
     }
     report.checks.expo = { iosBundle: true, androidBundle: true, metadata, bundles };
   }
+  assert.deepEqual(sourceIdentity(), report.sourceIdentity, 'Source identity changed during package verification');
   report.status = 'passed';
 } catch (error) {
   report.status = 'failed';
@@ -173,6 +180,7 @@ try {
   if (report.status === 'passed') await rm(fixtures, { recursive: true, force: true });
   else report.failedFixtures = path.relative(root, fixtures);
   await writeFile(path.join(evidence, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
+  await writeFile(path.join(base, 'package-latest.json'), `${JSON.stringify({ ...report, evidence: path.relative(root, evidence) }, null, 2)}\n`);
   console.log(`${report.status}: ${path.relative(root, evidence)}/report.json`);
   if (report.error) console.error(report.error);
 }

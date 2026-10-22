@@ -6,13 +6,13 @@ and release time; it has no runtime dependency on Studio or a private backend.
 | Source | Version | SHA256 |
 | --- | --- | --- |
 | `bubbas-brand-studio/tokens/brand.tokens.json` | Brand release `1.0.0` | `4c478d32c7eeedb31de0de77873829a7b327235e301325bacde3dc672534ebc4` |
-| Studio public-safe `foundations.json` | System `0.4.0`, owner-authorized scope 2026-10-22 | `256ff37b35361afefaad4655aee5eb5c669901a4a2cd0a829a3953d4abce922f` |
+| Studio public-safe `foundations.json` | System `0.4.0`, owner-authorized scope 2026-10-22 | `87bd2d88507662443d7cc12a63b7c98c5cef6bfc53f43c5c4bc52fd9d65bf18f` |
 
 `packages/ui/src/tokens.ts` pins brand colors, spacing, radii, touch targets,
 layout and motion plus the complete light/dark semantic role maps. It is generated
 from the immutable release in `packages/ui/foundations/`, with file approval,
 rights and byte hashes in the original manifest. Source commit:
-`eabb939785648624888a35f5f4a8c4d4607fd858`. The lock and package.json metadata
+`78cb5bd276378e3da138a815859d5948aa4f7a98`. The lock and package.json metadata
 pin the same source digest. `pnpm verify:foundations` rejects stale generation,
 changed files, invalid contrast, role mismatch and custody drift. The working
 interface baseline uses light surfaces and neutral charcoal dark surfaces;

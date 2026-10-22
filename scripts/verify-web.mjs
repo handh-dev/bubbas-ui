@@ -64,6 +64,14 @@ export async function verifyWeb(url, evidenceDirectory) {
     await page.screenshot({ path: path.join(evidenceDirectory, 'next-desktop.png'), fullPage: true });
     await page.setViewportSize({ width: 390, height: 844 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Mobile layout must not overflow');
+    // RNW ScrollView clips offscreen children. Paint the whole native scroll
+    // surface after a viewport change before retaining a full-page specimen.
+    await page.getByTestId('pattern-appearance').scrollIntoViewIfNeeded();
+    await page.getByTestId('pattern-theme').getByRole('heading', { name: 'Campaign review', exact: true }).waitFor();
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+    await page.getByTestId('patterns-demo').screenshot({ path: path.join(evidenceDirectory, 'next-mobile-patterns.png') });
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     await page.screenshot({ path: path.join(evidenceDirectory, 'next-mobile.png'), fullPage: true });
     assert.deepEqual(errors, [], 'No browser runtime errors');
     const result = { url, paint, compact, focus, pointerPress: true, keyboardPress: true, disabled: true, loading: true, mobileWidth: 390, gallery, patterns, overlayFixture, errors };

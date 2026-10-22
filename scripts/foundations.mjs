@@ -198,6 +198,7 @@ const manifest = await json(path.join(ui, 'package.json'));
 assert.equal(manifest.bubba.systemVersion, lock.systemVersion, 'Package systemVersion gate');
 assert.equal(manifest.bubba.brandRelease, lock.brandRelease, 'Package brandRelease gate');
 assert.equal(manifest.bubba.foundationDigest, lock.foundationDigest, 'Package foundationDigest gate');
+assert.equal(manifest.bubba.sourceCommit, lock.sourceCommit, 'Package sourceCommit gate');
 const generated = generate(validated);
 const target = path.join(ui, 'src/tokens.ts');
 if (process.argv.includes('--check')) assert.equal(await readFile(target, 'utf8'), generated, 'Generated tokens stale: run pnpm sync:foundations');
