@@ -209,7 +209,10 @@ Catalog SVG fixtures use fully encoded data URIs and must decode successfully.
 
 ## Annotated web candidate — 0.6.0
 
-Candidate only, awaiting owner design review and consumer release qualification.
+The owner approved the exact 0.6.0 design, which remains unchanged in the 0.6.1
+compatibility patch. 0.6.0 was published, then deprecated after an existing web
+form/SSR gate exposed dropped Button caller styles. npm latest returned to 0.5.0;
+0.6.1 requires exact patch review and consumer qualification before publication.
 The pinned Studio 0.5.0 foundation and default/native control variants remain.
 Marketing buttons accept `appearance="marketing"`; secondary actions use original
 blue. SectionAction accepts optional tone and social icon; absent facts remain absent.
@@ -251,3 +254,13 @@ the 44px pause/play control has its own flow slot. Existing caller copy and orde
 are unchanged. Only the text track scrolls after web hydration; hover, focus and
 manual pause stop it. No-JS, native and reduced-motion layouts wrap the complete
 sequence, allowing the band to grow. There are no duplicate announcements.
+
+### Web Pressable style forwarding
+
+Button forwards the original caller style on web and default native controls.
+Only native marketing controls compose the existing native shadow. The web
+adapter retains object/array styles and resolves callback styles after NativeWind
+class merging with the actual RNW interaction state. The existing web form gate
+covers SSR/RTL styles, pointer/keyboard state, focus, inactive states and forms.
+Run `pnpm verify:web:forms` in addition to package, font, consumer and docs gates;
+a package build or Next gallery does not establish this distinct host contract.

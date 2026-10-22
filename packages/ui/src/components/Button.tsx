@@ -95,7 +95,13 @@ export const Button = forwardRef<ElementRef<typeof Pressable>, ButtonProps>(
         {...{dataSet:{...props.dataSet, ...(appearance === 'marketing' ? {bubbaAction: variant,bubbaActionSize:size} : {})}}}
         {...(Platform.OS === 'web' ? { type, href: isDisabled ? undefined : href,
           hrefAttrs: href && external ? { target: '_blank', rel: 'noopener noreferrer' } : undefined } : {})}
-        style={(state)=>[appearance === 'marketing' && Platform.OS !== 'web' && !isDisabled && (variant==='primary'||variant==='secondary') ? {shadowColor:variant==='secondary'?tokens.colors.blue:tokens.colors.red,shadowOpacity:.22,shadowRadius:9,shadowOffset:{width:0,height:5},elevation:4}:undefined,typeof style==='function'?style(state):style]}
+        style={appearance === 'marketing' && Platform.OS !== 'web' ? (state) => [
+          !isDisabled && (variant === 'primary' || variant === 'secondary')
+            ? { shadowColor: variant === 'secondary' ? tokens.colors.blue : tokens.colors.red,
+                shadowOpacity: .22, shadowRadius: 9, shadowOffset: { width: 0, height: 5 }, elevation: 4 }
+            : undefined,
+          typeof style === 'function' ? style(state) : style,
+        ] : style}
         accessibilityRole={href ? 'link' : 'button'}
         onPress={(event) => {
           onPress?.(event);

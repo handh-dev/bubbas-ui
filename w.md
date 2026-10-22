@@ -1,3 +1,16 @@
+## Current compatibility patch — 0.6.1 · October 22, 2026
+
+0.6.0's approved archive was published unchanged, then deprecated after the
+existing web form/SSR gate exposed dropped Button caller styles. npm latest was
+restored to 0.5.0, and public reference/app activations were held. PR12's release
+docs were closed as superseded; its claims were not merged or deployed.
+
+0.6.1 preserves the approved design and foundation with a minimal style-forwarding
+patch. Run `pnpm verify:web:forms` as a distinct required host gate alongside
+`pnpm verify`, full `pnpm verify:package` and `pnpm verify:docs`. Qualify and review
+the exact clean archive; do not publish or deploy it before exact owner approval.
+See [the patch candidate record](docs/releases/0.6.1-candidate.md).
+
 ## Current web release — 0.5.0 · October 22, 2026
 
 UI 0.5.0 is owner-approved and published. Read [the exact release record](docs/releases/0.5.0.md)
