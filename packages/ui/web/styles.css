@@ -102,7 +102,7 @@
  .bubba-footer-layout { display:grid!important; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
  .bubba-footer-brand,.bubba-footer-season { grid-column:1 / -1; width:100%; }
  .bubba-footer-group { min-width:0; }
- .bubba-pdp-main-image { height:min(60vw,280px); }
+ .bubba-pdp-main-image { height:min(60vw,280px)!important; }
  .bubba-pdp-thumbnails { gap:8px; }
 }
 
