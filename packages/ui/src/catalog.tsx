@@ -1,4 +1,7 @@
 'use client';
+import { Icon } from './components/Icon';
+import { FlagTicker, CampaignSection, SocialSection } from './components/campaigns';
+import { Inline } from './components/layout';
 import { View } from 'react-native';
 import { components } from './showcase/catalog';
 import { ComponentDemo } from './showcase/Demo';
@@ -14,7 +17,7 @@ export { PatternsDemo } from './showcase/PatternsDemo';
 export { renderFoundationsDemo } from './showcase/FoundationsDemo';
 export { renderFormsDemo } from './showcase/FormsDemo';
 export { renderFeedbackDemo } from './showcase/FeedbackDemo';
-export const sectionCatalog = ['SiteHeader', 'SiteFooter', 'HeroSection', 'ContentSection', 'ProductCard', 'ProductGrid', 'CategoryCard', 'CategoryGrid', 'LocationCard', 'LocationGrid', 'ProductDetail', 'PromotionBanner'] as const;
+export const sectionCatalog = ['SiteHeader', 'SiteFooter', 'HeroSection', 'ContentSection', 'ProductCard', 'ProductGrid', 'CategoryCard', 'CategoryGrid', 'LocationCard', 'LocationGrid', 'ProductDetail', 'PromotionBanner', 'CampaignSection', 'SocialSection', 'FlagTicker', 'Icon'] as const;
 export const reviewCatalog = [...components.map((entry) => ({ id: entry.slug, name: entry.name, category: entry.category })), ...sectionCatalog.map((name) => ({ id: name, name, category: 'Sections' })), { id: 'patterns', name: 'Task patterns', category: 'Patterns' }];
 /** Fixtures are visibly examples and never imply catalog, prices, hours or availability. */
 export function SectionDemo({ name, variant = 'default' }: { name: string; variant?: 'default' | 'marketing' }) {
@@ -23,11 +26,15 @@ export function SectionDemo({ name, variant = 'default' }: { name: string; varia
   const links = [{ label: 'Sample destination', href: '#sample' }];
   const products = [{ id: 'sample', title: 'Example product', href: '#sample', description: 'Presentation fixture · no real retail facts.', priceLabel: 'Price unavailable', badge: 'Example label', image: variant === 'marketing' ? sampleImage : undefined }];
   const locations = [{ id: 'sample', title: 'Example location', address: ['Example address · not a real stand'], hoursLabel: 'Published hours unavailable', statusLabel: 'Reported stand status unavailable', actions: links }];
+  if (name === 'Icon') return <Inline>{(['search','menu','close','instagram','facebook','sparkles','pause','play','arrowRight'] as const).map(name=><Icon key={name} name={name} accessibilityLabel={name}/>)}</Inline>;
+  if (name === 'CampaignSection') return <CampaignSection title="Example campaign" highlight="250" description="Synthetic composition for review; not a live promotion." badges={['Example badge A','Example badge B','Example badge C','Example badge D']}/>;
+  if (name === 'SocialSection') return <SocialSection title="Example social links" description="Example destinations only." links={[{label:'Instagram',href:'#sample',icon:'instagram'},{label:'Facebook',href:'#sample-facebook',icon:'facebook'}]}/>;
+  if (name === 'FlagTicker') return <FlagTicker items={['Example campaign','Example destination','Synthetic review copy']}/>;
   if (name === 'SiteHeader') return <SiteHeader variant={variant} brand={brand} links={links} announcement={variant === 'marketing' ? 'Example announcement · no live campaign' : undefined} />;
   if (name === 'SiteFooter') return <SiteFooter variant={variant} brand={brand} links={links} description="Sample footer" />;
   if (name === 'ProductDetail') return <ProductDetail variant={variant} product={products[0]} />;
   if (name === 'HeroSection') return <HeroSection variant={variant} logoImage={variant === 'marketing' ? sampleImage : undefined} image={variant === 'marketing' ? sampleImage : undefined} title="Make a memory." description="Evergreen sample copy for owner review." action={links[0]} />;
-  if (name === 'PromotionBanner') return <PromotionBanner variant={variant} title="Sample campaign message" description="No live promotion, price or expiry is implied." action={links[0]} />;
+  if (name === 'PromotionBanner') return <PromotionBanner variant={variant} emphasis="sparkler" title="Sample campaign message" description="No live promotion, price or expiry is implied." action={links[0]} />;
   if (name === 'LocationCard') return <LocationCard variant={variant} location={locations[0]} />;
   if (name === 'LocationGrid') return <LocationGrid variant={variant} items={locations} />;
   if (name === 'ProductCard') return <ProductCard variant={variant} product={products[0]} />;

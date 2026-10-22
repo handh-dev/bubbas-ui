@@ -4,7 +4,7 @@ Bubba’s universal component library for React Native, Expo and React Native We
 All components use native primitives and NativeWind. React and platform runtimes
 are peers, with no Base UI, Radix UI or DOM component implementation.
 
-Version 0.5.0 includes 32 controls, 12 reusable sections, scoped light/dark/system
+Candidate 0.6.0 includes 32 controls, the shared Icon library, 15 reusable sections, scoped light/dark/system
 themes and shared design tokens. Expo and the existing Next.js universal example
 use the root entry; Vite and Astro use the browser entry described below.
 
@@ -53,7 +53,7 @@ Baseline: React 19.2.3, React Native 0.86.3, React Native Web 0.21.4,
 NativeWind 4.2.7, Tailwind 3.4.17. Install alongside the app’s compatible peers:
 
 ```sh
-pnpm add @bubbasfw/ui@0.5.0 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.6.0 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -151,7 +151,7 @@ step, with no automatic npm release on push or merge.
 ### Vite / Astro / server-rendered web hosts
 
 ```sh
-pnpm add @bubbasfw/ui@0.5.0 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
+pnpm add @bubbasfw/ui@0.6.0 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
 ```
 
 For browser hosts that cannot parse React Native's native entry, import the
@@ -188,3 +188,21 @@ throughout. Native form submit/reset intent is supported through `/web`'s Button
 Hydrate the shared SiteHeader and other interactive sections with the same data
 to enable menus and galleries. Hosts retain their own routing, authentication,
 data and actions.
+
+## Annotated web candidate 0.6.0
+
+This is an unreleased design candidate. Foundation system 0.5.0 and its immutable
+source/digest remain unchanged. Marketing variants now use the original blue,
+compact red/blue actions with hover glow, centered desktop navigation, full-height
+white hero, equal compact product cards, and caller-labelled gold badges.
+`CampaignSection`, `SocialSection` and `FlagTicker` take caller-owned content;
+`PromotionBanner emphasis="sparkler"` highlights a supplied offer. No facts are
+inferred. Motion stops under reduced motion and ticker motion has a pause control.
+
+`Icon` uses pinned Lucide 1.61.0 control icons and Simple Icons 16.35.0 social
+marks, rendered through RN Image with 96px transparent sources. Use 24px controls
+and 22px social marks inside targets at least 44px wide/high. Provide accessible
+labels on the parent control, or `accessibilityLabel` for a standalone image.
+Vector sources, licenses and SHA256 hashes ship under `icons/`; the reproducible
+ImageMagick recipe is `scripts/build-icons.mjs`. Social trademarks remain with
+their owners. This subset introduces no native SVG peer or font dependency.

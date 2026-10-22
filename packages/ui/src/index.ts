@@ -28,3 +28,7 @@ export type { BubbaTokens } from './tokens';
 
 export * from './components/sections';
 export * from './catalog';
+
+export { Icon } from './components/Icon';
+export type { IconProps, IconName } from './components/Icon';
+export * from './components/campaigns';

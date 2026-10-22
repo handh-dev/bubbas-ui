@@ -1,7 +1,7 @@
 # @bubbasfw/ui
 
 Bubba’s universal design system for Next.js, Vite, Astro, Expo, iOS and Android.
-`@bubbasfw/ui@0.5.0` contains 32 controls, 12 reusable sections and three task
+`@bubbasfw/ui@0.6.0` contains 32 controls, the shared Icon library, 15 reusable sections and three task
 patterns built with React Native primitives and NativeWind, plus semantic
 themes, a visual review workbench and complete Web/Expo galleries.
 
@@ -123,7 +123,7 @@ Next.js universal example.
 ### Vite and Astro
 
 ```sh
-pnpm add @bubbasfw/ui@0.5.0 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
+pnpm add @bubbasfw/ui@0.6.0 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
 ```
 
 Import controls and sections from `@bubbasfw/ui/web` and load
@@ -154,7 +154,7 @@ The tested example baseline is React 19.2.3, React Native 0.86.3, React Native W
 versions. NativeWind v5 and Tailwind v4 require a separate migration.
 
 ```sh
-pnpm add @bubbasfw/ui@0.5.0 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.6.0 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -242,3 +242,21 @@ Official setup references:
 
 For Expo SDK57 builds with Xcode27/iOS27, follow the targeted
 [scene-lifecycle setup](docs/platform-notes.md).
+
+## Annotated web candidate 0.6.0
+
+This is an unreleased design candidate. Foundation system 0.5.0 and its immutable
+source/digest remain unchanged. Marketing variants now use the original blue,
+compact red/blue actions with hover glow, centered desktop navigation, full-height
+white hero, equal compact product cards, and caller-labelled gold badges.
+`CampaignSection`, `SocialSection` and `FlagTicker` take caller-owned content;
+`PromotionBanner emphasis="sparkler"` highlights a supplied offer. No facts are
+inferred. Motion stops under reduced motion and ticker motion has a pause control.
+
+`Icon` uses pinned Lucide 1.61.0 control icons and Simple Icons 16.35.0 social
+marks, rendered through RN Image with 96px transparent sources. Use 24px controls
+and 22px social marks inside targets at least 44px wide/high. Provide accessible
+labels on the parent control, or `accessibilityLabel` for a standalone image.
+Vector sources, licenses and SHA256 hashes ship under `icons/`; the reproducible
+ImageMagick recipe is `scripts/build-icons.mjs`. Social trademarks remain with
+their owners. This subset introduces no native SVG peer or font dependency.
