@@ -18,7 +18,7 @@ export const sectionCatalog = ['SiteHeader', 'SiteFooter', 'HeroSection', 'Conte
 export const reviewCatalog = [...components.map((entry) => ({ id: entry.slug, name: entry.name, category: entry.category })), ...sectionCatalog.map((name) => ({ id: name, name, category: 'Sections' })), { id: 'patterns', name: 'Task patterns', category: 'Patterns' }];
 /** Fixtures are visibly examples and never imply catalog, prices, hours or availability. */
 export function SectionDemo({ name, variant = 'default' }: { name: string; variant?: 'default' | 'marketing' }) {
-  const sampleImage = { uri: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="280"%3E%3Crect width="400" height="280" fill="%23d9e8fb"/%3E%3Ctext x="40" y="150" font-size="36"%3ESAMPLE ART%3C/text%3E%3C/svg%3E', alt: 'Sample artwork fixture' };
+  const sampleImage = { uri: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="280"><rect width="400" height="280" fill="#d9e8fb"/><text x="40" y="150" font-size="36">SAMPLE ART</text></svg>'), alt: 'Sample artwork fixture' };
   const brand = { image: variant === 'marketing' ? sampleImage : undefined, label: 'Bubba’s · sample navigation', href: '#sample' };
   const links = [{ label: 'Sample destination', href: '#sample' }];
   const products = [{ id: 'sample', title: 'Example product', href: '#sample', description: 'Presentation fixture · no real retail facts.', priceLabel: 'Price unavailable', badge: 'Example label', image: variant === 'marketing' ? sampleImage : undefined }];

@@ -196,3 +196,10 @@ auxiliary navigation destinations remain available in the menu. The compact
 header bounds semantic navigation against host-wide `nav` rules. Link's optional
 `textVariant` selects its shared text scale; marketing captions avoid inheriting
 the responsive body scale. Existing Link defaults are unchanged.
+
+Marketing location-card theme wrappers retain the grid item's minimum-width and
+flex constraints. Product detail columns and actions stack within the available
+phone width; desktop retains the image/text columns. Hero actions follow the same
+phone constraint. Browser qualification measures every visible interactive
+control's bounds, since an app's overflow clipping can hide a layout failure.
+Catalog SVG fixtures use fully encoded data URIs and must decode successfully.
