@@ -116,6 +116,8 @@ export async function verifyGallery(page) {
   assert.ok(
     (await page.getByTestId("demo-select").textContent()).includes("Large"),
   );
+  // Shared overlays retain their focus trap during the short exit animation.
+  await page.getByTestId("demo-select-dialog").waitFor({ state: "detached" });
   assert.equal(await page.getByTestId("demo-select-dialog").count(), 0);
   await page.getByTestId("demo-select").click();
   await readyOverlay(page, "demo-select-dialog");

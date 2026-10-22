@@ -23,7 +23,7 @@ export function SocialLinks({links,color='#131B23'}:{links:readonly SectionActio
 }
 export function MarketingMotionControl({ dark=false }: { dark?:boolean }) {
  const [motion,toggle,reduced]=useMarketingMotion();
- return <Pressable accessibilityRole="switch" accessibilityLabel={reduced?"Decorative motion; disabled by system reduced motion":"Decorative motion"} accessibilityState={{checked:motion,disabled:reduced}} disabled={reduced} onPress={toggle} className={cn('bubba-motion-control min-h-11 self-start flex-row items-center gap-2 rounded border border-transparent px-2',focusRing,dark&&'bubba-motion-control-dark focus:border-white web:focus-visible:outline-white')}><Icon name={motion?'pause':'play'} size={16} color={dark?'#FFFFFF':'#03256C'}/><Text variant="caption" className={cn('text-xs font-bold',dark?'text-white':'text-bubba-navy')}>{motion?'Motion on':'Motion off'}</Text></Pressable>;
+ return <Pressable accessibilityRole="switch" accessibilityLabel={reduced?"Decorative motion; disabled by system reduced motion":"Decorative motion"} accessibilityState={{checked:motion,disabled:reduced}} aria-checked={motion} aria-disabled={reduced} disabled={reduced} onPress={toggle} className={cn('bubba-motion-control min-h-11 self-start flex-row items-center gap-2 rounded border border-transparent px-2',focusRing,dark&&'bubba-motion-control-dark focus:border-white web:focus-visible:outline-white')}><Icon name={motion?'pause':'play'} size={16} color={dark?'#FFFFFF':'#03256C'}/><Text variant="caption" className={cn('text-xs font-bold',dark?'text-white':'text-bubba-navy')}>{motion?'Motion on':'Motion off'}</Text></Pressable>;
 }
 function MarketingAnnouncement({copy}:{copy:string}) {
  const [motion]=useMarketingMotion();
