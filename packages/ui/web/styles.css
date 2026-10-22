@@ -11,7 +11,7 @@
 [data-bubba-action="secondary"]:not([aria-disabled="true"]):hover { box-shadow:0 4px 16px #0866FF47; transform:translateY(-1px); }
 [data-bubba-action]:not([aria-disabled="true"]):active { transform:translateY(1px); }
 .bubba-announcement { background-image:linear-gradient(110deg,#D40000 0 27%,#FFFFFF 27% 34%,#0866FF 34% 66%,#FFFFFF 66% 73%,#D40000 73%); }
-.bubba-announcement-copy { background:#03256C; border-radius:4px; padding:4px 12px; max-width:100%; }
+.bubba-announcement-copy { background:#03256C!important; border-radius:4px; padding:4px 12px; max-width:100%; }
 .bubba-header-row { min-height:80px; }
 .bubba-nav-link { position:relative; min-height:44px; padding:0 !important; }
 .bubba-nav-link::after { content:""; position:absolute; height:2px; bottom:9px; left:0; right:0; background:#D40000; transform:scaleX(0); transform-origin:left; transition:transform 180ms ease; }
