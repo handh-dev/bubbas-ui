@@ -168,3 +168,24 @@ share the host RNW ESM contexts. Node SSR selects the default CJS-backed context
 Import package subpaths rather than aliasing direct dist files across environments.
 The packed browser fixture also checks that inherited RTL logical padding agrees
 with an upstream host Pressable; the SSR fixture checks the same inherited RTL.
+
+### Public marketing variants
+
+Sections accept `variant="marketing"` for the existing public composition. The
+normal variant retains its prior layout. SiteHeader owns the compact announcement
+and desktop navigation plus an accessible mobile Dialog; Astro hosts hydrate the
+actual header with identical data to enable its menu. Shared Dialog supplies
+Escape dismissal, focus containment and focus return. Caller search controls and
+real navigation links remain caller supplied. The footer retains indexable links
+when scripting is unavailable.
+
+HeroSection accepts caller-owned `logoImage` and `actions`. Its title remains an
+indexable, visually hidden H1 when the original logo is shown. The caller supplies
+cleared artwork; this package distributes no brand image or licensed font.
+ContentSection supplies the navy/blue route title band; Product/Category grids
+use four desktop columns and two phone columns, with full-width square artwork.
+ProductDetail places artwork before text and uses image thumbnails. SiteFooter
+accepts `linkGroups`, `socialLinks` and `copyright`, with children for caller-owned
+season information. Missing facts remain absent. Every existing catalog section
+shows both variants using clearly labelled synthetic fixtures under the same
+stable component ID. Marketing remains a new review candidate until owner review.
