@@ -96,6 +96,8 @@ coordinates. Only measured visible viewport tiles are requested; there is no
 prefetch/offline store. Respect the selected provider's current policy, default
 browser caching and referrer. Automated checks stub provider imagery. Marker
 links have explicit direction labels and only fully visible targets are focusable.
+Visual labels reveal on hover/keyboard focus, avoiding overlapping city/address
+text where several real stores cluster; all pins and full accessible names remain.
 Loading and partial tile failure are explicit; Retry map retries current failures.
 Server/no-script output requests no guessed viewport tiles and points to the
 always-readable location directory. Native retains a direction-link fallback.
