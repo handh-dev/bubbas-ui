@@ -13,11 +13,11 @@ export async function createFocusMarqueeFixture({packageRoot=process.env.MARKETI
 const require=createRequire(import.meta.url),{build}=createRequire(require.resolve('tsup'))('esbuild');
 const root=process.cwd(),pkg=path.resolve(packageRoot),out=path.resolve(evidence);
 let artifactIdentity=await browserArtifactIdentity(pkg);
-const defaults={motion:preset,edgeBlur:preset==='linear'?0:3};
+const defaults=preset==='linear'?{motion:preset,edgeBlur:0,spacing:20}:{motion:preset};
 await mkdir(out,{recursive:true});
 const labels=['16 DFW LOCATIONS','PRICE BEAT GUARANTEE','FREE POP-ITS W/ FOLLOW','OPEN DAILY THROUGH JULY 5TH','AMERICA’S 250TH ANNIVERSARY','BUY HERE LIGHT HERE — $30/CAR'];
 const realLabels=['16 DFW Locations','Price Beat Guarantee','Follow @bubbas_fireworks For Free Pop-Its','Open Daily Through July 5th',"America’s 250th Anniversary",'Buy Here Light Here — $30/Car'];
-const variants={real:{items:realLabels},max:{items:realLabels,speed:240,spacing:20,centerEmphasis:{scale:1.35,lift:16,range:1}},longmax:{items:['ExtraordinarilyLongUnbrokenCampaignFact'.repeat(6),...labels],speed:240,centerEmphasis:{scale:1.35,lift:16,range:1}},normal:{items:labels},tiny:{items:['A'],speed:240,spacing:12},two:{items:['One','Two'],speed:140,direction:'right',spacing:40,centerEmphasis:{scale:1.25,lift:8,range:.4},badgeAppearance:{size:'md',shape:'rounded',textTone:'red'}},long:{items:['ExtraordinarilyLongUnbrokenCampaignFact'.repeat(6),...labels],speed:70},empty:{items:[]},static:{items:labels,speed:0}};
+const variants={real:{items:realLabels},max:{items:realLabels,speed:240,spacing:20,edgeBlur:4,centerEmphasis:{scale:1.35,lift:16,range:1}},longmax:{items:['ExtraordinarilyLongUnbrokenCampaignFact'.repeat(6),...labels],speed:240,edgeBlur:4,centerEmphasis:{scale:1.35,lift:16,range:1}},normal:{items:labels},tiny:{items:['A'],speed:240,spacing:12},two:{items:['One','Two'],speed:140,direction:'right',spacing:40,centerEmphasis:{scale:1.25,lift:8,range:.4},badgeAppearance:{size:'md',shape:'rounded',textTone:'red'}},long:{items:['ExtraordinarilyLongUnbrokenCampaignFact'.repeat(6),...labels],speed:70},empty:{items:[]},static:{items:labels,speed:0}};
 const {FocusMarquee,ThemeProvider,MarketingMotionControl}=await import(pathToFileURL(path.join(pkg,'dist/web.js')));
 const tree=(config)=>React.createElement(ThemeProvider,{fontFamily:'Montserrat'},React.createElement(FocusMarquee,{...defaults,...config}),React.createElement(MarketingMotionControl));
 const markups=Object.fromEntries(Object.entries(variants).map(([name,config])=>[name,renderToStaticMarkup(tree(config))]));const sheet=StyleSheet.getSheet();

@@ -245,3 +245,10 @@ soft outer edges. Shared default is now a finite cadence/preset sequence, keepin
 linear as an explicit option and all prior footprint/motion/static contracts.
 Actual recording and serial frames are required before freezing this local
 proposal; no publication/deployment is authorized.
+
+## FocusMarquee candidate15 — local fast flow
+
+Short centered rests, denser actual geometry and gentle outer-edge blur refine
+the same shared finite handoff engine. Preserve14 original artifacts/previews;
+compare actual motion/gaps/filter values against14 before freezing this local
+proposal. Publication and deployment remain paused.

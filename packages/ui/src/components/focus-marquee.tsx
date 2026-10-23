@@ -21,7 +21,7 @@ export interface FocusMarqueeProps extends Omit<ViewProps, 'children'> {
   spring?: 'gentle' | 'poppy';
   /** Decorative moving pills only; canonical/static content is always clear. */
   edgeBlur?: number;
-  /** Space between pills, including the last-to-first seam. */
+  /** Minimum visible edge gap, including the last-to-first seam. */
   spacing?: number;
   badgeAppearance?: { size?: 'sm' | 'md'; shape?: 'pill' | 'rounded'; textTone?: 'navy' | 'red' };
   centerEmphasis?: { scale?: number; lift?: number; range?: number };
@@ -48,21 +48,21 @@ interface WebRuntime {
 const bounded=(value:number|undefined,fallback:number,min:number,max:number)=>Number.isFinite(value)?Math.min(max,Math.max(min,value!)):fallback;
 
 /** Endless web pill lane. Native, SSR and motion-off keep the complete static copy. */
-export function FocusMarquee({items,speed=38,direction='left',motion:motionMode='spring',cadence=1.6,spring='poppy',edgeBlur=3,spacing=20,badgeAppearance,centerEmphasis,className,style,...props}:FocusMarqueeProps) {
+export function FocusMarquee({items,speed=38,direction='left',motion:motionMode='spring',cadence=.9,spring='poppy',edgeBlur=1,spacing=8,badgeAppearance,centerEmphasis,className,style,...props}:FocusMarqueeProps) {
   const [motion]=useMarketingMotion();
   const [copies,setCopies]=useState(1);
   const root=useRef<ElementRef<typeof View>>(null);
   const phase=useRef(0);
-  const velocity=bounded(speed,38,0,240),gap=bounded(spacing,20,0,96);
-  const scale=bounded(centerEmphasis?.scale,motionMode==='spring'?1.2:1.12,1,1.35),lift=bounded(centerEmphasis?.lift,4,0,16),range=bounded(centerEmphasis?.range,.5,.1,1);
-  const beat=bounded(cadence,1.6,1,3),blur=bounded(edgeBlur,3,0,4);
-  const stretch=motionMode==='spring'?(spring==='gentle'?.04:.08):0;
-  const nudge=motionMode==='spring'?(spring==='gentle'?3:6):0;
+  const velocity=bounded(speed,38,0,240),gap=bounded(spacing,8,0,96);
+  const scale=bounded(centerEmphasis?.scale,motionMode==='spring'?1.16:1.12,1,1.35),lift=bounded(centerEmphasis?.lift,4,0,16),range=bounded(centerEmphasis?.range,.5,.1,1);
+  const beat=bounded(cadence,.9,.8,3),blur=bounded(edgeBlur,1,0,4);
+  const stretch=motionMode==='spring'?(spring==='gentle'?.03:.06):0;
+  const nudge=motionMode==='spring'?(spring==='gentle'?1:2):0;
   const popLift=motionMode==='spring'?(spring==='gentle'?3:6):0;
-  const peakX=scale*(1+stretch),peakY=scale*(1+stretch*.5),sideReserve=nudge+blur*3;
+  const peakX=scale*(1+stretch),peakY=scale*(1+stretch*.5),sideReserve=nudge;
   const moving=velocity>0;
   const hasStarted=useRef(false),measurementSignature=useRef('');
-  const sequence=useRef({from:0,to:0,elapsed:0,cadence:beat,travel:Math.min(.72,beat*.42),travelling:false,source:0,target:0,sign:1});
+  const sequence=useRef({from:0,to:0,elapsed:0,cadence:beat,travel:beat-.14,travelling:false,source:0,target:0,sign:1});
   const motionSettings=useRef({velocity,direction,cadence:beat});
   // Changing positive speed/direction does not restart layout or the frame loop.
   useEffect(()=>{motionSettings.current={velocity,direction,cadence:beat};},[velocity,direction,beat]);
@@ -93,7 +93,7 @@ export function FocusMarquee({items,speed=38,direction='left',motion:motionMode=
       if(sign<0&&center>=logical-.01)center-=period;
       return{position:center-width/2,index};
     };
-    const resetSequence=()=>{const settings=motionSettings.current;sequence.current={from:phase.current,to:phase.current,elapsed:0,cadence:settings.cadence,travel:Math.min(.72,settings.cadence*.42),travelling:false,source:nearest(phase.current),target:nearest(phase.current),sign:settings.direction==='right'?-1:1};};
+    const resetSequence=()=>{const settings=motionSettings.current;sequence.current={from:phase.current,to:phase.current,elapsed:0,cadence:settings.cadence,travel:settings.cadence-.14,travelling:false,source:nearest(phase.current),target:nearest(phase.current),sign:settings.direction==='right'?-1:1};};
     const paint=()=>{
       const offset=-modulo(phase.current);
       track.style.transform=`translate3d(${offset}px,0,0)`;
@@ -114,7 +114,7 @@ export function FocusMarquee({items,speed=38,direction='left',motion:motionMode=
         const shift=-state.sign*nudge*pulse*outgoing;
         item.node.style.transform=`translate3d(${shift}px,${-lift*focus-popLift*rebound*incoming}px,0) scale(${x},${y})`;
         // The central region stays crisp; softness grows only in the outer lane.
-        const soft=smooth((Math.abs(position)/Math.max(1,width/2)-.45)/.55);
+        const soft=smooth((Math.abs(position)/Math.max(1,width/2)-.75)/.25);
         item.node.style.filter=`blur(${blur*soft}px)`;
       }
     };
@@ -137,9 +137,10 @@ export function FocusMarquee({items,speed=38,direction='left',motion:motionMode=
           }
           if(state.travelling){
             const u=Math.max(0,Math.min(1,(state.elapsed-hold)/state.travel));
-            const distance=state.to-state.from,over=Math.min(spring==='gentle'?4:8,Math.abs(distance)*.04)*state.sign;
+            const distance=state.to-state.from,over=Math.min(spring==='gentle'?3:5,Math.abs(distance)*.04)*state.sign;
             // One bounded overshoot with zero-velocity endpoints, then settle.
-            phase.current=u<.72?state.from+(distance+over)*smooth(u/.72):state.to+over*(1-smooth((u-.72)/.28));
+            const settle=Math.min(.12,state.travel*.18),arrival=1-settle/state.travel;
+            phase.current=u<arrival?state.from+(distance+over)*smooth(u/arrival):state.to+over*(1-smooth((u-arrival)/(1-arrival)));
           }
           if(state.elapsed>=state.cadence){const remainder=state.elapsed-state.cadence;phase.current=state.to;resetSequence();sequence.current.elapsed=remainder;}
         }

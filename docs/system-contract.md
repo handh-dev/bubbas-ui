@@ -370,7 +370,7 @@ backward compatible. No stars, separators or gradient enter the new component.
 `items` is readonly plain text; no links or input controls are accepted. `speed`
 is constant CSS pixels/second (default38, bounded0–240; zero is static), `direction`
 is left/right, and `spacing` is the minimum visible edge gap, including the
-last-to-first seam (default20px,0–96). Each wrapper reserves its pill’s maximum
+last-to-first seam (default8px,0–96). Each wrapper reserves its pill’s maximum
 scaled width; away from center the visible gap is larger.
 `badgeAppearance` selects sm/md, pill/rounded and navy/red text. `centerEmphasis`
 selects scale1–1.35(default1.12), lift0–16px(default4), and range0.1–1 of viewport
@@ -399,8 +399,8 @@ The owner superseded continuous ticker pacing with a pop/stretch handoff rhythm.
 `motion="spring"` is now the default: one fact is centered and readable, then the
 next arrives with a brief stretch/pop as the outgoing pill compresses and gives
 way. Each handoff has one small bounded overshoot and settles with zero-velocity
-endpoints. `cadence` is seconds per fact (default1.6, bounded1–3); travel takes
-about0.67s by default, with a calm readable remainder. Distance and velocity vary
+endpoints. `cadence` is seconds per fact (default0.90, bounded0.8–3); travel takes
+0.76s by default, ending with a0.12s settle and a short0.14s centered rest. Distance and velocity vary
 with label widths; cadence is the same per fact. `spring="poppy"|"gentle"` chooses
 a bounded presentation preset, rather than exposing physics internals.
 
@@ -410,15 +410,16 @@ option (default38). Positive speed is intentionally ignored by spring cadence;
 and direction stay position-continuous; spring direction is chosen at the next
 handoff and cadence updates apply to the next cycle, preserving the drawn phase.
 
-Spring default center emphasis is1.20 with peak transient horizontal stretch×1.08
-and a short outgoing nudge≤6px. Optional existing centerEmphasis settings remain;
-maximum combined scaleX/Y, lift, nudge and blur spread are reserved before measuring
-the repeating group. Configured spacing remains a minimum visible edge gap.
+Spring default center emphasis is1.16 with peak transient horizontal stretch×1.06
+and a short outgoing nudge≤2px. Optional existing centerEmphasis settings remain;
+Maximum combined scaleX/Y and nudge are reserved before measuring the repeating
+group; blur is decorative and adds no horizontal gap. Vertical inset also reserves
+lift and filter spread. Configured spacing remains a minimum visible edge gap.
 Long pills are capped using the complete peak footprint so their full text can
 reach center without clipping. Empty/single/two-item sequences use the same loop.
 
-`edgeBlur` is0–4px (default3). Only decorative moving pills soften gradually in
-the outer lane; the central region stays crisp. No filter touches canonical copy.
+`edgeBlur` is0–4px (default1). Only decorative moving pills soften gradually in
+the outermost25% of the center-to-edge distance; the central region stays crisp. No filter touches canonical copy.
 Stored/OS motion-off, no-JavaScript and native show every fact once in clear
 centered wrapping pills. Cleanup removes transforms and filters, and hidden/offscreen
 time never accumulates motion energy or a queue of missed facts. Initial animated
@@ -426,3 +427,14 @@ activation waits for the actual font; later resize/font changes retain drawn
 position and retarget the next logical fact. Animation frames use cached geometry
 and write transforms/filters only. Brand red, white/navy pills and caller-owned
 facts remain unchanged, with no stars, endcaps, gradient or decorative separators.
+
+### FocusMarquee fast flow — candidate15 local revision
+
+Owner review shortened the centered rest, reduced actual reserve-driven gaps and
+softened only the far edges. The default0.9s cadence keeps a0.14s quiet center
+rest,0.76s travel and a0.12s settle tail with≤5px overshoot. Gentle uses smaller
+stretch/nudge/overshoot. No visible-count cap or smaller type is introduced.
+Actual extracted-package comparisons with candidate14 verify shorter observed
+stationary time, smaller painted gaps and softer blur, alongside order, complete
+text, composite maximum-footprint separation and lifecycle/static contracts.
+This is a local proposal; owner approval and release remain separate.
