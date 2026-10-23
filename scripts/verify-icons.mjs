@@ -11,14 +11,14 @@ const sources=JSON.parse(generated.slice(generated.indexOf(' = ')+3,generated.la
 assert.deepEqual(Object.keys(sources),Object.keys(manifest.icons));
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 for(const [name,entry] of Object.entries(manifest.icons)) {
- assert.match(entry.source,/^(lucide|simple-icons)\/[a-z-]+\.svg$/);
+ assert.match(entry.source,/^(lucide|simple-icons|original)\/[a-z0-9-]+\.svg$/);
  assert.equal(hash(await readFile(new URL('icons/'+entry.source,root))),entry.sourceSha256);
  const png=Buffer.from(sources[name].split(',')[1],'base64');
  assert.equal(hash(png),entry.pngSha256);
  assert.ok(alphaCoverage(png)>.025,`${name} must have visible ink`);
  assert.equal(entry.width,96); assert.equal(entry.height,96);
 }
-for(const file of ['lucide/LICENSE','simple-icons/LICENSE.md']) assert.ok((await readFile(new URL('icons/'+file,root),'utf8')).length>100);
+for(const file of ['lucide/LICENSE','simple-icons/LICENSE.md','original/NOTICE.md']) assert.ok((await readFile(new URL('icons/'+file,root),'utf8')).length>100);
 console.log('Pinned icon subset sources, licenses and generated native/web image hashes verified.');
 
 // Decode only the committed RGBA PNG format; reject empty rasterized vectors.

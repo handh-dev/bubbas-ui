@@ -1,7 +1,7 @@
 'use client';
 
 import { Children, useEffect, useRef, useState } from 'react';
-import { Image, Platform, View } from 'react-native';
+import { Image, Platform, View, type ViewProps } from 'react-native';
 import { vars } from 'nativewind';
 import { Inline, Stack, Container } from './layout';
 import { Heading, Text } from './typography';
@@ -20,7 +20,7 @@ import type { SiteHeaderProps, SiteFooterProps, HeroSectionProps, ContentSection
 export function MarketingAction({ action, size='md', compact=false, className }: { action: SectionAction; size?:ButtonSize; compact?:boolean; className?:string }) {
   return <Button appearance="marketing" size={size} variant={action.tone === 'blue' ? 'secondary' : action.tone === 'white' ? 'outline' : 'primary'} href={action.href} external={action.external} className={cn('bubba-marketing-action max-w-full self-start', action.tone === 'white' && 'border-white bg-white',className)} textClassName={cn(action.tone === 'white'&&'text-bubba-navy',compact&&'text-[11px] leading-4 tracking-normal min-[761px]:text-sm')}>{action.label}</Button>;
 }
-export function MarketingScope({children,className}: {children: React.ReactNode;className?:string}) { const [motion]=useMarketingMotion(); return <ThemeProvider {...{dataSet:{bubbaMotion:motion?"on":"off"}}} appearance="light" className={cn("min-w-0 bg-transparent",className)}>{children}</ThemeProvider>; }
+export function MarketingScope({children,className,pointerEvents}: {children: React.ReactNode;className?:string;pointerEvents?:ViewProps['pointerEvents']}) { const [motion]=useMarketingMotion(); return <ThemeProvider {...{dataSet:{bubbaMotion:motion?"on":"off"}}} pointerEvents={pointerEvents} surface="transparent" appearance="light" className={cn("min-w-0 bg-transparent",className)}>{children}</ThemeProvider>; }
 export function SocialLinks({links,color='#131B23'}:{links:readonly SectionAction[];color?:string}) {
  return <Inline wrap gap={1} className="bubba-social-links">{links.map(link=>{const icon=link.icon??(/instagram/i.test(link.label+link.href)?'instagram':/facebook/i.test(link.label+link.href)?'facebook':/youtube/i.test(link.label+link.href)?'youtube':/tiktok/i.test(link.label+link.href)?'tiktok':/spotify/i.test(link.label+link.href)?'spotify':/(?:^X$|https?:\/\/(?:www\.)?(?:x|twitter)\.com)/i.test(link.label+' '+link.href)?'x':undefined);return icon?<Link key={link.href} href={link.href} external={link.external} accessibilityLabel={link.label} className="h-11 w-11 items-center justify-center" textClassName="no-underline"><Icon name={icon} size={22} color={color}/></Link>:<Link key={link.href} href={link.href} external={link.external}>{link.label}</Link>;})}</Inline>;
 }
@@ -74,10 +74,27 @@ export function AnnouncementBanner({content,compactCopy,onFitChange}:Announcemen
 }
 interface ScrollHeaderNode { style:{setProperty(name:string,value:string):void;removeProperty(name:string):void}; querySelector(selector:string):{getBoundingClientRect():{height:number}}|null;setAttribute(name:string,value:string):void }
 interface ScrollHeaderWeb {scrollY:number;requestAnimationFrame(callback:()=>void):number;cancelAnimationFrame(id:number):void;addEventListener(event:string,callback:()=>void,options?:{passive:boolean}):void;removeEventListener(event:string,callback:()=>void):void;ResizeObserver?:new(callback:()=>void)=>{observe(node:unknown):void;disconnect():void};document?:{addEventListener(event:string,callback:()=>void):void;removeEventListener(event:string,callback:()=>void):void;activeElement?:{closest(selector:string):unknown}}}
+interface HeaderFitBox {clientWidth:number;scrollWidth:number;getBoundingClientRect():{width:number};style:{getPropertyValue(name:string):string;getPropertyPriority(name:string):string;setProperty(name:string,value:string,priority?:string):void;removeProperty(name:string):void}}
+interface HeaderFitRoot {querySelector(selector:string):HeaderFitBox|null;setAttribute(name:string,value:string):void}
 export function MarketingHeader({brand,links,action,announcement,announcementCompact,auxiliaryLinks,socialLinks,currentPath,children,className,showSocialLinks=true,showMotionControl=true,announcementScrollBehavior='static',...props}:SiteHeaderProps) {
  const [open,setOpen]=useState(false);
  const header=useRef<React.ElementRef<typeof View>>(null);
  const [motion]=useMarketingMotion();
+ useEffect(()=>{
+  if(Platform.OS!=='web'||showSocialLinks)return;
+  const node=header.current as unknown as HeaderFitRoot|null;if(!node)return;
+  const row=node.querySelector('.bubba-header-row'),nav=node.querySelector('.bubba-header-nav'),brandBox=node.querySelector('.bubba-header-brand'),actions=node.querySelector('.bubba-header-actions'),menu=node.querySelector('.bubba-header-menu-toggle');
+  if(!row||!nav||!brandBox||!actions)return;
+  const web=globalThis as unknown as ScrollHeaderWeb&{getComputedStyle(node:HeaderFitBox):{paddingLeft:string;paddingRight:string;columnGap:string};document?:{fonts?:{ready:Promise<unknown>}}};let alive=true;
+  const fit=()=>{if(!alive)return;const properties:Record<string,[string,string]>={};for(const[key,value]of Object.entries({display:'flex',position:'absolute',width:'max-content','max-width':'none',visibility:'hidden','flex-wrap':'nowrap'})){properties[key]=[nav.style.getPropertyValue(key),nav.style.getPropertyPriority(key)];nav.style.setProperty(key,value,'important');}
+   const needed=nav.scrollWidth;for(const[key,[value,priority]]of Object.entries(properties)){if(value)nav.style.setProperty(key,value,priority);else nav.style.removeProperty(key);}
+   const style=web.getComputedStyle(row),menuWidth=menu?.getBoundingClientRect().width??0;const hasExtra=Boolean(auxiliaryLinks?.some(link=>!socialLinks?.includes(link)&&!/instagram|facebook|youtube|tiktok|spotify|twitter|x\.com/i.test(link.label+link.href)));
+   const available=row.clientWidth-parseFloat(style.paddingLeft||'0')-parseFloat(style.paddingRight||'0')-brandBox.getBoundingClientRect().width-actions.getBoundingClientRect().width-2*parseFloat(style.columnGap||'0')+(!hasExtra&&menuWidth?menuWidth+8:0);
+   node.setAttribute('data-bubba-nav-fits',available>=needed?'true':'false');
+  };
+  fit();const observer=web.ResizeObserver?new web.ResizeObserver(fit):undefined;observer?.observe(row);web.addEventListener('resize',fit);web.document?.fonts?.ready.then(fit);
+  return()=>{alive=false;observer?.disconnect();web.removeEventListener('resize',fit);};
+ },[showSocialLinks,links,action,auxiliaryLinks,socialLinks]);
  useEffect(()=>{
   if(Platform.OS!=='web'||announcementScrollBehavior!=='hide'||!announcement)return;
   const node=header.current as unknown as ScrollHeaderNode|null;if(!node)return;
@@ -91,12 +108,12 @@ export function MarketingHeader({brand,links,action,announcement,announcementCom
  },[announcementScrollBehavior,Boolean(announcement),motion,open]);
  const socials=socialLinks??auxiliaryLinks?.filter(link=>/instagram|facebook|youtube|tiktok|spotify|twitter|x\.com/i.test(link.label+link.href))??[];
  const extra=auxiliaryLinks?.filter(link=>!socials.includes(link))??[];
- return <View {...props} ref={header} role="banner" className={cn('bg-white',announcementScrollBehavior==='hide'&&'bubba-header-scroll',className)}>
+ return <View {...props} ref={header} pointerEvents="auto" role="banner" className={cn('bg-white',!showSocialLinks&&'bubba-header-compact',extra.length>0&&'bubba-header-has-extra',announcementScrollBehavior==='hide'&&'bubba-header-scroll',className)}>
   {announcement?<AnnouncementBanner content={announcement} compactCopy={announcementCompact}/>:null}
   <View className="bubba-header-row mx-auto w-full max-w-[1600px] flex-row items-center justify-between gap-3 px-4 py-2 min-[761px]:px-8">
    <View className="bubba-header-brand min-w-0 shrink-0"><Link textVariant="caption" href={brand.href} accessibilityLabel={brand.label}>{brand.image?<Image source={{uri:brand.image.uri}} accessibilityLabel={brand.image.alt} resizeMode="contain" className="h-14 w-24 min-[761px]:h-16 min-[761px]:w-28"/>:brand.label}</Link></View>
    <View role="navigation" accessibilityLabel="Main navigation" className="bubba-header-nav hidden flex-row items-center gap-5 min-[1350px]:flex">{links.map(link=><Link textVariant="caption" key={link.href} href={link.href} external={link.external} aria-current={currentPath===link.href?'page':undefined} className="bubba-nav-link" textClassName="text-xs font-extrabold uppercase text-ui-text no-underline">{link.label}</Link>)}</View>
-   <View className="bubba-header-actions min-w-0 flex-row items-center justify-end gap-2">{showSocialLinks?<View className="hidden min-[1350px]:flex"><SocialLinks links={socials}/></View>:null}{children}{action?<View className="hidden min-[1350px]:flex"><MarketingAction action={action}/></View>:null}<IconButton accessibilityLabel="Open navigation" aria-expanded={open} onPress={()=>setOpen(true)} className={extra.length ? undefined : "min-[1350px]:hidden"}><Icon name="menu"/></IconButton></View>
+   <View className="bubba-header-actions min-w-0 flex-row items-center justify-end gap-2">{showSocialLinks?<View className="hidden min-[1350px]:flex"><SocialLinks links={socials}/></View>:null}{children}{action?<View className="bubba-header-primary-action hidden min-[1350px]:flex"><MarketingAction action={action}/></View>:null}<IconButton accessibilityLabel="Open navigation" aria-expanded={open} onPress={()=>setOpen(true)} className={cn('bubba-header-menu-toggle',!extra.length&&'min-[1350px]:hidden')}><Icon name="menu"/></IconButton></View>
   </View>
   <Dialog open={open} onOpenChange={setOpen} title="Navigation" closeLabel="Close navigation"><Stack>{action?<MarketingAction action={action}/>:null}{[...links,...extra].map(link=><Link textVariant="caption" key={link.href} href={link.href} external={link.external} onPress={()=>setOpen(false)} className="bubba-mobile-nav-link min-h-11 justify-center rounded-bubba-control px-3" textClassName="text-lg font-extrabold uppercase no-underline">{link.label}</Link>)}{showSocialLinks?<SocialLinks links={socials}/>:null}{showMotionControl?<MarketingMotionControl/>:null}</Stack></Dialog>
  </View>;

@@ -30,7 +30,15 @@ try {
       waitUntil: "networkidle",
     });
     assert.equal(response.status(), 200);
-    await page.getByRole("heading", { name, exact: true }).first().waitFor();
+    // Separate current-route paint readiness from the accessible-role assertion.
+    // A reused role wait intermittently timed out while the captured h1 was visible.
+    await page.waitForFunction((expected) => {
+      const heading = document.querySelector("h1");
+      if (heading?.textContent?.trim() !== expected) return false;
+      const box = heading.getBoundingClientRect(), style = getComputedStyle(heading);
+      return box.width > 0 && box.height > 0 && style.display !== "none" && style.visibility !== "hidden";
+    }, name);
+    assert.equal(await page.getByRole("heading", { name, exact: true }).first().isVisible(), true);
     await page.getByTestId("preview-stage").waitFor();
   }
   await page.goto(base, { waitUntil: "networkidle" });

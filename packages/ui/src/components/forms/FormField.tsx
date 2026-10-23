@@ -31,11 +31,12 @@ export interface FormFieldProps extends ViewProps {
   children: ReactNode;
   className?: string;
   labelClassName?: string;
+  labelLeading?: ReactNode;
 }
 
 /** Associates a visible label, hint, and error with the enclosed form control. */
 export const FormField = forwardRef<ElementRef<typeof View>, FormFieldProps>(function FormField({ label, hint, error, required = false, disabled = false,
-  announceError = false, children, nativeID, className, labelClassName, ...props }, ref) {
+  announceError = false, children, nativeID, className, labelClassName, labelLeading, ...props }, ref) {
   const generatedID = useId().replace(/:/g, '');
   const id = nativeID ?? `bui-field-${generatedID}`;
   const descriptionID = [hint && `${id}-hint`, error && `${id}-error`].filter(Boolean).join(' ') || undefined;
@@ -45,9 +46,7 @@ export const FormField = forwardRef<ElementRef<typeof View>, FormFieldProps>(fun
   return (
     <FieldContext.Provider value={field}>
       <View {...props} ref={ref} nativeID={nativeID} className={cn('gap-2', className)}>
-        <Text nativeID={field.labelID} className={cn('text-base font-semibold text-ui-text', labelClassName)}>
-          {label}{required ? ' *' : ''}
-        </Text>
+        {labelLeading?<View className="min-w-0 flex-row items-center gap-2">{labelLeading}<Text nativeID={field.labelID} className={cn('min-w-0 flex-1 text-base font-semibold text-ui-text',labelClassName)}>{label}{required?' *':''}</Text></View>:<Text nativeID={field.labelID} className={cn('text-base font-semibold text-ui-text', labelClassName)}>{label}{required ? ' *' : ''}</Text>}
         {children}
         {hint ? <Text nativeID={`${id}-hint`} className="text-sm leading-5 text-ui-muted">{hint}</Text> : null}
         {error ? <Text nativeID={`${id}-error`} accessibilityLiveRegion={announceError ? 'polite' : 'none'}

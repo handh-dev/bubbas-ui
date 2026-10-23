@@ -76,18 +76,23 @@ the canonical schema, even if someone refreshes their manifest checksums.
 
 ## Pattern contracts
 
-### Website page compositions — proposed 0.8.0
+### Website page compositions — proposed 0.8.1
 
 `LocationSearch` is a controlled city/ZIP field with combined search and optional
 device-location actions. Apps own lookup, geolocation permission, validation,
 loading, errors and result announcements. Enter submits through the supplied
 action. Dynamic validation/permission errors announce politely while preserving
 the query and focus. Busy states prevent duplicate searches and location requests.
+The visible field label includes the shared brand-red location pin. Optional
+descriptions and result labels render only when supplied.
 
 `LocationCard` / `LocationGrid density="compact"` show supplied addresses, published
 hours, independently qualified status, optional local distance and phone, and
-real direction/call links. Missing phone/distance/status stays absent. Four
-desktop columns retain 44px action targets; narrower containers wrap the facts.
+real direction/call links. Missing phone/distance/status stays absent. Four columns
+fit a 1099px viewport; narrower containers wrap the facts. Address, hours/status
+and phone facts have leading icons. Blue direction and red phone icon actions
+keep 44px targets, store-and-address accessible names and tooltips. An optional
+bright feature badge uses caller-supplied text rather than inferred capabilities.
 The prior default and normal marketing card variants are preserved.
 
 `LocationMap` wraps an app provider or fits supplied verified location pins using
@@ -97,24 +102,28 @@ coordinates. Only measured visible viewport tiles are requested; there is no
 prefetch/offline store. Respect the selected provider's current policy, default
 browser caching and referrer. Automated checks stub provider imagery. Marker
 links have explicit direction labels and only fully visible targets are focusable.
-Overlapping 44px targets merge into counted clusters using axis-aligned screen
-bounds, repeating after centroid updates until target rectangles are disjoint.
-Cluster buttons open the shared Dialog with every member's actual supplied title
-and directions; Escape/close restores focus. Zoom separates clusters when space
-permits. Cluster centers summarize members without changing any store coordinate.
-Zoom/fit controls, notices and attribution stay outside the geographic viewport
-so they cannot cover a store target.
-Visual labels reveal on hover/keyboard focus, avoiding overlapping city/address
-text where several real stores cluster; all pins and full accessible names remain.
-Loading and partial tile failure are explicit; Retry map retries current failures.
-Server/no-script output requests no guessed viewport tiles and points to the
-always-readable location directory. Native retains a direction-link fallback.
+Each visible store retains a separate 44px target. When close or coincident stores
+would overlap, the shared layout places disjoint targets nearby and connects them
+with visible leaders to their exact geographic anchors. The supplied coordinates
+are never changed and no counted clusters replace individual stores. The layout
+reserves space for small bottom-right zoom/fit controls and the required minimal
+bottom-edge attribution. Raster tiles alone are grayscale; pins remain brand red.
+Wheel zoom anchors at the pointer, pointer/touch drag pans, arrows pan, and Home
+restores all-store bounds. Map gestures retain page position; wheel input at a
+zoom limit can continue to scroll the page. Explicit controls remain available
+for keyboard and touch users. Visual labels reveal on hover/keyboard focus and
+ignore pointer events. Loading and partial tile failure are explicit; Retry map
+retries current failures. Server/no-script output requests no guessed viewport
+tiles and points to the always-readable location directory. Native retains a
+direction-link fallback.
 
 `LocationHours` renders app-supplied dates and explicit labels. The app selects
 today plus the following nine calendar dates in the business timezone, advances
 the window at the local day boundary, and retains Core's unverified/missing
 distinction. The component does not infer opening or merge reported Stand Status
-with published hours. The source label is supplied by the consumer.
+with published hours. The default heading is “Store hours”; dates are brand red
+and time labels bold. Description and source labels are optional caller data,
+with no default helper copy or inferred timezone statement.
 
 `FAQSection` uses the real shared Accordion with full-width, wrapping questions,
 visible focus, 44px minimum targets and expanded/controlled-panel semantics.
@@ -127,8 +136,13 @@ Hosts supply reviewed safety wording and business/policy destinations.
 `FeaturedProductRow` limits the supplied selection to four compact cards. Apps
 own their ranking and identity; the component creates no best-seller claim.
 `OfferGrid` supplies equal-height social, guarantee and review compositions with
-distinct blue, white and navy fields. Their headings, terms and optional actions
-remain caller data. They do not share legacy app-card selectors.
+light-blue social/fountain fields and a white guarantee field. Original shared
+Pop-It, banknote and fountain motifs occupy a consistent top-right art region;
+these are newly authored geometry, not restricted Studio artwork. A shown
+Instagram mark is a caller-supplied link. Headings, terms and optional actions
+remain caller data. `ReviewLocationLinks` presents a responsive grid of supplied
+store-specific review destinations and optional address labels. Neither section
+infers reviews, offers or business claims. They do not share legacy app selectors.
 
 `ContentSection titleVisibility="hidden"` retains one semantic route heading
 with a compact transparent content region. It removes the visual marketing
@@ -141,18 +155,36 @@ announcement height. It never mutates the layout box, so a fixed host keeps one
 stable measured spacer without scroll feedback. Opening the navigation resets
 the translation; reduced/manual motion-off retains the static header. No easing,
 scroll handler layout reads, or React state updates occur on animation frames.
-Default header behavior is unchanged.
+No-social marketing headers use compact navigation at 1000px and above, including
+1099px; a measured width check collapses unusually long links when they cannot
+fit. Other header variants retain their original breakpoint. A fixed web host
+must keep the outer mount transparent with `pointer-events:none` and use
+`ThemeProvider surface="transparent" pointerEvents="box-none"`; the shared scope
+also passes pointer events through while the actual header remains interactive.
+This prevents the untranslated outer layout box from painting or intercepting
+content below a collapsed announcement. Check actual painted content and pointer
+hits immediately below navigation, not just its transform. Default header
+behavior is unchanged.
 
-All seven new sections have stable actual-package `SectionDemo` / review catalog
-IDs, consumed unchanged by docs, both self-contained examples and isolated Studio
+The new sections have stable actual-package `SectionDemo` / review catalog IDs,
+consumed unchanged by docs, both self-contained examples and isolated Studio
 review. The map catalog renders that actual implementation with synthetic local
-SVG grid tiles, close example pins, zoom/fit and its cluster chooser; no external
-tile provider or real business facts enter the specimen.
-`pnpm verify:website:sections` covers narrow/wide bounds, four directory
-columns, equal offer rows, search Enter, FAQ keyboard/no-script, scroll invariance,
-reduced motion, disjoint cluster hit targets/member destinations/focus return,
-announced search errors and mocked-provider loading/failure/retry. These shared checks do
-not establish consumer deployment, native device acceptance or owner approval.
+SVG grid tiles, close example pins, individual leader targets and zoom/fit; no
+external tile provider or real business facts enter the specimen.
+`pnpm verify:website:sections` covers narrow/wide bounds, four directory columns
+at 1099px, equal offer rows, linked social/review destinations, search Enter, FAQ
+keyboard/no-script, scroll invariance and painted content below the header,
+reduced motion, all sixteen actual-coordinate targets, synthetic coincident
+targets, wheel/pointer/touch/keyboard map gestures, announced search errors and
+mocked-provider loading/failure/retry. These shared checks do not establish
+consumer deployment, native device acceptance or owner approval.
+
+Compatible primitive extensions support these compositions: `Icon color={null}`
+preserves multicolor original geometry; `Link contentLayout="block"` accepts rich
+RN content; `Badge leading` and `FormField labelLeading` accept decorative icons
+while preserving existing text-label associations. Their omitted/default behavior
+is unchanged. New Lucide geometry uses the existing pinned MIT source, and original
+motif sources/notices remain in the package's icon custody manifest.
 
 AppearanceControl is controlled. The host persists Light/Dark/System, handles
 storage failure and passes the selection to ThemeProvider. System follows OS
