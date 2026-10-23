@@ -399,8 +399,8 @@ The owner superseded continuous ticker pacing with a pop/stretch handoff rhythm.
 `motion="spring"` is now the default: one fact is centered and readable, then the
 next arrives with a brief stretch/pop as the outgoing pill compresses and gives
 way. Each handoff has one small bounded overshoot and settles with zero-velocity
-endpoints. `cadence` is seconds per fact (default1.20, bounded0.8–3); travel takes
-1.06s by default, ending with a0.12s settle and a short0.14s centered rest. Distance and velocity vary
+endpoints. `cadence` is seconds per fact (default1.80, bounded0.8–3); travel takes
+1.66s by default, ending with a0.12s settle and a short0.14s centered rest. Distance and velocity vary
 with label widths; cadence is the same per fact. `spring="poppy"|"gentle"` chooses
 a bounded presentation preset, rather than exposing physics internals.
 
@@ -448,3 +448,11 @@ settle tail. Density, type, pop/stretch, overshoot, soft edges, complete fallbac
 and customization are unchanged. Actual original-package comparisons with15
 verify a longer per-fact interval while preserving the short observed rest.
 Publication and deployment remain paused.
+
+### FocusMarquee exact owner cadence — candidate17 local revision
+
+The owner then specified an exact1.80 seconds per fact. Shared default and
+nonfinite fallback now use1.80s:1.66s travel with the same0.14s quiet rest and
+0.12s settle tail. Every15 density, type, blur, geometry and pop/stretch setting
+remains unchanged. Prior16 original and1.05/1.20 drafts remain historical; this
+is a new local proposal with original-package timing proof. Release stays paused.

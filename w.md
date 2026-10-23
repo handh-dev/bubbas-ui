@@ -258,3 +258,10 @@ proposal. Publication and deployment remain paused.
 Owner requested only a small slowdown: default1.20s per fact, retaining15’s
 short0.14s centered rest and all density/blur/pop settings. Preserve15 original
 and successful isolated reruns; qualify a new16 artifact for local review only.
+
+## FocusMarquee candidate17 — exact owner1.80s cadence
+
+The owner specified1.80 seconds. Only shared default/fallback cadence changes;
+retain short0.14s rest and all15 density/blur/pop settings.16 original/evidence
+remain preserved as superseded. Build/prove actual timing, then freeze new17
+original for local review; release remains paused.
