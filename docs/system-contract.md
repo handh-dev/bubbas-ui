@@ -369,7 +369,9 @@ backward compatible. No stars, separators or gradient enter the new component.
 
 `items` is readonly plain text; no links or input controls are accepted. `speed`
 is constant CSS pixels/second (default38, bounded0–240; zero is static), `direction`
-is left/right, and `spacing` includes the last-to-first gap (default20px,0–96).
+is left/right, and `spacing` is the minimum visible edge gap, including the
+last-to-first seam (default20px,0–96). Each wrapper reserves its pill’s maximum
+scaled width; away from center the visible gap is larger.
 `badgeAppearance` selects sm/md, pill/rounded and navy/red text. `centerEmphasis`
 selects scale1–1.35(default1.12), lift0–16px(default4), and range0.1–1 of viewport
 width(default0.5). Nonfinite values use defaults. These are shared presentation

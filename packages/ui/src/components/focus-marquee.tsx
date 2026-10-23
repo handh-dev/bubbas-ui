@@ -78,10 +78,18 @@ export function FocusMarquee({items,speed=38,direction='left',spacing=20,badgeAp
     const start=()=>{if(alive&&ready&&visible&&!web.document?.hidden&&!frame)frame=web.requestAnimationFrame(tick);};
     const measure=()=>{
       measureFrame=0;if(!alive)return;
-      width=node.getBoundingClientRect().width;period=first.getBoundingClientRect().width;
+      width=node.getBoundingClientRect().width;
+      const wrappers=Array.from(track.querySelectorAll('.bubba-focus-item'));
+      // Reserve each pill's maximum scaled footprint in layout. The configured
+      // gap is then a minimum visible edge gap, even for two large neighbors.
+      const pills=wrappers.map(item=>item.querySelector('.bubba-focus-pill')!);
+      for(const pill of pills)pill.style.transform='';
+      const reserves=pills.map(pill=>(scale-1)*pill.getBoundingClientRect().width/2);
+      wrappers.forEach((item,index)=>{item.style.setProperty('padding-left',`${reserves[index]}px`);item.style.setProperty('padding-right',`${reserves[index]}px`);});
+      period=first.getBoundingClientRect().width;
       if(width<=0||period<=0){ready=false;stop();return;}
       const required=Math.max(2,Math.ceil(width/period)+2);
-      if(required!==copies){setCopies(required);return;}
+      if(required!==copies){ready=false;stop();setCopies(required);return;}
       const origin=track.getBoundingClientRect().x;
       geometry=Array.from(track.querySelectorAll('.bubba-focus-item')).map(item=>{const box=item.getBoundingClientRect();return{node:item.querySelector('.bubba-focus-pill')!,center:box.x-origin+box.width/2};});
       const height=first.getBoundingClientRect().height;
@@ -96,7 +104,7 @@ export function FocusMarquee({items,speed=38,direction='left',spacing=20,badgeAp
     web.addEventListener('resize',schedule);web.document?.addEventListener('visibilitychange',visibility);
     web.document?.fonts?.addEventListener('loadingdone',schedule);web.document?.fonts?.ready.then(schedule);
     measure();
-    return()=>{alive=false;stop();web.cancelAnimationFrame(measureFrame);resize?.disconnect();intersection?.disconnect();web.removeEventListener('resize',schedule);web.document?.removeEventListener('visibilitychange',visibility);web.document?.fonts?.removeEventListener('loadingdone',schedule);node.setAttribute('data-bubba-focus-active','false');track.style.transform='';for(const item of geometry)item.node.style.transform='';node.style.removeProperty('--bubba-focus-inset');};
+    return()=>{alive=false;stop();web.cancelAnimationFrame(measureFrame);resize?.disconnect();intersection?.disconnect();web.removeEventListener('resize',schedule);web.document?.removeEventListener('visibilitychange',visibility);web.document?.fonts?.removeEventListener('loadingdone',schedule);node.setAttribute('data-bubba-focus-active','false');track.style.transform='';for(const item of geometry)item.node.style.transform='';for(const item of track.querySelectorAll('.bubba-focus-item')){item.style.removeProperty('padding-left');item.style.removeProperty('padding-right');}node.style.removeProperty('--bubba-focus-inset');};
   },[itemKey,motion,velocity,direction,gap,scale,lift,range,copies,badgeAppearance?.size,badgeAppearance?.shape,badgeAppearance?.textTone]);
   if(items.length===0)return null;
   const pill=(label:string)=><View className={cn('bubba-focus-pill bg-white px-3 py-2',badgeAppearance?.shape==='rounded'?'rounded-bubba-control':'rounded-full')}><Text variant="caption" className={cn('bubba-focus-label text-center font-black uppercase',badgeAppearance?.size==='md'?'text-sm leading-5':'text-xs leading-4',badgeAppearance?.textTone==='red'?'text-bubba-red':'text-bubba-navy')}>{label}</Text></View>;
