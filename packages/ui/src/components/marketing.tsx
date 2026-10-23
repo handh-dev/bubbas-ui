@@ -37,7 +37,7 @@ interface AnnouncementWeb { ResizeObserver?:new(callback:()=>void)=>Announcement
 export interface AnnouncementBannerProps { content:AnnouncementContent; compactCopy?:AnnouncementContent; onFitChange?:(fontSize:number)=>void }
 export function AnnouncementBanner({content,compactCopy,onFitChange}:AnnouncementBannerProps) {
  const copy=typeof content==='string'?content:content.map(part=>part.text).join('');
- const renderContent=(value:AnnouncementContent)=>typeof value==='string'?value:value.map((part,index)=><Text key={index} variant="caption" className={cn('bubba-announcement-segment font-black uppercase italic text-white',part.tone==='yellow'&&'bubba-announcement-yellow')} style={part.tone==='yellow'?{color:'#FED766',backgroundColor:'#03256C'}:undefined}>{part.text}</Text>);
+ const renderContent=(value:AnnouncementContent)=>typeof value==='string'?value:value.map((part,index)=><Text key={index} variant="caption" className={cn('bubba-announcement-segment font-black uppercase italic',part.tone==='yellow'?'bubba-announcement-yellow':'text-white')} style={part.tone==='yellow'?{color:'#FED766',backgroundColor:'#03256C'}:undefined}>{part.text}</Text>);
  const fallback=(value:AnnouncementContent)=>vars({'--bubba-announcement-length':String(Math.max(1,Array.from(typeof value==='string'?value:value.map(part=>part.text).join('')).length)*1.1)});
  const viewport=useRef<React.ElementRef<typeof View>>(null);
  useEffect(()=>{
