@@ -92,8 +92,16 @@
 @keyframes bubba-overlay-in { from { opacity:0; } to { opacity:1; } }
 @keyframes bubba-panel-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 @media (min-width:1350px) {
- .bubba-header-row { display:grid!important; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); }
+ /* The action track has an intrinsic floor: extra accounts/actions must never
+    overflow left into navigation even when a balanced track would be smaller. */
+ .bubba-header-row { display:grid!important; grid-template-columns:minmax(0,1fr) auto minmax(max-content,1fr); }
  .bubba-header-nav { position:relative!important; inset:auto!important; margin:0!important; padding:0!important; width:auto!important; z-index:auto!important; background:transparent!important; border:0!important; box-shadow:none!important; }
+}
+/* At compact desktop widths use the brand's real width, leaving enough room for
+   all supplied navigation, social accounts and actions. */
+@media (min-width:1350px) and (max-width:1599px) {
+ .bubba-header-row { grid-template-columns:auto minmax(0,1fr) auto; }
+ .bubba-header-nav { min-width:0; justify-content:center; }
 }
 @media (min-width:761px) {
  .bubba-marketing-hero { min-height:calc(100svh - var(--bubbas-header-height,124px) - 24px)!important; justify-content:center; }
