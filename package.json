@@ -24,7 +24,11 @@
     "sync:foundations": "node scripts/foundations.mjs",
     "verify:foundations": "node scripts/foundations.mjs --check",
     "verify:shared": "node scripts/verify-shared.mjs && node scripts/verify-icons.mjs",
-    "verify:web:forms": "node scripts/verify-web-forms.mjs"
+    "verify:web:forms": "node scripts/verify-web-forms.mjs",
+    "verify:web:marketing": "pnpm build && node scripts/verify-marketing-refinements.mjs && node scripts/verify-announcement-fit.mjs && node scripts/verify-campaign-badges.mjs && node scripts/verify-focus-marquee.mjs && node scripts/verify-focus-marquee-spring.mjs",
+    "dev:marquee": "node tools/focus-marquee-lab/server.mjs",
+    "verify:marquee:lab": "node tools/focus-marquee-lab/verify.mjs",
+    "verify:promotion": "node scripts/verify-promotion.mjs"
   },
   "devDependencies": {
     "@types/node": "24.10.1",

@@ -42,13 +42,15 @@ export interface ThemeProviderProps extends ViewProps {
    * Font loading and licensing remain the host's responsibility.
    */
   fontFamily?: string;
+  /** Canvas paint is optional when composing a transparent standalone section. */
+  surface?: 'canvas' | 'transparent';
   className?: string;
 }
 
 /** Scoped variables support nested themes without changing global appearance.
  * The host owns persistence and applies the same theme to safe areas/install shells.
  */
-export function ThemeProvider({ appearance = 'light', fontFamily, children, className, style, ...props }: ThemeProviderProps) {
+export function ThemeProvider({ appearance = 'light', fontFamily, surface='canvas', children, className, style, ...props }: ThemeProviderProps) {
   const parent = useContext(ThemeContext);
   const system = useColorScheme();
   const resolved = appearance === 'system' ? system === 'dark' ? 'dark' : 'light' : appearance;
@@ -56,7 +58,7 @@ export function ThemeProvider({ appearance = 'light', fontFamily, children, clas
   const value = useMemo(() => themeValue(appearance, resolved, family), [appearance, resolved, family]);
   return (
     <ThemeContext.Provider value={value}>
-      <View {...props} className={cn('bg-ui-canvas', className)} style={[value.variables, style]}>
+      <View {...props} className={cn(surface==='transparent'?'bg-transparent':'bg-ui-canvas', className)} style={[value.variables, style]}>
         {children}
       </View>
     </ThemeContext.Provider>

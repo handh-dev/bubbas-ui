@@ -32,3 +32,14 @@ export * from './catalog';
 export { Icon } from './components/Icon';
 export type { IconProps, IconName } from './components/Icon';
 export * from './components/campaigns';
+
+export { MarketingMotionControl } from './components/marketing';
+
+export { AnnouncementBanner } from './components/marketing';
+export { AnnouncementEditor } from './components/announcement';
+export type { AnnouncementSegment, AnnouncementContent, AnnouncementEditorProps } from './components/announcement';
+export type { AnnouncementBannerProps } from './components/marketing';
+
+export { FocusMarquee, FOCUS_MARQUEE_DEFAULT_CADENCE } from './components/focus-marquee';
+export { FOCUS_MARQUEE_CAMPAIGN_PRESET } from './components/focus-marquee-preset.js';
+export type { FocusMarqueeProps, FocusMarqueeTiming, FocusMarqueeSpringTuning } from './components/focus-marquee';

@@ -1,0 +1,40 @@
+import {createServer} from 'node:http';
+import {readFile} from 'node:fs/promises';
+import {existsSync} from 'node:fs';
+import {createRequire} from 'node:module';
+import {execFileSync} from 'node:child_process';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {defaults,componentProps} from './settings.mjs';
+const here=path.dirname(fileURLToPath(import.meta.url)),root=path.resolve(here,'../..');
+const require=createRequire(path.join(root,'package.json')),{build,context}=createRequire(require.resolve('tsup'))('esbuild');
+const webAPI=createRequire(require.resolve('nativewind')).resolve('react-native-css-interop/src/runtime/web/api.ts');
+const rnwRoot=path.dirname(require.resolve('react-native-web/package.json'));
+const formSources={Pressable:await readFile(path.join(rnwRoot,'dist/exports/Pressable/index.js'),'utf8'),View:(await readFile(path.join(rnwRoot,'dist/exports/View/index.js'),'utf8')).replace('href: true,','href: true, type: true,')};
+// Same NativeWind/RNW adapter as scripts/build-web.mjs, with no component fork.
+function universalWeb(host){return{name:'lab-shared-web-adapter',setup(builder){
+ builder.onResolve({filter:/^bubbas:form-pressable$/},()=>({path:'Pressable',namespace:'rnw-form'}));
+ builder.onLoad({filter:/.*/,namespace:'rnw-form'},args=>({contents:formSources[args.path],loader:'js',resolveDir:path.join(rnwRoot,'dist/exports',args.path)}));
+ builder.onResolve({filter:/^\./,namespace:'rnw-form'},args=>{if(args.importer==='Pressable'&&args.path==='../View')return{path:'View',namespace:'rnw-form'};const relative=path.relative(path.join(rnwRoot,'dist'),path.resolve(args.resolveDir,args.path));return{path:relative.endsWith('.js')?relative:existsSync(path.join(rnwRoot,'dist',`${relative}.js`))?`${relative}.js`:`${relative}/index.js`,namespace:'rnw-external'};});
+ builder.onLoad({filter:/.*/,namespace:'rnw-external'},async args=>{const external=`react-native-web/dist/${host==='node'?'cjs/':''}${args.path}`;if(host==='browser'){const source=await readFile(path.join(rnwRoot,'dist',args.path),'utf8');return{contents:`export * from '${external}'; ${source.includes('export default')?`export {default} from '${external}';`:''}`,loader:'js',resolveDir:root};}return{contents:`import * as mod from '${external}'; const api=mod.default??mod; export default api.default??api; export * from '${external}';`,loader:'js'};});
+ if(host==='node')builder.onResolve({filter:/^react-native-web(?:\/|$)/},args=>({path:args.path,external:true}));
+ builder.onResolve({filter:/^react-native$/},args=>({path:args.importer.includes('node_modules')?require.resolve('react-native-web'):path.join(root,'packages/ui/web/native.ts')}));
+ builder.onResolve({filter:/^react-native-css-interop\/dist\/runtime\/web\/api\.js$|^nativewind$/},()=>({path:webAPI}));
+}};}
+const base={absWorkingDir:root,bundle:true,write:false,target:'es2022',jsx:'automatic',jsxImportSource:'react',tsconfigRaw:{compilerOptions:{jsx:'react-jsx',jsxImportSource:'react'}},define:{'process.env.NODE_ENV':'"production"'},logLevel:'warning'};
+const css=execFileSync('pnpm',['exec','tailwindcss','-c','packages/ui/web/tailwind.config.cjs','-i','packages/ui/web/styles.css','--minify'],{cwd:root,encoding:'utf8',maxBuffer:8*1024*1024});
+const ssr=await build({...base,stdin:{contents:"export {FocusMarquee} from './packages/ui/src/components/focus-marquee';export {ThemeProvider} from './packages/ui/src/theme';",resolveDir:root},platform:'node',format:'cjs',external:['react','react/*'],plugins:[universalWeb('node')]});
+const module={exports:{}};new Function('require','module','exports',ssr.outputFiles[0].text)(require,module,module.exports);
+const React=require('react'),{renderToString}=require('react-dom/server'),{StyleSheet}=require('react-native-web');
+const staticPreview=renderToString(React.createElement(module.exports.ThemeProvider,{fontFamily:'Montserrat',surface:'transparent'},React.createElement(module.exports.FocusMarquee,componentProps(defaults))));
+const sheet=StyleSheet.getSheet();
+const html=(await readFile(path.join(here,'index.html'),'utf8')).replace('__STATIC_PREVIEW__',staticPreview).replace('</head>',`<style id="${sheet.id}">${sheet.textContent}</style></head>`);
+let bundle,buildError;
+const bundleContext=await context({...base,entryPoints:[path.join(here,'client.jsx')],platform:'browser',format:'esm',plugins:[universalWeb('browser'),{name:'keep-bundle-in-memory',setup(builder){builder.onEnd(result=>{if(result.errors.length){buildError='Source build failed; check terminal.';return;}bundle=result.outputFiles[0].contents;buildError=null;});}}]});
+await bundleContext.rebuild();await bundleContext.watch();
+const font=await readFile(path.join(root,'apps/docs/public/fonts/montserrat.ttf'));
+const port=Number(process.env.MARQUEE_LAB_PORT||8930);if(!Number.isInteger(port)||port<1024||port>65535)throw Error('MARQUEE_LAB_PORT must be 1024–65535.');
+const server=createServer((req,res)=>{res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405);res.end();return;}const pathname=new URL(req.url,'http://127.0.0.1').pathname;const route=pathname==='/'?['text/html; charset=utf-8',html]:pathname==='/shared.css'?['text/css; charset=utf-8',css]:pathname==='/lab.js'&&!buildError?['text/javascript; charset=utf-8',bundle]:pathname==='/montserrat.ttf'?['font/ttf',font]:pathname==='/health'?['application/json',JSON.stringify({ok:!buildError,mode:'local-source-lab',deployment:'paused'})]:null;if(!route){res.writeHead(404);res.end('Not found');return;}res.setHeader('Content-Type',route[0]);res.end(req.method==='HEAD'?undefined:route[1]);});
+await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,'127.0.0.1',resolve);});
+console.log(`FocusMarquee local source lab: http://127.0.0.1:${port}/ (PID ${process.pid})\nDrag controls live; no rebuild/repack per change. Deployment stays paused.`);
+let closing=false;async function close(){if(closing)return;closing=true;await bundleContext.dispose();const stopped=new Promise(resolve=>server.close(resolve));server.closeIdleConnections();await stopped;process.exit(0);}process.on('SIGINT',close);process.on('SIGTERM',close);

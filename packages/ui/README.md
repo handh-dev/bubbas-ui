@@ -212,11 +212,66 @@ bundled Chromium recipe is `scripts/build-icons.mjs`. Social trademarks remain w
 their owners. This subset introduces no native SVG peer or font dependency.
 
 Marketing actions use the existing `appearance="marketing"` and `size` API.
-Choose `size="lg"` for a featured action (60px desktop / 56px phone, 18px desktop / 16px phone label,
-12px corners); default `md` and `sm` retain compact 44px targets, 14px labels and
-6px corners. HeroSection chooses featured actions; header and repeated controls
+Choose `size="lg"` for a featured action (60px desktop / 48px phone, 18px desktop / 16px phone label,
+12px corners); default `md` and `sm` retain compact 48px targets, 14px labels and
+6px corners. HeroSection chooses the shared compact same-row treatment; header and repeated controls
 stay compact. Blue/red fills use gentle gradients and soft ambient glow on web,
 with lift/press feedback and a white-separated focus ring. Inactive controls have
 no glow or movement; reduced motion removes travel. Native keeps the same sizing,
 solid brand fill, label, semantics and restrained native shadow without a new
 gradient dependency. Default application controls retain their previous design.
+
+## Mobile marketing refinement candidate 0.7.0
+
+Unpublished; public 0.6.1 remains approved. Hero actions use a compact single row
+with 48px targets. Metallic honor badges, gold-only continuous twinkles, safe full
+product titles, two/three/four-column grids, narrower star caps and subtle mobile
+navigation hover feedback belong to the shared system. Container/ContentSection
+accept `width="wide"`; ContentSection accepts `surface="transparent"`; use the same named surface on an
+outer ThemeProvider when that standalone region should not paint a canvas.
+
+`SiteHeader` accepts a plain announcement string or safe `{text,tone}` segments,
+where tone is `default` or `yellow`; optional `announcementCompact` supplies a
+reviewed short phone message. Text is static and fitted, never a marquee. Gold
+words use navy backing for readable contrast. The same `AnnouncementBanner` is
+used by the controlled `AnnouncementEditor`: value/onValueChange, text selection
+and Make yellow/Make white, disabled/busy/error, actual phone preview and small-text
+warning. Hosts own Core calls, enabled state, revisions and save actions. No HTML
+is accepted; no Studio runtime is required.
+
+The authoring limit is 160 Unicode characters and 24 normalized text sections.
+Long phone copy still becomes small; supply concise phone copy and inspect its
+actual preview. React Native/NativeWind and the web/native style-forwarding contract
+remain. Use the prebuilt web entry and CSS in a scoped document for a legacy host;
+do not duplicate the controls or expose global legacy styles to the preview.
+
+The Motion on/off switch controls the moving ticker, gold reflections/twinkles,
+side bursts and action travel, with persisted choice and reduced-motion override.
+No art/font binary or reference runtime is copied. Licensed social icons support
+Instagram, Facebook, X, YouTube, TikTok and Spotify; URLs stay caller supplied.
+See the [candidate contract](https://github.com/handh-dev/bubbas-ui/blob/main/docs/releases/0.7.0-candidate.md)
+for rights, meaningful browser checks and separate owner publication/adoption gates.
+
+### Selected campaign marquee preset (local candidate)
+
+```tsx
+import { FocusMarquee, FOCUS_MARQUEE_CAMPAIGN_PRESET } from '@bubbasfw/ui';
+<FocusMarquee {...FOCUS_MARQUEE_CAMPAIGN_PRESET} items={callerOwnedFacts} />
+```
+
+This presentation-only preset totals1.64s per pill:1.1s hold, .25s leaving,
+.25s entering, .04s settling. Apps supply facts; no preview width is imposed.
+The general component's omitted-timing cadence remains2.3s. This local candidate
+does not authorize publication or deployment.
+
+Sparkler offer: use `PromotionBanner variant="marketing" emphasis="sparkler"`
+with `title`, optional `titleAccent` (gold second line), `eyebrow`, description,
+and action. Optional caller-owned `artwork={{uri, alt:'', aspectRatio, rotation}}`
+retains original proportions/colors and a shared responsive orientation. Keep
+private art outside this package; its rights and notices stay with its owner.
+No-asset/error states retain the offer and action. See the system contract and
+same-component catalog `promotionExample` fixture for local review.
+
+The sparkler offer uses the shared product badge’s large size:16px/36px on
+phones and18px/40px in wider containers. Existing product badges keep their
+compact default. Metallic shine, gleam and gold twinkles remain shared.

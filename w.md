@@ -187,3 +187,138 @@ sections and package-owned catalog. See docs/releases/0.5.0-candidate.md and
 system-contract.md. Owner review remains required before publication; no npm or
 Pages publication occurs on this branch. Excluded mobile/HQ/Bulk/social apps
 retain their own pins. Existing dirty AGENTS.md was preserved separately.
+
+## Mobile marketing refinement — 0.7.0 candidate
+
+Extends the shared marketing implementation in an isolated worktree. Public
+0.6.1 stays approved; no npm/Pages/app publication occurs during preparation.
+Read docs/releases/0.7.0-candidate.md for the 18-item behavior scope, reference
+provenance, required gates and review boundary. Existing framework/dependency
+versions, native primitives, foundation custody and web Button forwarding remain.
+
+## October 23 shared refinements — candidate6 preparation
+
+Owner's twelve annotations refine the shared implementation, not app-local styles.
+Same-row compact hero actions; metallic gold and continuous gold-only twinkles;
+long-title fit; wide/transparent layout APIs; narrower ticker caps; hover feedback;
+six licensed social icons. Owner then requested Core-backed announcement authoring:
+shared safe segments, static measured banner and controlled selected-word editor;
+Core/HQ own persistence and publication. Existing HQ controls remain excluded.
+All proposed versions remain isolated and unpublished pending exact owner review.
+Use `pnpm verify:web:marketing` plus existing fonts/forms/package/docs gates.
+
+## Proposed 0.7.0 final10 — announcement fitting correction
+
+The independent final9 review found that important generic font utilities kept
+long announcements at 12px despite their measured inline size. Final10 scopes the
+shared font cascade, measures at the actual painted 14px base, reports computed
+size, and supplies a conservative no-JavaScript fallback without an overflow-
+causing minimum floor. Gold paint, inline spaces and the six-social header remain.
+The real-browser announcement-fit gate reproduces final9's overflow and covers
+85-character seed/near-160-character content, both stylesheet orders, opaque
+classic-script hydration, delayed fonts, content/width changes and honest editor
+warnings. The seeded concise phone message stays readable.
+
+Owner review, normal full-package/docs checks, fresh independent review and
+consumer qualification remain separate; this is not a publication/deployment.
+
+## Candidate11 local review — campaign badges
+
+Owner paused release and requested that every campaign badge/full label stay
+visible on phones without horizontal scrolling. Shared CampaignSection wraps by
+available width; the catalog/contract and extracted browser bounds checks cover
+realistic labels, long words, enlarged text and narrower nested containers.
+Existing candidate10 archive/previews stay immutable. No publication or deployment.
+
+## FocusMarquee — local candidate11
+
+Owner resumed local work for one solid-red, endlessly moving white pill lane with
+subtle center focus. Shared FocusMarquee owns all presentation/options, global
+motion/static fallback, layout observation and inert duplicates. Apps supply
+facts. The backward-compatible CampaignSection wrap fix is retained. No release
+or consumer deployment is authorized by this local revision.
+
+## FocusMarquee candidate14 — local spring direction
+
+Owner's next visual review requests centered spring handoffs, pop/stretch and
+soft outer edges. Shared default is now a finite cadence/preset sequence, keeping
+linear as an explicit option and all prior footprint/motion/static contracts.
+Actual recording and serial frames are required before freezing this local
+proposal; no publication/deployment is authorized.
+
+## FocusMarquee candidate15 — local fast flow
+
+Short centered rests, denser actual geometry and gentle outer-edge blur refine
+the same shared finite handoff engine. Preserve14 original artifacts/previews;
+compare actual motion/gaps/filter values against14 before freezing this local
+proposal. Publication and deployment remain paused.
+
+## FocusMarquee candidate16 — slightly eased local cadence
+
+Owner requested only a small slowdown: default1.20s per fact, retaining15’s
+short0.14s centered rest and all density/blur/pop settings. Preserve15 original
+and successful isolated reruns; qualify a new16 artifact for local review only.
+
+## FocusMarquee candidate17 — exact owner1.80s cadence
+
+The owner specified1.80 seconds. Only shared default/fallback cadence changes;
+retain short0.14s rest and all15 density/blur/pop settings.16 original/evidence
+remain preserved as superseded. Build/prove actual timing, then freeze new17
+original for local review; release remains paused.
+
+## FocusMarquee candidate18 — quick local live tuning
+
+Single shared default2.3s; existing cadence prop and actual Input/FormField catalog
+control enable local trials without repeated package changes. Preserve17 originals
+and HQ17. Focused actual-package build/type/live-edit/invalid/static checks and a
+fresh read-only review apply; full release/Expo/Core/HQ/recovery gates wait for
+accepted motion. Website DEV override belongs to its consumer, ignored in prod.
+
+## Sparkler offer — local candidate21
+
+Extend shared PromotionBanner, same-component catalog and contracts for the
+owner's navy/gold/red composition reference and original caller-supplied vector.
+Private art stays outside the public package. Focused shared build/type/browser
+responsive/focus/hover/static/missing-art checks apply; exact selection20 marquee
+settings are preserved. Consumer integration and fresh read-only review follow.
+This is a local proposal: publication/deployment and full release gates remain
+paused/deferred.
+
+
+## Sparkler offer — local candidate22 owner correction
+
+Owner superseded21’s dark navy field: use solid official brand blue and remove
+both static Sparkles glyphs from the offer (badge and background). Keep gold
+animated sparkles, original caller art, white/gold headline, gold/red sweep and
+white action. Preserve original21 artifact and all selected20 marquee settings.
+This correction is local only; publication/deployment remain paused.
+
+
+## Sparkler offer — local candidate23 badge reuse
+
+Owner requests existing product deal badge for Free gift. Reuse actual shared
+MarketingProductBadge with its metallic paint/gleam/twinkles and an optional
+static-icon flag (true by default for existing products; false in this card).
+Retain every22 composition choice and selected20 marquee. Focused badge motion,
+manual/reduced preference, bounds and keyboard checks qualify local preparation
+only. Original22 preserved; publication/deployment remain paused.
+
+
+## Sparkler offer — local candidate24 badge size
+
+Owner asks for a modestly larger Free gift badge. Extend actual reusable
+MarketingProductBadge with sm default preserving products and lg in the offer:
+16px/36px base,18px/40px at440px containing inline size. Same metallic effects,
+icon=false and other23 composition/marquee unchanged. Focused actual dimensions,
+responsive bounds and existing motion/keyboard checks; no unrelated broad suite.
+Preserve23 original; publication/deployment stay paused.
+
+
+## Candidate24 release preparation — owner authorized
+
+The owner approved source5312215244e2118d42c64738759e50b8065e041b and original
+archiveffd517304c85c091f85b26ab9a10ad3c3d008fe13f769cae53d41adfc495c991,
+authorizing deployment. Full required gates now bind those original bytes.
+This documentation delta updates public guides/release state only; no approved
+package member changes. npm/Pages/sourcepush/merge await coordinator go after
+system-wide preflight. See docs/releases/0.7.0.md for current evidence/state.

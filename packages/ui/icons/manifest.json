@@ -65,6 +65,34 @@
       "pngSha256": "aa45f35b1a90a20e067010176c5391f837385af5a0f052a0cdc332f640467817",
       "width": 96,
       "height": 96
+    },
+    "x": {
+      "source": "simple-icons/x.svg",
+      "sourceSha256": "693e68863eceb8dc9f72e2acd386ab9c20a10858dab2c076212f7084cb7a32fe",
+      "pngSha256": "f3b68c57b234b7f3f13cf211c816d6ec7f8fa65896758b04fe2c919b5b15fb32",
+      "width": 96,
+      "height": 96
+    },
+    "youtube": {
+      "source": "simple-icons/youtube.svg",
+      "sourceSha256": "5038808acbbc4e6edda16cbeb1cc6dec80e4e4ee4e227e039c41229fa222aa8c",
+      "pngSha256": "123c75bfa425854a500f81264009f9b49061b242af194d19378d3c51d33c6846",
+      "width": 96,
+      "height": 96
+    },
+    "tiktok": {
+      "source": "simple-icons/tiktok.svg",
+      "sourceSha256": "6f54ac8d325faacea8935bdc44cbed60206a6b408641799e5fea1cba7c1a0af7",
+      "pngSha256": "e6fd0c815350879272066785838b7bb5816aac5873ca0463d15ad69162324e8b",
+      "width": 96,
+      "height": 96
+    },
+    "spotify": {
+      "source": "simple-icons/spotify.svg",
+      "sourceSha256": "b9ec9bec7769c35643981586d6ea0d675aaf3871b32f8a291bcac7a87fff0bc1",
+      "pngSha256": "35e1e5d12020fbfee537cdc71dc5fd2b324f2b0ddc2ae0694c520b9293a4635a",
+      "width": 96,
+      "height": 96
     }
   }
 }

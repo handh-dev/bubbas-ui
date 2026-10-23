@@ -1,7 +1,7 @@
 # @bubbasfw/ui
 
 Bubba’s universal design system for Next.js, Vite, Astro, Expo, iOS and Android.
-`@bubbasfw/ui@0.6.1` contains 32 controls, the shared Icon library, 15 reusable sections and three task
+Owner-reviewed `@bubbasfw/ui@0.7.0` contains 32 controls, the shared Icon library, 15 reusable sections and three task
 patterns built with React Native primitives and NativeWind, plus semantic
 themes, a visual review workbench and complete Web/Expo galleries.
 
@@ -123,7 +123,7 @@ Next.js universal example.
 ### Vite and Astro
 
 ```sh
-pnpm add @bubbasfw/ui@0.6.1 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
+pnpm add @bubbasfw/ui@0.7.0 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
 ```
 
 Import controls and sections from `@bubbasfw/ui/web` and load
@@ -154,7 +154,7 @@ The tested example baseline is React 19.2.3, React Native 0.86.3, React Native W
 versions. NativeWind v5 and Tailwind v4 require a separate migration.
 
 ```sh
-pnpm add @bubbasfw/ui@0.6.1 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.7.0 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -243,7 +243,7 @@ Official setup references:
 For Expo SDK57 builds with Xcode27/iOS27, follow the targeted
 [scene-lifecycle setup](docs/platform-notes.md).
 
-## Approved annotated web release 0.6.1
+## Previous approved annotated web release 0.6.1
 
 The owner approved the exact 0.6.1 compatibility patch preserving the reviewed
 annotated web design. It fixes dropped web Button caller styles; 0.6.0 remains
@@ -274,3 +274,37 @@ with lift/press feedback and a white-separated focus ring. Inactive controls hav
 no glow or movement; reduced motion removes travel. Native keeps the same sizing,
 solid brand fill, label, semantics and restrained native shadow without a new
 gradient dependency. Default application controls retain their previous design.
+
+## Owner-reviewed web revision 0.7.0
+
+This source contains owner-reviewed candidate24. The approved registry
+release remains 0.6.1 until deliberate publication. The owner has approved
+exact candidate24; see [its release record](docs/releases/0.7.0.md) for qualification
+and publication state.
+The marketing sections keep their existing props: apps supply content/actions;
+the website omits the optional Hero description. Phones show the caller's mascot
+without a repeated hero logo, use intrinsic 48px actions, a readable announcement,
+the selected spring campaign marquee, a two-column footer and a compact product
+gallery. The reusable bright-blue sparkler offer uses its larger shared metallic
+product badge; private original artwork stays with its owning consumer.
+
+Announcement and ticker animation share a visible **Motion on/off** switch in
+marketing navigation and footer. Hover does not stop the ribbon. The choice survives ordinary page loads with a caught storage/in-memory fallback
+for restricted browser contexts. Reduced motion starts static; with motion off the complete ribbon wraps and the single-line
+announcement can be scrolled manually. Native and no-JS layouts retain all copy.
+Standalone ticker consumers must provide the shared motion control alongside the
+ribbon, as the canonical catalog does; do not remove access to the stop mechanism.
+
+Gold badges and the promotion's brief side bursts are decorative and preserve
+content/actions. All new motion stops for reduced motion. No art/font binary or
+Info Links runtime is included. See the [candidate contract](docs/releases/0.7.0-candidate.md)
+for rights, behavior and separate publication/consumer acceptance gates.
+
+Local sparkler offer proposal: `PromotionBanner` keeps the actual reusable
+composition in UI. Use `variant="marketing" emphasis="sparkler"`, `title="Free"`,
+`titleAccent="Sparkler"`, `eyebrow="Free gift"`, caller-owned copy/action and optional
+`artwork={{uri: reviewedLocalUrl, alt: '', aspectRatio: originalWidth / originalHeight,
+rotation: -60}}`. Original art stays in its private consumer with provenance;
+public catalog examples stay synthetic. Review through the same real component
+with `UIReviewCatalog promotionExample={callerFixture}`. No artwork is bundled
+or approved by this API. Publication/deployment remain paused.

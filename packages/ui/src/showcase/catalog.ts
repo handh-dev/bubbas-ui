@@ -200,4 +200,4 @@ export const components = catalog.map(
   }),
 );
 export const categories = [...new Set(components.map((item) => item.category))];
-export const candidateVersion = "0.6.1";
+export const candidateVersion = "0.7.0";
