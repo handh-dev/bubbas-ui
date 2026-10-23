@@ -23,7 +23,7 @@ export function SocialSection({links,description,...props}:SocialSectionProps) {
 export interface FlagTickerProps extends SectionProps { items:readonly string[] }
 /** Patriotic ribbon with caller-owned copy; native/no-JS/reduced motion keep every item readable. */
 function TickerEndcap({side}:{side:'left'|'right'}) {
- return <View accessible={false} aria-hidden pointerEvents="none" className={cn('bubba-ticker-endcap w-10 shrink-0 items-center justify-center bg-bubba-navy px-1 min-[761px]:w-24',side==='left'?'bubba-ticker-endcap-left':'bubba-ticker-endcap-right')}><Text variant="caption" className="text-center text-[8px] leading-3 text-white min-[761px]:text-xs min-[761px]:leading-4">{'★ ★ ★\n ★ ★\n★ ★ ★'}</Text></View>;
+ return <View accessible={false} aria-hidden pointerEvents="none" className={cn('bubba-ticker-endcap w-6 shrink-0 items-center justify-center bg-bubba-navy px-0.5 min-[761px]:w-12',side==='left'?'bubba-ticker-endcap-left':'bubba-ticker-endcap-right')}><Text variant="caption" className="text-center text-[6px] leading-[10px] text-white min-[761px]:text-[10px] min-[761px]:leading-3">{'★ ★ ★\n ★ ★\n★ ★ ★'}</Text></View>;
 }
 export function FlagTicker({items,className,variant,...props}:FlagTickerProps) {
  const [motion]=useMarketingMotion();

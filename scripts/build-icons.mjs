@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { chromium } from 'playwright';
 process.chdir(new URL('..', import.meta.url).pathname);
-const files = { search:'lucide/search', menu:'lucide/menu', close:'lucide/x', sparkles:'lucide/sparkles', pause:'lucide/pause', play:'lucide/play', arrowRight:'lucide/arrow-right', instagram:'simple-icons/instagram', facebook:'simple-icons/facebook' };
+const files = { search:'lucide/search', menu:'lucide/menu', close:'lucide/x', sparkles:'lucide/sparkles', pause:'lucide/pause', play:'lucide/play', arrowRight:'lucide/arrow-right', instagram:'simple-icons/instagram', facebook:'simple-icons/facebook', x:'simple-icons/x', youtube:'simple-icons/youtube', tiktok:'simple-icons/tiktok', spotify:'simple-icons/spotify' };
 let browser;
 try {
  browser=await chromium.launch();

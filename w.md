@@ -195,3 +195,14 @@ Extends the shared marketing implementation in an isolated worktree. Public
 Read docs/releases/0.7.0-candidate.md for the 18-item behavior scope, reference
 provenance, required gates and review boundary. Existing framework/dependency
 versions, native primitives, foundation custody and web Button forwarding remain.
+
+## October 23 shared refinements — candidate6 preparation
+
+Owner's twelve annotations refine the shared implementation, not app-local styles.
+Same-row compact hero actions; metallic gold and continuous gold-only twinkles;
+long-title fit; wide/transparent layout APIs; narrower ticker caps; hover feedback;
+six licensed social icons. Owner then requested Core-backed announcement authoring:
+shared safe segments, static measured banner and controlled selected-word editor;
+Core/HQ own persistence and publication. Existing HQ controls remain excluded.
+All proposed versions remain isolated and unpublished pending exact owner review.
+Use `pnpm verify:web:marketing` plus existing fonts/forms/package/docs gates.

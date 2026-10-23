@@ -48,7 +48,7 @@ const containerSizes: Record<ButtonSize, string> = {
   lg: 'min-h-[56px] px-6 py-4',
 };
 const marketingContainerSizes: Record<ButtonSize,string> = {
- sm:'min-h-[48px] rounded-[6px] px-4 py-2.5',
+ sm:'min-h-[48px] rounded-[6px] px-3 py-2',
  md:'min-h-[48px] rounded-[6px] px-4 py-2.5',
  lg:'min-h-[48px] rounded-xl px-5 py-3 min-[761px]:min-h-[60px] min-[761px]:px-[26px] min-[761px]:py-4',
 };

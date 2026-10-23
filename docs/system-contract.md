@@ -241,12 +241,12 @@ The original brand artwork remains caller supplied and retains its own rights.
 The existing marketing appearance interprets `size="lg"` as a featured action;
 HeroSection selects it automatically. sm/md retain compact repeated actions.
 The reference-inspired design uses 12px featured corners / 6px compact corners,
-60px desktop / 56px phone featured minimum height, and 44px compact targets.
+60px desktop / 48px phone featured minimum height, and 48px compact targets.
 Original red/blue gradient shading and ambient glow are web effects; universal
 native controls retain solid fills, the same geometry and subtle native shadow.
 No gradient dependency or default application-control redesign is introduced.
 Hover/press, white-separated focus, disabled/busy and reduced-motion states remain
-part of the exact reviewed candidate. Labels wrap rather than truncate.
+part of the contract. Marketing labels stay on one line; callers keep copy concise.
 
 ### Ribbon ticker refinement
 
@@ -269,39 +269,74 @@ a package build or Next gallery does not establish this distinct host contract.
 
 ## Mobile marketing refinement candidate — 0.7.0
 
-Unpublished; exact owner design review remains required. Existing section props
-and the 0.6.1 web Button style/RTL/form contract remain. Marketing actions use
-intrinsic widths, a 48px phone minimum, one readable label line, a restrained red
-or blue glow, and distinct hover/focus/press/inactive states. Callers keep action
-labels short; they never add app-local styles to repair a shared layout.
+Unpublished; exact owner review remains required. The October 23 refinement extends
+shared presentation and the actual package catalog, rather than creating app-local
+styles. The existing 0.6.1 Button object/array/callback/RTL/form forwarding remains.
 
-Phones hide only the repeated hero logo, retain the accessible H1 and supplied
-mascot, and use a readable gold honor badge. Announcement uses original blue
-#0866FF and a >=12px single-line track after hydration. Its complete copy is one
-accessible text node; manual motion-off mode supports horizontal scrolling.
-No-JS web retains the same one-line, manually scrollable full text; native keeps
-a static wrapping adaptation. Campaign badges stay in a single
-nonshrinking row inside a native ScrollView; the rail scrolls when required.
-Footer uses brand/full-width, two link columns, then full-width season content
-through 760px, retaining the original logo source without an added white well.
-PDP artwork is contained within min(60vw,280px) on phones, with 48px thumbnails.
-All product facts, descriptions, gallery/video and actions remain available.
+- Marketing hero action pairs stay on one row at every supported width. The shared
+  compact hero treatment has 48px targets, bounded horizontal padding and fluid
+  10–14px web labels. Callers keep labels short; no label truncation or wrapping.
+  Native retains the same row, 48px targets and compact 11px label adaptation.
+- Honor badges use a rich gold metallic gradient, beveled edge and narrow reflective
+  band with dark #352300 text. Product badges use the approved gold family, an
+  occasional reflective pass and continuous independently staggered four-point
+  gold twinkles. PromotionBanner uses the same gold-only vocabulary. Short bounded
+  radial side bursts remain interaction feedback; no particles intercept input.
+- Product and category grids use two columns through 760px, three through 1199px,
+  then four. Full titles wrap safely, including unusually long words. ThemeProvider also accepts `surface="transparent"` for standalone
+  sections without painting a canvas behind them; its default remains canvas. Container and
+  ContentSection support `width="wide"` (1600px maximum with 16px gutters).
+  ContentSection supports `surface="transparent"` for action-only areas.
+- FlagTicker reserves 24px phone / 48px desktop navy star caps. Its text keeps moving
+  on hover. The persistent Motion switch in navigation/footer controls the ticker,
+  gold twinkles/reflections, side bursts and action travel. The same stored preference
+  is mirrored onto the document root for static SSR sections. OS reduced motion
+  overrides it; restricted storage uses the existing in-memory fallback.
+- Mobile navigation links have a subtle blue hover/keyboard-focus highlight.
+  Header, footer and SocialSection render all caller-supplied social links, including
+  the licensed Instagram, Facebook, X, YouTube, TikTok and Spotify icon subset.
+  Account URLs and category artwork remain caller-owned, never inferred business data.
+- Phones retain the accessible H1 and supplied mascot, omit only the repeated hero
+  logo, keep the campaign badges on one keyboard-scrollable rail, use the responsive
+  two-column footer without an extra white logo well, and retain compact contained
+  PDP artwork/gallery/video/actions. Dialog focus/scroll locking and 200ms exit stay.
 
-Ticker endcaps are navy with white stars only. Hover no longer pauses motion.
-A shared Motion on/off switch remains pointer/touch/keyboard operable in marketing
-navigation and footer and controls ticker, announcement, honor/product gleams, spark emission and
-promotion bursts. It also removes decorative action movement while preserving
-static interaction/focus feedback. The browser hook mirrors its namespaced motion
-preference onto the document root so static server-rendered hero/cards/promotion
-receive the same CSS stop state without hydrating every presentation section. Standalone
-examples include the same control. The visitor choice persists across ordinary page loads, with caught storage failures
-and an in-memory fallback for sandboxed Studio previews. Reduced motion defaults off and overrides all
-decorative animation. Manual stop reveals the complete wrapped ticker and manually
-scrollable announcement; no duplicate text or hidden announcement substitutes.
+### Static promotional announcement and authoring
 
-Promotion side bursts are independently authored, bounded, noninteractive radial
-CSS effects inspired by the owner's Info Links reference. They run once per hover,
-focus or touch activation, away from copy/actions. Native retains the static gold
-spark icon; reduced motion retains static color/glow without particle movement.
-Shared Dialog retains its web portal/focus trap/scroll lock for a 200ms opacity
-and 10px exit, then restores trigger focus. Reduced motion unmounts immediately.
+`AnnouncementContent` accepts either a backward-compatible plain string or safe
+`AnnouncementSegment[]` (`{text, tone:'default'|'yellow'}`). SiteHeader accepts
+`announcement` and optional `announcementCompact` of that type. AnnouncementBanner
+exports the same real presentation for authoring previews. Neither performs a fetch.
+Core owns publication, segments and revisions; the host supplies current content.
+No raw HTML is accepted or rendered. Yellow words use approved #FED766 on a small
+opaque #03256C backing (normal-text contrast above 10:1); the bar stays original blue.
+
+The announcement is static and single-line, with no marquee or manual scrolling.
+Measured web fitting uses a shorter caller-reviewed phone message through 760px or
+when the full message would fall below 11px; otherwise it fits the full message.
+The full copy remains its accessible label. A conservative character-count CSS
+fallback keeps reviewed concise phone/desktop copy at least 11px before hydration/without JavaScript; native
+uses the static text adaptation. Content is never silently removed or invented.
+Arbitrary long copy cannot fit a phone at a readable size: authors supply concise
+phone copy, and the editor warns when its actual 320px preview drops below 11px.
+
+`AnnouncementEditor` is controlled (`value`, `onValueChange`) and uses the shared
+RN Textarea, FormField and Buttons. Select words, then Make yellow/Make white. It
+retains selection/focus, preserves highlight runs through ordinary edits, handles
+UTF-16 selection boundaries without splitting surrogate pairs, and rejects over
+160 Unicode code points or over 24 normalized segments. Controls, line breaks, Unicode line/paragraph
+separators and angle brackets are rejected with visible feedback and the prior
+valid value remains. Adjacent equal tones merge.
+It supports disabled/busy/error states, a configurable `previewWidth` and optional
+caller children for publication controls. Apps own enable/save/revision/conflicts,
+validation and persistence. Its preview is the actual AnnouncementBanner. Two
+editors may author primary and optional phone messages. Existing hosts with broad
+legacy CSS may isolate the actual web bundle in a scoped document as Studio does;
+never duplicate the editor or import a different implementation for its showcase.
+
+`pnpm verify:web:marketing` covers actual 320/375/390/747/950/1024/1200/1661 layouts,
+long-title bounds, same-row CTA/label fit, static/no-JS announcement fit, six socials,
+continuous gold-only twinkles, stored/OS motion stop, menu hover, selected-word
+formatting, Unicode editing, authoring validation/states and small-text warning.
+Required release gates also include verify, web forms, full installed package and
+public docs checks. Native export checks do not qualify installed device behavior.

@@ -34,3 +34,8 @@ export type { IconProps, IconName } from './components/Icon';
 export * from './components/campaigns';
 
 export { MarketingMotionControl } from './components/marketing';
+
+export { AnnouncementBanner } from './components/marketing';
+export { AnnouncementEditor } from './components/announcement';
+export type { AnnouncementSegment, AnnouncementContent, AnnouncementEditorProps } from './components/announcement';
+export type { AnnouncementBannerProps } from './components/marketing';

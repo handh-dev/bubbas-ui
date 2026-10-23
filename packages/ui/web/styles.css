@@ -20,26 +20,43 @@
 [data-bubba-action]:not([aria-disabled="true"]):active { transform:translateY(1px); }
 [data-bubba-action]:not([aria-disabled="true"]):focus-visible { outline:3px solid #03256C!important; outline-offset:3px!important; box-shadow:0 0 0 3px #FFFFFF; }
 [data-bubba-action][aria-disabled="true"] { background-image:none; box-shadow:none; transform:none; }
+/* Static announcement: fit text, never scroll or wrap. The compact copy is caller reviewed. */
 .bubba-announcement { background:#0866FF!important; }
-.bubba-announcement-viewport { container-type:inline-size; overflow:auto; }
-.bubba-announcement-copy { color:#FFFFFF; min-width:100%; width:max-content!important; max-width:none!important; white-space:nowrap!important; }
-.bubba-announcement[data-bubba-animated="true"][data-bubba-motion="on"] .bubba-announcement-viewport { overflow:hidden; }
-.bubba-announcement[data-bubba-animated="true"][data-bubba-motion="on"] .bubba-announcement-copy { animation:bubba-announcement-scroll 28s linear infinite alternate; }
-.bubba-announcement-viewport:focus-visible { outline:2px solid #FFFFFF; outline-offset:-3px; }
-.bubba-honor-badge { position:relative; overflow:hidden; }
-.bubba-honor-badge::after { content:""; position:absolute; inset:0; background:linear-gradient(110deg,transparent 25%,#FFFFFF99 50%,transparent 75%); transform:translateX(-110%); animation:bubba-honor-shimmer 3s ease-out 1; pointer-events:none; }
+.bubba-announcement-viewport { container-type:inline-size; overflow:visible; padding-inline:12px; }
+.bubba-announcement-copy { color:#FFFFFF; flex-shrink:0; width:max-content!important; max-width:none!important; white-space:nowrap!important; font-size:clamp(11px,calc((100cqw - 24px)/var(--bubba-announcement-length,100)),14px); line-height:1.3; }
+.bubba-announcement-compact { display:none!important; }
+.bubba-announcement-segment { font:inherit!important; line-height:inherit!important; letter-spacing:inherit!important; }
+.bubba-honor-badge { position:relative; overflow:hidden; background:linear-gradient(165deg,#FED766 0%,#E5AF33 22%,#FFE69B 43%,#F9D56D 47%,#D7A127 50%,#FED766 72%,#C39424 100%); border:1px solid #A77512; box-shadow:inset 0 1px 0 #FFF4C8,inset 0 -1px 0 #8A620060,0 2px 7px #65480022; }
+.bubba-honor-badge::after { content:""; position:absolute; inset:0; background:linear-gradient(110deg,transparent 30%,#FFF4C855 47%,#FFFFFF80 50%,transparent 60%); transform:translateX(-110%); animation:bubba-honor-shimmer 6s ease-in-out infinite; pointer-events:none; }
+.bubba-hero-actions { flex-direction:row!important; flex-wrap:nowrap!important; gap:8px; container-type:inline-size; }
+.bubba-hero-actions [data-bubba-action] { min-height:48px!important; max-width:calc((100% - 8px)/2); min-width:0; padding:10px 12px!important; border-radius:8px!important; flex-shrink:1; }
+.bubba-hero-actions .bubba-action-label { font-size:clamp(10px,3.3cqw,14px)!important; line-height:20px!important; }
+.bubba-content-transparent { background:transparent!important; }
 .bubba-header-row { min-height:80px; }
 .bubba-nav-link { position:relative; min-height:44px; padding:0 !important; }
 .bubba-nav-link::after { content:""; position:absolute; height:2px; bottom:9px; left:0; right:0; background:#D40000; transform:scaleX(0); transform-origin:left; transition:transform 180ms ease; }
 .bubba-nav-link:hover::after,.bubba-nav-link:focus-visible::after,.bubba-nav-link[aria-current="page"]::after { transform:scaleX(1); }
 .bubba-product-image > div { width:100%; display:flex; }
 .bubba-product-card { height:100%; }
-.bubba-product-badge { position:relative; overflow:visible; background:linear-gradient(110deg,#FED766,#FFEBA8,#FED766); box-shadow:0 1px 8px #FED76645; }
-.bubba-product-badge::before { content:"✦"; color:#8A6200; position:absolute; right:-8px; top:-9px; font-size:13px; pointer-events:none; animation:bubba-badge-spark 1800ms ease-out 1; }
-.bubba-product-badge::after { content:""; position:absolute; inset:0; border-radius:inherit; background:linear-gradient(100deg,transparent 35%,#FFFFFF99 50%,transparent 65%); background-size:250% 100%; background-position:150% 0; animation:bubba-badge-gleam 1800ms ease-out 1; pointer-events:none; }
+.bubba-product-title,.bubba-product-title a,.bubba-product-title-copy { min-width:0; max-width:100%; overflow-wrap:anywhere!important; word-break:normal; white-space:normal!important; }
+.bubba-product-title a { display:flex; width:100%; }
+.bubba-product-badge { position:relative; max-width:100%; overflow:visible; background:linear-gradient(155deg,#FFE69B,#FED766 37%,#F3BD44 55%,#FFE69B 82%,#D7A127); box-shadow:inset 0 1px 0 #FFF4C8,0 1px 8px #FED76645; }
+.bubba-product-badge::after { content:""; position:absolute; inset:0; border-radius:inherit; background:linear-gradient(100deg,transparent 35%,#FFF4C870 50%,transparent 65%); background-size:250% 100%; background-position:150% 0; animation:bubba-badge-gleam 6s ease-in-out infinite; pointer-events:none; }
+.bubba-gold-sparkles { position:absolute!important; inset:-8px -5px!important; overflow:visible; pointer-events:none; }
+.bubba-gold-sparkle { position:absolute!important; width:10px; height:10px; opacity:0; background:#FED766; clip-path:polygon(50% 0%,62% 36%,100% 50%,62% 62%,50% 100%,38% 62%,0% 50%,38% 36%); filter:drop-shadow(0 0 3px #D7A12790); animation:bubba-gold-twinkle 3.8s ease-in-out infinite; }
+.bubba-gold-sparkle-0 { left:3%; top:5%; animation-delay:-.8s; }
+.bubba-gold-sparkle-1 { left:37%; top:82%; width:7px; height:7px; animation-delay:-2.4s; }
+.bubba-gold-sparkle-2 { right:2%; top:18%; animation-delay:-1.5s; }
+.bubba-gold-sparkle-3 { left:68%; top:0; width:6px; height:6px; animation-delay:-3.2s; }
+.bubba-gold-sparkle-4 { right:18%; top:85%; width:6px; height:6px; animation-delay:-.1s; }
+.bubba-gold-sparkles-large { inset:16px!important; }
+.bubba-gold-sparkles-large .bubba-gold-sparkle { width:17px; height:17px; }
+.bubba-mobile-nav-link { transition:background-color 160ms ease,box-shadow 160ms ease; }
+.bubba-mobile-nav-link:hover { background-color:#0866FF0D; box-shadow:inset 3px 0 0 #0866FF; }
+.bubba-mobile-nav-link:focus-visible { background-color:#0866FF14; }
 .bubba-promo-spark { filter:drop-shadow(0 0 9px #FED76670); }
 .bubba-sparkler-promo { border-left:8px solid #FED766; }
-.bubba-promo-burst { position:absolute; width:100px; height:100px; top:50%; margin-top:-50px; opacity:0; pointer-events:none; border-radius:50%; background:repeating-conic-gradient(from 10deg,transparent 0deg 27deg,#FED766 28deg 30deg,transparent 31deg 45deg); mask-image:radial-gradient(circle,transparent 15%,#000 17% 48%,transparent 68%); }
+.bubba-promo-burst { position:absolute!important; width:100px; height:100px; top:50%; margin-top:-50px; opacity:0; pointer-events:none; border-radius:50%; background:repeating-conic-gradient(from 10deg,transparent 0deg 27deg,#FED766 28deg 30deg,transparent 31deg 45deg); mask-image:radial-gradient(circle,transparent 15%,#000 17% 48%,transparent 68%); }
 .bubba-promo-burst-left { left:-58px; }
 .bubba-promo-burst-right { right:-58px; }
 .bubba-promotion:hover .bubba-promo-burst,.bubba-promotion:focus-within .bubba-promo-burst,.bubba-promotion:active .bubba-promo-burst { animation:bubba-promo-burst 900ms ease-out 1; }
@@ -64,10 +81,10 @@
 .bubba-overlay[data-bubba-overlay="closing"] { animation:bubba-overlay-in 200ms ease-in reverse both; }
 .bubba-overlay[data-bubba-overlay="closing"] .bubba-overlay-panel { animation:bubba-panel-in 200ms ease-in reverse both; }
 @keyframes bubba-ticker-scroll { from { transform:translateX(0); } to { transform:translateX(min(0px,calc(-100% + 100cqw))); } }
-@keyframes bubba-announcement-scroll { 0%,12% { transform:translateX(0); } 88%,100% { transform:translateX(min(0px,calc(-100% + 100cqw))); } }
 @keyframes bubba-badge-gleam { to { background-position:-150% 0; } }
 @keyframes bubba-badge-spark { 0% { transform:translate(0,4px) scale(.6); opacity:0; } 35% { opacity:1; } 100% { transform:translate(3px,-3px) scale(1); opacity:.5; } }
-@keyframes bubba-honor-shimmer { 20% { transform:translateX(-110%); } 100% { transform:translateX(110%); } }
+@keyframes bubba-honor-shimmer { 0%,60% { transform:translateX(-110%); } 100% { transform:translateX(110%); } }
+@keyframes bubba-gold-twinkle { 0%,55%,100% { transform:translateY(2px) scale(.25) rotate(-12deg); opacity:0; } 70% { transform:translateY(0) scale(1) rotate(0); opacity:.85; } 88% { transform:translateY(-2px) scale(.55) rotate(12deg); opacity:.35; } }
 @keyframes bubba-promo-burst { 0% { transform:scale(.25); opacity:0; } 25% { opacity:.65; } 100% { transform:scale(1.35) rotate(9deg); opacity:0; } }
 @keyframes bubba-overlay-in { from { opacity:0; } to { opacity:1; } }
 @keyframes bubba-panel-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
@@ -96,6 +113,7 @@
 
 @media (max-width:760px) {
  .bubba-hero-action-pair { align-items:center; }
+
  .bubba-hero-copy { flex:none; }
  .bubba-honor-badge { max-width:100%; }
  .bubba-footer-layout { display:grid!important; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
@@ -109,11 +127,6 @@
 
 .bubba-campaign-badge-scroll:focus-visible { outline:3px solid #FFFFFF!important; outline-offset:3px!important; }
 
-/* One-shot badge effects can be seen again when a product is reached/interacted with. */
-.bubba-product-card:hover .bubba-product-badge::after,.bubba-product-card:focus-within .bubba-product-badge::after,.bubba-product-detail:hover .bubba-product-badge::after,.bubba-product-detail:focus-within .bubba-product-badge::after { animation:bubba-badge-gleam-replay 1800ms ease-out 1; }
-.bubba-product-card:hover .bubba-product-badge::before,.bubba-product-card:focus-within .bubba-product-badge::before,.bubba-product-detail:hover .bubba-product-badge::before,.bubba-product-detail:focus-within .bubba-product-badge::before { animation:bubba-badge-spark-replay 1800ms ease-out 1; }
-@keyframes bubba-badge-gleam-replay { from { background-position:150% 0; } to { background-position:-150% 0; } }
-@keyframes bubba-badge-spark-replay { 0% { transform:translate(0,4px) scale(.6); opacity:0; } 35% { opacity:1; } 100% { transform:translate(3px,-3px) scale(1); opacity:.5; } }
 /* The persistent preference governs every decorative marketing effect. */
 :is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-honor-badge::after,:is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-product-badge::after,:is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-product-badge::before,:is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-promo-burst { animation:none!important; }
 :is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-honor-badge::after,:is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-product-badge::after,:is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-promo-burst { display:none!important; }
@@ -121,3 +134,13 @@
 @media (prefers-reduced-motion:reduce) {
  .bubba-product-card .bubba-product-badge::after,.bubba-product-card .bubba-product-badge::before,.bubba-product-detail .bubba-product-badge::after,.bubba-product-detail .bubba-product-badge::before { animation:none!important; }
 }
+
+/* Twinkles are decoration only; stored/OS preferences also govern static SSR sections. */
+:is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-gold-sparkles { display:none!important; }
+@media (prefers-reduced-motion:reduce) { .bubba-gold-sparkles { display:none!important; } .bubba-gold-sparkle { animation:none!important; } .bubba-mobile-nav-link { transition:none; } }
+
+@media (max-width:760px) { .bubba-announcement-has-compact { display:none!important; } .bubba-announcement-compact { display:flex!important; font-size:clamp(11px,calc((100cqw - 24px)/var(--bubba-announcement-length,40)),14px); } }
+.bubba-announcement-viewport[data-bubba-compact="true"] .bubba-announcement-full { display:none!important; }
+.bubba-announcement-viewport[data-bubba-compact="true"] .bubba-announcement-compact { display:flex!important; }
+.bubba-announcement-viewport[data-bubba-compact="false"] .bubba-announcement-full { display:flex!important; }
+.bubba-announcement-viewport[data-bubba-compact="false"] .bubba-announcement-compact { display:none!important; }

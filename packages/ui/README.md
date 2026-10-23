@@ -212,9 +212,9 @@ bundled Chromium recipe is `scripts/build-icons.mjs`. Social trademarks remain w
 their owners. This subset introduces no native SVG peer or font dependency.
 
 Marketing actions use the existing `appearance="marketing"` and `size` API.
-Choose `size="lg"` for a featured action (60px desktop / 56px phone, 18px desktop / 16px phone label,
-12px corners); default `md` and `sm` retain compact 44px targets, 14px labels and
-6px corners. HeroSection chooses featured actions; header and repeated controls
+Choose `size="lg"` for a featured action (60px desktop / 48px phone, 18px desktop / 16px phone label,
+12px corners); default `md` and `sm` retain compact 48px targets, 14px labels and
+6px corners. HeroSection chooses the shared compact same-row treatment; header and repeated controls
 stay compact. Blue/red fills use gentle gradients and soft ambient glow on web,
 with lift/press feedback and a white-separated focus ring. Inactive controls have
 no glow or movement; reduced motion removes travel. Native keeps the same sizing,
@@ -223,21 +223,31 @@ gradient dependency. Default application controls retain their previous design.
 
 ## Mobile marketing refinement candidate 0.7.0
 
-This source contains an unpublished design candidate. The approved registry
-release remains 0.6.1 until exact owner review and deliberate publication.
-The marketing sections keep their existing props: apps supply content/actions;
-the website omits the optional Hero description. Phones show the caller's mascot
-without a repeated hero logo, use intrinsic 48px actions, a readable announcement,
-a horizontal badge rail, a two-column footer and a compact product gallery.
+Unpublished; public 0.6.1 remains approved. Hero actions use a compact single row
+with 48px targets. Metallic honor badges, gold-only continuous twinkles, safe full
+product titles, two/three/four-column grids, narrower star caps and subtle mobile
+navigation hover feedback belong to the shared system. Container/ContentSection
+accept `width="wide"`; ContentSection accepts `surface="transparent"`; use the same named surface on an
+outer ThemeProvider when that standalone region should not paint a canvas.
 
-Announcement and ticker animation share a visible **Motion on/off** switch in
-marketing navigation and footer. Hover does not stop the ribbon. The choice survives ordinary page loads with a caught storage/in-memory fallback
-for restricted browser contexts. Reduced motion starts static; with motion off the complete ribbon wraps and the single-line
-announcement can be scrolled manually. Native and no-JS layouts retain all copy.
-Standalone ticker consumers must provide the shared motion control alongside the
-ribbon, as the canonical catalog does; do not remove access to the stop mechanism.
+`SiteHeader` accepts a plain announcement string or safe `{text,tone}` segments,
+where tone is `default` or `yellow`; optional `announcementCompact` supplies a
+reviewed short phone message. Text is static and fitted, never a marquee. Gold
+words use navy backing for readable contrast. The same `AnnouncementBanner` is
+used by the controlled `AnnouncementEditor`: value/onValueChange, text selection
+and Make yellow/Make white, disabled/busy/error, actual phone preview and small-text
+warning. Hosts own Core calls, enabled state, revisions and save actions. No HTML
+is accepted; no Studio runtime is required.
 
-Gold badges and the promotion's brief side bursts are decorative and preserve
-content/actions. All new motion stops for reduced motion. No art/font binary or
-Info Links runtime is included. See the [candidate contract](https://github.com/handh-dev/bubbas-ui/blob/main/docs/releases/0.7.0-candidate.md)
-for rights, behavior and separate publication/consumer acceptance gates.
+The authoring limit is 160 Unicode characters and 24 normalized text sections.
+Long phone copy still becomes small; supply concise phone copy and inspect its
+actual preview. React Native/NativeWind and the web/native style-forwarding contract
+remain. Use the prebuilt web entry and CSS in a scoped document for a legacy host;
+do not duplicate the controls or expose global legacy styles to the preview.
+
+The Motion on/off switch controls the moving ticker, gold reflections/twinkles,
+side bursts and action travel, with persisted choice and reduced-motion override.
+No art/font binary or reference runtime is copied. Licensed social icons support
+Instagram, Facebook, X, YouTube, TikTok and Spotify; URLs stay caller supplied.
+See the [candidate contract](https://github.com/handh-dev/bubbas-ui/blob/main/docs/releases/0.7.0-candidate.md)
+for rights, meaningful browser checks and separate owner publication/adoption gates.
