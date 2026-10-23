@@ -41,4 +41,5 @@ export type { AnnouncementSegment, AnnouncementContent, AnnouncementEditorProps 
 export type { AnnouncementBannerProps } from './components/marketing';
 
 export { FocusMarquee, FOCUS_MARQUEE_DEFAULT_CADENCE } from './components/focus-marquee';
+export { FOCUS_MARQUEE_CAMPAIGN_PRESET } from './components/focus-marquee-preset.js';
 export type { FocusMarqueeProps, FocusMarqueeTiming, FocusMarqueeSpringTuning } from './components/focus-marquee';

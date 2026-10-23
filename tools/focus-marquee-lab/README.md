@@ -27,8 +27,9 @@ Existing frozen candidates and other local preview servers are not changed.
   build, repack, commit or server restart. Invalid numbers keep the last valid
   value. The viewport is capped to the browser panel width and reports its actual
   width, so expand the browser to inspect the Wide preset.
-- Settings save only in this browser's local storage. Reset restores the current
-  2.3-second baseline. Copy/import versioned JSON or copy a local review URL.
+- Settings save only in this browser's local storage. Reset restores the owner-selected campaign preset
+  (1.1/.25/.25/.04 seconds, totaling1.64s). Existing saved settings are retained
+  until you choose Reset. Copy/import versioned JSON or copy a local review URL.
   Clipboard/storage failures have an editable textarea/in-memory fallback.
   Labels are plain sample text, one per line, and do not edit business data.
 

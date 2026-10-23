@@ -517,3 +517,21 @@ never catches up; geometry stays cached during frames. The lab may use ordinary
 HTML sliders outside `packages/ui`; shared UI remains React Native/NativeWind.
 Focused package/type and actual browser tuning checks qualify only this local
 experiment; full release/native/Core/HQ/recovery gates remain deferred.
+
+### Selected campaign presentation — local selection20
+
+`FOCUS_MARQUEE_CAMPAIGN_PRESET` exports the owner-selected presentation only:
+1.1s hold, .25s exit, .25s enter, .04s settle (1.64s total), 1px minimum gap,
+1.5px edge blur from .75, md rounded navy pills, 1.16 focus scale/4px lift/.5
+range, and spring stretch .06/squash .03/overshoot4/popLift3/nudge4. Direction
+is left; linear speed remains38. Spread it into the actual component:
+
+```tsx
+<FocusMarquee {...FOCUS_MARQUEE_CAMPAIGN_PRESET} items={callerOwnedFacts} />
+```
+
+The primary shared specimen and local lab defaults/Reset use that same preset.
+The lab retains existing browser-local settings; its six sample labels and950px
+preview width are local metadata, not package facts. Generic omitted-timing
+behavior and `FOCUS_MARQUEE_DEFAULT_CADENCE` remain2.3s, shown as a separate
+comparison. No engine change or publication/deployment is part of this selection.

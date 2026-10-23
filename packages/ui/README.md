@@ -251,3 +251,15 @@ No art/font binary or reference runtime is copied. Licensed social icons support
 Instagram, Facebook, X, YouTube, TikTok and Spotify; URLs stay caller supplied.
 See the [candidate contract](https://github.com/handh-dev/bubbas-ui/blob/main/docs/releases/0.7.0-candidate.md)
 for rights, meaningful browser checks and separate owner publication/adoption gates.
+
+### Selected campaign marquee preset (local candidate)
+
+```tsx
+import { FocusMarquee, FOCUS_MARQUEE_CAMPAIGN_PRESET } from '@bubbasfw/ui';
+<FocusMarquee {...FOCUS_MARQUEE_CAMPAIGN_PRESET} items={callerOwnedFacts} />
+```
+
+This presentation-only preset totals1.64s per pill:1.1s hold, .25s leaving,
+.25s entering, .04s settling. Apps supply facts; no preview width is imposed.
+The general component's omitted-timing cadence remains2.3s. This local candidate
+does not authorize publication or deployment.
