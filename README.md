@@ -1,7 +1,7 @@
 # @bubbasfw/ui
 
 Bubba’s universal design system for Next.js, Vite, Astro, Expo, iOS and Android.
-`@bubbasfw/ui@0.6.1` contains 32 controls, the shared Icon library, 15 reusable sections and three task
+Owner-reviewed `@bubbasfw/ui@0.7.0` contains 32 controls, the shared Icon library, 15 reusable sections and three task
 patterns built with React Native primitives and NativeWind, plus semantic
 themes, a visual review workbench and complete Web/Expo galleries.
 
@@ -123,7 +123,7 @@ Next.js universal example.
 ### Vite and Astro
 
 ```sh
-pnpm add @bubbasfw/ui@0.6.1 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
+pnpm add @bubbasfw/ui@0.7.0 react@19.2.3 react-dom@19.2.3 react-native-web@0.21.4
 ```
 
 Import controls and sections from `@bubbasfw/ui/web` and load
@@ -154,7 +154,7 @@ The tested example baseline is React 19.2.3, React Native 0.86.3, React Native W
 versions. NativeWind v5 and Tailwind v4 require a separate migration.
 
 ```sh
-pnpm add @bubbasfw/ui@0.6.1 nativewind@4.2.7
+pnpm add @bubbasfw/ui@0.7.0 nativewind@4.2.7
 pnpm add -D tailwindcss@3.4.17
 ```
 
@@ -243,7 +243,7 @@ Official setup references:
 For Expo SDK57 builds with Xcode27/iOS27, follow the targeted
 [scene-lifecycle setup](docs/platform-notes.md).
 
-## Approved annotated web release 0.6.1
+## Previous approved annotated web release 0.6.1
 
 The owner approved the exact 0.6.1 compatibility patch preserving the reviewed
 annotated web design. It fixes dropped web Button caller styles; 0.6.0 remains
@@ -275,10 +275,12 @@ no glow or movement; reduced motion removes travel. Native keeps the same sizing
 solid brand fill, label, semantics and restrained native shadow without a new
 gradient dependency. Default application controls retain their previous design.
 
-## Mobile marketing refinement candidate 0.7.0
+## Owner-reviewed web revision 0.7.0
 
 This source contains an unpublished design candidate. The approved registry
-release remains 0.6.1 until exact owner review and deliberate publication.
+registry release remains 0.6.1 until deliberate publication. The owner has approved
+exact candidate24; see [its release record](docs/releases/0.7.0.md) for qualification
+and publication state.
 The marketing sections keep their existing props: apps supply content/actions;
 the website omits the optional Hero description. Phones show the caller's mascot
 without a repeated hero logo, use intrinsic 48px actions, a readable announcement,

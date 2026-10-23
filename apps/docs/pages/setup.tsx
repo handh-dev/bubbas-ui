@@ -15,8 +15,8 @@ export default function Setup() {
       description="Start with a runnable example. Both platforms import the same components."
     >
       <Alert
-        title="32 controls, icons and 15 reusable sections"
-        description={`Owner-approved @bubbasfw/ui@${candidateVersion} fixes web Button caller style forwarding. Version 0.6.0 is deprecated. Vite and Astro use the web entry; Expo and the Next.js universal example keep their NativeWind host setup.`}
+        title="32 controls, icons and shared sections"
+        description={`Owner-approved @bubbasfw/ui@${candidateVersion} includes the reviewed responsive marketing sections, campaign marquee and offer badge, retaining the web Button caller-style fix. Version 0.6.0 is deprecated. Vite and Astro use the web entry; Expo and the Next.js universal example keep their NativeWind host setup.`}
         tone="info"
       />
       <View className="gap-4">

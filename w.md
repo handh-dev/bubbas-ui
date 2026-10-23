@@ -312,3 +312,13 @@ MarketingProductBadge with sm default preserving products and lg in the offer:
 icon=false and other23 composition/marquee unchanged. Focused actual dimensions,
 responsive bounds and existing motion/keyboard checks; no unrelated broad suite.
 Preserve23 original; publication/deployment stay paused.
+
+
+## Candidate24 release preparation — owner authorized
+
+The owner approved source5312215244e2118d42c64738759e50b8065e041b and original
+archiveffd517304c85c091f85b26ab9a10ad3c3d008fe13f769cae53d41adfc495c991,
+authorizing deployment. Full required gates now bind those original bytes.
+This documentation delta updates public guides/release state only; no approved
+package member changes. npm/Pages/sourcepush/merge await coordinator go after
+system-wide preflight. See docs/releases/0.7.0.md for current evidence/state.
