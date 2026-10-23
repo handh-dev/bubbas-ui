@@ -263,3 +263,11 @@ This presentation-only preset totals1.64s per pill:1.1s hold, .25s leaving,
 .25s entering, .04s settling. Apps supply facts; no preview width is imposed.
 The general component's omitted-timing cadence remains2.3s. This local candidate
 does not authorize publication or deployment.
+
+Sparkler offer: use `PromotionBanner variant="marketing" emphasis="sparkler"`
+with `title`, optional `titleAccent` (gold second line), `eyebrow`, description,
+and action. Optional caller-owned `artwork={{uri, alt:'', aspectRatio, rotation}}`
+retains original proportions/colors and a shared responsive orientation. Keep
+private art outside this package; its rights and notices stay with its owner.
+No-asset/error states retain the offer and action. See the system contract and
+same-component catalog `promotionExample` fixture for local review.

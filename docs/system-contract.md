@@ -535,3 +535,31 @@ The lab retains existing browser-local settings; its six sample labels and950px
 preview width are local metadata, not package facts. Generic omitted-timing
 behavior and `FOCUS_MARQUEE_DEFAULT_CADENCE` remain2.3s, shown as a separate
 comparison. No engine change or publication/deployment is part of this selection.
+
+### Sparkler offer composition — local candidate21
+
+`PromotionBanner variant="marketing" emphasis="sparkler"` owns the navy/blue
+panel, gold eyebrow, white title with a gold second line, optional original art,
+and the white/navy action on a gold-edged red lower sweep. Supply `title`,
+`titleAccent`, `eyebrow`, `description` and `action`; apps retain the offer facts
+and actual destination. The default generic promotion remains unchanged.
+
+Optional `artwork` is caller-owned `{uri, alt, aspectRatio, rotation}`. Supply the
+original width/height ratio and orientation in degrees; the component contains
+it without stretching/recoloring its source. Decorative offer art is hidden from
+assistive technology because the heading/body carry the offer. Invalid or nonfinite
+ratios use a square fallback; nonfinite rotations use zero degrees. Missing/failed art
+retains complete text and action and opens the description width. No required
+business content belongs only in artwork. The responsive composition adapts to
+its own container, including narrow cards inside desktop layouts; the call to
+action stays after the copy with a full target and visible keyboard focus.
+
+`UIReviewCatalog` and `SectionDemo` accept `promotionExample` caller fixture data
+for the same actual component. Public defaults contain synthetic text and shared
+icons only. Private caller assets never enter the universal package, public
+catalog or generated artwork; selecting an asset does not change its catalog
+approval or redistribution rights. Existing gold twinkles follow manual/system
+motion preferences; the art, copy and action remain usable with no JavaScript.
+Use `node scripts/verify-promotion.mjs` for focused shared checks; optionally pass
+an external `PROMOTION_ARTWORK_PATH` and `PROMOTION_EVIDENCE` for private proofs.
+Local preview qualification does not grant publication or deployment approval.

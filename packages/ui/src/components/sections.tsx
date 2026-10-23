@@ -83,8 +83,9 @@ export function ProductDetail({ product, children, legacyGalleryHooks = false, c
     <Inline>{product.actions?.map((action) => <SectionActionLink key={action.href} action={action} />)}</Inline>{children}
   </HeroSection>;
 }
-export interface PromotionBannerProps extends SectionProps { title: string; description?: string; action?: SectionAction; emphasis?: 'default' | 'sparkler' }
-export function PromotionBanner({ title, description, action, className, variant, emphasis, ...props }: PromotionBannerProps) {
-  if (variant === 'marketing') return <MarketingScope><MarketingPromotion {...props} {...{title, description, action, className, emphasis}} /></MarketingScope>;
-  return <Card {...props} className={cn('gap-4 bg-ui-selected', className)}><Heading level={2}>{title}</Heading>{description ? <Text>{description}</Text> : null}{action ? <SectionActionLink action={action} /> : null}</Card>;
+export interface PromotionArtwork extends SectionImage { /** Intrinsic width / height; original bytes remain caller-owned. */ aspectRatio?: number; /** Degrees, applied once to the original artwork. */ rotation?: number }
+export interface PromotionBannerProps extends SectionProps { title: string; titleAccent?: string; eyebrow?: string; artwork?: PromotionArtwork; description?: string; action?: SectionAction; emphasis?: 'default' | 'sparkler' }
+export function PromotionBanner({ title, titleAccent, eyebrow, artwork, description, action, className, variant, emphasis, ...props }: PromotionBannerProps) {
+  if (variant === 'marketing') return <MarketingScope><MarketingPromotion {...props} {...{title, titleAccent, eyebrow, artwork, description, action, className, emphasis}} /></MarketingScope>;
+  return <Card {...props} className={cn('gap-4 bg-ui-selected', className)}><Heading level={2}>{title}{titleAccent ? ` ${titleAccent}` : ''}</Heading>{description ? <Text>{description}</Text> : null}{action ? <SectionActionLink action={action} /> : null}</Card>;
 }

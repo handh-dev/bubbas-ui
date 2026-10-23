@@ -40,7 +40,7 @@ try{browser=await chromium.launch({headless:true});const page=await browser.newP
  for(const action of result.actions){assert.ok(action.box.height>=48);assert.ok(action.text.x>=action.box.x-1&&action.text.right<=action.box.right+1,`Button label fits ${width}`);}
  assert.equal(result.announcement.animation,'none');assert.equal(result.announcement.whiteSpace,'nowrap');assert.ok(result.announcement.right<=width+1&&result.announcement.x>=-1,`Announcement fits ${width}`);assert.ok(result.announcement.size>=10,`Readable announcement ${width}`);
  for(const title of result.titles)assert.ok(title.text.right<=title.card.right-6&&title.text.x>=title.card.x,`Long product title fits ${width}`);
- assert.ok(result.promotion.height<300,`Decorative effects stay out of card layout ${width}`);assert.ok(result.gold.includes('linear-gradient'));assert.equal(result.socials,6);assert.ok(result.endcaps.every(cap=>cap.width===(width<=760?24:48)));
+ assert.ok(result.promotion.height>=410&&result.promotion.height<700,`Sparkler composition reserves bounded responsive space ${width}`);assert.ok(result.gold.includes('linear-gradient'));assert.equal(result.socials,6);assert.ok(result.endcaps.every(cap=>cap.width===(width<=760?24:48)));
  assert.equal(result.cards.filter(card=>Math.abs(card.y-result.cards[0].y)<1).length,width<761?2:width<1200?3:4);
  reports.push(result);if([320,950,1661].includes(width))await page.screenshot({path:path.join(out,`composition-${width}.png`),fullPage:true});
  }

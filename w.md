@@ -273,3 +273,13 @@ control enable local trials without repeated package changes. Preserve17 origina
 and HQ17. Focused actual-package build/type/live-edit/invalid/static checks and a
 fresh read-only review apply; full release/Expo/Core/HQ/recovery gates wait for
 accepted motion. Website DEV override belongs to its consumer, ignored in prod.
+
+## Sparkler offer — local candidate21
+
+Extend shared PromotionBanner, same-component catalog and contracts for the
+owner's navy/gold/red composition reference and original caller-supplied vector.
+Private art stays outside the public package. Focused shared build/type/browser
+responsive/focus/hover/static/missing-art checks apply; exact selection20 marquee
+settings are preserved. Consumer integration and fresh read-only review follow.
+This is a local proposal: publication/deployment and full release gates remain
+paused/deferred.

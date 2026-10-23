@@ -295,3 +295,12 @@ Gold badges and the promotion's brief side bursts are decorative and preserve
 content/actions. All new motion stops for reduced motion. No art/font binary or
 Info Links runtime is included. See the [candidate contract](docs/releases/0.7.0-candidate.md)
 for rights, behavior and separate publication/consumer acceptance gates.
+
+Local sparkler offer proposal: `PromotionBanner` keeps the actual reusable
+composition in UI. Use `variant="marketing" emphasis="sparkler"`, `title="Free"`,
+`titleAccent="Sparkler"`, `eyebrow="Free gift"`, caller-owned copy/action and optional
+`artwork={{uri: reviewedLocalUrl, alt: '', aspectRatio: originalWidth / originalHeight,
+rotation: -60}}`. Original art stays in its private consumer with provenance;
+public catalog examples stay synthetic. Review through the same real component
+with `UIReviewCatalog promotionExample={callerFixture}`. No artwork is bundled
+or approved by this API. Publication/deployment remain paused.
