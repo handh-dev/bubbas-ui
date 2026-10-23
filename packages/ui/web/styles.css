@@ -57,7 +57,8 @@
 @container (min-width:300px) { .bubba-location-card { display:grid!important; grid-template-columns:minmax(0,1fr) 112px; align-items:start; } .bubba-location-actions { width:112px; } }
 .bubba-location-search-submit[data-bubba-action],.bubba-locate-button[data-bubba-action] { box-shadow:none; }
 .bubba-location-search-row { flex-wrap:wrap!important; }
-.bubba-location-search-field { flex-basis:280px; }
+.bubba-location-search-field { flex-basis:280px!important; }
+.bubba-location-search-row .bubba-action-label { text-transform:none!important; letter-spacing:normal!important; }
 .bubba-locate-button[data-bubba-action] { flex-shrink:1; }
 .bubba-map-frame { isolation:isolate; }
 .bubba-map-pin { overflow:visible!important; z-index:2; }
@@ -81,7 +82,7 @@
 .bubba-offer-review .bubba-offer-mark { background:#FFFFFF26; }
 .bubba-offer-card h2 { overflow-wrap:anywhere; }
 @media (max-width:760px) {
- .bubba-location-search-field { flex-basis:100%; }
+ .bubba-location-search-field { flex-basis:100%!important; }
  .bubba-location-search-submit[data-bubba-action],.bubba-locate-button[data-bubba-action] { flex:1!important; min-width:0!important; width:auto!important; padding-inline:10px!important; }
  .bubba-location-search-row .bubba-action-label { font-size:12px!important; }
  .bubba-featured-card { flex-direction:column!important; }
