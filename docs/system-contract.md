@@ -392,3 +392,37 @@ scrolling. The existing global MarketingMotionControl remains the discoverable
 manual control. Native intentionally uses this real static adaptation; native
 animation/device acceptance is outside the web revision. Very long pills wrap
 within their viewport; vertical inset reserves peak emphasis so nothing clips.
+
+### FocusMarquee spring handoff — candidate14 local revision
+
+The owner superseded continuous ticker pacing with a pop/stretch handoff rhythm.
+`motion="spring"` is now the default: one fact is centered and readable, then the
+next arrives with a brief stretch/pop as the outgoing pill compresses and gives
+way. Each handoff has one small bounded overshoot and settles with zero-velocity
+endpoints. `cadence` is seconds per fact (default1.6, bounded1–3); travel takes
+about0.67s by default, with a calm readable remainder. Distance and velocity vary
+with label widths; cadence is the same per fact. `spring="poppy"|"gentle"` chooses
+a bounded presentation preset, rather than exposing physics internals.
+
+`motion="linear"` retains continuous px/second motion through the existing `speed`
+option (default38). Positive speed is intentionally ignored by spring cadence;
+`speed={0}` remains an explicit static fallback in either mode. Live linear speed
+and direction stay position-continuous; spring direction is chosen at the next
+handoff and cadence updates apply to the next cycle, preserving the drawn phase.
+
+Spring default center emphasis is1.20 with peak transient horizontal stretch×1.08
+and a short outgoing nudge≤6px. Optional existing centerEmphasis settings remain;
+maximum combined scaleX/Y, lift, nudge and blur spread are reserved before measuring
+the repeating group. Configured spacing remains a minimum visible edge gap.
+Long pills are capped using the complete peak footprint so their full text can
+reach center without clipping. Empty/single/two-item sequences use the same loop.
+
+`edgeBlur` is0–4px (default3). Only decorative moving pills soften gradually in
+the outer lane; the central region stays crisp. No filter touches canonical copy.
+Stored/OS motion-off, no-JavaScript and native show every fact once in clear
+centered wrapping pills. Cleanup removes transforms and filters, and hidden/offscreen
+time never accumulates motion energy or a queue of missed facts. Initial animated
+activation waits for the actual font; later resize/font changes retain drawn
+position and retarget the next logical fact. Animation frames use cached geometry
+and write transforms/filters only. Brand red, white/navy pills and caller-owned
+facts remain unchanged, with no stars, endcaps, gradient or decorative separators.

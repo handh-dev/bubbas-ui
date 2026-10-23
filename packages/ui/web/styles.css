@@ -163,7 +163,7 @@
 .bubba-focus-visual { position:absolute!important; top:0; left:0; opacity:0; pointer-events:none!important; }
 .bubba-focus-track { width:max-content; flex-wrap:nowrap!important; will-change:transform; }
 .bubba-focus-group { flex-shrink:0; gap:var(--bubba-focus-gap,20px); padding-right:var(--bubba-focus-gap,20px)!important; }
-.bubba-focus-item .bubba-focus-pill { max-width:max(1px,calc((100cqw - 32px)/var(--bubba-focus-scale,1.12))); }
+.bubba-focus-item .bubba-focus-pill { max-width:max(1px,calc((100cqw - 32px - 2*var(--bubba-focus-side-reserve,0px))/var(--bubba-focus-scale,1.12))); }
 .bubba-focus-pill { transform-origin:center center; }
 .bubba-focus-marquee[data-bubba-focus-active="true"] { padding-block:var(--bubba-focus-inset,18px)!important; }
 .bubba-focus-marquee[data-bubba-focus-active="true"] .bubba-focus-static { position:absolute!important; width:1px!important; height:1px!important; margin:-1px!important; padding:0!important; clip-path:inset(50%); overflow:hidden!important; }

@@ -237,3 +237,11 @@ subtle center focus. Shared FocusMarquee owns all presentation/options, global
 motion/static fallback, layout observation and inert duplicates. Apps supply
 facts. The backward-compatible CampaignSection wrap fix is retained. No release
 or consumer deployment is authorized by this local revision.
+
+## FocusMarquee candidate14 — local spring direction
+
+Owner's next visual review requests centered spring handoffs, pop/stretch and
+soft outer edges. Shared default is now a finite cadence/preset sequence, keeping
+linear as an explicit option and all prior footprint/motion/static contracts.
+Actual recording and serial frames are required before freezing this local
+proposal; no publication/deployment is authorized.
