@@ -76,7 +76,7 @@ the canonical schema, even if someone refreshes their manifest checksums.
 
 ## Pattern contracts
 
-### Website page compositions — proposed 0.8.1
+### Website page compositions — proposed 0.8.2
 
 `LocationSearch` is a controlled city/ZIP field with combined search and optional
 device-location actions. Apps own lookup, geolocation permission, validation,
@@ -157,7 +157,11 @@ the translation; reduced/manual motion-off retains the static header. No easing,
 scroll handler layout reads, or React state updates occur on animation frames.
 No-social marketing headers use compact navigation at 1000px and above, including
 1099px; a measured width check collapses unusually long links when they cannot
-fit. Other header variants retain their original breakpoint. A fixed web host
+fit. Brand, navigation and actions retain explicit grid columns; actions keep
+their intrinsic width when navigation is hidden, so a mobile-to-desktop resize
+can restore the full navigation without fit-measurement feedback. Verify that
+transition on one mounted header, with working controls and no page reload.
+Other header variants retain their original breakpoint. A fixed web host
 must keep the outer mount transparent with `pointer-events:none` and use
 `ThemeProvider surface="transparent" pointerEvents="box-none"`; the shared scope
 also passes pointer events through while the actual header remains interactive.
