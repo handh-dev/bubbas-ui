@@ -252,3 +252,9 @@ Short centered rests, denser actual geometry and gentle outer-edge blur refine
 the same shared finite handoff engine. Preserve14 original artifacts/previews;
 compare actual motion/gaps/filter values against14 before freezing this local
 proposal. Publication and deployment remain paused.
+
+## FocusMarquee candidate16 — slightly eased local cadence
+
+Owner requested only a small slowdown: default1.20s per fact, retaining15’s
+short0.14s centered rest and all density/blur/pop settings. Preserve15 original
+and successful isolated reruns; qualify a new16 artifact for local review only.
