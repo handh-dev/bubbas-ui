@@ -76,7 +76,7 @@ the canonical schema, even if someone refreshes their manifest checksums.
 
 ## Pattern contracts
 
-### Website page compositions — proposed 0.8.2
+### Website page compositions — proposed 0.8.3
 
 `LocationSearch` is a controlled city/ZIP field with combined search and optional
 device-location actions. Apps own lookup, geolocation permission, validation,
@@ -102,17 +102,20 @@ coordinates. Only measured visible viewport tiles are requested; there is no
 prefetch/offline store. Respect the selected provider's current policy, default
 browser caching and referrer. Automated checks stub provider imagery. Marker
 links have explicit direction labels and only fully visible targets are focusable.
-Each visible store retains a separate 44px target. When close or coincident stores
-would overlap, the shared layout places disjoint targets nearby and connects them
-with visible leaders to their exact geographic anchors. The supplied coordinates
-are never changed and no counted clusters replace individual stores. The layout
-reserves space for small bottom-right zoom/fit controls and the required minimal
-bottom-edge attribution. Raster tiles alone are grayscale; pins remain brand red.
+Each fully visible store retains a separate 24px transparent link target centered
+at its exact supplied geographic coordinate. The only marker paint is a 10px
+brand-red dot. No allocator, displaced target, leader, icon, cluster, tooltip or
+visible text label changes that location. Close and coincident dots intentionally
+overlap, as requested by the owner; every individual link remains in keyboard
+order with a store-specific accessible name and Enter destination. Visible focus
+rises above overlapping targets without moving the dot. The adjacent directory
+retains full-size individual direction/call actions as the complete alternative.
+Small bottom-right zoom/fit controls and minimal required bottom-edge attribution
+remain in the map. Raster tiles alone are grayscale.
 Wheel zoom anchors at the pointer, pointer/touch drag pans, arrows pan, and Home
 restores all-store bounds. Map gestures retain page position; wheel input at a
 zoom limit can continue to scroll the page. Explicit controls remain available
-for keyboard and touch users. Visual labels reveal on hover/keyboard focus and
-ignore pointer events. Loading and partial tile failure are explicit; Retry map
+for keyboard and touch users. Loading and partial tile failure are explicit; Retry map
 retries current failures. Server/no-script output requests no guessed viewport
 tiles and points to the always-readable location directory. Native retains a
 direction-link fallback.
@@ -136,9 +139,20 @@ Hosts supply reviewed safety wording and business/policy destinations.
 `FeaturedProductRow` limits the supplied selection to four compact cards. Apps
 own their ranking and identity; the component creates no best-seller claim.
 `OfferGrid` supplies equal-height social, guarantee and review compositions with
-light-blue social/fountain fields and a white guarantee field. Original shared
-Pop-It, banknote and fountain motifs occupy a consistent top-right art region;
-these are newly authored geometry, not restricted Studio artwork. A shown
+light-blue social/fountain fields and a white guarantee field. Social/review cards
+have no decorative fallback when caller artwork is missing; the guarantee uses
+original bold blue/red/white/navy money geometry. Caller `artwork`, optional
+natural `aspectRatio`, and `artworkHref` supply linked images with contain scaling.
+When any offer uses caller art, a shared top-right art row (up to 144×128,
+matched to the tallest supplied image/money motif) across the whole group keeps
+images readable and titles/body clear at 320px; complete titles
+use the following full-width row. No aspect ratio crops or tints the source.
+CategoryGrid already accepts SectionImage for approved category art; no
+Hero/Campaign API changes are needed. Cleared app assets remain app-owned.
+`UIReviewCatalog offerExample` forwards caller-owned review content and art to
+both actual OfferGrid variants, without embedding those inputs in the package. No
+private original bytes enter this public package. Legacy Pop-It/fountain Icon
+names remain compatible but are not new default offer/specimen presentation. A shown
 Instagram mark is a caller-supplied link. Headings, terms and optional actions
 remain caller data. `ReviewLocationLinks` presents a responsive grid of supplied
 store-specific review destinations and optional address labels. Neither section
@@ -173,13 +187,13 @@ behavior is unchanged.
 The new sections have stable actual-package `SectionDemo` / review catalog IDs,
 consumed unchanged by docs, both self-contained examples and isolated Studio
 review. The map catalog renders that actual implementation with synthetic local
-SVG grid tiles, close example pins, individual leader targets and zoom/fit; no
+SVG grid tiles, close exact-coordinate dots and zoom/fit; no
 external tile provider or real business facts enter the specimen.
 `pnpm verify:website:sections` covers narrow/wide bounds, four directory columns
 at 1099px, equal offer rows, linked social/review destinations, search Enter, FAQ
 keyboard/no-script, scroll invariance and painted content below the header,
-reduced motion, all sixteen actual-coordinate targets, synthetic coincident
-targets, wheel/pointer/touch/keyboard map gestures, announced search errors and
+reduced motion, painted dots at all sixteen actual coordinates, intentional
+coincident overlap with individual keyboard destinations, wheel/pointer/touch/keyboard map gestures, announced search errors and
 mocked-provider loading/failure/retry. These shared checks do not establish
 consumer deployment, native device acceptance or owner approval.
 

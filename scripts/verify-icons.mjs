@@ -18,6 +18,8 @@ for(const [name,entry] of Object.entries(manifest.icons)) {
  assert.ok(alphaCoverage(png)>.025,`${name} must have visible ink`);
  assert.equal(entry.width,96); assert.equal(entry.height,96);
 }
+const money=await readFile(new URL('icons/original/money.svg',root),'utf8');
+assert.deepEqual([...new Set(money.match(/#[0-9A-F]{6}/g))].sort(),['#03256C','#0866FF','#D40000','#FFFFFF'],'Original money clipart uses only the proposed Bubba blue/red/white/navy inks');
 for(const file of ['lucide/LICENSE','simple-icons/LICENSE.md','original/NOTICE.md']) assert.ok((await readFile(new URL('icons/'+file,root),'utf8')).length>100);
 console.log('Pinned icon subset sources, licenses and generated native/web image hashes verified.');
 

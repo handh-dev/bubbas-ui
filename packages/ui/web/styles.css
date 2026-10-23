@@ -82,12 +82,9 @@
 .bubba-map-frame { isolation:isolate; touch-action:none; cursor:grab; overscroll-behavior:contain; }
 .bubba-map-frame[data-map-dragging="true"] { cursor:grabbing; }
 .bubba-map-tiles { filter:grayscale(1); }
-.bubba-map-pin { overflow:visible!important; z-index:2; }
-.bubba-map-pin:hover,.bubba-map-pin:focus-visible { z-index:3; }
-.bubba-map-pin > div { position:relative; display:flex!important; align-items:center; justify-content:center; width:44px!important; height:44px!important; overflow:visible!important; }
-.bubba-map-leader,.bubba-map-coordinate-dot { z-index:1; pointer-events:none!important; }
-.bubba-map-pin-label { display:none!important; pointer-events:none!important; position:absolute; top:34px; left:50%; transform:translateX(-50%); width:max-content; max-width:160px; margin:0; padding:2px 5px; border-radius:4px; background:#FFFFFFEC; box-shadow:0 1px 4px #03256C18; text-align:center; white-space:normal; line-height:15px!important; }
-.bubba-map-pin:hover .bubba-map-pin-label,.bubba-map-pin:focus-visible .bubba-map-pin-label { display:block!important; }
+.bubba-map-pin { width:24px!important; height:24px!important; min-width:24px!important; min-height:24px!important; z-index:2; }
+.bubba-map-pin:focus-visible { z-index:5; }
+.bubba-map-dot { width:10px!important; height:10px!important; pointer-events:none!important; }
 .bubba-map-controls,.bubba-map-attribution { z-index:4; cursor:default; }
 .bubba-map-controls { box-shadow:0 2px 8px #03256C20; }
 .bubba-map-controls [role="button"] { border-radius:0; border:0; padding:0!important; }
