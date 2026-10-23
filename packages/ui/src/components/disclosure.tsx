@@ -1,7 +1,7 @@
 'use client';
 
-import { useId, type ReactNode } from 'react';
-import { Pressable, View, type ViewProps } from 'react-native';
+import { useEffect, useId, useState, type ReactNode } from 'react';
+import { Platform, Pressable, View, type ViewProps } from 'react-native';
 import { cn, focusRing, useControllableState } from '../internal/utils';
 import { Text } from './typography';
 
@@ -13,14 +13,18 @@ export interface AccordionProps extends ViewProps {
   onValueChange?: (value: string) => void;
   className?: string;
   appearance?: 'default' | 'marketing';
+  /** Keep all supplied answers readable until browser hydration enables disclosure. */
+  progressiveEnhancement?: boolean;
 }
 
 /** Single-open disclosure. An empty value collapses every section. */
-export function Accordion({ items, value, defaultValue = '', onValueChange, className, appearance='default', ...props }: AccordionProps) {
+export function Accordion({ items, value, defaultValue = '', onValueChange, className, appearance='default', progressiveEnhancement=false, ...props }: AccordionProps) {
   const [selected, setSelected] = useControllableState({ value, defaultValue, onChange: onValueChange });
+  const [enhanced,setEnhanced]=useState(!progressiveEnhancement||Platform.OS!=='web');
+  useEffect(()=>setEnhanced(true),[]);
   const id = useId();
   return <View {...props} className={className}>{items.map((item, index) => {
-    const expanded = selected === item.value;
+    const expanded = !enhanced || selected === item.value;
     const triggerID = `${id}-trigger-${index}`;
     const panelID = `${id}-panel-${index}`;
     return <View key={item.value} className={cn('border-b border-ui-line',appearance==='marketing'&&'bubba-faq-item rounded-xl border bg-white',expanded&&appearance==='marketing'&&'bubba-faq-item-open')}>
