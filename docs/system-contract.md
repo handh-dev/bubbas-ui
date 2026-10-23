@@ -538,7 +538,7 @@ comparison. No engine change or publication/deployment is part of this selection
 
 ### Sparkler offer composition — local candidate21
 
-`PromotionBanner variant="marketing" emphasis="sparkler"` owns the navy/blue
+`PromotionBanner variant="marketing" emphasis="sparkler"` owns the solid brand-blue
 panel, gold eyebrow, white title with a gold second line, optional original art,
 and the white/navy action on a gold-edged red lower sweep. Supply `title`,
 `titleAccent`, `eyebrow`, `description` and `action`; apps retain the offer facts

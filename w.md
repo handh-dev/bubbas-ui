@@ -283,3 +283,12 @@ responsive/focus/hover/static/missing-art checks apply; exact selection20 marque
 settings are preserved. Consumer integration and fresh read-only review follow.
 This is a local proposal: publication/deployment and full release gates remain
 paused/deferred.
+
+
+## Sparkler offer — local candidate22 owner correction
+
+Owner superseded21’s dark navy field: use solid official brand blue and remove
+both static Sparkles glyphs from the offer (badge and background). Keep gold
+animated sparkles, original caller art, white/gold headline, gold/red sweep and
+white action. Preserve original21 artifact and all selected20 marquee settings.
+This correction is local only; publication/deployment remain paused.

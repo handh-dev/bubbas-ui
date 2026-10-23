@@ -125,13 +125,12 @@ export function MarketingPromotion({title,titleAccent,eyebrow,artwork,descriptio
  const hasArtwork=Boolean(artwork?.uri)&&failedArtwork!==artwork?.uri;
  const ratio=artwork?.aspectRatio&&Number.isFinite(artwork.aspectRatio)&&artwork.aspectRatio>0?artwork.aspectRatio:1;
  const rotation=artwork?.rotation&&Number.isFinite(artwork.rotation)?Math.max(-180,Math.min(180,artwork.rotation)):0;
- if(emphasis==='sparkler') return <View {...props} className={cn('bubba-promotion bubba-sparkler-promo relative overflow-hidden rounded-xl bg-bubba-navy p-6',!hasArtwork&&'bubba-sparkler-promo-no-art',className)}>
+ if(emphasis==='sparkler') return <View {...props} className={cn('bubba-promotion bubba-sparkler-promo relative overflow-hidden rounded-xl bg-bubba-blue p-6',!hasArtwork&&'bubba-sparkler-promo-no-art',className)}>
   <View accessible={false} aria-hidden pointerEvents="none" className="bubba-sparkler-sweep absolute bg-bubba-red"/>
-  <View accessible={false} aria-hidden pointerEvents="none" className="bubba-sparkler-firework absolute"><Icon name="sparkles" color="#FED766" size={80}/></View>
   <GoldSparkles large/>
   {hasArtwork&&artwork?<View accessible={false} aria-hidden pointerEvents="none" className="bubba-sparkler-art absolute"><Image key={artwork.uri} source={{uri:artwork.uri}} accessible={false} accessibilityLabel="" resizeMode="contain" onError={()=>setFailedArtwork(artwork.uri)} className="bubba-sparkler-original" style={{width:'100%',aspectRatio:ratio,transform:[{rotate:`${rotation}deg`}]}}/></View>:null}
   <View className="bubba-sparkler-copy relative items-start">
-   {eyebrow?<View className="bubba-sparkler-eyebrow flex-row items-center gap-2 self-start rounded-full bg-bubba-gold px-4 py-2"><Icon name="sparkles" color="#03256C" size={18}/><Text variant="caption" className="text-xs font-black uppercase tracking-widest text-bubba-navy">{eyebrow}</Text></View>:null}
+   {eyebrow?<View className="bubba-sparkler-eyebrow flex-row items-center gap-2 self-start rounded-full bg-bubba-gold px-4 py-2"><Text variant="caption" className="text-xs font-black uppercase tracking-widest text-bubba-navy">{eyebrow}</Text></View>:null}
    <Heading level={2} className="bubba-sparkler-title w-full font-black uppercase italic text-white">{title}{titleAccent?<>
     {'\n'}<Text className="bubba-sparkler-title-accent font-black uppercase italic text-bubba-gold">{titleAccent}</Text></>:null}</Heading>
    {description?<Text variant="caption" className="bubba-sparkler-description text-base font-medium leading-6 text-white">{description}</Text>:null}

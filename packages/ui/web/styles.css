@@ -60,7 +60,7 @@
 .bubba-mobile-nav-link:focus-visible { background-color:#0866FF14; }
 .bubba-promo-spark { filter:drop-shadow(0 0 9px #FED76670); }
 /* The reusable offer owns its composition. The host supplies original artwork. */
-.bubba-sparkler-promo { container-type:inline-size!important; background:linear-gradient(115deg,#03256C 25%,#0866FF 180%)!important; min-height:410px!important; padding:24px!important; box-shadow:0 6px 18px #03256C1A!important; isolation:isolate!important; }
+.bubba-sparkler-promo { container-type:inline-size!important; background:#0866FF!important; min-height:410px!important; padding:24px!important; box-shadow:0 6px 18px #03256C1A!important; isolation:isolate!important; }
 .bubba-sparkler-copy { z-index:2!important; gap:14px!important; }
 .bubba-sparkler-eyebrow { max-width:100%!important; }
 .bubba-sparkler-eyebrow > div { overflow-wrap:anywhere!important; }
@@ -74,7 +74,6 @@
 .bubba-sparkler-sweep { z-index:0!important; left:-20%!important; width:150%!important; height:34%!important; bottom:-16%!important; border-top:6px solid #FED766!important; border-radius:50% 50% 0 0!important; transform:rotate(3deg)!important; }
 .bubba-sparkler-art { z-index:1!important; width:340px!important; top:193px!important; left:calc(78% - 170px)!important; }
 .bubba-sparkler-original { overflow:visible!important; }
-.bubba-sparkler-firework { z-index:0!important; right:6%!important; top:18%!important; opacity:.12!important; transform:rotate(16deg)!important; }
 .bubba-sparkler-promo .bubba-gold-sparkles { z-index:2!important; inset:22px!important; }
 .bubba-sparkler-promo .bubba-gold-sparkle-0 { left:70%!important; top:13%!important; }
 .bubba-sparkler-promo .bubba-gold-sparkle-1 { left:59%!important; top:66%!important; }
