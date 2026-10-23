@@ -277,14 +277,16 @@ gradient dependency. Default application controls retain their previous design.
 
 ## Owner-reviewed web revision 0.7.0
 
-This source contains an unpublished design candidate. The approved registry
-registry release remains 0.6.1 until deliberate publication. The owner has approved
+This source contains owner-reviewed candidate24. The approved registry
+release remains 0.6.1 until deliberate publication. The owner has approved
 exact candidate24; see [its release record](docs/releases/0.7.0.md) for qualification
 and publication state.
 The marketing sections keep their existing props: apps supply content/actions;
 the website omits the optional Hero description. Phones show the caller's mascot
 without a repeated hero logo, use intrinsic 48px actions, a readable announcement,
-a horizontal badge rail, a two-column footer and a compact product gallery.
+the selected spring campaign marquee, a two-column footer and a compact product
+gallery. The reusable bright-blue sparkler offer uses its larger shared metallic
+product badge; private original artwork stays with its owning consumer.
 
 Announcement and ticker animation share a visible **Motion on/off** switch in
 marketing navigation and footer. Hover does not stop the ribbon. The choice survives ordinary page loads with a caught storage/in-memory fallback
