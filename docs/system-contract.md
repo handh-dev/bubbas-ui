@@ -81,7 +81,8 @@ the canonical schema, even if someone refreshes their manifest checksums.
 `LocationSearch` is a controlled city/ZIP field with combined search and optional
 device-location actions. Apps own lookup, geolocation permission, validation,
 loading, errors and result announcements. Enter submits through the supplied
-action. Busy states prevent duplicate searches and location requests.
+action. Dynamic validation/permission errors announce politely while preserving
+the query and focus. Busy states prevent duplicate searches and location requests.
 
 `LocationCard` / `LocationGrid density="compact"` show supplied addresses, published
 hours, independently qualified status, optional local distance and phone, and
@@ -96,6 +97,13 @@ coordinates. Only measured visible viewport tiles are requested; there is no
 prefetch/offline store. Respect the selected provider's current policy, default
 browser caching and referrer. Automated checks stub provider imagery. Marker
 links have explicit direction labels and only fully visible targets are focusable.
+Overlapping 44px targets merge into counted clusters using axis-aligned screen
+bounds, repeating after centroid updates until target rectangles are disjoint.
+Cluster buttons open the shared Dialog with every member's actual supplied title
+and directions; Escape/close restores focus. Zoom separates clusters when space
+permits. Cluster centers summarize members without changing any store coordinate.
+Zoom/fit controls, notices and attribution stay outside the geographic viewport
+so they cannot cover a store target.
 Visual labels reveal on hover/keyboard focus, avoiding overlapping city/address
 text where several real stores cluster; all pins and full accessible names remain.
 Loading and partial tile failure are explicit; Retry map retries current failures.
@@ -137,9 +145,13 @@ Default header behavior is unchanged.
 
 All seven new sections have stable actual-package `SectionDemo` / review catalog
 IDs, consumed unchanged by docs, both self-contained examples and isolated Studio
-review. `pnpm verify:website:sections` covers narrow/wide bounds, four directory
+review. The map catalog renders that actual implementation with synthetic local
+SVG grid tiles, close example pins, zoom/fit and its cluster chooser; no external
+tile provider or real business facts enter the specimen.
+`pnpm verify:website:sections` covers narrow/wide bounds, four directory
 columns, equal offer rows, search Enter, FAQ keyboard/no-script, scroll invariance,
-reduced motion and mocked-provider loading/failure/retry. These shared checks do
+reduced motion, disjoint cluster hit targets/member destinations/focus return,
+announced search errors and mocked-provider loading/failure/retry. These shared checks do
 not establish consumer deployment, native device acceptance or owner approval.
 
 AppearanceControl is controlled. The host persists Light/Dark/System, handles

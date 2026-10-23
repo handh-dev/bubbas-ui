@@ -65,10 +65,10 @@
 .bubba-map-pin:hover,.bubba-map-pin:focus-visible { z-index:3; }
 .bubba-map-pin > div { position:relative; width:44px!important; height:44px!important; overflow:visible!important; }
 .bubba-map-pin-dot { position:absolute!important; left:12px; top:12px; box-shadow:0 2px 5px #03256C55; }
-.bubba-map-pin-label { display:none!important; position:absolute; top:34px; left:50%; transform:translateX(-50%); width:max-content; max-width:160px; margin:0; padding:2px 5px; border-radius:4px; background:#FFFFFFEC; box-shadow:0 1px 4px #03256C18; text-align:center; white-space:normal; line-height:15px!important; }
+.bubba-map-pin-label { display:none!important; pointer-events:none!important; position:absolute; top:34px; left:50%; transform:translateX(-50%); width:max-content; max-width:160px; margin:0; padding:2px 5px; border-radius:4px; background:#FFFFFFEC; box-shadow:0 1px 4px #03256C18; text-align:center; white-space:normal; line-height:15px!important; }
 .bubba-map-pin:hover .bubba-map-pin-label,.bubba-map-pin:focus-visible .bubba-map-pin-label { display:block!important; }
-.bubba-map-frame > div:last-child { z-index:4; }
-.bubba-map-frame > div:has(> [aria-label="Zoom map in"]) { z-index:4; }
+.bubba-map-cluster { z-index:2; box-shadow:0 2px 6px #03256C55; }
+.bubba-map-cluster:hover,.bubba-map-cluster:focus-visible { z-index:3; }
 .bubba-faq-trigger:hover { background:#F4F8FF; }
 .bubba-faq-item-open { border-color:#0866FF!important; box-shadow:0 3px 12px #03256C0A; }
 .bubba-faq-trigger { background:transparent; box-shadow:none; }
@@ -87,7 +87,7 @@
  .bubba-location-search-field { flex-basis:100%!important; }
  .bubba-location-search-submit[data-bubba-action],.bubba-locate-button[data-bubba-action] { flex:1!important; min-width:0!important; width:auto!important; padding-inline:10px!important; }
  .bubba-location-search-row .bubba-action-label { font-size:12px!important; }
- .bubba-featured-card { flex-direction:column!important; }
+ .bubba-featured-products .bubba-featured-card { flex-direction:column!important; }
  .bubba-featured-image,.bubba-featured-image img { align-self:center; }
  .bubba-hours-day { padding-inline:8px!important; }
 }

@@ -11,6 +11,7 @@ import { Heading, Text } from './typography';
 import { Inline, Stack } from './layout';
 import { Link } from './actions';
 import { Icon } from './Icon';
+import { Dialog } from './overlays';
 import { MarketingAction, MarketingProductBadge, MarketingScope } from './marketing';
 import type { LocationCardProps, LocationGridProps, ProductPresentation, SectionAction, SectionProps } from './sections';
 import { cn } from '../internal/utils';
@@ -24,7 +25,7 @@ export interface LocationSearchProps extends SectionProps {
 export function LocationSearch({ value, onValueChange, onSearch, onLocate, locating=false, busy=false, error, resultLabel, placeholder='City or ZIP code', label='Find a Bubba’s near you', className, variant: _variant, ...props }: LocationSearchProps) {
   const searching=busy||locating;
   return <MarketingScope><Stack {...props} className={cn('bubba-location-search mx-auto w-full max-w-[880px]',className)} gap={2}>
-    <FormField label={label} error={error}>
+    <FormField label={label} error={error} announceError>
       <Inline align="stretch" className="bubba-location-search-row w-full gap-2">
         <View className="bubba-location-search-field min-w-0 flex-1 basis-full min-[761px]:basis-[280px]"><Input value={value} onChangeText={onValueChange} onSubmitEditing={()=>{if(!searching)onSearch();}} returnKeyType="search" placeholder={placeholder} disabled={searching} className="rounded-xl border-ui-border bg-white"/></View>
         {onLocate?<Button variant="outline" appearance="marketing" onPress={onLocate} disabled={searching} loading={locating} loadingLabel="Locating" className="bubba-locate-button" accessibilityLabel="Use my location to find nearby stores">Use my location</Button>:null}
@@ -56,6 +57,15 @@ export interface LocationMapPin { id:string; title:string; /** Optional concise 
 export interface LocationMapProps extends SectionProps { children?:ReactNode; title?:string; description?:string; pins?:readonly LocationMapPin[]; tileUrlTemplate?:string; attribution?:SectionAction; emptyLabel?:string }
 const tileSize=256;
 function project(latitude:number,longitude:number) { const lat=Math.max(-85.05112878,Math.min(85.05112878,latitude))*Math.PI/180;return {x:(longitude+180)/360,y:(1-Math.log(Math.tan(lat)+1/Math.cos(lat))/Math.PI)/2}; }
+type ProjectedMapPin=LocationMapPin&{left:number;top:number};
+interface MapCluster {id:string;left:number;top:number;pins:ProjectedMapPin[]}
+/** Merge overlapping 44px screen targets, recomputing centroids until disjoint. */
+function clusterMapPins(pins:ProjectedMapPin[]):MapCluster[] {
+  const groups:MapCluster[]=pins.map(pin=>({id:pin.id,left:pin.left,top:pin.top,pins:[pin]}));
+  let merged=true;
+  while(merged){merged=false;outer:for(let first=0;first<groups.length;first++)for(let second=first+1;second<groups.length;second++)if(Math.abs(groups[first].left-groups[second].left)<52&&Math.abs(groups[first].top-groups[second].top)<52){const members=[...groups[first].pins,...groups[second].pins];groups[first]={id:members.map(pin=>pin.id).sort().join(':'),left:members.reduce((sum,pin)=>sum+pin.left,0)/members.length,top:members.reduce((sum,pin)=>sum+pin.top,0)/members.length,pins:members};groups.splice(second,1);merged=true;break outer;}}
+  return groups;
+}
 /** Geographic presentation only. Caller owns verified map coordinates and provider choice. */
 export function LocationMap({children,title='All locations',description,pins=[],tileUrlTemplate,attribution,emptyLabel='Map information is unavailable.',className,variant:_variant,...props}:LocationMapProps) {
   // Wait for the measured viewport; SSR must not fetch desktop-sized offscreen
@@ -64,6 +74,7 @@ export function LocationMap({children,title='All locations',description,pins=[],
   const [zoomDelta,setZoomDelta]=useState(0);
   const [tileStates,setTileStates]=useState<Record<string,'ready'|'error'>>({});
   const [tileRetry,setTileRetry]=useState(0);
+  const [selectedIDs,setSelectedIDs]=useState<readonly string[]>([]);
   const validPins=useMemo(()=>pins.filter(pin=>Number.isFinite(pin.latitude)&&Number.isFinite(pin.longitude)&&Math.abs(pin.latitude)<=90&&Math.abs(pin.longitude)<=180).map(pin=>({...pin,...project(pin.latitude,pin.longitude)})),[pins]);
   const map=useMemo(()=>{
     if(!validPins.length||!size.width||!size.height)return null;
@@ -73,26 +84,29 @@ export function LocationMap({children,title='All locations',description,pins=[],
     const zoom=Math.min(18,Math.max(1,fit+zoomDelta)),scale=tileSize*2**zoom;
     const left=(bounds.left+bounds.right)/2*scale-size.width/2,top=(bounds.top+bounds.bottom)/2*scale-size.height/2;
     const tiles=[];for(let y=Math.floor(top/tileSize);y<=Math.floor((top+size.height)/tileSize);y++)for(let x=Math.floor(left/tileSize);x<=Math.floor((left+size.width)/tileSize);x++)if(y>=0&&y<2**zoom)tiles.push({x,y,left:x*tileSize-left,top:y*tileSize-top,url:tileUrlTemplate?.replace('{z}',String(zoom)).replace('{x}',String(((x%2**zoom)+2**zoom)%2**zoom)).replace('{y}',String(y))});
-    return {zoom,fit,tiles,markers:validPins.map(pin=>({...pin,left:pin.x*scale-left,top:pin.y*scale-top}))};
+    const markers=validPins.map(pin=>({...pin,left:pin.x*scale-left,top:pin.y*scale-top}));
+    return {zoom,fit,tiles,clusters:clusterMapPins(markers.filter(pin=>pin.left>=22&&pin.left<=size.width-22&&pin.top>=22&&pin.top<=size.height-22))};
   },[validPins,size,zoomDelta,tileUrlTemplate]);
   const hasMap=Platform.OS==='web'&&map&&tileUrlTemplate&&attribution;
   const tileError=map?.tiles.some(tile=>tile.url&&tileStates[tile.url]==='error');
   const tilesLoading=map?.tiles.some(tile=>tile.url&&!tileStates[tile.url]);
   const setTileState=(url:string,state:'ready'|'error')=>setTileStates(previous=>previous[url]===state?previous:{...previous,[url]:state});
   const retryTiles=()=>{setTileStates(previous=>{const next={...previous};for(const tile of map?.tiles??[])if(tile.url&&next[tile.url]==='error')delete next[tile.url];return next;});setTileRetry(value=>value+1);};
+  const selectedPins=validPins.filter(pin=>selectedIDs.includes(pin.id));
   return <MarketingScope><Stack {...props} className={cn('bubba-location-map w-full',className)} gap={2}>
     <Heading level={2} className="sr-only">{title}</Heading>
     {description?<Text variant="caption" className="text-sm text-ui-muted">{description}</Text>:null}
+    {hasMap?<Inline gap={1} className="bubba-map-toolbar self-end rounded-xl border border-ui-line bg-white p-1"><Text variant="caption" className="px-2 text-xs text-ui-muted">Map</Text><Button variant="ghost" accessibilityLabel="Zoom map in" onPress={()=>setZoomDelta(value=>Math.min(18-map.fit,value+1))} disabled={map.zoom>=18}>+</Button><Button variant="ghost" accessibilityLabel="Zoom map out" onPress={()=>setZoomDelta(value=>Math.max(1-map.fit,value-1))} disabled={map.zoom<=1}>−</Button><Button variant="ghost" accessibilityLabel="Show all locations on map" onPress={()=>setZoomDelta(0)}>Fit all</Button></Inline>:null}
     <View className={cn('bubba-map-frame relative w-full overflow-hidden rounded-xl border border-ui-line bg-[#D9E8FB]',Platform.OS==='web'?'h-[300px] min-[761px]:h-[360px]':'min-h-[160px]')} onLayout={event=>{const {width,height}=event.nativeEvent.layout;setSize(previous=>width>0&&height>0&&(previous.width!==width||previous.height!==height)?{width,height}:previous);}}>
       {children??(hasMap?<>
         <View accessible={false} aria-hidden pointerEvents="none" className="absolute inset-0">{map.tiles.map(tile=><Image key={`${map.zoom}/${tile.x}/${tile.y}/${tileRetry}`} source={{uri:tile.url!}} accessible={false} onLoad={()=>setTileState(tile.url!,'ready')} onError={()=>setTileState(tile.url!,'error')} resizeMode="cover" style={{position:'absolute',left:tile.left,top:tile.top,width:tileSize,height:tileSize}}/>)}</View>
-        {tilesLoading&&!tileError?<View role="status" pointerEvents="none" className="absolute bottom-14 left-3 rounded-lg border border-ui-line bg-white p-3"><Text variant="caption" className="text-xs">Loading map…</Text></View>:null}
-        {map.markers.filter(pin=>pin.left>=22&&pin.left<=size.width-22&&pin.top>=22&&pin.top<=size.height-22).map(pin=><Link key={pin.id} href={pin.href} external accessibilityLabel={`Directions to ${pin.title}`} className="bubba-map-pin absolute h-11 w-11 items-center justify-center" style={{left:pin.left-22,top:pin.top-22}} textClassName="no-underline"><View className="bubba-map-pin-dot h-5 w-5 rounded-full border-[3px] border-white bg-bubba-red"/><Text variant="caption" className="bubba-map-pin-label text-xs font-bold text-bubba-navy">{pin.label??pin.title}</Text></Link>)}
-        <Stack gap={1} className="absolute right-3 top-3 rounded-xl border border-ui-line bg-white p-1"><Button variant="ghost" accessibilityLabel="Zoom map in" onPress={()=>setZoomDelta(value=>Math.min(18-map.fit,value+1))} disabled={map.zoom>=18}>+</Button><Button variant="ghost" accessibilityLabel="Zoom map out" onPress={()=>setZoomDelta(value=>Math.max(1-map.fit,value-1))} disabled={map.zoom<=1}>−</Button><Button variant="ghost" accessibilityLabel="Show all locations on map" onPress={()=>setZoomDelta(0)}>Fit</Button></Stack>
-        <View className="absolute bottom-0 right-0 bg-white px-2 py-1"><Link textVariant="caption" href={attribution.href} external textClassName="text-[11px] text-bubba-navy">{attribution.label}</Link></View>
-        {tileError?<View role="status" className="absolute bottom-14 left-3 max-w-[230px] gap-2 rounded-lg border border-ui-line bg-white p-3"><Text variant="caption" className="text-xs leading-5">Map tiles could not load. Location cards below still provide directions.</Text><Button variant="outline" size="sm" onPress={retryTiles}>Retry map</Button></View>:null}
+        {map.clusters.map(cluster=>cluster.pins.length>1?<Button key={cluster.id} variant="ghost" accessibilityLabel={`Show ${cluster.pins.length} nearby locations`} onPress={()=>setSelectedIDs(cluster.pins.map(pin=>pin.id))} {...{dataSet:{pinCount:String(cluster.pins.length)}}} className="bubba-map-cluster absolute h-11 min-h-[44px] w-11 items-center justify-center rounded-full border-[3px] border-white bg-bubba-navy p-0" textClassName="text-sm font-black text-white" style={{left:cluster.left-22,top:cluster.top-22}}>{cluster.pins.length}</Button>:cluster.pins.map(pin=><Link key={pin.id} href={pin.href} external accessibilityLabel={`Directions to ${pin.title}`} className="bubba-map-pin absolute h-11 w-11 items-center justify-center" style={{left:pin.left-22,top:pin.top-22}} textClassName="no-underline"><View className="bubba-map-pin-dot h-5 w-5 rounded-full border-[3px] border-white bg-bubba-red"/><Text variant="caption" className="bubba-map-pin-label text-xs font-bold text-bubba-navy">{pin.label??pin.title}</Text></Link>))}
       </>:<Stack className="flex-1 justify-center p-6"><Text>{validPins.length&&Platform.OS==='web'?'Use the location cards below for directions. The interactive map requires JavaScript.':emptyLabel}</Text>{Platform.OS!=='web'?validPins.map(pin=><Link key={pin.id} href={pin.href} external>{pin.title} · Directions</Link>):null}</Stack>)}
     </View>
+    {hasMap&&attribution?<Link textVariant="caption" href={attribution.href} external className="self-end" textClassName="text-[11px] text-bubba-navy">{attribution.label}</Link>:null}
+    {hasMap&&tilesLoading&&!tileError?<View role="status"><Text variant="caption" className="text-xs text-ui-muted">Loading map…</Text></View>:null}
+    {hasMap&&tileError?<Inline role="status" className="rounded-xl border border-ui-line bg-white p-3"><Text variant="caption" className="min-w-0 flex-1 text-xs leading-5">Map tiles could not load. Location cards below still provide directions.</Text><Button variant="outline" size="sm" onPress={retryTiles}>Retry map</Button></Inline>:null}
+    <Dialog open={selectedPins.length>0} onOpenChange={open=>{if(!open)setSelectedIDs([]);}} title={`${selectedPins.length} nearby locations`} description="Choose a store for directions. Close this list and zoom in to separate nearby map pins." closeLabel="Close nearby locations"><Stack gap={3}>{selectedPins.map(pin=><Stack key={pin.id} gap={2} className="rounded-xl border border-ui-line p-4"><Heading level={3} className="text-base font-bold">{pin.title}</Heading><Button variant="secondary" href={pin.href} external accessibilityLabel={`Directions to ${pin.title}`}>Get directions</Button></Stack>)}</Stack></Dialog>
   </Stack></MarketingScope>;
 }
 
