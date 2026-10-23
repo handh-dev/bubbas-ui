@@ -49,9 +49,13 @@ export function FocusMarquee({items,speed=38,direction='left',spacing=20,badgeAp
   const phase=useRef(0);
   const velocity=bounded(speed,38,0,240),gap=bounded(spacing,20,0,96);
   const scale=bounded(centerEmphasis?.scale,1.12,1,1.35),lift=bounded(centerEmphasis?.lift,4,0,16),range=bounded(centerEmphasis?.range,.5,.1,1);
+  const moving=velocity>0;
+  const motionSettings=useRef({velocity,direction});
+  // Changing positive speed/direction does not restart layout or the frame loop.
+  useEffect(()=>{motionSettings.current={velocity,direction};},[velocity,direction]);
   const itemKey=JSON.stringify(items);
   useEffect(()=>{
-    if(Platform.OS!=='web'||!motion||velocity===0||items.length===0)return;
+    if(Platform.OS!=='web'||!motion||!moving||items.length===0)return;
     const node=root.current as unknown as WebNode|null;
     const track=node?.querySelector('.bubba-focus-track'),first=track?.querySelector('.bubba-focus-group');
     if(!node||!track||!first)return;
@@ -60,7 +64,8 @@ export function FocusMarquee({items,speed=38,direction='left',spacing=20,badgeAp
     let width=0,period=0,geometry:{node:WebNode;center:number}[]=[];
     const stop=()=>{web.cancelAnimationFrame(frame);frame=0;lastTime=undefined;};
     const paint=()=>{
-      const offset=direction==='right'?-period+phase.current:-phase.current;
+      // A single coordinate convention preserves position when direction changes.
+      const offset=-phase.current;
       track.style.transform=`translate3d(${offset}px,0,0)`;
       // All geometry is cached during measurement. Animation writes transforms only.
       for(const item of geometry){
@@ -72,7 +77,11 @@ export function FocusMarquee({items,speed=38,direction='left',spacing=20,badgeAp
     const tick=(time:number)=>{
       frame=0;
       if(!alive||!ready||!visible||web.document?.hidden)return;
-      if(lastTime!==undefined)phase.current=(phase.current+(time-lastTime)*velocity/1000)%period;
+      if(lastTime!==undefined){
+        const settings=motionSettings.current;
+        const distance=(time-lastTime)*settings.velocity/1000*(settings.direction==='right'?-1:1);
+        phase.current=((phase.current+distance)%period+period)%period;
+      }
       lastTime=time;paint();frame=web.requestAnimationFrame(tick);
     };
     const start=()=>{if(alive&&ready&&visible&&!web.document?.hidden&&!frame)frame=web.requestAnimationFrame(tick);};
@@ -105,7 +114,7 @@ export function FocusMarquee({items,speed=38,direction='left',spacing=20,badgeAp
     web.document?.fonts?.addEventListener('loadingdone',schedule);web.document?.fonts?.ready.then(schedule);
     measure();
     return()=>{alive=false;stop();web.cancelAnimationFrame(measureFrame);resize?.disconnect();intersection?.disconnect();web.removeEventListener('resize',schedule);web.document?.removeEventListener('visibilitychange',visibility);web.document?.fonts?.removeEventListener('loadingdone',schedule);node.setAttribute('data-bubba-focus-active','false');track.style.transform='';for(const item of geometry)item.node.style.transform='';for(const item of track.querySelectorAll('.bubba-focus-item')){item.style.removeProperty('padding-left');item.style.removeProperty('padding-right');}node.style.removeProperty('--bubba-focus-inset');};
-  },[itemKey,motion,velocity,direction,gap,scale,lift,range,copies,badgeAppearance?.size,badgeAppearance?.shape,badgeAppearance?.textTone]);
+  },[itemKey,motion,moving,gap,scale,lift,range,copies,badgeAppearance?.size,badgeAppearance?.shape,badgeAppearance?.textTone]);
   if(items.length===0)return null;
   const pill=(label:string)=><View className={cn('bubba-focus-pill bg-white px-3 py-2',badgeAppearance?.shape==='rounded'?'rounded-bubba-control':'rounded-full')}><Text variant="caption" className={cn('bubba-focus-label text-center font-black uppercase',badgeAppearance?.size==='md'?'text-sm leading-5':'text-xs leading-4',badgeAppearance?.textTone==='red'?'text-bubba-red':'text-bubba-navy')}>{label}</Text></View>;
   return <MarketingScope><View {...props} ref={root} style={[vars({'--bubba-focus-gap':`${gap}px`,'--bubba-focus-scale':String(scale)}),style]} className={cn('bubba-focus-marquee relative min-w-0 max-w-full bg-bubba-red px-0 py-4',className)}>
