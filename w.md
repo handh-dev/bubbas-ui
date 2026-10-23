@@ -292,3 +292,13 @@ both static Sparkles glyphs from the offer (badge and background). Keep gold
 animated sparkles, original caller art, white/gold headline, gold/red sweep and
 white action. Preserve original21 artifact and all selected20 marquee settings.
 This correction is local only; publication/deployment remain paused.
+
+
+## Sparkler offer — local candidate23 badge reuse
+
+Owner requests existing product deal badge for Free gift. Reuse actual shared
+MarketingProductBadge with its metallic paint/gleam/twinkles and an optional
+static-icon flag (true by default for existing products; false in this card).
+Retain every22 composition choice and selected20 marquee. Focused badge motion,
+manual/reduced preference, bounds and keyboard checks qualify local preparation
+only. Original22 preserved; publication/deployment remain paused.

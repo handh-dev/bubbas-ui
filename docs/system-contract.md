@@ -539,7 +539,7 @@ comparison. No engine change or publication/deployment is part of this selection
 ### Sparkler offer composition — local candidate21
 
 `PromotionBanner variant="marketing" emphasis="sparkler"` owns the solid brand-blue
-panel, gold eyebrow, white title with a gold second line, optional original art,
+panel, existing metallic product badge for the eyebrow (without its optional static icon), white title with a gold second line, optional original art,
 and the white/navy action on a gold-edged red lower sweep. Supply `title`,
 `titleAccent`, `eyebrow`, `description` and `action`; apps retain the offer facts
 and actual destination. The default generic promotion remains unchanged.
@@ -563,3 +563,15 @@ motion preferences; the art, copy and action remain usable with no JavaScript.
 Use `node scripts/verify-promotion.mjs` for focused shared checks; optionally pass
 an external `PROMOTION_ARTWORK_PATH` and `PROMOTION_EVIDENCE` for private proofs.
 Local preview qualification does not grant publication or deployment approval.
+
+
+### Sparkler offer deal badge — local candidate23
+
+The supplied offer eyebrow reuses the exact `MarketingProductBadge` used by
+product cards/details: metallic gold paint, shared moving gleam and gold twinkles.
+The internal badge’s optional `icon` defaults to true for existing products; the
+sparkler offer explicitly passes false, preserving the owner’s no-static-icon
+choice. No new badge paint/effect implementation or consumer override is added.
+The existing manual/system motion preference disables both gleam and twinkles.
+Bright blue, caller-owned artwork, headline/body/action and selected20 marquee
+remain unchanged. Original22 stays immutable; local preparation is not release.
