@@ -85,19 +85,18 @@ export function FeaturedProductRow({items,title='Featured favorites',emptyLabel=
 export interface OfferPresentation {id:string;title:string;description:string;eyebrow?:string;kind:'social'|'guarantee'|'review';action?:SectionAction;socialLink?:SectionAction;artwork?:{uri:string;alt:string;aspectRatio?:number};artworkHref?:string}
 export interface OfferGridProps extends SectionProps {items:readonly OfferPresentation[]}
 export function OfferGrid({items,className,variant:_variant,...props}:OfferGridProps) {
-  const expandedArt=items.some(offer=>offer.artwork);
   const naturalHeight=(offer:OfferPresentation)=>{const ratio=offer.artwork?.aspectRatio;return Math.min(128,144/(ratio&&Number.isFinite(ratio)&&ratio>0?ratio:1));};
-  const artRowHeight=expandedArt?Math.max(...items.map(offer=>offer.artwork?naturalHeight(offer):offer.kind==='guarantee'?96:0)):0;
+  const artRowHeight=Math.max(0,...items.map(offer=>offer.artwork?naturalHeight(offer):offer.kind==='guarantee'?96:0));
   return <MarketingScope><View {...props} className={cn('bubba-offer-grid flex-row flex-wrap items-stretch',className)}>{items.map(offer=>{
-    const artWidth=expandedArt?144:80,artHeight=expandedArt?naturalHeight(offer):80;
-    const art=offer.artwork?<Image source={{uri:offer.artwork.uri}} accessibilityLabel={offer.artwork.alt} resizeMode="contain" style={{width:artWidth,height:artHeight}}/>:offer.kind==='guarantee'?<Icon name="money" size={expandedArt?96:80} color={null}/>:null;
-    return <View key={offer.id} className="bubba-offer-grid-item w-full min-w-0 p-2 min-[900px]:w-1/3"><View className={cn('bubba-offer-card h-full min-h-[280px] overflow-hidden rounded-xl border border-ui-line p-6',`bubba-offer-${offer.kind}`,expandedArt&&'bubba-offer-expanded-art',offer.kind==='guarantee'?'bg-white':'bg-[#EAF3FF]')}>
-      {expandedArt?<View className="bubba-offer-art-row mb-4 w-full items-end" style={{height:artRowHeight}}><View className="bubba-offer-art max-w-full items-center justify-start">{offer.artwork&&offer.artworkHref?<Link href={offer.artworkHref} external accessibilityLabel={offer.artwork.alt} contentLayout="block" style={{width:artWidth,height:artHeight}}>{art}</Link>:art}</View></View>:art?<View className="bubba-offer-art absolute right-4 top-4 h-20 w-20 items-center justify-center">{art}</View>:null}
-      {offer.eyebrow?<Text variant="caption" className={cn('bubba-offer-eyebrow mb-3 text-xs font-bold uppercase text-bubba-red',!expandedArt&&art&&'max-w-[65%]')}>{offer.eyebrow}</Text>:null}
-      <Heading level={2} className={cn('bubba-offer-title min-h-[64px] text-2xl font-black leading-8 text-bubba-navy',!expandedArt&&art&&'max-w-[68%]')}>{offer.title}</Heading>
+    const artWidth=144,artHeight=naturalHeight(offer);
+    const art=offer.artwork?<Image source={{uri:offer.artwork.uri}} accessibilityLabel={offer.artwork.alt} resizeMode="contain" style={{width:artWidth,height:artHeight}}/>:offer.kind==='guarantee'?<Icon name="money" size={96} color={null}/>:null;
+    return <View key={offer.id} className="bubba-offer-grid-item w-full min-w-0 p-2 min-[900px]:w-1/3"><View className={cn('bubba-offer-card h-full min-h-[280px] overflow-hidden rounded-xl border border-ui-line p-6',`bubba-offer-${offer.kind}`,offer.kind==='guarantee'?'bg-white':'bg-[#EAF3FF]')}>
+      {offer.eyebrow?<Text variant="caption" className="bubba-offer-eyebrow mb-3 text-xs font-bold uppercase text-bubba-red">{offer.eyebrow}</Text>:null}
+      <Heading level={2} className="bubba-offer-title min-h-[64px] text-2xl font-black leading-8 text-bubba-navy">{offer.title}</Heading>
+      {artRowHeight>0?<View className="bubba-offer-art-row mt-4 w-full items-center justify-center" style={{height:artRowHeight}}><View className="bubba-offer-art max-w-full items-center justify-center">{offer.artwork&&offer.artworkHref?<Link href={offer.artworkHref} external accessibilityLabel={offer.artwork.alt} contentLayout="block" style={{width:artWidth,height:artHeight}}>{art}</Link>:art}</View></View>:null}
       <Text variant="caption" className="bubba-offer-description mt-4 text-sm leading-6 text-ui-muted">{offer.description}</Text>
       {offer.socialLink?<Link href={offer.socialLink.href} external={offer.socialLink.external} accessibilityLabel={offer.socialLink.label} contentLayout="block" className="bubba-offer-social-link mt-3 flex-row items-center gap-2 self-start"><Icon name={offer.socialLink.icon??'instagram'} size={20} color="#0866FF"/><Text variant="caption" className="min-w-0 shrink text-sm font-bold text-bubba-blue">{offer.socialLink.label}</Text></Link>:null}
-      {offer.action?<View className="mt-auto pt-5"><MarketingAction action={{...offer.action,tone:'blue'}}/></View>:null}
+      {offer.action?<View className="bubba-offer-action mt-auto pt-5"><MarketingAction action={{...offer.action,tone:'blue'}}/></View>:null}
     </View></View>;
   })}</View></MarketingScope>;
 }

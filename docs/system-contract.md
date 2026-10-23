@@ -76,7 +76,7 @@ the canonical schema, even if someone refreshes their manifest checksums.
 
 ## Pattern contracts
 
-### Website page compositions — proposed 0.8.3
+### Website page compositions — proposed 0.8.4
 
 `LocationSearch` is a controlled city/ZIP field with combined search and optional
 device-location actions. Apps own lookup, geolocation permission, validation,
@@ -141,12 +141,16 @@ own their ranking and identity; the component creates no best-seller claim.
 `OfferGrid` supplies equal-height social, guarantee and review compositions with
 light-blue social/fountain fields and a white guarantee field. Social/review cards
 have no decorative fallback when caller artwork is missing; the guarantee uses
-original bold blue/red/white/navy money geometry. Caller `artwork`, optional
-natural `aspectRatio`, and `artworkHref` supply linked images with contain scaling.
-When any offer uses caller art, a shared top-right art row (up to 144×128,
-matched to the tallest supplied image/money motif) across the whole group keeps
-images readable and titles/body clear at 320px; complete titles
-use the following full-width row. No aspect ratio crops or tints the source.
+original bold green-banknote geometry with navy outlines. Paper occupies a
+prominent green area; token colors and other original artwork are unchanged.
+Every deal card follows the same DOM and paint order: supplied eyebrow/label,
+full-width title, centered natural-size illustration row, description, then action.
+There is no above-heading/top-right art branch. Caller `artwork`, optional natural
+`aspectRatio`, and `artworkHref` retain exact linked images and contain scaling.
+The common illustration row is only as tall as the tallest art (up to 144×128);
+images center within it while titles/body align and desktop buttons stay at the
+bottom. No artificial art space precedes the label. Canonical deal examples omit
+`socialLink`; the optional generic API remains for other consumers.
 CategoryGrid already accepts SectionImage for approved category art; no
 Hero/Campaign API changes are needed. Cleared app assets remain app-owned.
 `UIReviewCatalog offerExample` forwards caller-owned review content and art to
