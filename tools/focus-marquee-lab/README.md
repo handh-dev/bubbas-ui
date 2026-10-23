@@ -10,6 +10,8 @@ This is a plain HTML developer shell outside `packages/ui`. Its React root rende
 preference with the same NativeWind/RNW adapter as the shared web build. It has no
 second animation, direct pill transform override, consumer pin, Core connection,
 remote assets or server writes. The preview remains visible above the controls.
+Tall previews flow normally instead of sticking when they exceed 55% of the
+viewport height, so static copies and large effects cannot cover the controls.
 Existing frozen candidates and other local preview servers are not changed.
 
 - Timing: standing, leaving, entering and settle seconds; the total is derived.
