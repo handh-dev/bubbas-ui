@@ -9,6 +9,9 @@ import { MarketingScope } from './marketing';
 import { useMarketingMotion } from '../internal/marketing-motion';
 import { cn } from '../internal/utils';
 
+/** Shared spring default; callers can tune cadence live without rebuilding UI. */
+export const FOCUS_MARQUEE_DEFAULT_CADENCE = 2.3;
+
 export interface FocusMarqueeProps extends Omit<ViewProps, 'children'> {
   /** Plain caller-owned claims; no links, controls or inferred business facts. */
   items: readonly string[];
@@ -48,14 +51,14 @@ interface WebRuntime {
 const bounded=(value:number|undefined,fallback:number,min:number,max:number)=>Number.isFinite(value)?Math.min(max,Math.max(min,value!)):fallback;
 
 /** Endless web pill lane. Native, SSR and motion-off keep the complete static copy. */
-export function FocusMarquee({items,speed=38,direction='left',motion:motionMode='spring',cadence=1.8,spring='poppy',edgeBlur=1,spacing=8,badgeAppearance,centerEmphasis,className,style,...props}:FocusMarqueeProps) {
+export function FocusMarquee({items,speed=38,direction='left',motion:motionMode='spring',cadence=FOCUS_MARQUEE_DEFAULT_CADENCE,spring='poppy',edgeBlur=1,spacing=8,badgeAppearance,centerEmphasis,className,style,...props}:FocusMarqueeProps) {
   const [motion]=useMarketingMotion();
   const [copies,setCopies]=useState(1);
   const root=useRef<ElementRef<typeof View>>(null);
   const phase=useRef(0);
   const velocity=bounded(speed,38,0,240),gap=bounded(spacing,8,0,96);
   const scale=bounded(centerEmphasis?.scale,motionMode==='spring'?1.16:1.12,1,1.35),lift=bounded(centerEmphasis?.lift,4,0,16),range=bounded(centerEmphasis?.range,.5,.1,1);
-  const beat=bounded(cadence,1.8,.8,3),blur=bounded(edgeBlur,1,0,4);
+  const beat=bounded(cadence,FOCUS_MARQUEE_DEFAULT_CADENCE,.8,3),blur=bounded(edgeBlur,1,0,4);
   const stretch=motionMode==='spring'?(spring==='gentle'?.03:.06):0;
   const nudge=motionMode==='spring'?(spring==='gentle'?1:2):0;
   const popLift=motionMode==='spring'?(spring==='gentle'?3:6):0;

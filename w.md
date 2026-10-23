@@ -265,3 +265,11 @@ The owner specified1.80 seconds. Only shared default/fallback cadence changes;
 retain short0.14s rest and all15 density/blur/pop settings.16 original/evidence
 remain preserved as superseded. Build/prove actual timing, then freeze new17
 original for local review; release remains paused.
+
+## FocusMarquee candidate18 — quick local live tuning
+
+Single shared default2.3s; existing cadence prop and actual Input/FormField catalog
+control enable local trials without repeated package changes. Preserve17 originals
+and HQ17. Focused actual-package build/type/live-edit/invalid/static checks and a
+fresh read-only review apply; full release/Expo/Core/HQ/recovery gates wait for
+accepted motion. Website DEV override belongs to its consumer, ignored in prod.

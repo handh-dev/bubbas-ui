@@ -2,11 +2,12 @@
 import {useState} from 'react';
 import {AnnouncementEditor,type AnnouncementSegment} from './components/announcement';
 import { MarketingMotionControl } from './components/marketing';
-import { FocusMarquee } from './components/focus-marquee';
+import { FocusMarquee, FOCUS_MARQUEE_DEFAULT_CADENCE } from './components/focus-marquee';
 import { Icon } from './components/Icon';
 import { FlagTicker, CampaignSection, SocialSection } from './components/campaigns';
 import { Inline } from './components/layout';
 import { Button } from './components/Button';
+import { FormField, Input } from './components/forms';
 import { ThemeProvider } from './theme';
 import { View } from 'react-native';
 import { components } from './showcase/catalog';
@@ -29,6 +30,13 @@ function AnnouncementAuthoringDemo() {
  const[value,setValue]=useState<readonly AnnouncementSegment[]>([{text:'Example ',tone:'default'},{text:'gold words',tone:'yellow'},{text:' · synthetic review',tone:'default'}]);
  return <AnnouncementEditor value={value} onValueChange={setValue}/>;
 }
+function FocusMarqueeDemo() {
+ const[draft,setDraft]=useState(String(FOCUS_MARQUEE_DEFAULT_CADENCE));
+ const[cadence,setCadence]=useState(FOCUS_MARQUEE_DEFAULT_CADENCE);
+ const valid=(value:string)=>value.trim()!==''&&Number.isFinite(Number(value))&&Number(value)>=.8&&Number(value)<=3;
+ const change=(value:string)=>{setDraft(value);if(valid(value))setCadence(Number(value));};
+ return <View className="gap-4"><Text variant="label">Spring flow · {FOCUS_MARQUEE_DEFAULT_CADENCE}s shared default</Text><View className="w-full max-w-sm"><FormField label="Seconds per pill" hint="0.8–3 seconds. Applies on next handoff." error={valid(draft)?undefined:'Enter a number from 0.8 to 3 seconds.'}><Input value={draft} onChangeText={change} inputMode="decimal" keyboardType="decimal-pad"/></FormField><Text variant="small" testID="focus-marquee-cadence-value">Preview: {cadence} seconds per pill</Text></View><FocusMarquee testID="focus-marquee-live-preview" cadence={cadence} items={['Example: 16 DFW locations','Example: price beat guarantee','Example: free pop-its with follow','Example: open daily through July 5th']}/><Text variant="label">Linear preset · optional comparison</Text><FocusMarquee motion="linear" edgeBlur={0} items={['Example custom direction','Synthetic caller-owned content']} speed={28} direction="right" spacing={28} badgeAppearance={{size:'md',shape:'rounded'}} centerEmphasis={{scale:1.1,lift:3,range:.4}}/><MarketingMotionControl/></View>;
+}
 /** Fixtures are visibly examples and never imply catalog, prices, hours or availability. */
 export function SectionDemo({ name, variant = 'default' }: { name: string; variant?: 'default' | 'marketing' }) {
   const sampleImage = { uri: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="280"><rect width="400" height="280" fill="#d9e8fb"/><text x="40" y="150" font-size="36">SAMPLE ART</text></svg>'), alt: 'Sample artwork fixture' };
@@ -40,7 +48,7 @@ export function SectionDemo({ name, variant = 'default' }: { name: string; varia
   if (name === 'Icon') return <Inline>{(['search','menu','close','instagram','facebook','x','youtube','tiktok','spotify','sparkles','pause','play','arrowRight'] as const).map(name=><Icon key={name} name={name} accessibilityLabel={name}/>)}</Inline>;
   if (name === 'CampaignSection') return <CampaignSection title="Example campaign" highlight="250" description="Synthetic composition for review; not a live promotion." badges={['Example: 16 DFW locations','Example: price beat guarantee','Example: free pop-its with follow','Example: open daily through July 5th']}/>;
   if (name === 'SocialSection') return <SocialSection title="Example social links" description="Example destinations only." links={[{label:'Instagram',href:'#sample',icon:'instagram'},{label:'Facebook',href:'#sample-facebook',icon:'facebook'}]}/>;
-  if (name === 'FocusMarquee') return <View className="gap-4"><Text variant="label">Spring flow · 1.80s default</Text><FocusMarquee items={['Example: 16 DFW locations','Example: price beat guarantee','Example: free pop-its with follow','Example: open daily through July 5th']}/><Text variant="label">Linear preset · optional comparison</Text><FocusMarquee motion="linear" edgeBlur={0} items={['Example custom direction','Synthetic caller-owned content']} speed={28} direction="right" spacing={28} badgeAppearance={{size:'md',shape:'rounded'}} centerEmphasis={{scale:1.1,lift:3,range:.4}}/><MarketingMotionControl/></View>;
+  if (name === 'FocusMarquee') return <FocusMarqueeDemo/>;
   if (name === 'FlagTicker') return <View className="gap-2"><FlagTicker items={['Example campaign','Example destination','Synthetic review copy']}/><MarketingMotionControl/></View>;
   if (name === 'SiteHeader') return <SiteHeader variant={variant} brand={brand} links={links} announcement={variant === 'marketing' ? 'Example announcement · no live campaign' : undefined} />;
   if (name === 'SiteFooter') return <SiteFooter variant={variant} brand={brand} links={links} description="Sample footer" linkGroups={[{title:"Explore",links:[...links,{label:"Example long destination",href:"#sample-long"}]},{title:"Resources",links}]} copyright="Sample copyright; no live business facts"><Text className="text-white">Example season information</Text></SiteFooter>;

@@ -399,8 +399,8 @@ The owner superseded continuous ticker pacing with a pop/stretch handoff rhythm.
 `motion="spring"` is now the default: one fact is centered and readable, then the
 next arrives with a brief stretch/pop as the outgoing pill compresses and gives
 way. Each handoff has one small bounded overshoot and settles with zero-velocity
-endpoints. `cadence` is seconds per fact (default1.80, bounded0.8–3); travel takes
-1.66s by default, ending with a0.12s settle and a short0.14s centered rest. Distance and velocity vary
+endpoints. `cadence` is seconds per fact (default2.30, bounded0.8–3); travel takes
+2.16s by default, ending with a0.12s settle and a short0.14s centered rest. Distance and velocity vary
 with label widths; cadence is the same per fact. `spring="poppy"|"gentle"` chooses
 a bounded presentation preset, rather than exposing physics internals.
 
@@ -456,3 +456,22 @@ nonfinite fallback now use1.80s:1.66s travel with the same0.14s quiet rest and
 0.12s settle tail. Every15 density, type, blur, geometry and pop/stretch setting
 remains unchanged. Prior16 original and1.05/1.20 drafts remain historical; this
 is a new local proposal with original-package timing proof. Release stays paused.
+
+### FocusMarquee live tuning — candidate18 local baseline
+
+`FOCUS_MARQUEE_DEFAULT_CADENCE` is the single shared default (2.3 seconds per
+pill), reused for the component default, nonfinite fallback and actual catalog
+state/label. Explicit `cadence` props update at the next handoff without remounting
+or resetting motion. The existing Input/FormField in the real FocusMarquee
+specimen edits that prop live: finite0.8–3 drafts apply, empty/invalid/out-of-range
+drafts show an associated error and retain the last valid cadence. Appearance
+changes preserve the draft. This is a local example control, not persisted Core
+configuration or a production customer setting. Static/reduced-motion/native
+content remains complete and clear while the example field stays usable.
+
+Once this baseline is frozen, local input/DEV website query tuning can change the
+prop without package edits, repacking or a new release cycle. Apps own any local
+DEV query parser and identical SSR/hydration props; production must ignore that
+DEV override. A chosen final motion version still needs a frozen review and the
+owning release gates. Full release/Expo/Core/HQ/recovery qualification is deferred
+while motion is being tuned; focused local evidence does not claim those gates.

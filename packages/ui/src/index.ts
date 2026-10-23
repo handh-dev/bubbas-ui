@@ -40,5 +40,5 @@ export { AnnouncementEditor } from './components/announcement';
 export type { AnnouncementSegment, AnnouncementContent, AnnouncementEditorProps } from './components/announcement';
 export type { AnnouncementBannerProps } from './components/marketing';
 
-export { FocusMarquee } from './components/focus-marquee';
+export { FocusMarquee, FOCUS_MARQUEE_DEFAULT_CADENCE } from './components/focus-marquee';
 export type { FocusMarqueeProps } from './components/focus-marquee';
