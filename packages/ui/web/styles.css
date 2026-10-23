@@ -23,7 +23,8 @@
 /* Static announcement: fit text, never scroll or wrap. The compact copy is caller reviewed. */
 .bubba-announcement { background:#0866FF!important; }
 .bubba-announcement-viewport { container-type:inline-size; overflow:visible; padding-inline:12px; }
-.bubba-announcement-copy { display:block!important; color:#FFFFFF; flex-shrink:0; width:max-content!important; max-width:none!important; white-space:nowrap!important; font-size:clamp(11px,calc((100cqw - 24px)/var(--bubba-announcement-length,100)),14px); line-height:1.3; }
+.bubba-announcement-copy { display:block!important; color:#FFFFFF; flex-shrink:0; width:max-content!important; max-width:none!important; white-space:nowrap!important; line-height:1.3; }
+.bubba-announcement .bubba-announcement-copy { font-size:min(14px,calc((100cqw - 24px)/var(--bubba-announcement-length,100)))!important; }
 .bubba-announcement-compact { display:none!important; }
 .bubba-announcement-segment { font:inherit!important; line-height:inherit!important; letter-spacing:inherit!important; }
 /* RNW may insert its atomic sheet before or after the shared CSS. Keep highlighted
@@ -150,7 +151,7 @@
 :is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-gold-sparkles { display:none!important; }
 @media (prefers-reduced-motion:reduce) { .bubba-gold-sparkles { display:none!important; } .bubba-gold-sparkle { animation:none!important; } .bubba-mobile-nav-link { transition:none; } }
 
-@media (max-width:760px) { .bubba-announcement-has-compact { display:none!important; } .bubba-announcement-compact { display:block!important; font-size:clamp(11px,calc((100cqw - 24px)/var(--bubba-announcement-length,40)),14px); } }
+@media (max-width:760px) { .bubba-announcement-has-compact { display:none!important; } .bubba-announcement-compact { display:block!important; } }
 .bubba-announcement-viewport[data-bubba-compact="true"] .bubba-announcement-full { display:none!important; }
 .bubba-announcement-viewport[data-bubba-compact="true"] .bubba-announcement-compact { display:block!important; }
 .bubba-announcement-viewport[data-bubba-compact="false"] .bubba-announcement-full { display:block!important; }

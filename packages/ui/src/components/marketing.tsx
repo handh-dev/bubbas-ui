@@ -32,13 +32,19 @@ export function MarketingMotionControl({ dark=false }: { dark?:boolean }) {
 interface AnnouncementTextNode { style:{fontSize:string;setProperty(name:string,value:string,priority?:string):void;removeProperty(name:string):void}; scrollWidth:number; getBoundingClientRect():{width:number} }
 interface AnnouncementViewportNode { clientWidth:number;setAttribute(name:string,value:string):void; querySelectorAll(selector:string):Iterable<AnnouncementTextNode> }
 interface AnnouncementObserver { observe(node:AnnouncementViewportNode):void; disconnect():void }
-interface AnnouncementWeb { ResizeObserver?:new(callback:()=>void)=>AnnouncementObserver; addEventListener(event:string,callback:()=>void):void; removeEventListener(event:string,callback:()=>void):void; document?:{fonts?:{ready:Promise<unknown>}} }
+interface AnnouncementWeb { ResizeObserver?:new(callback:()=>void)=>AnnouncementObserver; addEventListener(event:string,callback:()=>void):void; removeEventListener(event:string,callback:()=>void):void; getComputedStyle(node:AnnouncementTextNode):{fontSize:string}; document?:{fonts?:{ready:Promise<unknown>}} }
 /** Static text: caller may supply a reviewed concise phone message. No moving announcement. */
 export interface AnnouncementBannerProps { content:AnnouncementContent; compactCopy?:AnnouncementContent; onFitChange?:(fontSize:number)=>void }
 export function AnnouncementBanner({content,compactCopy,onFitChange}:AnnouncementBannerProps) {
  const copy=typeof content==='string'?content:content.map(part=>part.text).join('');
  const renderContent=(value:AnnouncementContent)=>typeof value==='string'?value:value.map((part,index)=><Text key={index} variant="caption" className={cn('bubba-announcement-segment font-black uppercase italic',part.tone==='yellow'?'bubba-announcement-yellow':'text-white')} style={part.tone==='yellow'?{color:'#FED766',backgroundColor:'#03256C'}:undefined}>{part.text}</Text>);
- const fallback=(value:AnnouncementContent)=>vars({'--bubba-announcement-length':String(Math.max(1,Array.from(typeof value==='string'?value:value.map(part=>part.text).join('')).length)*1.1)});
+ // Conservative uppercase advance bounds for the approved Montserrat 900 font.
+ // Unlike a minimum font-size floor, this also contains long copy before JS runs.
+ const fallback=(value:AnnouncementContent)=>{
+  const text=(typeof value==='string'?value:value.map(part=>part.text).join('')).toUpperCase();
+  const advance=Array.from(text).reduce((width,char)=>width+(/\s/.test(char)?.35:char==='W'?1.3:char==='M'?1.05:/[OQ]/.test(char)?.9:/[ADHNUV]/.test(char)?.85:/[BCKPRXG]/.test(char)?.8:/[ELFSTYZ0-9]/.test(char)?.75:char==='I'?.4:char==='J'?.65:/['’.,:;!|]/.test(char)?.4:/[\x20-\x7e]/.test(char)?1.3:2),0);
+  return vars({'--bubba-announcement-length':String(Math.max(1,advance))});
+ };
  const viewport=useRef<React.ElementRef<typeof View>>(null);
  useEffect(()=>{
   if(Platform.OS!=='web') return;
@@ -48,12 +54,16 @@ export function AnnouncementBanner({content,compactCopy,onFitChange}:Announcemen
   const fit=()=>{
    if(!alive)return;
    const texts=Array.from(node.querySelectorAll('.bubba-announcement-copy'));
-   const available=node.clientWidth-24;
-   const widths=texts.map(text=>{text.style.fontSize='14px';text.style.setProperty('display','block','important');const width=text.scrollWidth;text.style.removeProperty('display');return width;});
+   const available=Math.max(1,node.clientWidth-24);
+   // NativeWind utilities are important. Use the same priority while measuring
+   // and painting, and measure the fractional rendered width rather than a
+   // rounded scrollWidth at a different effective font size.
+   const widths=texts.map(text=>{text.style.setProperty('font-size','14px','important');text.style.setProperty('display','block','important');const width=text.getBoundingClientRect().width;text.style.removeProperty('display');return width;});
    const compact=Boolean(compactCopy)&&(node.clientWidth<761||14*available/Math.max(widths[0],1)<11);
    node.setAttribute('data-bubba-compact',compact?'true':'false');
    const index=compact?1:0,size=Math.min(14,14*available/Math.max(widths[index],1));
-   texts[index].style.fontSize=`${size}px`;onFitChange?.(size);
+   texts[index].style.setProperty('font-size',`${size}px`,'important');
+   onFitChange?.(parseFloat(web.getComputedStyle(texts[index]).fontSize));
   };
   const web=globalThis as unknown as AnnouncementWeb;
   fit(); const observer=web.ResizeObserver?new web.ResizeObserver(fit):undefined;

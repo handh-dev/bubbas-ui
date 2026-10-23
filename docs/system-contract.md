@@ -314,9 +314,13 @@ opaque #03256C backing (normal-text contrast above 10:1); the bar stays original
 The announcement is static and single-line, with no marquee or manual scrolling.
 Measured web fitting uses a shorter caller-reviewed phone message through 760px or
 when the full message would fall below 11px; otherwise it fits the full message.
-The full copy remains its accessible label. A conservative character-count CSS
-fallback keeps reviewed concise phone/desktop copy at least 11px before hydration/without JavaScript; native
-uses the static text adaptation. Content is never silently removed or invented.
+The full copy remains its accessible label. A conservative uppercase advance
+estimate for approved Montserrat supplies the CSS fallback before hydration/without JavaScript, including long copy. There is no
+minimum font-size floor that could force text outside its band. Reviewed concise
+seeded phone/desktop messages remain at least 11px; native uses static text.
+Measured fitting and the editor warning use the actual computed font size after
+font loading, content changes and container resizes, regardless of stylesheet
+order. Content is never silently removed or invented.
 Arbitrary long copy cannot fit a phone at a readable size: authors supply concise
 phone copy, and the editor warns when its actual 320px preview drops below 11px.
 
@@ -338,5 +342,9 @@ never duplicate the editor or import a different implementation for its showcase
 long-title bounds, same-row CTA/label fit, static/no-JS announcement fit, six socials,
 continuous gold-only twinkles, stored/OS motion stop, menu hover, selected-word
 formatting, Unicode editing, authoring validation/states and small-text warning.
+It also checks the actual computed and reported font sizes, text-range containment
+for the 85-character seed and near-160-character custom messages, both stylesheet
+orders, standard and opaque classic-script hydration, delayed fonts, content
+changes, resizes, no-JavaScript fallback, gold paint and positive boundary spaces.
 Required release gates also include verify, web forms, full installed package and
 public docs checks. Native export checks do not qualify installed device behavior.

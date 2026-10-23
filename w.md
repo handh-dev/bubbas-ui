@@ -206,3 +206,18 @@ shared safe segments, static measured banner and controlled selected-word editor
 Core/HQ own persistence and publication. Existing HQ controls remain excluded.
 All proposed versions remain isolated and unpublished pending exact owner review.
 Use `pnpm verify:web:marketing` plus existing fonts/forms/package/docs gates.
+
+## Proposed 0.7.0 final10 — announcement fitting correction
+
+The independent final9 review found that important generic font utilities kept
+long announcements at 12px despite their measured inline size. Final10 scopes the
+shared font cascade, measures at the actual painted 14px base, reports computed
+size, and supplies a conservative no-JavaScript fallback without an overflow-
+causing minimum floor. Gold paint, inline spaces and the six-social header remain.
+The real-browser announcement-fit gate reproduces final9's overflow and covers
+85-character seed/near-160-character content, both stylesheet orders, opaque
+classic-script hydration, delayed fonts, content/width changes and honest editor
+warnings. The seeded concise phone message stays readable.
+
+Owner review, normal full-package/docs checks, fresh independent review and
+consumer qualification remain separate; this is not a publication/deployment.
