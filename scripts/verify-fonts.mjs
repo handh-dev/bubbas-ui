@@ -46,6 +46,7 @@ export {registeredBodyFamily} from ${JSON.stringify(path.join(root, 'examples/ex
 const e=React.createElement;
 export function All(){return e(UI.ThemeProvider,{fontFamily:'BubbasBody'},
   ...components.map(item=>e(ComponentDemo,{key:item.name,name:item.name})),e(PatternsDemo),
+  e(UI.FocusMarquee,{items:['Example native campaign','Every fact remains visible']}),
   e(UI.Dialog,{defaultOpen:true,title:'Dialog font',description:'Dialog description'},e(UI.Text,null,'Dialog body')),
   e(UI.Sheet,{defaultOpen:true,title:'Sheet font'},e(UI.Input,{placeholder:'Sheet input'})));}
 export function Overrides(){return e(UI.ThemeProvider,{fontFamily:'BubbasBody'},

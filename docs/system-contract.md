@@ -297,7 +297,7 @@ styles. The existing 0.6.1 Button object/array/callback/RTL/form forwarding rema
   the licensed Instagram, Facebook, X, YouTube, TikTok and Spotify icon subset.
   Account URLs and category artwork remain caller-owned, never inferred business data.
 - Phones retain the accessible H1 and supplied mascot, omit only the repeated hero
-  logo, keep the campaign badges on one keyboard-scrollable rail, use the responsive
+  logo, let campaign badges wrap into centered rows when available width is tight, use the responsive
   two-column footer without an extra white logo well, and retain compact contained
   PDP artwork/gallery/video/actions. Dialog focus/scroll locking and 200ms exit stay.
 
@@ -348,3 +348,45 @@ orders, standard and opaque classic-script hydration, delayed fonts, content
 changes, resizes, no-JavaScript fallback, gold paint and positive boundary spaces.
 Required release gates also include verify, web forms, full installed package and
 public docs checks. Native export checks do not qualify installed device behavior.
+
+### Campaign badge containment — candidate11 local revision
+
+CampaignSection keeps all supplied badges visible without a horizontal scroll
+region. Its shared React Native Inline wraps naturally within the actual container;
+wide layouts keep one row when the labels fit. Each badge is bounded to the row
+width and its full label may wrap, including an unusually long word. Text retains
+the existing readable caption size; nothing is truncated or hidden. This supersedes
+the earlier single scrollable rail direction. The real catalog uses realistic
+long synthetic labels. Extracted-package browser checks measure every badge and
+every painted text range at narrow/wide and nested widths and enlarged text.
+
+### FocusMarquee — candidate11 local review
+
+FocusMarquee combines caller-supplied campaign facts in one solid brand-red band
+with white pills and brand-navy text. It replaces the separate campaign badge row
+and flag ticker in the requesting website, while those existing exports remain
+backward compatible. No stars, separators or gradient enter the new component.
+
+`items` is readonly plain text; no links or input controls are accepted. `speed`
+is constant CSS pixels/second (default38, bounded0–240; zero is static), `direction`
+is left/right, and `spacing` includes the last-to-first gap (default20px,0–96).
+`badgeAppearance` selects sm/md, pill/rounded and navy/red text. `centerEmphasis`
+selects scale1–1.35(default1.12), lift0–16px(default4), and range0.1–1 of viewport
+width(default0.5). Nonfinite values use defaults. These are shared presentation
+options, never app-local overrides or business rules.
+
+The measured repeating web lane moves continuously in either direction, including
+while hovered. Pills smoothly scale/lift as their actual centers approach the
+viewport center. A measured final gap and enough repeated groups cover the
+viewport plus a complete loop. Layout is measured on initial render, container or
+font changes; animation frames only write transforms using cached geometry.
+Hidden documents and offscreen instances suspend frame work and resume without
+catching up elapsed hidden time. Cleanup cancels frames, observers and listeners.
+
+One canonical copy remains semantic. Every moving copy is decorative, hidden from
+assistive technology and pointer-free. Motion off, OS reduced motion, no JavaScript
+and native show the complete centered wrapping static copy without horizontal
+scrolling. The existing global MarketingMotionControl remains the discoverable
+manual control. Native intentionally uses this real static adaptation; native
+animation/device acceptance is outside the web revision. Very long pills wrap
+within their viewport; vertical inset reserves peak emphasis so nothing clips.

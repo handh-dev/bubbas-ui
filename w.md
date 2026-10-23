@@ -221,3 +221,19 @@ warnings. The seeded concise phone message stays readable.
 
 Owner review, normal full-package/docs checks, fresh independent review and
 consumer qualification remain separate; this is not a publication/deployment.
+
+## Candidate11 local review — campaign badges
+
+Owner paused release and requested that every campaign badge/full label stay
+visible on phones without horizontal scrolling. Shared CampaignSection wraps by
+available width; the catalog/contract and extracted browser bounds checks cover
+realistic labels, long words, enlarged text and narrower nested containers.
+Existing candidate10 archive/previews stay immutable. No publication or deployment.
+
+## FocusMarquee — local candidate11
+
+Owner resumed local work for one solid-red, endlessly moving white pill lane with
+subtle center focus. Shared FocusMarquee owns all presentation/options, global
+motion/static fallback, layout observation and inert duplicates. Apps supply
+facts. The backward-compatible CampaignSection wrap fix is retained. No release
+or consumer deployment is authorized by this local revision.

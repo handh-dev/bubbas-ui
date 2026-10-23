@@ -66,9 +66,9 @@
 .bubba-promotion:hover .bubba-promo-burst,.bubba-promotion:focus-within .bubba-promo-burst,.bubba-promotion:active .bubba-promo-burst { animation:bubba-promo-burst 900ms ease-out 1; }
 .bubba-promotion:hover,.bubba-promotion:focus-within { box-shadow:0 0 24px #D4000038; }
 .bubba-social-section .bubba-campaign-description { color:#FFFAE8; }
-.bubba-campaign-badges { flex-wrap:nowrap; flex-shrink:0; width:max-content; }
-.bubba-campaign-badge { flex-shrink:0; }
-.bubba-campaign-badge > div { white-space:nowrap; }
+.bubba-campaign-badges { flex-wrap:wrap; width:100%; min-width:0; max-width:100%; }
+.bubba-campaign-badge { flex-shrink:0; min-width:0; max-width:100%; }
+.bubba-campaign-badge > div { white-space:normal; overflow-wrap:anywhere; }
 .bubba-ticker-viewport { container-type:inline-size; }
 .bubba-ticker-track { width:auto; min-width:100%; flex-wrap:wrap; }
 .bubba-ticker-item { flex-shrink:1; max-width:100%; }
@@ -137,7 +137,6 @@
 
 .bubba-marketing-footer :focus-visible,.bubba-motion-control-dark:focus-visible { outline:3px solid #FFFFFF!important; outline-offset:3px!important; box-shadow:0 0 0 3px #171717; }
 
-.bubba-campaign-badge-scroll:focus-visible { outline:3px solid #FFFFFF!important; outline-offset:3px!important; }
 
 /* The persistent preference governs every decorative marketing effect. */
 :is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-honor-badge::after,:is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-product-badge::after,:is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-product-badge::before,:is([data-bubba-motion="off"],[data-bubba-marketing-motion="off"]) .bubba-promo-burst { animation:none!important; }
@@ -156,3 +155,20 @@
 .bubba-announcement-viewport[data-bubba-compact="true"] .bubba-announcement-compact { display:block!important; }
 .bubba-announcement-viewport[data-bubba-compact="false"] .bubba-announcement-full { display:block!important; }
 .bubba-announcement-viewport[data-bubba-compact="false"] .bubba-announcement-compact { display:none!important; }
+
+/* FocusMarquee: one semantic static copy and an inert, repeating visual lane. */
+.bubba-focus-marquee { background:#D40000!important; container-type:inline-size; overflow:hidden; }
+.bubba-focus-static .bubba-focus-pill { min-width:0; max-width:100%; }
+.bubba-focus-label { white-space:normal!important; overflow-wrap:anywhere; }
+.bubba-focus-visual { position:absolute!important; top:0; left:0; opacity:0; pointer-events:none!important; }
+.bubba-focus-track { width:max-content; flex-wrap:nowrap!important; will-change:transform; }
+.bubba-focus-group { flex-shrink:0; gap:var(--bubba-focus-gap,20px); padding-right:var(--bubba-focus-gap,20px); }
+.bubba-focus-item { max-width:max(1px,calc((100cqw - 32px)/var(--bubba-focus-scale,1.12))); }
+.bubba-focus-pill { transform-origin:center center; }
+.bubba-focus-marquee[data-bubba-focus-active="true"] { padding-block:var(--bubba-focus-inset,18px)!important; }
+.bubba-focus-marquee[data-bubba-focus-active="true"] .bubba-focus-static { position:absolute!important; width:1px!important; height:1px!important; margin:-1px!important; padding:0!important; clip-path:inset(50%); overflow:hidden!important; }
+.bubba-focus-marquee[data-bubba-focus-active="true"] .bubba-focus-visual { position:relative!important; opacity:1; }
+@media (prefers-reduced-motion:reduce) {
+ .bubba-focus-marquee[data-bubba-focus-active="true"] .bubba-focus-static { position:relative!important; width:auto!important; height:auto!important; margin:0!important; padding:0 16px!important; clip-path:none; overflow:visible!important; }
+ .bubba-focus-marquee[data-bubba-focus-active="true"] .bubba-focus-visual { display:none; }
+}

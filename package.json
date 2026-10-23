@@ -25,7 +25,7 @@
     "verify:foundations": "node scripts/foundations.mjs --check",
     "verify:shared": "node scripts/verify-shared.mjs && node scripts/verify-icons.mjs",
     "verify:web:forms": "node scripts/verify-web-forms.mjs",
-    "verify:web:marketing": "pnpm build && node scripts/verify-marketing-refinements.mjs && node scripts/verify-announcement-fit.mjs"
+    "verify:web:marketing": "pnpm build && node scripts/verify-marketing-refinements.mjs && node scripts/verify-announcement-fit.mjs && node scripts/verify-campaign-badges.mjs && node scripts/verify-focus-marquee.mjs"
   },
   "devDependencies": {
     "@types/node": "24.10.1",
