@@ -49,7 +49,7 @@ export function AnnouncementBanner({content,compactCopy,onFitChange}:Announcemen
    if(!alive)return;
    const texts=Array.from(node.querySelectorAll('.bubba-announcement-copy'));
    const available=node.clientWidth-24;
-   const widths=texts.map(text=>{text.style.fontSize='14px';text.style.setProperty('display','flex','important');const width=text.scrollWidth;text.style.removeProperty('display');return width;});
+   const widths=texts.map(text=>{text.style.fontSize='14px';text.style.setProperty('display','block','important');const width=text.scrollWidth;text.style.removeProperty('display');return width;});
    const compact=Boolean(compactCopy)&&(node.clientWidth<761||14*available/Math.max(widths[0],1)<11);
    node.setAttribute('data-bubba-compact',compact?'true':'false');
    const index=compact?1:0,size=Math.min(14,14*available/Math.max(widths[index],1));
