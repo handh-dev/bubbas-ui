@@ -277,10 +277,11 @@ gradient dependency. Default application controls retain their previous design.
 
 ## Owner-reviewed web revision 0.7.0
 
-This source contains owner-reviewed candidate24. The approved registry
-release remains 0.6.1 until deliberate publication. The owner has approved
-exact candidate24; see [its release record](docs/releases/0.7.0.md) for qualification
-and publication state.
+Owner-reviewed 0.7.0 is published to npm and the public reference. The official
+registry download matches the original candidate24 bytes, all104 reference files
+match the cleared output, and the full live browser gate passed. See
+[the release record](docs/releases/0.7.0.md) for source/tag identities, qualification
+and publication receipts; each consumer retains its own adoption workflow.
 The marketing sections keep their existing props: apps supply content/actions;
 the website omits the optional Hero description. Phones show the caller's mascot
 without a repeated hero logo, use intrinsic 48px actions, a readable announcement,
@@ -300,11 +301,11 @@ content/actions. All new motion stops for reduced motion. No art/font binary or
 Info Links runtime is included. See the [candidate contract](docs/releases/0.7.0-candidate.md)
 for rights, behavior and separate publication/consumer acceptance gates.
 
-Local sparkler offer proposal: `PromotionBanner` keeps the actual reusable
+Shared sparkler offer: `PromotionBanner` keeps the actual reusable
 composition in UI. Use `variant="marketing" emphasis="sparkler"`, `title="Free"`,
 `titleAccent="Sparkler"`, `eyebrow="Free gift"`, caller-owned copy/action and optional
 `artwork={{uri: reviewedLocalUrl, alt: '', aspectRatio: originalWidth / originalHeight,
 rotation: -60}}`. Original art stays in its private consumer with provenance;
 public catalog examples stay synthetic. Review through the same real component
 with `UIReviewCatalog promotionExample={callerFixture}`. No artwork is bundled
-or approved by this API. Publication/deployment remain paused.
+or approved by this API. UI publication does not deploy an app.

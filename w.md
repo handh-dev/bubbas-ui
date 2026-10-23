@@ -1,3 +1,14 @@
+## Current release — 0.7.0 · October 23, 2026
+
+Owner-approved candidate24 is published unchanged to npm and the cleared public
+reference. Source PR16 merged as146523ae; tagv0.7.0 preserves that exact merge.
+The original tarball byte-matches official registry download, all104 live Pages
+files match the qualified output, and the full38-route browser gate passed.
+Read [the release record](docs/releases/0.7.0.md) for exact identities, required
+qualification, preserved transient diagnostics and limits. This record update
+changes no package member, public output or consumer host. Older candidate and
+pause notes below are historical; each app's activation remains separately owned.
+
 ## Current release — 0.6.1 · October 22, 2026
 
 The owner approved exact 0.6.1 source/archive after fresh independent review and
