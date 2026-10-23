@@ -271,3 +271,7 @@ retains original proportions/colors and a shared responsive orientation. Keep
 private art outside this package; its rights and notices stay with its owner.
 No-asset/error states retain the offer and action. See the system contract and
 same-component catalog `promotionExample` fixture for local review.
+
+The sparkler offer uses the shared product badge’s large size:16px/36px on
+phones and18px/40px in wider containers. Existing product badges keep their
+compact default. Metallic shine, gleam and gold twinkles remain shared.

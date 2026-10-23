@@ -302,3 +302,13 @@ static-icon flag (true by default for existing products; false in this card).
 Retain every22 composition choice and selected20 marquee. Focused badge motion,
 manual/reduced preference, bounds and keyboard checks qualify local preparation
 only. Original22 preserved; publication/deployment remain paused.
+
+
+## Sparkler offer — local candidate24 badge size
+
+Owner asks for a modestly larger Free gift badge. Extend actual reusable
+MarketingProductBadge with sm default preserving products and lg in the offer:
+16px/36px base,18px/40px at440px containing inline size. Same metallic effects,
+icon=false and other23 composition/marquee unchanged. Focused actual dimensions,
+responsive bounds and existing motion/keyboard checks; no unrelated broad suite.
+Preserve23 original; publication/deployment stay paused.

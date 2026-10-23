@@ -575,3 +575,18 @@ choice. No new badge paint/effect implementation or consumer override is added.
 The existing manual/system motion preference disables both gleam and twinkles.
 Bright blue, caller-owned artwork, headline/body/action and selected20 marquee
 remain unchanged. Original22 stays immutable; local preparation is not release.
+
+
+### Larger offer badge — local candidate24
+
+`MarketingProductBadge` adds a reusable `size="lg"` option, used by the actual
+sparkler offer and therefore its same-component catalog example. The default
+`sm` retains existing product badges unchanged. Large uses 16px text / 20px line
+and 12px horizontal / 8px vertical padding (36px height); in a containing inline
+size of at least440px it uses 18px / 24px (40px height). This lets the offer badge
+read at the supporting-copy scale, while the headline remains dominant. Native
+uses the real 16px/36px base adaptation; this local web check does not qualify
+native devices. Metallic paint, moving gleam, gold twinkles and motion preferences
+are the same existing implementation, with no static icon in the offer.
+All other23 composition and selected20 marquee settings remain unchanged;
+original23 stays immutable, publication/deployment remain paused.

@@ -82,6 +82,7 @@
 .bubba-sparkler-promo > .bubba-gold-sparkles-large .bubba-gold-sparkle-4 { right:28%!important; top:80%!important; }
 .bubba-sparkler-promo-no-art .bubba-sparkler-description { max-width:100%!important; }
 @container (min-width:440px) {
+ .bubba-product-badge-lg .bubba-product-badge-label { font-size:18px!important; line-height:24px!important; }
  .bubba-sparkler-copy { gap:18px!important; }
  .bubba-sparkler-description { max-width:62%!important; font-size:18px!important; }
  .bubba-sparkler-art { width:470px!important; top:190px!important; left:calc(79% - 235px)!important; }
