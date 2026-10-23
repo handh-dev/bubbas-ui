@@ -36,7 +36,7 @@ export function LocationSearch({ value, onValueChange, onSearch, onLocate, locat
 }
 
 export function CompactLocationCard({ location, className, variant: _variant, density: _density, ...props }: LocationCardProps) {
-  return <MarketingScope className={cn('bubba-location-compact-scope h-full',className)}><View {...props} dataSet={{...props.dataSet,locationId:location.id}} className="bubba-location-card h-full gap-3 rounded-xl border border-ui-line bg-white p-4">
+  return <MarketingScope className={cn('bubba-location-compact-scope h-full',className)}><View {...props} {...{dataSet:{...props.dataSet,locationId:location.id}}} className="bubba-location-card h-full gap-3 rounded-xl border border-ui-line bg-white p-4">
     <View className="bubba-location-details min-w-0 flex-1 gap-2">
       <Inline wrap={false} justify="between" align="start" gap={2}><Heading level={3} className="bubba-location-title min-w-0 flex-1 text-lg font-black leading-6 text-bubba-navy">{location.href?<Link href={location.href} textVariant="caption" textClassName="text-lg font-black text-bubba-navy no-underline">{location.title}</Link>:location.title}</Heading>{location.distanceLabel?<Text variant="caption" className="shrink-0 pt-1 text-xs text-bubba-navy">{location.distanceLabel}</Text>:null}</Inline>
       {location.statusLabel?<Badge tone={location.statusTone??'neutral'} textClassName="text-[11px] leading-4" className="bubba-location-status px-2 py-0.5">{location.statusLabel}</Badge>:null}
