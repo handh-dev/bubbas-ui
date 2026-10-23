@@ -28,7 +28,7 @@ export function LocationSearch({ value, onValueChange, onSearch, onLocate, locat
       <Inline align="stretch" className="bubba-location-search-row w-full gap-2">
         <View className="bubba-location-search-field min-w-0 flex-1 basis-full min-[761px]:basis-[280px]"><Input value={value} onChangeText={onValueChange} onSubmitEditing={()=>{if(!searching)onSearch();}} returnKeyType="search" placeholder={placeholder} disabled={searching} className="rounded-xl border-ui-border bg-white"/></View>
         {onLocate?<Button variant="outline" appearance="marketing" onPress={onLocate} disabled={searching} loading={locating} loadingLabel="Locating" className="bubba-locate-button" accessibilityLabel="Use my location to find nearby stores">Use my location</Button>:null}
-        <Button appearance="marketing" onPress={onSearch} loading={busy} loadingLabel="Searching" disabled={locating} className="bubba-location-search-submit"><Icon name="search" size={19} color="#FFFFFF" className="hidden min-[761px]:flex"/> Search locations</Button>
+        <Button appearance="marketing" onPress={onSearch} loading={busy} loadingLabel="Searching" disabled={locating} className="bubba-location-search-submit">Search locations</Button>
       </Inline>
     </FormField>
     <View role="status" aria-live="polite" aria-atomic>{resultLabel?<Text variant="caption" className="text-sm text-ui-muted">{resultLabel}</Text>:null}</View>
