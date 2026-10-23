@@ -12,6 +12,10 @@ import { cn } from '../internal/utils';
 /** Shared spring default; callers can tune cadence live without rebuilding UI. */
 export const FOCUS_MARQUEE_DEFAULT_CADENCE = 2.3;
 
+/** Sequential spring stages, in seconds; an explicit object takes precedence over cadence. */
+export interface FocusMarqueeTiming { hold?:number; exit?:number; enter?:number; settle?:number }
+/** Numeric overrides for the selected spring preset. Distances are CSS pixels. */
+export interface FocusMarqueeSpringTuning { stretch?:number; squash?:number; overshoot?:number; popLift?:number; nudge?:number }
 export interface FocusMarqueeProps extends Omit<ViewProps, 'children'> {
   /** Plain caller-owned claims; no links, controls or inferred business facts. */
   items: readonly string[];
@@ -22,8 +26,13 @@ export interface FocusMarqueeProps extends Omit<ViewProps, 'children'> {
   motion?: 'spring' | 'linear';
   cadence?: number;
   spring?: 'gentle' | 'poppy';
+  /** Hold -> departure -> approach -> settle. Changes latch at the next cycle. */
+  timing?: FocusMarqueeTiming;
+  springTuning?: FocusMarqueeSpringTuning;
   /** Decorative moving pills only; canonical/static content is always clear. */
   edgeBlur?: number;
+  /** Fraction of center-to-edge distance that stays crisp (0–1, default .75). */
+  edgeBlurStart?: number;
   /** Minimum visible edge gap, including the last-to-first seam. */
   spacing?: number;
   badgeAppearance?: { size?: 'sm' | 'md'; shape?: 'pill' | 'rounded'; textTone?: 'navy' | 'red' };
@@ -51,24 +60,28 @@ interface WebRuntime {
 const bounded=(value:number|undefined,fallback:number,min:number,max:number)=>Number.isFinite(value)?Math.min(max,Math.max(min,value!)):fallback;
 
 /** Endless web pill lane. Native, SSR and motion-off keep the complete static copy. */
-export function FocusMarquee({items,speed=38,direction='left',motion:motionMode='spring',cadence=FOCUS_MARQUEE_DEFAULT_CADENCE,spring='poppy',edgeBlur=1,spacing=8,badgeAppearance,centerEmphasis,className,style,...props}:FocusMarqueeProps) {
+export function FocusMarquee({items,speed=38,direction='left',motion:motionMode='spring',cadence=FOCUS_MARQUEE_DEFAULT_CADENCE,spring='poppy',timing,springTuning,edgeBlur=1,edgeBlurStart=.75,spacing=8,badgeAppearance,centerEmphasis,className,style,...props}:FocusMarqueeProps) {
   const [motion]=useMarketingMotion();
   const [copies,setCopies]=useState(1);
   const root=useRef<ElementRef<typeof View>>(null);
   const phase=useRef(0);
   const velocity=bounded(speed,38,0,240),gap=bounded(spacing,8,0,96);
-  const scale=bounded(centerEmphasis?.scale,motionMode==='spring'?1.16:1.12,1,1.35),lift=bounded(centerEmphasis?.lift,4,0,16),range=bounded(centerEmphasis?.range,.5,.1,1);
-  const beat=bounded(cadence,FOCUS_MARQUEE_DEFAULT_CADENCE,.8,3),blur=bounded(edgeBlur,1,0,4);
-  const stretch=motionMode==='spring'?(spring==='gentle'?.03:.06):0;
-  const nudge=motionMode==='spring'?(spring==='gentle'?1:2):0;
-  const popLift=motionMode==='spring'?(spring==='gentle'?3:6):0;
-  const peakX=scale*(1+stretch),peakY=scale*(1+stretch*.5),sideReserve=nudge;
+  const scale=bounded(centerEmphasis?.scale,motionMode==='spring'?1.16:1.12,1,1.8),lift=bounded(centerEmphasis?.lift,4,0,48),range=bounded(centerEmphasis?.range,.5,.1,1);
+  const beat=bounded(cadence,FOCUS_MARQUEE_DEFAULT_CADENCE,.8,3),blur=bounded(edgeBlur,1,0,8),blurStart=bounded(edgeBlurStart,.75,0,1);
+  const springValue=(value:number|undefined,gentle:number,poppy:number,max:number)=>motionMode==='spring'?bounded(value,spring==='gentle'?gentle:poppy,0,max):0;
+  const stretch=springValue(springTuning?.stretch,.03,.06,.5),squash=springValue(springTuning?.squash,.015,.03,.5);
+  const nudge=springValue(springTuning?.nudge,1,2,24),popLift=springValue(springTuning?.popLift,3,6,48);
+  const overshoot=springValue(springTuning?.overshoot,3,5,48),overshootFraction=Math.min(.2,.04*overshoot/(spring==='gentle'?3:5));
+  const peakX=scale*(1+stretch),peakY=scale*(1+squash),sideReserve=nudge;
+  const legacyTravel=beat-.14,legacySettle=Math.min(.12,legacyTravel*.18);
+  const stages={hold:bounded(timing?.hold,.14,0,5),exit:bounded(timing?.exit,(legacyTravel-legacySettle)/2,.05,5),enter:bounded(timing?.enter,(legacyTravel-legacySettle)/2,.05,5),settle:bounded(timing?.settle,legacySettle,0,3)};
+  const cycle=timing?stages.hold+stages.exit+stages.enter+stages.settle:beat;
   const moving=velocity>0;
   const hasStarted=useRef(false),measurementSignature=useRef('');
-  const sequence=useRef({from:0,to:0,elapsed:0,cadence:beat,travel:beat-.14,travelling:false,source:0,target:0,sign:1});
-  const motionSettings=useRef({velocity,direction,cadence:beat});
+  const sequence=useRef({from:0,to:0,elapsed:0,cadence:cycle,travel:cycle-stages.hold,stages,overshoot,overshootFraction,travelling:false,source:0,target:0,sign:1});
+  const motionSettings=useRef({velocity,direction,cadence:cycle,stages,overshoot,overshootFraction});
   // Changing positive speed/direction does not restart layout or the frame loop.
-  useEffect(()=>{motionSettings.current={velocity,direction,cadence:beat};},[velocity,direction,beat]);
+  useEffect(()=>{motionSettings.current={velocity,direction,cadence:cycle,stages,overshoot,overshootFraction};},[velocity,direction,cycle,stages.hold,stages.exit,stages.enter,stages.settle,overshoot,overshootFraction]);
   const itemKey=JSON.stringify(items);
   useEffect(()=>{
     if(Platform.OS!=='web'||!motion||!moving||items.length===0)return;
@@ -96,7 +109,7 @@ export function FocusMarquee({items,speed=38,direction='left',motion:motionMode=
       if(sign<0&&center>=logical-.01)center-=period;
       return{position:center-width/2,index};
     };
-    const resetSequence=()=>{const settings=motionSettings.current;sequence.current={from:phase.current,to:phase.current,elapsed:0,cadence:settings.cadence,travel:settings.cadence-.14,travelling:false,source:nearest(phase.current),target:nearest(phase.current),sign:settings.direction==='right'?-1:1};};
+    const resetSequence=()=>{const settings=motionSettings.current;sequence.current={from:phase.current,to:phase.current,elapsed:0,cadence:settings.cadence,travel:settings.cadence-settings.stages.hold,stages:settings.stages,overshoot:settings.overshoot,overshootFraction:settings.overshootFraction,travelling:false,source:nearest(phase.current),target:nearest(phase.current),sign:settings.direction==='right'?-1:1};};
     const paint=()=>{
       const offset=-modulo(phase.current);
       track.style.transform=`translate3d(${offset}px,0,0)`;
@@ -112,12 +125,12 @@ export function FocusMarquee({items,speed=38,direction='left',motion:motionMode=
         const base=1+(scale-1)*focus;
         const incoming=motionMode==='spring'&&state.travelling&&item.index===state.target&&Math.abs(position-(state.to-phase.current))<1?focus:0;
         const outgoing=motionMode==='spring'&&state.travelling&&item.index===state.source&&Math.abs(position-(state.from-phase.current))<1?focus:0;
-        const x=base*(1+stretch*pulse*incoming-stretch*.5*pulse*outgoing);
-        const y=base*(1-stretch*.5*pulse*incoming+stretch*.5*rebound*incoming-stretch*.5*pulse*outgoing);
+        const x=base*(1+stretch*pulse*incoming-squash*pulse*outgoing);
+        const y=base*(1-squash*pulse*incoming+squash*rebound*incoming-squash*pulse*outgoing);
         const shift=-state.sign*nudge*pulse*outgoing;
         item.node.style.transform=`translate3d(${shift}px,${-lift*focus-popLift*rebound*incoming}px,0) scale(${x},${y})`;
         // The central region stays crisp; softness grows only in the outer lane.
-        const soft=smooth((Math.abs(position)/Math.max(1,width/2)-.75)/.25);
+        const soft=blurStart===1?0:smooth((Math.abs(position)/Math.max(1,width/2)-blurStart)/(1-blurStart));
         item.node.style.filter=`blur(${blur*soft}px)`;
       }
     };
@@ -132,18 +145,27 @@ export function FocusMarquee({items,speed=38,direction='left',motion:motionMode=
           // A stalled visible frame slows the finite sequence; hidden time never
           // accumulates spring energy or skips a queue of facts on return.
           state.elapsed+=Math.min(delta,.064);
-          const hold=state.cadence-state.travel;
+          const hold=state.stages.hold;
           if(state.elapsed>=hold&&!state.travelling){
             state.sign=settings.direction==='right'?-1:1;
             const target=next(state.from,state.sign);
             state.to=target.position;state.target=target.index;state.travelling=true;
           }
           if(state.travelling){
-            const u=Math.max(0,Math.min(1,(state.elapsed-hold)/state.travel));
-            const distance=state.to-state.from,over=Math.min(spring==='gentle'?3:5,Math.abs(distance)*.04)*state.sign;
-            // One bounded overshoot with zero-velocity endpoints, then settle.
-            const settle=Math.min(.12,state.travel*.18),arrival=1-settle/state.travel;
-            phase.current=u<arrival?state.from+(distance+over)*smooth(u/arrival):state.to+over*(1-smooth((u-arrival)/(1-arrival)));
+            const distance=state.to-state.from,over=state.stages.settle>0?Math.min(state.overshoot,Math.abs(distance)*state.overshootFraction)*state.sign:0;
+            // Two monotonic Hermite legs meet at the halfway point with the same
+            // velocity. Their independent durations change departure/approach,
+            // while rest/arrival endpoints stay still and the seam stays smooth.
+            const {exit,enter,settle}=state.stages,elapsed=Math.max(0,state.elapsed-hold);
+            const arrival=distance+over,half=arrival/2;
+            const joinVelocity=Math.sign(arrival)*Math.min(1.5*Math.abs(arrival)/(exit+enter),3*Math.abs(half)/exit,3*Math.abs(half)/enter);
+            const hermite=(from:number,to:number,startVelocity:number,endVelocity:number,duration:number,t:number)=>{
+              const q=Math.max(0,Math.min(1,t/duration)),q2=q*q,q3=q2*q;
+              return(2*q3-3*q2+1)*from+(q3-2*q2+q)*duration*startVelocity+(-2*q3+3*q2)*to+(q3-q2)*duration*endVelocity;
+            };
+            phase.current=elapsed<exit?state.from+hermite(0,half,0,joinVelocity,exit,elapsed)
+              :elapsed<exit+enter?state.from+hermite(half,arrival,joinVelocity,0,enter,elapsed-exit)
+              :settle>0?state.to+over*(1-smooth((elapsed-exit-enter)/settle)):state.to;
           }
           if(state.elapsed>=state.cadence){const remainder=state.elapsed-state.cadence;phase.current=state.to;resetSequence();sequence.current.elapsed=remainder;}
         }
@@ -185,7 +207,7 @@ export function FocusMarquee({items,speed=38,direction='left',motion:motionMode=
     web.document?.fonts?.addEventListener('loadingdone',schedule);web.document?.fonts?.ready.then(()=>{fontsReady=true;schedule();});
     measure();
     return()=>{alive=false;stop();web.cancelAnimationFrame(measureFrame);resize?.disconnect();intersection?.disconnect();web.removeEventListener('resize',schedule);web.document?.removeEventListener('visibilitychange',visibility);web.document?.fonts?.removeEventListener('loadingdone',schedule);node.setAttribute('data-bubba-focus-active','false');track.style.transform='';for(const item of geometry){item.node.style.transform='';item.node.style.filter='';}for(const item of track.querySelectorAll('.bubba-focus-item')){item.style.removeProperty('padding-left');item.style.removeProperty('padding-right');}node.style.removeProperty('--bubba-focus-inset');};
-  },[itemKey,motion,moving,motionMode,spring,blur,peakX,peakY,sideReserve,popLift,nudge,stretch,gap,scale,lift,range,copies,badgeAppearance?.size,badgeAppearance?.shape,badgeAppearance?.textTone]);
+  },[itemKey,motion,moving,motionMode,spring,blur,blurStart,peakX,peakY,sideReserve,popLift,nudge,stretch,squash,gap,scale,lift,range,copies,badgeAppearance?.size,badgeAppearance?.shape,badgeAppearance?.textTone]);
   if(items.length===0)return null;
   const pill=(label:string)=><View className={cn('bubba-focus-pill bg-white px-3 py-2',badgeAppearance?.shape==='rounded'?'rounded-bubba-control':'rounded-full')}><Text variant="caption" className={cn('bubba-focus-label text-center font-black uppercase',badgeAppearance?.size==='md'?'text-sm leading-5':'text-xs leading-4',badgeAppearance?.textTone==='red'?'text-bubba-red':'text-bubba-navy')}>{label}</Text></View>;
   return <MarketingScope><View {...props} ref={root} style={[vars({'--bubba-focus-gap':`${gap}px`,'--bubba-focus-scale':String(peakX),'--bubba-focus-side-reserve':`${sideReserve}px`}),style]} className={cn('bubba-focus-marquee relative min-w-0 max-w-full bg-bubba-red px-0 py-4',className)}>

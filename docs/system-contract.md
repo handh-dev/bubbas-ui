@@ -475,3 +475,45 @@ DEV query parser and identical SSR/hydration props; production must ignore that
 DEV override. A chosen final motion version still needs a frozen review and the
 owning release gates. Full release/Expo/Core/HQ/recovery qualification is deferred
 while motion is being tuned; focused local evidence does not claim those gates.
+
+
+### FocusMarquee motion lab — local tuning
+
+The local raw-HTML lab controls the actual shared `FocusMarquee`; it does not
+copy its motion or markup. Production adoption, publication and deployment
+remain paused. Existing frozen candidate18 previews/artifacts stay unchanged.
+
+`timing` exposes four sequential stages in seconds: `hold` is the centered quiet
+rest; `exit` moves the lane through the first half of the next handoff; `enter`
+finishes approaching the next fact; `settle` returns the small overshoot to center.
+Both moving halves share one lane and a matching midpoint velocity, rather than
+independently animating two pills. The cycle total is their sum. An explicit
+`timing` object takes precedence over `cadence`; omitted values derive from the
+legacy cadence, and omitting `timing` retains the existing 2.3-second default
+and trajectory. At default cadence the stages are .14/1.02/1.02/.12 seconds.
+`hold` clamps to0–5, `exit`/`enter` to .05–5, and `settle` to0–3. Thus all-zero
+input still has a finite .1-second cycle. A zero settle disables positional
+overshoot, avoiding a jump at arrival. Nonfinite values use stage defaults.
+Timing and overshoot edits latch at the next cycle without remounting or jumping
+the current track position. Direction changes select the next handoff; visual
+geometry edits remeasure the existing lane.
+
+`springTuning` overrides the chosen spring preset: `stretch`0–.5 (default .06),
+`squash`0–.5 (.03), `overshoot`0–48px (5), `popLift`0–48px (6), and `nudge`0–24px
+(2). Gentle defaults remain .03/.015/3/3/1. Overshoot additionally stays within
+20% of the actual handoff distance; its default remains within4%. Endpoint
+velocities are zero; the departure/approach join is continuous and monotonic.
+`edgeBlur` accepts0–8px; `edgeBlurStart`0–1 (default .75) chooses where softness
+begins as a fraction of center-to-edge distance, with1 keeping the lane crisp.
+`centerEmphasis.scale` supports1–1.8 and `lift`0–48px; range, badge appearance,
+spacing and direction retain their existing meanings. These are presentation
+props, not persisted business data or Core settings.
+
+Maximum horizontal stretch+nudge and vertical squash rebound+lift+blur spread
+are reserved before measuring the repeating groups. Zero blur/overshoot/stretch/
+squash/pop/nudge are valid neutral settings. Static, no-JavaScript, OS/manual
+motion-off and native retain every fact once, clear and wrapping. Hidden time
+never catches up; geometry stays cached during frames. The lab may use ordinary
+HTML sliders outside `packages/ui`; shared UI remains React Native/NativeWind.
+Focused package/type and actual browser tuning checks qualify only this local
+experiment; full release/native/Core/HQ/recovery gates remain deferred.
