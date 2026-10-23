@@ -44,6 +44,7 @@ try {
     assert.equal(await page.locator('.bubba-hours-day').count(),10);
     assert.equal(await page.getByText('Today',{exact:true}).count(),1);
     assert.equal(await page.locator('.bubba-map-pin').count(),2,'All supplied pins fit the measured initial viewport');
+    assert.equal(await page.getByRole('button',{name:'Zoom map in',exact:true}).evaluate(node=>getComputedStyle(node.parentElement).zIndex),'4','Map controls stay above every geographic marker');
     const layout=await page.evaluate(()=>({width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth,offenders:[...document.querySelectorAll('*')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>innerWidth+.5&&getComputedStyle(e).position!=='absolute';}).slice(0,15).map(e=>({class:e.className,text:e.textContent.slice(0,70),width:e.getBoundingClientRect().width,right:e.getBoundingClientRect().right})),locations:[...document.querySelectorAll('.bubba-location-grid-item')].map(e=>({x:e.getBoundingClientRect().x,y:e.getBoundingClientRect().y,width:e.getBoundingClientRect().width})),offers:[...document.querySelectorAll('.bubba-offer-card')].map(e=>({y:e.getBoundingClientRect().y,height:e.getBoundingClientRect().height}))}));
     if(layout.overflow){await page.screenshot({path:path.join(out,`overflow-${width}.png`),fullPage:true});await writeFile(path.join(out,'overflow.json'),JSON.stringify(layout,null,2));}
     assert.equal(layout.overflow,false,`No horizontal overflow at ${width}`);
