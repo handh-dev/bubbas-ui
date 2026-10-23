@@ -37,11 +37,57 @@
 .bubba-hero-actions .bubba-action-label { font-size:clamp(10px,3.3cqw,14px)!important; line-height:20px!important; }
 .bubba-content-transparent { background:transparent!important; }
 .bubba-header-row { min-height:80px; }
+/* Scroll follows the document exactly. The full layout box remains invariant,
+   so a fixed host's spacer/ResizeObserver cannot feed back into scroll position. */
+.bubba-header-scroll { transform:translate3d(0,calc(-1 * var(--bubba-header-scroll-offset,0px)),0); will-change:transform; }
+@media (prefers-reduced-motion:reduce) { .bubba-header-scroll { transform:none!important; will-change:auto; } }
 .bubba-nav-link { position:relative; min-height:44px; padding:0 !important; }
 .bubba-nav-link::after { content:""; position:absolute; height:2px; bottom:9px; left:0; right:0; background:#D40000; transform:scaleX(0); transform-origin:left; transition:transform 180ms ease; }
 .bubba-nav-link:hover::after,.bubba-nav-link:focus-visible::after,.bubba-nav-link[aria-current="page"]::after { transform:scaleX(1); }
 .bubba-product-image > div { width:100%; display:flex; }
 .bubba-product-card { height:100%; }
+/* Compact directory / featured rows are shared compositions, not host overrides. */
+.bubba-location-compact-scope { container-type:inline-size; }
+.bubba-location-card { box-shadow:0 2px 8px #03256C06; }
+.bubba-location-title { overflow-wrap:anywhere; }
+.bubba-location-title a { min-height:0!important; }
+.bubba-location-action[data-bubba-action] { width:100%!important; min-height:44px!important; padding:10px 12px!important; box-shadow:none!important; }
+.bubba-location-action .bubba-action-label { font-size:12px!important; line-height:18px!important; }
+.bubba-location-actions { width:100%; }
+@container (min-width:300px) { .bubba-location-card { display:grid!important; grid-template-columns:minmax(0,1fr) 112px; align-items:start; } .bubba-location-actions { width:112px; } }
+.bubba-location-search-submit[data-bubba-action],.bubba-locate-button[data-bubba-action] { box-shadow:none; }
+.bubba-location-search-row { flex-wrap:wrap!important; }
+.bubba-location-search-field { flex-basis:280px; }
+.bubba-locate-button[data-bubba-action] { flex-shrink:1; }
+.bubba-map-frame { isolation:isolate; }
+.bubba-map-pin { overflow:visible!important; z-index:2; }
+.bubba-map-pin:hover,.bubba-map-pin:focus-visible { z-index:3; }
+.bubba-map-pin > div { overflow:visible!important; }
+.bubba-map-pin-dot { margin-inline:auto; box-shadow:0 2px 5px #03256C55; }
+.bubba-map-pin-label { display:block!important; width:max-content; max-width:110px; margin:2px auto 0; padding:2px 5px; border-radius:4px; background:#FFFFFFEC; box-shadow:0 1px 4px #03256C18; text-align:center; white-space:normal; line-height:15px!important; }
+.bubba-map-frame > div:last-child { z-index:4; }
+.bubba-faq-trigger:hover { background:#F4F8FF; }
+.bubba-faq-item-open { border-color:#0866FF!important; box-shadow:0 3px 12px #03256C0A; }
+.bubba-faq-trigger { background:transparent; box-shadow:none; }
+.bubba-featured-card { container-type:inline-size; }
+.bubba-featured-card .bubba-product-badge { padding:2px 6px!important; }
+.bubba-featured-card .bubba-product-badge-label { font-size:10px!important; line-height:14px!important; }
+.bubba-offer-card { position:relative; box-shadow:0 4px 14px #03256C0C; }
+.bubba-offer-social { border-top:5px solid #FED766!important; }
+.bubba-offer-guarantee { border-top:5px solid #D40000!important; }
+.bubba-offer-review { border-top:5px solid #0866FF!important; }
+.bubba-offer-social .bubba-offer-mark { background:#FFFFFF26; }
+.bubba-offer-guarantee .bubba-offer-mark { background:#0866FF12; }
+.bubba-offer-review .bubba-offer-mark { background:#FFFFFF26; }
+.bubba-offer-card h2 { overflow-wrap:anywhere; }
+@media (max-width:760px) {
+ .bubba-location-search-field { flex-basis:100%; }
+ .bubba-location-search-submit[data-bubba-action],.bubba-locate-button[data-bubba-action] { flex:1!important; min-width:0!important; width:auto!important; padding-inline:10px!important; }
+ .bubba-location-search-row .bubba-action-label { font-size:12px!important; }
+ .bubba-featured-card { flex-direction:column!important; }
+ .bubba-featured-image,.bubba-featured-image img { align-self:center; }
+ .bubba-hours-day { padding-inline:8px!important; }
+}
 .bubba-product-title,.bubba-product-title a,.bubba-product-title-copy { min-width:0; max-width:100%; overflow-wrap:anywhere!important; word-break:normal; white-space:normal!important; }
 .bubba-product-title a { display:flex; width:100%; }
 .bubba-product-badge { position:relative; max-width:100%; overflow:visible; background:linear-gradient(155deg,#FFE69B,#FED766 37%,#F3BD44 55%,#FFE69B 82%,#D7A127); box-shadow:inset 0 1px 0 #FFF4C8,0 1px 8px #FED76645; }

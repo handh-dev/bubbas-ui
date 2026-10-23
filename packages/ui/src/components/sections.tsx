@@ -10,6 +10,7 @@ import { Link } from './actions';
 import type { AnnouncementContent } from './announcement';
 import type { IconName } from './Icon';
 import { cn } from '../internal/utils';
+import { CompactLocationCard, CompactLocationGrid } from './website-sections';
 import { MarketingScope, MarketingHeader, MarketingFooter, MarketingHero, MarketingContent, MarketingProductCard, MarketingGrid, MarketingProductDetail, MarketingPromotion } from './marketing';
 
 /** Caller supplies cleared assets and real content. These sections never fetch business facts. */
@@ -20,9 +21,9 @@ export interface BrandLink { label: string; href: string; image?: SectionImage }
 function SectionActionLink({ action }: { action: SectionAction }) {
   return <Link href={action.href} external={action.external} className="rounded-bubba-control border border-ui-action-border bg-ui-primary px-5 py-3" textClassName="font-bold text-ui-action-text no-underline">{action.label}</Link>;
 }
-export interface SiteHeaderProps extends SectionProps { brand: BrandLink; links: readonly SectionAction[]; action?: SectionAction; children?: ReactNode; announcement?: AnnouncementContent; announcementCompact?: AnnouncementContent; auxiliaryLinks?: readonly SectionAction[]; currentPath?: string; socialLinks?: readonly SectionAction[] }
-export function SiteHeader({ brand, links, action, children, className, variant, announcement, announcementCompact, auxiliaryLinks, currentPath, socialLinks, ...props }: SiteHeaderProps) {
-  if (variant === 'marketing') return <MarketingScope><MarketingHeader {...props} {...{brand, links, action, children, className, announcement, announcementCompact, auxiliaryLinks, currentPath, socialLinks}} /></MarketingScope>;
+export interface SiteHeaderProps extends SectionProps { brand: BrandLink; links: readonly SectionAction[]; action?: SectionAction; children?: ReactNode; announcement?: AnnouncementContent; announcementCompact?: AnnouncementContent; auxiliaryLinks?: readonly SectionAction[]; currentPath?: string; socialLinks?: readonly SectionAction[]; showSocialLinks?: boolean; showMotionControl?: boolean; announcementScrollBehavior?: 'static' | 'hide' }
+export function SiteHeader({ brand, links, action, children, className, variant, announcement, announcementCompact, auxiliaryLinks, currentPath, socialLinks, showSocialLinks, showMotionControl, announcementScrollBehavior, ...props }: SiteHeaderProps) {
+  if (variant === 'marketing') return <MarketingScope><MarketingHeader {...props} {...{brand, links, action, children, className, announcement, announcementCompact, auxiliaryLinks, currentPath, socialLinks, showSocialLinks, showMotionControl, announcementScrollBehavior}} /></MarketingScope>;
   return <View {...props} role="banner" className={cn('border-b border-ui-line bg-ui-surface py-4', className)}><Container><Inline justify="between" gap={6}>
     <Link href={brand.href} accessibilityLabel={brand.label}>{brand.image ? <Image source={{ uri: brand.image.uri }} accessibilityLabel={brand.image.alt} resizeMode="contain" className="h-16 w-48" /> : brand.label}</Link>
     <Inline role="navigation" accessibilityLabel="Main navigation" gap={4}>{links.map((link) => <Link key={link.href} href={link.href} external={link.external} textClassName="font-bold no-underline">{link.label}</Link>)}{action ? <SectionActionLink action={action} /> : null}</Inline>{children}
@@ -33,10 +34,10 @@ export function SiteFooter({ brand, links, description, children, className, var
   if (variant === 'marketing') return <MarketingScope><MarketingFooter {...props} {...{brand, links, description, children, className, linkGroups, socialLinks, copyright}} /></MarketingScope>;
   return <View {...props} role="contentinfo" className={cn('border-t border-ui-line bg-ui-surface py-8', className)}><Container><Stack gap={4}><Link href={brand.href}>{brand.label}</Link>{description ? <Text tone="muted">{description}</Text> : null}<Inline gap={4}>{links.map((link) => <Link key={link.href} href={link.href} external={link.external}>{link.label}</Link>)}</Inline>{children}</Stack></Container></View>;
 }
-export interface ContentSectionProps extends SectionProps { title?: string; description?: string; headingLevel?: 1 | 2 | 3; children?: ReactNode; eyebrow?: string; width?: 'standard' | 'wide'; surface?: 'default' | 'transparent' }
-export function ContentSection({ title, description, headingLevel = 2, children, className, variant, eyebrow, width='standard', surface='default', ...props }: ContentSectionProps) {
-  if (variant === 'marketing') return <MarketingScope><MarketingContent {...props} {...{title, description, headingLevel, children, className, eyebrow, width, surface}} /></MarketingScope>;
-  return <View {...props} className={cn('py-8 sm:py-12',surface==='transparent'&&'bg-transparent', className)}><Container width={width}><Stack gap={6}>{title ? <Heading level={headingLevel}>{title}</Heading> : null}{description ? <Text tone="muted">{description}</Text> : null}{children}</Stack></Container></View>;
+export interface ContentSectionProps extends SectionProps { title?: string; description?: string; headingLevel?: 1 | 2 | 3; children?: ReactNode; eyebrow?: string; width?: 'standard' | 'wide'; surface?: 'default' | 'transparent'; titleVisibility?: 'visible' | 'hidden' }
+export function ContentSection({ title, description, headingLevel = 2, children, className, variant, eyebrow, width='standard', surface='default', titleVisibility='visible', ...props }: ContentSectionProps) {
+  if (variant === 'marketing') return <MarketingScope><MarketingContent {...props} {...{title, description, headingLevel, children, className, eyebrow, width, surface, titleVisibility}} /></MarketingScope>;
+  return <View {...props} className={cn('py-8 sm:py-12',surface==='transparent'&&'bg-transparent', className)}><Container width={width}><Stack gap={6}>{title ? <Heading level={headingLevel} className={titleVisibility==='hidden'?'sr-only':undefined}>{title}</Heading> : null}{description ? <Text tone="muted">{description}</Text> : null}{children}</Stack></Container></View>;
 }
 export interface HeroSectionProps extends SectionProps { title: string; description?: string; eyebrow?: string; image?: SectionImage; imageNativeID?: string; action?: SectionAction; children?: ReactNode; logoImage?: SectionImage; actions?: readonly SectionAction[] }
 export function HeroSection({ title, description, eyebrow, image, imageNativeID, action, children, className, variant, logoImage, actions, ...props }: HeroSectionProps) {
@@ -59,14 +60,16 @@ export interface CategoryCardProps extends SectionProps { category: CategoryPres
 export function CategoryCard({ category, ...props }: CategoryCardProps) { return <ProductCard {...props} product={category} />; }
 export interface CategoryGridProps extends SectionProps { items: readonly CategoryPresentation[]; emptyLabel?: string }
 export function CategoryGrid(props: CategoryGridProps) { return <ProductGrid {...props} emptyLabel={props.emptyLabel ?? 'No categories to display.'} />; }
-export interface LocationPresentation { id: string; title: string; href?: string; address: readonly string[]; hoursLabel?: string; statusLabel?: string; phoneLabel?: string; description?: string; actions?: readonly SectionAction[] }
-export interface LocationCardProps extends SectionProps { location: LocationPresentation }
-export function LocationCard({ location, className, variant, ...props }: LocationCardProps) {
+export interface LocationPresentation { id: string; title: string; href?: string; address: readonly string[]; hoursLabel?: string; statusLabel?: string; statusTone?: 'neutral' | 'success' | 'warning'; distanceLabel?: string; phoneLabel?: string; phoneHref?: string; description?: string; actions?: readonly SectionAction[] }
+export interface LocationCardProps extends SectionProps { location: LocationPresentation; density?: 'default' | 'compact' }
+export function LocationCard({ location, className, variant, density='default', ...props }: LocationCardProps) {
+  if (density === 'compact') return <CompactLocationCard {...props} location={location} className={className}/>;
   const card = <Card {...props} className={cn('gap-4', variant === 'marketing' && 'p-5', variant !== 'marketing' && className)}><Heading level={3} className={variant === 'marketing' ? 'text-2xl font-black uppercase italic' : undefined}>{location.href ? <Link href={location.href} textClassName="font-bold no-underline">{location.title}</Link> : location.title}</Heading><Stack gap={1} className="loc-address">{location.address.map((line, index) => <Text key={index}>{line}</Text>)}</Stack>{location.hoursLabel ? <Text>{location.hoursLabel}</Text> : null}{location.phoneLabel ? <Text>{location.phoneLabel}</Text> : null}{location.description ? <Text>{location.description}</Text> : null}{location.statusLabel ? <Text variant="label">{location.statusLabel}</Text> : null}<Inline gap={3}>{location.actions?.map((action) => <Link key={action.href} href={action.href} external={action.external}>{action.label}</Link>)}</Inline></Card>;
   return variant === 'marketing' ? <MarketingScope className={className}>{card}</MarketingScope> : card;
 }
-export interface LocationGridProps extends SectionProps { items: readonly LocationPresentation[]; emptyLabel?: string }
-export function LocationGrid({ items, emptyLabel = 'Location information is unavailable.', className, variant, ...props }: LocationGridProps) {
+export interface LocationGridProps extends SectionProps { items: readonly LocationPresentation[]; emptyLabel?: string; density?: 'default' | 'compact' }
+export function LocationGrid({ items, emptyLabel = 'Location information is unavailable.', className, variant, density='default', ...props }: LocationGridProps) {
+  if (density === 'compact') return <CompactLocationGrid {...props} items={items} emptyLabel={emptyLabel} className={className}/>;
   return <Inline {...props} align="stretch" gap={6} className={className}>{items.length ? items.map((location) => <LocationCard key={location.id} variant={variant} location={location} className="min-w-0 flex-1 basis-80" />) : <Text tone="muted">{emptyLabel}</Text>}</Inline>;
 }
 export interface ProductDetailProps extends SectionProps { product: ProductPresentation; children?: ReactNode; legacyGalleryHooks?: boolean }
