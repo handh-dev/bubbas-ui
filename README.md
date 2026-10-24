@@ -1,7 +1,7 @@
 # @bubbasfw/ui
 
 Bubba’s universal design system for Next.js, Vite, Astro, Expo, iOS and Android.
-Owner-reviewed `@bubbasfw/ui@0.7.0` contains 32 controls, the shared Icon library, 15 reusable sections and three task
+Owner-reviewed `@bubbasfw/ui@0.8.4` contains 32 controls, the shared Icon library, reusable sections and three task
 patterns built with React Native primitives and NativeWind, plus semantic
 themes, a visual review workbench and complete Web/Expo galleries.
 
@@ -275,7 +275,25 @@ no glow or movement; reduced motion removes travel. Native keeps the same sizing
 solid brand fill, label, semantics and restrained native shadow without a new
 gradient dependency. Default application controls retain their previous design.
 
-## Owner-reviewed web revision 0.7.0
+## Owner-reviewed website pages 0.8.4
+
+Owner-approved 0.8.4 is published unchanged to npm and the public reference.
+The official registry download matches the one original archive, all 104 live
+reference files match the frozen qualified output, and the full 38-route live
+browser gate passed. See [the release record](docs/releases/0.8.4.md) for exact
+source/tag, archive, publication and qualification identities. Consumer adoption
+and live acceptance remain separately owned.
+
+This release adds compact location search/map/cards and supplied hours,
+accessible safety/FAQ, featured products, review-location links and aligned
+illustrated offer cards. Apps retain Core facts, actions and rights-qualified
+artwork. The scroll-linked announcement exits smoothly, desktop navigation
+restores after mounted responsive resizing, and the decorative-motion control
+stays in the footer. Foundation system 0.5.0 and prior normal variants remain
+supported. Earlier archive README/candidate wording is historical and is never
+rewritten through a repack.
+
+## Previous owner-reviewed web revision 0.7.0
 
 Owner-reviewed 0.7.0 is published to npm and the public reference. The official
 registry download matches the original candidate24 bytes, all104 reference files

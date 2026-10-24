@@ -1,4 +1,15 @@
-## Current release — 0.7.0 · October 23, 2026
+## Current release — 0.8.4 · October 24, 2026
+
+The owner approved exact revision-5 source 5eb2a374 and original archive 8296424e.
+Published npm 0.8.4 byte-matches that original (961,648 bytes / 111 members);
+latest 0.8.4, source PR #18 / merge 61fa9eaf and annotated tag v0.8.4 are verified.
+The frozen 104-file public reference and full 38-route live browser gate pass.
+Read [the release record](docs/releases/0.8.4.md) for full identities, receipts,
+processing/authentication timing and native/device limits. No rebuild/repack or
+consumer host action accompanies this release-record-only update. Older candidate
+and pause notes below are historical; app activation stays separately owned.
+
+## Previous release — 0.7.0 · October 23, 2026
 
 Owner-approved candidate24 is published unchanged to npm and the cleared public
 reference. Source PR16 merged as146523ae; tagv0.7.0 preserves that exact merge.
