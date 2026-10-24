@@ -25,8 +25,9 @@ rights.
 
 Use the normal shadcn CLI and the component source it installs in your app.
 Bubba supplies semantic theme variables, not replacement component APIs.
-In a Tailwind 4 app, load the theme after Tailwind and after any CLI-generated
-default theme declarations so the Bubba variables take precedence:
+In a Tailwind 4 app, import the theme after Tailwind. Replace the CLI-generated
+neutral `:root`/`.dark` variable blocks with this adapter; keeping a later neutral
+block would override the Bubba theme. Keep other app CSS and animation imports:
 
 ```css
 @import "tailwindcss";
