@@ -112,7 +112,7 @@ async function qualify(archive,sourceReceipt){
   const {packageRoot,members,version}=await inspectArchive(archive,path.join(evidence,'artifact'));
   report.archive={...report.archive,version,members};report.checks.artifact={status:'passed'};
   // Node resolution from the extracted artifact uses the producer's exact installed tools.
-  const {symlink}=await import('node:fs/promises');await symlink(path.join(root,'node_modules'),path.join(evidence,'artifact/node_modules'),'dir');
+  const {symlink}=await import('node:fs/promises');await symlink(path.join(root,'packages/ui/node_modules'),path.join(packageRoot,'node_modules'),'dir');
   await ownedRun(process.execPath,['scripts/verify-web-forms.mjs',packageRoot,path.join(evidence,'forms')],root,evidence,'forms');report.checks.forms={status:'passed'};
   await ownedRun(process.execPath,['scripts/verify-website-sections.mjs','--package-root',packageRoot,'--evidence',path.join(evidence,'sections')],root,evidence,'sections');report.checks.websiteSections={status:'passed'};
   const next=path.join(consumers,'next');await cp(path.join(root,'examples/next'),next,{recursive:true,filter:file=>!['node_modules','.next'].includes(path.basename(file))&&!file.endsWith('.tsbuildinfo')});
