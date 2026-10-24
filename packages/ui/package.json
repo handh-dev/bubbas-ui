@@ -1,7 +1,7 @@
 {
   "name": "@bubbasfw/ui",
-  "version": "0.8.5",
-  "description": "Bubba\u2019s universal React Native and web design system, styled with NativeWind.",
+  "version": "0.9.0",
+  "description": "Bubba\u2019s shared web design system. Historical root/native compatibility exports remain available without a new native-support promise.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -152,6 +152,7 @@
     "systemVersion": "0.5.0",
     "brandRelease": "1.0.0",
     "foundationDigest": "6519085b9a56c315f7f2994f562ed6c0d7c0d260f05c687cd47f38020a37cd77",
-    "sourceCommit": "31be2db4c6626f5a48d871d6a7a27bac8b7a04b9"
+    "sourceCommit": "31be2db4c6626f5a48d871d6a7a27bac8b7a04b9",
+    "releaseContract": "web-only-v1"
   }
 }

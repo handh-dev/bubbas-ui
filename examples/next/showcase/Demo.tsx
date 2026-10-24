@@ -1,2 +1,2 @@
-export { ComponentDemo } from "@bubbasfw/ui";
-export type { DemoProps, DemoContext } from "@bubbasfw/ui";
+export { ComponentDemo } from "@bubbasfw/ui/web";
+export type { DemoProps, DemoContext } from "@bubbasfw/ui/web";

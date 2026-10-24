@@ -8,10 +8,10 @@
   },
   "scripts": {
     "build": "pnpm verify:shadcn && pnpm verify:shared && pnpm verify:foundations && pnpm --filter @bubbasfw/ui build",
-    "typecheck": "pnpm --filter @bubbasfw/ui typecheck && pnpm --filter './examples/*' --if-present typecheck && pnpm --filter './apps/*' --if-present typecheck",
-    "verify": "pnpm build && pnpm typecheck && pnpm verify:fonts",
+    "typecheck": "pnpm --filter @bubbasfw/ui typecheck && pnpm --filter @bubbasfw/example-next typecheck && pnpm --filter @bubbasfw/docs typecheck",
+    "verify": "pnpm build && pnpm typecheck",
     "verify:fonts": "node scripts/verify-fonts.mjs",
-    "pack": "pnpm verify:foundations && pnpm --filter @bubbasfw/ui pack",
+    "pack": "node scripts/verify-package.mjs --pack",
     "dev:web": "pnpm --filter @bubbasfw/example-next dev",
     "dev:expo": "pnpm --filter @bubbasfw/example-expo start",
     "verify:package": "node scripts/verify-package.mjs",
@@ -31,7 +31,10 @@
     "verify:promotion": "node scripts/verify-promotion.mjs",
     "verify:website:sections": "node scripts/verify-website-sections.mjs",
     "sync:shadcn": "node scripts/shadcn-theme.mjs",
-    "verify:shadcn": "node scripts/shadcn-theme.mjs --check"
+    "verify:shadcn": "node scripts/shadcn-theme.mjs --check",
+    "verify:legacy:native": "pnpm verify:fonts && node scripts/verify-package.mjs --native-only",
+    "verify:legacy:full": "node scripts/verify-package.mjs --legacy-full",
+    "test:package:commands": "node --test tests/package-command.test.mjs"
   },
   "devDependencies": {
     "@types/node": "24.10.1",

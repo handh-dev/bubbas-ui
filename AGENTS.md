@@ -1,3 +1,13 @@
+## Current web-only candidate contract
+
+The owner-approved October 24 fast-web specification supersedes older mandatory
+native/Studio-review obligations for new web releases. Read the new 0.9.0
+contract in README.md. Preserve the existing native primitives, compatibility
+exports, published originals and mobile pins. Current default checks select web;
+historical native/full checks are explicit. Qualify the chosen original archive,
+never repack it during qualification. Review in the actual affected website;
+Studio deployment is outside this path. This source candidate remains unpublished.
+
 # Contributor and agent guidance
 
 - Coding start: run `2brain` where available. Wstack project context is in w.md.
