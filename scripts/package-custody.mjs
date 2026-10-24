@@ -45,9 +45,9 @@ export async function validateQualification(root,archive,reportFile){
  assert.equal(report.mode,'web','Web qualification mode required');assert.equal(report.status,'passed','Completed passing qualification required');
  assert.equal(report.cleanup,'complete','Owned cleanup must complete');
  assert.equal(report.completion,'uninterrupted-cleanup-v1','Uninterrupted package completion required');
- const lifecycle=report.checks?.webConsumer?.lifecycle;
- assert.ok(lifecycle?.ownedReadiness&&lifecycle.uninterrupted&&lifecycle.cleanup==='complete'&&((lifecycle.exitCode===0&&lifecycle.signal===null)||(lifecycle.exitCode===null&&lifecycle.signal==='SIGTERM')),'Successful owned consumer lifecycle required');
  for(const name of requiredChecks)assert.equal(report.checks?.[name]?.status,'passed',`Missing required web outcome: ${name}`);
+ const lifecycle=report.checks?.webConsumer?.lifecycle;
+ assert.ok(lifecycle?.ownedReadiness===true&&lifecycle.uninterrupted===true&&lifecycle.cleanup==='complete'&&((lifecycle.exitCode===0&&lifecycle.signal===null)||(lifecycle.exitCode===null&&lifecycle.signal==='SIGTERM')),'Successful owned consumer lifecycle required');
  assert.equal(report.archive.sha256,sha(await readFile(archive)),'Qualified original archive differs');
  assert.deepEqual(report.verificationIdentity,await sourceIdentity(root),'Source contents changed since qualification');
  assert.deepEqual(report.tools,toolsIdentity(),'Required package tools changed');
