@@ -1,6 +1,6 @@
 {
   "name": "@bubbasfw/ui",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "Bubba\u2019s universal React Native and web design system, styled with NativeWind.",
   "license": "MIT",
   "type": "module",
@@ -77,7 +77,9 @@
       },
       "import": "./dist/web-runtime.js",
       "require": "./dist/web-runtime.cjs"
-    }
+    },
+    "./shadcn.css": "./shadcn.css",
+    "./shadcn-theme.css": "./shadcn-theme.css"
   },
   "files": [
     "dist",
@@ -88,7 +90,9 @@
     "foundations",
     "foundations.lock.json",
     "web",
-    "icons"
+    "icons",
+    "shadcn.css",
+    "shadcn-theme.css"
   ],
   "sideEffects": [
     "**/*.css"
@@ -112,7 +116,7 @@
     "bubbas"
   ],
   "scripts": {
-    "build": "node ../../scripts/foundations.mjs --check && tsup && node ../../scripts/build-web.mjs",
+    "build": "node ../../scripts/shadcn-theme.mjs --check && node ../../scripts/foundations.mjs --check && tsup && node ../../scripts/build-web.mjs",
     "typecheck": "tsc --noEmit",
     "prepack": "pnpm build"
   },
@@ -124,11 +128,23 @@
     "react-native": "^0.86.3",
     "react-native-web": "^0.21.4",
     "nativewind": "^4.2.7",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "^3.4.17 || ^4.0.0",
     "react-native-css-interop": "^0.2.7"
   },
   "peerDependenciesMeta": {
     "react-native-web": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "nativewind": {
+      "optional": true
+    },
+    "react-native-css-interop": {
+      "optional": true
+    },
+    "tailwindcss": {
       "optional": true
     }
   },

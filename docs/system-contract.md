@@ -725,3 +725,16 @@ native devices. Metallic paint, moving gleam, gold twinkles and motion preferenc
 are the same existing implementation, with no static icon in the offer.
 All other23 composition and selected20 marquee settings remain unchanged;
 original23 stays immutable, publication/deployment remain paused.
+
+## Standard shadcn consumers — 0.8.5 candidate
+
+The CSS-only `shadcn.css` entry maps standard shadcn semantic variables to the
+pinned Studio0.5.0 foundation. The consumer installs upstream components directly
+with its normal CLI, dependencies and API; UI adds no DOM control implementation.
+`shadcn-theme.css` is the same variable contract without Tailwind4 directives.
+Generated files are checked from immutable foundation input at build/pack time
+with `pnpm verify:shadcn`; deliberate refresh uses `pnpm sync:shadcn`.
+Native source/runtime exports and their platform peer requirements remain
+unchanged. Native-only peers are optional for install because CSS-only consumers
+do not execute them. No publication, website/Studio adoption or production Social
+activation follows from this source candidate.
