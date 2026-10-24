@@ -36,12 +36,80 @@
 .bubba-hero-actions [data-bubba-action] { min-height:48px!important; max-width:calc((100% - 8px)/2); min-width:0; padding:10px 12px!important; border-radius:8px!important; flex-shrink:1; }
 .bubba-hero-actions .bubba-action-label { font-size:clamp(10px,3.3cqw,14px)!important; line-height:20px!important; }
 .bubba-content-transparent { background:transparent!important; }
-.bubba-header-row { min-height:80px; }
+.bubba-header-row { min-height:80px!important; }
+@media (min-width:1000px) {
+ .bubba-header-compact .bubba-header-row { display:grid!important; grid-template-columns:auto minmax(0,1fr) auto; gap:16px!important; padding-inline:24px!important; }
+ .bubba-header-compact .bubba-header-brand { grid-column:1; grid-row:1; justify-self:start; }
+ .bubba-header-compact .bubba-header-nav { grid-column:2; grid-row:1; }
+ .bubba-header-compact .bubba-header-actions { grid-column:3; grid-row:1; justify-self:end; width:max-content; max-width:100%; }
+ .bubba-header-compact .bubba-header-nav { display:flex!important; position:relative!important; width:auto!important; min-width:0; flex-wrap:wrap; justify-content:center; gap:4px 12px!important; }
+ .bubba-header-compact .bubba-header-nav a { max-width:100%; }
+ .bubba-header-compact .bubba-header-nav a > div { font-size:11px!important; white-space:normal!important; overflow-wrap:anywhere; }
+ .bubba-header-compact .bubba-header-brand img { max-width:96px!important; }
+ .bubba-header-compact .bubba-header-primary-action { display:flex!important; }
+ .bubba-header-compact:not(.bubba-header-has-extra) .bubba-header-menu-toggle { display:none!important; }
+ .bubba-header-compact[data-bubba-nav-fits="true"] .bubba-header-nav { flex-wrap:nowrap; }
+ .bubba-header-compact[data-bubba-nav-fits="false"] .bubba-header-nav { display:none!important; }
+ .bubba-header-compact[data-bubba-nav-fits="false"] .bubba-header-menu-toggle { display:flex!important; }
+}
+/* Scroll follows the document exactly. The full layout box remains invariant,
+   so a fixed host's spacer/ResizeObserver cannot feed back into scroll position. */
+.bubba-header-scroll { transform:translate3d(0,calc(-1 * var(--bubba-header-scroll-offset,0px)),0); will-change:transform; }
+@media (prefers-reduced-motion:reduce) { .bubba-header-scroll { transform:none!important; will-change:auto; } }
 .bubba-nav-link { position:relative; min-height:44px; padding:0 !important; }
 .bubba-nav-link::after { content:""; position:absolute; height:2px; bottom:9px; left:0; right:0; background:#D40000; transform:scaleX(0); transform-origin:left; transition:transform 180ms ease; }
 .bubba-nav-link:hover::after,.bubba-nav-link:focus-visible::after,.bubba-nav-link[aria-current="page"]::after { transform:scaleX(1); }
 .bubba-product-image > div { width:100%; display:flex; }
 .bubba-product-card { height:100%; }
+/* Compact directory / featured rows are shared compositions, not host overrides. */
+.bubba-location-compact-scope { container-type:inline-size; }
+.bubba-location-card { box-shadow:0 2px 8px #03256C06; }
+.bubba-location-title { overflow-wrap:anywhere; }
+.bubba-location-title a { min-height:0!important; }
+.bubba-location-action[data-bubba-action] { width:100%!important; min-height:44px!important; padding:10px 12px!important; box-shadow:none!important; }
+.bubba-location-action .bubba-action-label { font-size:12px!important; line-height:18px!important; text-transform:none!important; letter-spacing:normal!important; white-space:normal!important; overflow-wrap:anywhere; }
+.bubba-location-actions { width:44px; flex-shrink:0; }
+@container (min-width:220px) { .bubba-location-card { display:grid!important; grid-template-columns:minmax(0,1fr) 44px; align-items:start; } }
+.bubba-location-info img { margin-top:2px; flex-shrink:0; }
+.bubba-location-icon-action { box-shadow:0 2px 5px #03256C12; }
+.bubba-location-icon-action:hover { filter:brightness(.92); }
+.bubba-location-feature-badge { box-shadow:inset 0 0 0 1px #FED766; }
+.bubba-location-search-submit[data-bubba-action],.bubba-locate-button[data-bubba-action] { box-shadow:none; }
+.bubba-location-search-row { flex-wrap:wrap!important; }
+.bubba-location-search-field { flex-basis:280px!important; }
+.bubba-location-search-row .bubba-action-label { text-transform:none!important; letter-spacing:normal!important; }
+.bubba-locate-button[data-bubba-action] { flex-shrink:1; }
+.bubba-map-frame { isolation:isolate; touch-action:none; cursor:grab; overscroll-behavior:contain; }
+.bubba-map-frame[data-map-dragging="true"] { cursor:grabbing; }
+.bubba-map-tiles { filter:grayscale(1); }
+.bubba-map-pin { width:24px!important; height:24px!important; min-width:24px!important; min-height:24px!important; z-index:2; }
+.bubba-map-pin:focus-visible { z-index:5; }
+.bubba-map-dot { width:10px!important; height:10px!important; pointer-events:none!important; }
+.bubba-map-controls,.bubba-map-attribution { z-index:4; cursor:default; }
+.bubba-map-controls { box-shadow:0 2px 8px #03256C20; }
+.bubba-map-controls [role="button"] { border-radius:0; border:0; padding:0!important; }
+.bubba-map-attribution > div { background:#FFFFFFE8; border-radius:3px; padding:2px 5px; }
+.bubba-faq-trigger:hover { background:#F4F8FF; }
+.bubba-faq-item-open { border-color:#0866FF!important; box-shadow:0 3px 12px #03256C0A; }
+.bubba-faq-trigger { background:transparent; box-shadow:none; }
+.bubba-featured-card { container-type:inline-size; }
+.bubba-featured-card .bubba-product-badge { padding:2px 6px!important; }
+.bubba-featured-card .bubba-product-badge-label { font-size:10px!important; line-height:14px!important; }
+.bubba-offer-card { position:relative; box-shadow:0 4px 14px #03256C0C; }
+.bubba-offer-social,.bubba-offer-review { background:#EAF3FF!important; border-top:4px solid #0866FF!important; }
+.bubba-offer-guarantee { border-top:4px solid #D40000!important; }
+.bubba-offer-art { pointer-events:none; }
+.bubba-offer-art:has(a) { pointer-events:auto; }
+.bubba-offer-card h2 { overflow-wrap:anywhere; }
+.bubba-review-location-link:hover { border-color:#0866FF; background:#EAF3FF; }
+@media (max-width:760px) {
+ .bubba-location-search-field { flex-basis:100%!important; }
+ .bubba-location-search-submit[data-bubba-action],.bubba-locate-button[data-bubba-action] { flex:1!important; min-width:0!important; width:auto!important; padding-inline:10px!important; }
+ .bubba-location-search-row .bubba-action-label { font-size:12px!important; }
+ .bubba-featured-products .bubba-featured-card { flex-direction:column!important; }
+ .bubba-featured-image,.bubba-featured-image img { align-self:center; }
+ .bubba-hours-day { padding-inline:8px!important; }
+}
 .bubba-product-title,.bubba-product-title a,.bubba-product-title-copy { min-width:0; max-width:100%; overflow-wrap:anywhere!important; word-break:normal; white-space:normal!important; }
 .bubba-product-title a { display:flex; width:100%; }
 .bubba-product-badge { position:relative; max-width:100%; overflow:visible; background:linear-gradient(155deg,#FFE69B,#FED766 37%,#F3BD44 55%,#FFE69B 82%,#D7A127); box-shadow:inset 0 1px 0 #FFF4C8,0 1px 8px #FED76645; }

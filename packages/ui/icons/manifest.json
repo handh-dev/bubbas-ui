@@ -1,6 +1,7 @@
 {
   "lucide": "lucide-static@1.61.0",
   "simpleIcons": "simple-icons@16.35.0",
+  "original": "MIT source geometry · proposed UI motifs; see original/NOTICE.md",
   "rasterizer": "Playwright bundled Chromium 156.0.8078.4",
   "icons": {
     "search": {
@@ -49,6 +50,69 @@
       "source": "lucide/arrow-right.svg",
       "sourceSha256": "78af91b2c9d7cf8ea9564c3ca28a4f9021cced57aee0bc3bc801d68555d5b8e1",
       "pngSha256": "ce909a1361d7e64c88daca7c46e16c0ae93bed5d4973274a4e33df45b70d0298",
+      "width": 96,
+      "height": 96
+    },
+    "mapPin": {
+      "source": "lucide/map-pin.svg",
+      "sourceSha256": "2c2c016ef465ff3a5115ef0c4b92b5ca331fdb7d4c98119e958100acd88fa743",
+      "pngSha256": "eb91495f8111558581aeb6454867a45c05d622cd2bde9a6ad8722cece949b3ab",
+      "width": 96,
+      "height": 96
+    },
+    "clock": {
+      "source": "lucide/clock-3.svg",
+      "sourceSha256": "554415a5c1c93adccedffe3171f96bcbe57a0b013c3431bbb228b93524464198",
+      "pngSha256": "d22d4a4298a6b5eb81a8d1cd12d5c87b3074af57816987735cc91e9fea2b0241",
+      "width": 96,
+      "height": 96
+    },
+    "phone": {
+      "source": "lucide/phone.svg",
+      "sourceSha256": "1decebcfd8b5358d9f508c260fd69d3713fcc7ab3b8355bb258309ea71b18ba6",
+      "pngSha256": "6be7f0189496bbff6ec87b27f8fa8f0546e73a70e327bfc182bbd1e1ed43bc94",
+      "width": 96,
+      "height": 96
+    },
+    "directions": {
+      "source": "lucide/navigation.svg",
+      "sourceSha256": "76133ef627bb252564c2923886ef13d052116d15c3e989a97a466cdecb787862",
+      "pngSha256": "eca127ca80eb6672366da4925fb896ba44c2b0c9d06a3c8945830645cd30b974",
+      "width": 96,
+      "height": 96
+    },
+    "fit": {
+      "source": "lucide/locate-fixed.svg",
+      "sourceSha256": "d97e2eae9d183e5fcc92cbda49cc5ccc8bf2fd121a91efa2b699a4085f5efc45",
+      "pngSha256": "a4e62fabe27f73d6aafdf829c9f069215443c67b384dd4b1ebeaba2524f3e95d",
+      "width": 96,
+      "height": 96
+    },
+    "star": {
+      "source": "lucide/star.svg",
+      "sourceSha256": "29d57a6721d440f84328f183f684fd54bd5ec49f8aa8b45a2902974c30770361",
+      "pngSha256": "1b4511fca7b6fab99f27a0f02a01bff7e52c7b1520dcaad2e260f344934b9170",
+      "width": 96,
+      "height": 96
+    },
+    "popIts": {
+      "source": "original/pop-its.svg",
+      "sourceSha256": "2403252d2ada040071582fffc0f7b7d54c72971fe70f1d7cceb40f8ecd088590",
+      "pngSha256": "00aaf43089e2e249b9556b65aa8d43a969f114bdb55b4ea27df65c78426353aa",
+      "width": 96,
+      "height": 96
+    },
+    "money": {
+      "source": "original/money.svg",
+      "sourceSha256": "e3710a5e1e2e399bf8d3370c8859b357aec4da4133029d57093c56038045ff02",
+      "pngSha256": "8c427dfcbc6f9c1ac07b8dd95a1a31c98c1747e9a169ccd265180cbe43c9ed32",
+      "width": 96,
+      "height": 96
+    },
+    "fountain": {
+      "source": "original/fountain.svg",
+      "sourceSha256": "7407d18670118b558633ddcda2314947ebac7bf20c3db1039b8d7a6f13365de6",
+      "pngSha256": "ee228c551eee9309a1198ed233b5ef733e2c096877e2e8621af0f45d371c8c2b",
       "width": 96,
       "height": 96
     },

@@ -10,9 +10,9 @@ const toneClasses = {
   neutral: 'bg-ui-selected', info: 'bg-ui-info-surface', success: 'bg-ui-success-surface', warning: 'bg-ui-warning-surface', error: 'bg-ui-error-surface',
 };
 const toneText = { neutral: 'text-ui-text', info: 'text-ui-info', success: 'text-ui-success', warning: 'text-ui-warning', error: 'text-ui-error' };
-export interface BadgeProps extends ViewProps { children: ReactNode; tone?: StatusTone; className?: string; textClassName?: string }
-export function Badge({ children, tone = 'neutral', className, textClassName, ...props }: BadgeProps) {
-  return <View {...props} className={cn('self-start rounded-full px-3 py-1', toneClasses[tone], className)}><Text variant="small" className={cn('font-semibold', toneText[tone], textClassName)}>{children}</Text></View>;
+export interface BadgeProps extends ViewProps { children: ReactNode; leading?: ReactNode; tone?: StatusTone; className?: string; textClassName?: string }
+export function Badge({ children, leading, tone = 'neutral', className, textClassName, ...props }: BadgeProps) {
+  return <View {...props} className={cn('self-start rounded-full px-3 py-1',Boolean(leading)&&'flex-row items-center gap-1', toneClasses[tone], className)}>{leading}<Text variant="small" className={cn('font-semibold', toneText[tone], textClassName)}>{children}</Text></View>;
 }
 
 export interface AvatarProps extends ViewProps {

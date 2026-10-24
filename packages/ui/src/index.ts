@@ -27,6 +27,7 @@ export { tokens } from './tokens';
 export type { BubbaTokens } from './tokens';
 
 export * from './components/sections';
+export * from './components/website-sections';
 export * from './catalog';
 
 export { Icon } from './components/Icon';
