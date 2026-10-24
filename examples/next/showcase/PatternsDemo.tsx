@@ -1,1 +1,1 @@
-export { PatternsDemo } from "@bubbasfw/ui";
+export { PatternsDemo } from "@bubbasfw/ui/web";

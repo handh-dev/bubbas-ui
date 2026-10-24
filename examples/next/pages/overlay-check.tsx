@@ -1,26 +1,26 @@
 import { useState } from "react";
-import { View } from "react-native";
 import {
   Button,
+  Stack,
   Dialog,
   Input,
   Sheet,
   Text,
   ThemeProvider,
-} from "@bubbasfw/ui";
+} from "@bubbasfw/ui/web";
 export default function OverlayCheck() {
   const [show, setShow] = useState(true);
   const [nested, setNested] = useState(false);
   return (
     <ThemeProvider>
-      <View className="min-h-screen gap-6 p-8">
+      <Stack gap={6} style={{ padding: 32 }}>
         <Text>Overlay compatibility fixture</Text>
         <Button testID="default-reopen" onPress={() => setShow(true)}>
           Open initial dialog
         </Button>
-        <View className="h-[1400px]">
+        <Stack style={{ minHeight: 1400 }}>
           <Text>Background scroll content.</Text>
-        </View>
+        </Stack>
         {show ? (
           <Dialog
             defaultOpen
@@ -31,7 +31,7 @@ export default function OverlayCheck() {
             closeLabel="Close initial"
             testID="default-overlay"
           >
-            <View className="gap-4">
+            <Stack gap={4}>
               <Input accessibilityLabel="Initial example field" />
               <Button testID="nested-open" onPress={() => setNested(true)}>
                 Open nested sheet
@@ -47,10 +47,10 @@ export default function OverlayCheck() {
                   Finish nested example
                 </Button>
               </Sheet>
-            </View>
+            </Stack>
           </Dialog>
         ) : null}
-      </View>
+      </Stack>
     </ThemeProvider>
   );
 }

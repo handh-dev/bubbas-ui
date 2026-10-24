@@ -186,7 +186,7 @@ if (importIndex !== -1) {
   await writeFile(path.join(ui, 'foundations.lock.json'), `${JSON.stringify(lock, null, 2)}\n`);
   const packagePath = path.join(ui, 'package.json');
   const pkg = await json(packagePath);
-  pkg.bubba = { systemVersion: lock.systemVersion, brandRelease: lock.brandRelease, foundationDigest: lock.foundationDigest, sourceCommit: lock.sourceCommit };
+  pkg.bubba = { ...pkg.bubba, systemVersion: lock.systemVersion, brandRelease: lock.brandRelease, foundationDigest: lock.foundationDigest, sourceCommit: lock.sourceCommit };
   await writeFile(packagePath, `${JSON.stringify(pkg, null, 2)}\n`);
 }
 const validated = await validate(vendor);

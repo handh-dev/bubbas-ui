@@ -5,11 +5,12 @@ import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { verifyGallery, verifyOverlayFixture } from './verify-gallery.mjs';
 import { verifyPatterns } from './verify-patterns.mjs';
-import { tokens } from '../packages/ui/dist/tokens.js';
 
-export async function verifyWeb(url, evidenceDirectory) {
+
+export async function verifyWeb(url, evidenceDirectory, { signal } = {}) {
   await mkdir(evidenceDirectory, { recursive: true });
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({executablePath:chromium.executablePath()});
+  const cancel=()=>{void browser.close();};signal?.addEventListener('abort',cancel,{once:true});if(signal?.aborted)cancel();
   const errors = [];
   try {
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
@@ -29,7 +30,7 @@ export async function verifyWeb(url, evidenceDirectory) {
         height: element.getBoundingClientRect().height,
       };
     });
-    assert.equal(paint.background, `rgb(${[1, 3, 5].map((start) => parseInt(tokens.themes.light.primary.slice(start, start + 2), 16)).join(', ')})`, 'NativeWind package styles must reach the browser');
+    assert.equal(paint.background, `rgb(${[1, 3, 5].map((start) => parseInt('D40000'.slice(start - 1, start + 1), 16)).join(', ')})`, 'NativeWind package styles must reach the browser');
     assert.ok(paint.height >= 44, 'The default touch target must be at least 44px tall');
     assert.ok(parseFloat(paint.paddingLeft) > 0, 'Package spacing utilities must be compiled');
     const compact = await page.getByTestId('compact-button').boundingBox();
@@ -75,10 +76,12 @@ export async function verifyWeb(url, evidenceDirectory) {
     await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     await page.screenshot({ path: path.join(evidenceDirectory, 'next-mobile.png'), fullPage: true });
     assert.deepEqual(errors, [], 'No browser runtime errors');
-    const result = { url, paint, compact, focus, pointerPress: true, keyboardPress: true, disabled: true, loading: true, mobileWidth: 390, gallery, patterns, overlayFixture, errors };
+    if(signal?.aborted)throw signal.reason??new Error('Browser verification interrupted');
+    const result = { browserVersion:browser.version(), url, paint, compact, focus, pointerPress: true, keyboardPress: true, disabled: true, loading: true, mobileWidth: 390, gallery, patterns, overlayFixture, errors };
     await writeFile(path.join(evidenceDirectory, 'web.json'), `${JSON.stringify(result, null, 2)}\n`);
     return result;
   } finally {
+    signal?.removeEventListener('abort',cancel);
     await browser.close();
   }
 }

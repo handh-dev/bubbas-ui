@@ -1,5 +1,57 @@
 # @bubbasfw/ui
 
+## New web contract — unpublished 0.9.0 candidate
+
+New releases support web use through `@bubbasfw/ui/web` and
+`@bubbasfw/ui/web.css`. The existing React Native Web/NativeWind implementation,
+root/native compatibility exports and immutable foundations are preserved.
+Existing mobile consumers retain their published pins; this contract adds no
+new Expo, iOS or Android qualification. Native examples and the historical
+verifier remain available explicitly.
+
+Review shared design changes in the actual affected website localhost preview.
+Studio remains the source of approved identity, artwork rights and foundations;
+a Studio catalog update or deployment is not a website release requirement.
+Applications retain content, navigation, actions, authentication and Core access.
+Only the owner approves the exact reviewed design and release.
+
+Pack once, then qualify that original archive:
+
+```sh
+pnpm run pack --destination artifacts/candidates/0.9.0
+pnpm verify:package --archive /absolute/original.tgz --source-receipt /absolute/source.json
+pnpm verify:package --archive /absolute/original.tgz --check-report /absolute/report.json
+```
+
+The first command builds and creates one original plus its source receipt. The
+second consumes those bytes without rebuilding/repacking; it checks artifact
+custody, actual `/web` forms/sections and the independent Next production
+consumer. Reuse requires identical source contents (including supported
+untracked inputs), original archive, required mode and lock/tool inputs. Reports
+start incomplete and pass only after required outcomes and owned cleanup. The
+portable report retains the actual resolved Next consumer lock and tool versions,
+selected bundled Chromium launcher/engine digests and external map-fixture digest.
+Reuse validates these inputs; a later fresh resolution is a different qualification.
+Original production source/tool custody remains distinct from the verifier
+source/tool snapshot; a verifier correction can test the retained original
+without changing its bytes. Foundation imports replace their four owned fields
+and preserve package-owned release metadata. Current packaged sources must match
+the retained original; its original builder/helper snapshot remains immutable. The website deliberately vendors this same original
+and pins the immutable
+qualification report alongside it before build/dev/preview.
+
+`pnpm verify` and `pnpm typecheck` select shared/web checks. Run
+`pnpm verify:legacy:native` or `pnpm verify:legacy:full` only for explicitly scoped
+historical compatibility work. Emitting preserved root declarations/JavaScript
+is not a new native acceptance claim. The Next example uses the actual `/web`
+entry and prebuilt stylesheet; its existing dependency set is retained during
+this initial tooling transition, including React Native declaration types.
+
+This source candidate is unpublished and unqualified until the real archive and
+website checks finish. Published 0.8.4/0.8.5 originals remain immutable.
+
+## Historical universal setup and release notes
+
 Bubba’s universal design system for Next.js, Vite, Astro, Expo, iOS and Android.
 Owner-reviewed `@bubbasfw/ui@0.8.4` contains 32 controls, the shared Icon library, reusable sections and three task
 patterns built with React Native primitives and NativeWind, plus semantic

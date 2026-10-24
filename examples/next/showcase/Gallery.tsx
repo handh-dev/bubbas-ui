@@ -1,1 +1,1 @@
-export { Gallery } from "@bubbasfw/ui";
+export { Gallery } from "@bubbasfw/ui/web";

@@ -1,1 +1,1 @@
-export { renderFoundationsDemo } from "@bubbasfw/ui";
+export { renderFoundationsDemo } from "@bubbasfw/ui/web";

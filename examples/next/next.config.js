@@ -1,22 +1,2 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
-  reactStrictMode: true,
-  transpilePackages: [
-    '@bubbasfw/ui',
-    'nativewind',
-    'react-native-css-interop',
-    'react-native',
-    'react-native-web',
-  ],
-  webpack(config) {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      'react-native$': 'react-native-web',
-    };
-    config.resolve.extensions = [
-      '.web.tsx', '.web.ts', '.web.jsx', '.web.js',
-      ...config.resolve.extensions,
-    ];
-    return config;
-  },
-};
+module.exports = { reactStrictMode: true, transpilePackages: ['@bubbasfw/ui', 'react-native-web'] };
