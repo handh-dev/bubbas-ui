@@ -18,7 +18,7 @@ Only the owner approves the exact reviewed design and release.
 Pack once, then qualify that original archive:
 
 ```sh
-pnpm pack --destination artifacts/candidates/0.9.0
+pnpm run pack --destination artifacts/candidates/0.9.0
 pnpm verify:package --archive /absolute/original.tgz --source-receipt /absolute/source.json
 pnpm verify:package --archive /absolute/original.tgz --check-report /absolute/report.json
 ```
