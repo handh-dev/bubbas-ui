@@ -34,6 +34,8 @@
   --sidebar-accent-foreground: #131B23;
   --sidebar-border: #E4E6EA;
   --sidebar-ring: #03256C;
+  --bubba-shadcn-link: #03256C;
+  --bubba-shadcn-error: #B42318;
   --radius: 4px;
   --radius-panel: 12px;
   --font-sans: Montserrat, Arial, sans-serif;
@@ -73,7 +75,19 @@
   --sidebar-accent-foreground: #FFFFFF;
   --sidebar-border: #3D3D3D;
   --sidebar-ring: #FFFFFF;
+  --bubba-shadcn-link: #8DC7FF;
+  --bubba-shadcn-error: #FFAEA8;
   --radius: 4px;
   --radius-panel: 12px;
   --font-sans: Montserrat, Arial, sans-serif;
+}
+
+/* Text-only variants need foreground inks, while solid destructive actions retain
+ * a red fill with white labels. Keep upstream component source and APIs intact. */
+[data-slot="button"][data-variant="link"] {
+  --primary: var(--bubba-shadcn-link);
+}
+[data-slot="alert"],
+[data-slot="dropdown-menu-item"][data-variant="destructive"] {
+  --destructive: var(--bubba-shadcn-error);
 }

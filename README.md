@@ -65,7 +65,10 @@ appearance provider. Put the selected appearance on the document root so
 portalled dialogs, menus and tooltips inherit it. Montserrat remains host-loaded;
 no font or artwork is bundled. Four-pixel controls and twelve-pixel panels derive
 from the pinned foundation. Primary actions use the original red; focus uses
-navy in Light and white in Dark. Chart colors identify series, not business facts.
+navy in Light and white in Dark. Standard link buttons use the canonical link
+ink; destructive alerts and menu items use the readable error ink. These scoped
+semantic mappings leave the solid destructive Button red with a white label and
+keep upstream component source unchanged. Chart colors identify series, not business facts.
 
 `0.8.5` is an unpublished candidate until explicit owner publication approval.
 The real Social dashboard is the installation/interaction proof; it owns its
