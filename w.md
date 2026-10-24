@@ -1,3 +1,11 @@
+## October 24 shadcn compatibility candidate
+
+Unpublished0.8.5 adds the CSS-only standard shadcn theme and optional native peers.
+The universal implementation and immutable0.5.0 foundation stay unchanged.
+See [candidate scope and release boundary](docs/releases/0.8.5-candidate.md).
+Social is the actual consumer proof; no production deployment or npm publication
+is authorized by this implementation task. Existing published0.8.4 remains live.
+
 ## Current release — 0.8.4 · October 24, 2026
 
 The owner approved exact revision-5 source 5eb2a374 and original archive 8296424e.

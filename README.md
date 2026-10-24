@@ -21,6 +21,56 @@ The code is licensed under [MIT](LICENSE). Bubba’s names and marks are not
 licensed as trademarks; separately supplied fonts and artwork retain their own
 rights.
 
+## Standard shadcn/ui components (0.8.5 candidate)
+
+Use the normal shadcn CLI and the component source it installs in your app.
+Bubba supplies semantic theme variables, not replacement component APIs.
+In a Tailwind 4 app, load the theme after Tailwind and after any CLI-generated
+default theme declarations so the Bubba variables take precedence:
+
+```css
+@import "tailwindcss";
+@import "@bubbasfw/ui/shadcn.css";
+```
+
+```sh
+pnpm add @bubbasfw/ui@0.8.5
+pnpm dlx shadcn@latest add button card input dialog
+```
+
+```tsx
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+
+<Card>
+  <CardHeader><CardTitle>Campaign overview</CardTitle></CardHeader>
+  <CardContent><Button onClick={save}>Save draft</Button></CardContent>
+</Card>
+```
+
+Use your project's actual import alias and existing `components.json` configuration.
+Keep CLI-generated components and their normal dependencies in the consumer.
+Do not import `web.css` or add React Native/NativeWind merely for shadcn components.
+The CSS-only path has no JavaScript runtime; native peers are optional at install.
+Existing universal/root and `/web` components still need their documented platform
+peers; NativeWind 4 continues to use Tailwind 3. The shadcn adapter supports
+Tailwind 4 and modern full-color CSS variables (not legacy `hsl(var(--primary))`
+Tailwind 3 configurations). `shadcn-theme.css` exports just the variables for
+hosts that maintain their own Tailwind mapping.
+
+Use the normal `.dark` root class or `data-bubba-theme="light|dark"` on the
+root. The host still owns System resolution and persistence; there is no second
+appearance provider. Put the selected appearance on the document root so
+portalled dialogs, menus and tooltips inherit it. Montserrat remains host-loaded;
+no font or artwork is bundled. Four-pixel controls and twelve-pixel panels derive
+from the pinned foundation. Primary actions use the original red; focus uses
+navy in Light and white in Dark. Chart colors identify series, not business facts.
+
+`0.8.5` is an unpublished candidate until explicit owner publication approval.
+The real Social dashboard is the installation/interaction proof; it owns its
+workflows, routing, auth, records and provider operations.
+
+
 ## Workspace
 
 ```text

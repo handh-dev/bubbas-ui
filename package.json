@@ -7,7 +7,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "build": "pnpm verify:shared && pnpm verify:foundations && pnpm --filter @bubbasfw/ui build",
+    "build": "pnpm verify:shadcn && pnpm verify:shared && pnpm verify:foundations && pnpm --filter @bubbasfw/ui build",
     "typecheck": "pnpm --filter @bubbasfw/ui typecheck && pnpm --filter './examples/*' --if-present typecheck && pnpm --filter './apps/*' --if-present typecheck",
     "verify": "pnpm build && pnpm typecheck && pnpm verify:fonts",
     "verify:fonts": "node scripts/verify-fonts.mjs",
@@ -29,7 +29,9 @@
     "dev:marquee": "node tools/focus-marquee-lab/server.mjs",
     "verify:marquee:lab": "node tools/focus-marquee-lab/verify.mjs",
     "verify:promotion": "node scripts/verify-promotion.mjs",
-    "verify:website:sections": "node scripts/verify-website-sections.mjs"
+    "verify:website:sections": "node scripts/verify-website-sections.mjs",
+    "sync:shadcn": "node scripts/shadcn-theme.mjs",
+    "verify:shadcn": "node scripts/shadcn-theme.mjs --check"
   },
   "devDependencies": {
     "@types/node": "24.10.1",
