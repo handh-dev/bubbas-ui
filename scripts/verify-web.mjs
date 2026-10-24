@@ -7,9 +7,10 @@ import { verifyGallery, verifyOverlayFixture } from './verify-gallery.mjs';
 import { verifyPatterns } from './verify-patterns.mjs';
 
 
-export async function verifyWeb(url, evidenceDirectory) {
+export async function verifyWeb(url, evidenceDirectory, { signal } = {}) {
   await mkdir(evidenceDirectory, { recursive: true });
   const browser = await chromium.launch({executablePath:chromium.executablePath()});
+  const cancel=()=>{void browser.close();};signal?.addEventListener('abort',cancel,{once:true});if(signal?.aborted)cancel();
   const errors = [];
   try {
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
@@ -75,10 +76,12 @@ export async function verifyWeb(url, evidenceDirectory) {
     await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     await page.screenshot({ path: path.join(evidenceDirectory, 'next-mobile.png'), fullPage: true });
     assert.deepEqual(errors, [], 'No browser runtime errors');
+    if(signal?.aborted)throw signal.reason??new Error('Browser verification interrupted');
     const result = { browserVersion:browser.version(), url, paint, compact, focus, pointerPress: true, keyboardPress: true, disabled: true, loading: true, mobileWidth: 390, gallery, patterns, overlayFixture, errors };
     await writeFile(path.join(evidenceDirectory, 'web.json'), `${JSON.stringify(result, null, 2)}\n`);
     return result;
   } finally {
+    signal?.removeEventListener('abort',cancel);
     await browser.close();
   }
 }

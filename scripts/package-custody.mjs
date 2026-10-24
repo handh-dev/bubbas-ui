@@ -29,8 +29,13 @@ export async function validateSourceReceipt(root,archive,receiptFile){
  assert.equal(receipt.policy,policy);
  assert.equal(receipt.archive.sha256,sha(await readFile(archive)),'Original archive differs from production receipt');
  const current=await sourceIdentity(root,true);
- assert.deepEqual(receipt.productionIdentity?.members,current.members,'Package production inputs changed since original archive production');
- assert.equal(receipt.productionIdentity?.contentSha256,current.contentSha256,'Package production contents changed');
+ assert.equal(receipt.productionIdentity?.contentSha256,sha(JSON.stringify(receipt.productionIdentity?.members)),'Original production snapshot is incomplete');
+ // The original records its original builder/helper inputs. A later verifier or
+ // importer correction does not rewrite that custody or require repacking it.
+ // Proposed package content must still be exactly the original packaged source.
+ const packaged=members=>Object.fromEntries(Object.entries(members??{}).filter(([name])=>name.startsWith('packages/ui/')));
+ const originalPackage=packaged(receipt.productionIdentity.members);assert.ok(Object.keys(originalPackage).length,'Original package source snapshot absent');
+ assert.deepEqual(packaged(current.members),originalPackage,'Package production contents changed since original archive production');
  return receipt;
 }
 export async function validateQualification(root,archive,reportFile){
@@ -39,6 +44,9 @@ export async function validateQualification(root,archive,reportFile){
  assert.equal(report.kind,'bubbas-ui-package');assert.equal(report.policy,policy);
  assert.equal(report.mode,'web','Web qualification mode required');assert.equal(report.status,'passed','Completed passing qualification required');
  assert.equal(report.cleanup,'complete','Owned cleanup must complete');
+ assert.equal(report.completion,'uninterrupted-cleanup-v1','Uninterrupted package completion required');
+ const lifecycle=report.checks?.webConsumer?.lifecycle;
+ assert.ok(lifecycle?.ownedReadiness&&lifecycle.uninterrupted&&lifecycle.cleanup==='complete'&&((lifecycle.exitCode===0&&lifecycle.signal===null)||(lifecycle.exitCode===null&&lifecycle.signal==='SIGTERM')),'Successful owned consumer lifecycle required');
  for(const name of requiredChecks)assert.equal(report.checks?.[name]?.status,'passed',`Missing required web outcome: ${name}`);
  assert.equal(report.archive.sha256,sha(await readFile(archive)),'Qualified original archive differs');
  assert.deepEqual(report.verificationIdentity,await sourceIdentity(root),'Source contents changed since qualification');

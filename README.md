@@ -34,7 +34,9 @@ selected bundled Chromium launcher/engine digests and external map-fixture diges
 Reuse validates these inputs; a later fresh resolution is a different qualification.
 Original production source/tool custody remains distinct from the verifier
 source/tool snapshot; a verifier correction can test the retained original
-without changing its bytes. The website deliberately vendors this same original
+without changing its bytes. Foundation imports replace their four owned fields
+and preserve package-owned release metadata. Current packaged sources must match
+the retained original; its original builder/helper snapshot remains immutable. The website deliberately vendors this same original
 and pins the immutable
 qualification report alongside it before build/dev/preview.
 
