@@ -76,7 +76,10 @@ the canonical schema, even if someone refreshes their manifest checksums.
 
 ## Pattern contracts
 
-### Website page compositions — proposed 0.8.4
+### Website page compositions — owner-approved 0.8.4
+
+The exact published identity and qualification are recorded in
+[the 0.8.4 release record](releases/0.8.4.md). Apps retain their own adoption gates.
 
 `LocationSearch` is a controlled city/ZIP field with combined search and optional
 device-location actions. Apps own lookup, geolocation permission, validation,
