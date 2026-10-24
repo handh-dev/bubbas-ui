@@ -148,10 +148,10 @@ async function checkNext(directory,evidence){
  const log=createWriteStream(path.join(evidence,'next-server.log'));
  const child=spawn(process.execPath,['--import',path.join(root,'scripts/package-consumer-runtime.mjs'),require.resolve('next/dist/bin/next'),'start','--hostname','127.0.0.1','--port',String(port)],{cwd:directory,env:{...process.env,BUBBAS_PACKAGE_RUNTIME_ID:runtimeId},detached:true,stdio:['ignore','pipe','pipe']});child.stdout.pipe(log,{end:false});child.stderr.pipe(log,{end:false});
  const exited=new Promise((resolve,reject)=>{child.once('error',reject);child.once('close',resolve);});
- let interrupted=false,expectedStop=false,unexpected,killTimer,outcome;
+ let interrupted=false,expectedStop=false,stopRequested=false,unexpected,killTimer,outcome;
  const alive=()=>child.exitCode===null&&child.signalCode===null;
  const guard=()=>assert.ok(alive()&&!unexpected,'Packed Next candidate exited prematurely');
- const terminate=()=>{if(alive()){try{process.kill(-child.pid,'SIGTERM');}catch{}killTimer??=setTimeout(()=>{if(alive())try{process.kill(-child.pid,'SIGKILL');}catch{}},10000);killTimer.unref();}};
+ const terminate=()=>{if(alive()){try{process.kill(-child.pid,'SIGTERM');stopRequested=true;}catch{}killTimer??=setTimeout(()=>{if(alive())try{process.kill(-child.pid,'SIGKILL');}catch{}},10000);killTimer.unref();}};
  const cancel=()=>{interrupted=true;controller.abort(new Error('Packed Next qualification interrupted'));terminate();};
  process.on('SIGINT',cancel);process.on('SIGTERM',cancel);
  const premature=exited.then(()=>{if(!expectedStop){unexpected=new Error('Packed Next candidate exited prematurely');controller.abort(unexpected);throw unexpected;}});premature.catch(()=>{});
@@ -168,8 +168,8 @@ async function checkNext(directory,evidence){
   try{await exited;await writeFile(runtimeFile,JSON.stringify({kind:'bubbas-ui-next-runtime',status:interrupted?'interrupted':unexpected||!outcome?'failed':'stopped',runtimeId,exitCode:child.exitCode,signal:child.signalCode,cleanup:alive()?'failed':'complete'},null,2)+'\n');}finally{clearTimeout(killTimer);process.removeListener('SIGINT',cancel);process.removeListener('SIGTERM',cancel);await new Promise(resolve=>log.end(resolve));}
  }
  assert.ok(!interrupted&&!unexpected,'Packed Next qualification interrupted or exited prematurely');
- assert.ok(child.exitCode===0||child.signalCode==='SIGTERM','Packed Next candidate did not stop successfully');
- const lifecycle={runtimeId,ownedReadiness:true,uninterrupted:true,cleanup:'complete',exitCode:child.exitCode,signal:child.signalCode};
+ assert.ok(stopRequested&&(child.exitCode===0||child.exitCode===143||child.signalCode==='SIGTERM'),'Packed Next candidate did not stop successfully');
+ const lifecycle={runtimeId,ownedReadiness:true,uninterrupted:true,stopRequested,cleanup:'complete',exitCode:child.exitCode,signal:child.signalCode};
  await writeFile(runtimeFile,JSON.stringify({kind:'bubbas-ui-next-runtime',status:'stopped',...lifecycle},null,2)+'\n');
  return{browserVersion:outcome.browserVersion,lifecycle};
 }
