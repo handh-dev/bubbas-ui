@@ -5,7 +5,7 @@ import {mkdir,mkdtemp,readFile,writeFile,rm,cp,readdir,lstat} from 'node:fs/prom
 import path from 'node:path';
 import {createRequire} from 'node:module';
 import {createServer} from 'node:net';
-import {policy,sha,sourceIdentity,toolsIdentity,validateSourceReceipt,validateQualification} from './package-custody.mjs';
+import {policy,sha,sourceIdentity,toolsIdentity,validateSourceReceipt,validateQualification,testInputIdentity,consumerToolIdentity} from './package-custody.mjs';
 const root=path.resolve(import.meta.dirname,'..');
 const flags=new Map();const booleans=new Set(['--web','--artifact-only','--native-only','--legacy-full','--pack']);
 try{
@@ -106,22 +106,26 @@ async function qualify(archive,sourceReceipt){
  const production=await validateSourceReceipt(root,archive,sourceReceipt);
  const base=path.join(root,'artifacts/verification');await mkdir(base,{recursive:true});
  const evidence=await mkdtemp(path.join(base,'web-'));const consumers=path.join(evidence,'consumers');
- const report={schemaVersion:1,kind:'bubbas-ui-package',policy,mode:'web',status:'running',sourceIdentity:production.sourceIdentity,verificationIdentity:await sourceIdentity(root),productionIdentity:production.productionIdentity,productionTools:production.tools,tools:toolsIdentity(),archive:{...production.archive},productionReceiptSha256:sha(await readFile(sourceReceipt)),command:'node scripts/verify-package.mjs --web --archive ORIGINAL --source-receipt SOURCE',checks:{},cleanup:'pending'};
+ const report={schemaVersion:1,kind:'bubbas-ui-package',policy,mode:'web',status:'running',sourceIdentity:production.sourceIdentity,verificationIdentity:await sourceIdentity(root),productionIdentity:production.productionIdentity,productionTools:production.tools,tools:toolsIdentity(),archive:{...production.archive},testInputs:await testInputIdentity(),productionReceiptSha256:sha(await readFile(sourceReceipt)),command:'node scripts/verify-package.mjs --web --archive ORIGINAL --source-receipt SOURCE',checks:{},cleanup:'pending'};
  const reportFile=path.join(evidence,'report.json');await writeFile(reportFile,JSON.stringify(report,null,2)+'\n');
  try{
   const {packageRoot,members,version}=await inspectArchive(archive,path.join(evidence,'artifact'));
   report.archive={...report.archive,version,members};report.checks.artifact={status:'passed'};
   // Node resolution from the extracted artifact uses the producer's exact installed tools.
   const {symlink}=await import('node:fs/promises');await symlink(path.join(root,'packages/ui/node_modules'),path.join(packageRoot,'node_modules'),'dir');
-  await ownedRun(process.execPath,['scripts/verify-web-forms.mjs',packageRoot,path.join(evidence,'forms')],root,evidence,'forms');report.checks.forms={status:'passed'};
-  await ownedRun(process.execPath,['scripts/verify-website-sections.mjs','--package-root',packageRoot,'--evidence',path.join(evidence,'sections')],root,evidence,'sections');report.checks.websiteSections={status:'passed'};
+  await ownedRun(process.execPath,['scripts/verify-web-forms.mjs',packageRoot,path.join(evidence,'forms')],root,evidence,'forms');const forms=JSON.parse(await readFile(path.join(evidence,'forms/report.json'),'utf8'));assert.equal(forms.browserVersion,report.testInputs.browser.version);report.checks.forms={status:'passed',browserVersion:forms.browserVersion};
+  await ownedRun(process.execPath,['scripts/verify-website-sections.mjs','--package-root',packageRoot,'--evidence',path.join(evidence,'sections')],root,evidence,'sections');const sections=JSON.parse(await readFile(path.join(evidence,'sections/report.json'),'utf8'));assert.equal(sections.browserVersion,report.testInputs.browser.version);report.checks.websiteSections={status:'passed',browserVersion:sections.browserVersion};
   const next=path.join(consumers,'next');await cp(path.join(root,'examples/next'),next,{recursive:true,filter:file=>!['node_modules','.next'].includes(path.basename(file))&&!file.endsWith('.tsbuildinfo')});
-  const manifest=JSON.parse(await readFile(path.join(next,'package.json'),'utf8'));manifest.dependencies['@bubbasfw/ui']=`file:${archive}`;await writeFile(path.join(next,'package.json'),JSON.stringify(manifest,null,2)+'\n');
+  const manifest=JSON.parse(await readFile(path.join(next,'package.json'),'utf8'));const consumerArchive='bubbasfw-ui-original.tgz';await cp(archive,path.join(next,consumerArchive));assert.equal(sha(await readFile(path.join(next,consumerArchive))),production.archive.sha256);manifest.dependencies['@bubbasfw/ui']=`file:./${consumerArchive}`;await writeFile(path.join(next,'package.json'),JSON.stringify(manifest,null,2)+'\n');
   await writeFile(path.join(next,'pnpm-workspace.yaml'),'packages: []\nallowBuilds:\n  esbuild: true\n  sharp: true\nstrictPeerDependencies: true\n');
-  await ownedRun('pnpm',['install','--no-frozen-lockfile'],next,evidence,'web-install');await ownedRun('pnpm',['typecheck'],next,evidence,'web-typecheck');await ownedRun('pnpm',['build'],next,evidence,'web-build');
-  await checkNext(next,evidence);report.checks.webConsumer={status:'passed',entry:'@bubbasfw/ui/web',productionBuild:true,typecheck:true,browser:true};
+  await ownedRun('pnpm',['install','--no-frozen-lockfile'],next,evidence,'web-install');
+  const lockContents=await readFile(path.join(next,'pnpm-lock.yaml'),'utf8');
+  report.consumer={manifestSha256:sha(await readFile(path.join(next,'package.json'))),lockContents,lockSha256:sha(lockContents),tools:await consumerToolIdentity(next)};
+  assert.ok(!lockContents.includes(root),'Consumer lock must use portable original-archive paths');await writeFile(path.join(evidence,'next-consumer.pnpm-lock.yaml'),lockContents);
+  await ownedRun('pnpm',['typecheck'],next,evidence,'web-typecheck');await ownedRun('pnpm',['build'],next,evidence,'web-build');
+  const actualBrowser=await checkNext(next,evidence);assert.equal(actualBrowser,report.testInputs.browser.version,'Actual browser differs from recorded engine');report.checks.webConsumer={status:'passed',entry:'@bubbasfw/ui/web',productionBuild:true,typecheck:true,browser:true};
   assert.equal(sha(await readFile(archive)),production.archive.sha256,'Original archive changed during qualification');
-  assert.deepEqual(await sourceIdentity(root),report.verificationIdentity,'Source contents changed during qualification');assert.deepEqual(toolsIdentity(),report.tools,'Tools changed during qualification');
+  assert.deepEqual(await sourceIdentity(root),report.verificationIdentity,'Source contents changed during qualification');assert.deepEqual(toolsIdentity(),report.tools,'Tools changed during qualification');assert.deepEqual(await testInputIdentity(),report.testInputs,'Browser or external fixture changed during qualification');
   report.status='passed';
  }catch(error){report.status='failed';report.error=error.stack;process.exitCode=1;}
  finally{
@@ -137,6 +141,6 @@ async function checkNext(directory,evidence){
  const exited=new Promise(resolve=>child.once('close',resolve));
  try{
   let ready=false;for(let i=0;i<100&&child.exitCode===null;i++){try{ready=(await fetch(`http://127.0.0.1:${port}`,{signal:AbortSignal.timeout(1000)})).ok;}catch{}if(ready)break;await new Promise(resolve=>setTimeout(resolve,300));}assert.ok(ready,'Packed web consumer must start');
-  const {verifyWeb}=await import('./verify-web.mjs');await verifyWeb(`http://127.0.0.1:${port}`,evidence);
+  const {verifyWeb}=await import('./verify-web.mjs');const outcome=await verifyWeb(`http://127.0.0.1:${port}`,evidence);return outcome.browserVersion;
  }finally{stop();await Promise.race([exited,new Promise(resolve=>setTimeout(resolve,10000))]);try{process.kill(-child.pid,'SIGKILL');}catch{}await exited;process.removeListener('SIGINT',stop);process.removeListener('SIGTERM',stop);await new Promise(resolve=>log.end(resolve));}
 }

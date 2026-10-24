@@ -9,7 +9,7 @@ import { verifyPatterns } from './verify-patterns.mjs';
 
 export async function verifyWeb(url, evidenceDirectory) {
   await mkdir(evidenceDirectory, { recursive: true });
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({executablePath:chromium.executablePath()});
   const errors = [];
   try {
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
@@ -75,7 +75,7 @@ export async function verifyWeb(url, evidenceDirectory) {
     await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     await page.screenshot({ path: path.join(evidenceDirectory, 'next-mobile.png'), fullPage: true });
     assert.deepEqual(errors, [], 'No browser runtime errors');
-    const result = { url, paint, compact, focus, pointerPress: true, keyboardPress: true, disabled: true, loading: true, mobileWidth: 390, gallery, patterns, overlayFixture, errors };
+    const result = { browserVersion:browser.version(), url, paint, compact, focus, pointerPress: true, keyboardPress: true, disabled: true, loading: true, mobileWidth: 390, gallery, patterns, overlayFixture, errors };
     await writeFile(path.join(evidenceDirectory, 'web.json'), `${JSON.stringify(result, null, 2)}\n`);
     return result;
   } finally {

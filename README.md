@@ -28,7 +28,10 @@ second consumes those bytes without rebuilding/repacking; it checks artifact
 custody, actual `/web` forms/sections and the independent Next production
 consumer. Reuse requires identical source contents (including supported
 untracked inputs), original archive, required mode and lock/tool inputs. Reports
-start incomplete and pass only after required outcomes and owned cleanup.
+start incomplete and pass only after required outcomes and owned cleanup. The
+portable report retains the actual resolved Next consumer lock and tool versions,
+selected bundled Chromium launcher/engine digests and external map-fixture digest.
+Reuse validates these inputs; a later fresh resolution is a different qualification.
 Original production source/tool custody remains distinct from the verifier
 source/tool snapshot; a verifier correction can test the retained original
 without changing its bytes. The website deliberately vendors this same original

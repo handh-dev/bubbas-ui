@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {readFile,lstat} from 'node:fs/promises';
+import {createReadStream} from 'node:fs';
+import {createRequire} from 'node:module';
 import path from 'node:path';
 export const policy='bubbas-ui-web-v1';
 export const requiredChecks=['artifact','webConsumer','forms','websiteSections'];
@@ -41,5 +43,35 @@ export async function validateQualification(root,archive,reportFile){
  assert.equal(report.archive.sha256,sha(await readFile(archive)),'Qualified original archive differs');
  assert.deepEqual(report.verificationIdentity,await sourceIdentity(root),'Source contents changed since qualification');
  assert.deepEqual(report.tools,toolsIdentity(),'Required package tools changed');
+ assert.ok(report.consumer?.lockContents&&report.consumer?.lockSha256,'Resolved consumer lock is required');
+ assert.equal(sha(report.consumer.lockContents),report.consumer.lockSha256,'Resolved consumer lock differs');
+ assert.ok(report.consumer.manifestSha256&&report.consumer.tools?.next&&report.consumer.tools?.typescript,'Resolved consumer tools are required');
+ assert.deepEqual(report.consumer.tools,await consumerToolIdentity(path.join(root,'examples/next')),'Required consumer tools changed');
+ const inputs=await testInputIdentity();
+ assert.deepEqual(report.testInputs?.mapPinFixture,inputs.mapPinFixture,'External map fixture changed');
+ assert.deepEqual(report.testInputs?.browser,inputs.browser,'Required browser changed');
  return report;
+}
+
+async function fileSha256(file){const hash=createHash('sha256');for await(const chunk of createReadStream(file))hash.update(chunk);return hash.digest('hex');}
+export async function testInputIdentity(){
+ const require=createRequire(import.meta.url),{chromium}=await import('playwright');
+ const playwrightFile=require.resolve('playwright/package.json');
+ const playwright=JSON.parse(await readFile(playwrightFile,'utf8'));
+ const coreRoot=path.dirname(createRequire(playwrightFile).resolve('playwright-core/package.json'));
+ const metadata=JSON.parse(await readFile(path.join(coreRoot,'browsers.json'),'utf8')).browsers.find(item=>item.name==='chromium');
+ const executable=chromium.executablePath(),engineFiles={launcher:await fileSha256(executable)};
+ if(process.platform==='darwin')engineFiles.framework=await fileSha256(path.resolve(path.dirname(executable),'../Frameworks/Google Chrome for Testing Framework.framework/Versions/Current/Google Chrome for Testing Framework'));
+ if(process.platform==='win32')engineFiles.engine=await fileSha256(path.join(path.dirname(executable),'chrome.dll'));
+ const browser={playwright:playwright.version,name:'chromium',version:metadata.browserVersion,revision:metadata.revision,engineFiles};
+ const fixture=process.env.MAP_PIN_FIXTURE;
+ let mapPinFixture={kind:'builtin-synthetic'};
+ if(fixture){const stat=await lstat(fixture);assert.ok(stat.isFile()&&!stat.isSymbolicLink(),'Regular external map fixture required');mapPinFixture={kind:'external',sha256:await fileSha256(fixture),bytes:stat.size};}
+ return{browser,mapPinFixture};
+}
+
+export async function consumerToolIdentity(directory){
+ const require=createRequire(path.join(directory,'package.json')),tools={};
+ for(const name of ['next','typescript']){const file=require.resolve(`${name}/package.json`),bytes=await readFile(file);tools[name]={version:JSON.parse(bytes).version,packageSha256:sha(bytes)};}
+ return tools;
 }

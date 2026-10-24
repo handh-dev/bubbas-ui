@@ -44,7 +44,7 @@ const server = createServer(async (request, response) => {
 await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
 let browser;
 try {
-  browser = await chromium.launch();
+  browser = await chromium.launch({executablePath:chromium.executablePath()});
   const page = await browser.newPage(); const errors=[];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto(`http://127.0.0.1:${server.address().port}`, { waitUntil:'networkidle' });
@@ -104,6 +104,6 @@ try {
   const imageBox = await image.boundingBox(); assert.ok(imageBox && imageBox.width > 0 && imageBox.height > 0, 'Image owns visible layout');
   assert.deepEqual(errors, []);
   await page.screenshot({path:path.join(evidence,'form-and-image.png'),fullPage:true});
-  await writeFile(path.join(evidence,'report.json'),JSON.stringify({packageRoot:root,ssrTypes:true,ssrImage:true,ssrInheritedDirection:true,ssrCallbackDirection:true,objectStyles:true,arrayStyles:true,forwardedRef:true,callbackClassStyles:true,callbackPointerAndKeyboard:true,callbackFocus:true,inactiveCallback:true,reducedMotion:true,browserInheritedDirection:direction,hostDirection,clickSubmit:true,enterSubmit:true,requiredValidation:true,reset:true,defaultAction:true,preventDefault:true,disabled:true,loading:true,imageLoaded:true,errors},null,2)+'\n');
+  await writeFile(path.join(evidence,'report.json'),JSON.stringify({browserVersion:browser.version(),packageRoot:root,ssrTypes:true,ssrImage:true,ssrInheritedDirection:true,ssrCallbackDirection:true,objectStyles:true,arrayStyles:true,forwardedRef:true,callbackClassStyles:true,callbackPointerAndKeyboard:true,callbackFocus:true,inactiveCallback:true,reducedMotion:true,browserInheritedDirection:direction,hostDirection,clickSubmit:true,enterSubmit:true,requiredValidation:true,reset:true,defaultAction:true,preventDefault:true,disabled:true,loading:true,imageLoaded:true,errors},null,2)+'\n');
   console.log(`Form and SSR image checks passed: ${evidence}`);
 } finally { if(browser) await browser.close(); await new Promise((resolve) => server.close(resolve)); }
