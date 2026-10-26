@@ -1,4 +1,4 @@
-## Current web-only candidate contract
+## Current web-only release contract
 
 The owner-approved October 24 fast-web specification supersedes older mandatory
 native/Studio-review obligations for new web releases. Read the new 0.9.0
@@ -6,7 +6,8 @@ contract in README.md. Preserve the existing native primitives, compatibility
 exports, published originals and mobile pins. Current default checks select web;
 historical native/full checks are explicit. Qualify the chosen original archive,
 never repack it during qualification. Review in the actual affected website;
-Studio deployment is outside this path. This source candidate remains unpublished.
+Studio deployment is outside this path. The approved original 0.9.0 is published;
+read [its dated record](docs/releases/0.9.0.md) before claiming consumer adoption.
 
 # Contributor and agent guidance
 
@@ -47,7 +48,7 @@ update shared examples/contracts. Preserve Core boundaries and artwork rights.
 
 ## Current shared web release
 
-Read [the exact 0.8.4 release record](docs/releases/0.8.4.md) before changing a pin
+Read [the exact 0.9.0 release record](docs/releases/0.9.0.md) before changing a pin
 or claiming adoption. Published 0.6.0 is deprecated for dropped web Button caller
 styles and remains immutable. The 0.6.1 style-forwarding fix remains preserved
 through the owner-reviewed 0.8.4 website sections. Run `pnpm verify:web:forms` for the separate SSR,

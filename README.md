@@ -1,6 +1,11 @@
 # @bubbasfw/ui
 
-## New web contract — unpublished 0.9.0 candidate
+## Current web contract — published 0.9.0
+
+The owner-approved original 0.9.0 archive is published and adopted by the live
+website. Read [the October 26 release record](docs/releases/0.9.0.md) for exact
+archive/source identities and owning consumer evidence. The public Pages
+reference remains 0.8.4; Studio and existing mobile pins remain unchanged.
 
 New releases support web use through `@bubbasfw/ui/web` and
 `@bubbasfw/ui/web.css`. The existing React Native Web/NativeWind implementation,
@@ -15,7 +20,8 @@ a Studio catalog update or deployment is not a website release requirement.
 Applications retain content, navigation, actions, authentication and Core access.
 Only the owner approves the exact reviewed design and release.
 
-Pack once, then qualify that original archive:
+Pack once, then qualify that original archive. The commands below describe
+preparation; published 0.9.0 is frozen and must not be repacked:
 
 ```sh
 pnpm run pack --destination artifacts/candidates/0.9.0
@@ -47,8 +53,8 @@ is not a new native acceptance claim. The Next example uses the actual `/web`
 entry and prebuilt stylesheet; its existing dependency set is retained during
 this initial tooling transition, including React Native declaration types.
 
-This source candidate is unpublished and unqualified until the real archive and
-website checks finish. Published 0.8.4/0.8.5 originals remain immutable.
+The published 0.9.0 original and earlier 0.8.4/0.8.5 archives remain immutable.
+New candidates still require their own completed qualification and owner approval.
 
 ## Historical universal setup and release notes
 
