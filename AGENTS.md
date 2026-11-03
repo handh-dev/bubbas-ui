@@ -1,3 +1,5 @@
+Owner direction — November 3, 2026: bubba-design and ub-mode are optional references, never mandatory skills or release gates. Do not automatically invoke either or enforce their skill-derived workflows/scoring gates. Use proportionate verification for the requested task. This supersedes older skill mandates; preserve artwork rights, business data, credentials, and service ownership.
+
 ## Current web-only release contract
 
 The owner-approved October 24 fast-web specification supersedes older mandatory
@@ -38,13 +40,6 @@ read [its dated record](docs/releases/0.9.0.md) before claiming consumer adoptio
 Wstack project notes → [w.md](w.md).
 <!-- wstack:end setup -->
 
-<!-- bubba-design:begin -->
-Bubba’s design work: load the installed `bubba-design` skill before changing UI,
-brand, components, social/print compositions or their guidance. Its maintained
-source is `handh-dev/bubbas-brand-studio/skills/bubba-design/SKILL.md`.
-Reuse/extend the shared system, pin reviewed exports, integrate this app, and
-update shared examples/contracts. Preserve Core boundaries and artwork rights.
-<!-- bubba-design:end -->
 
 ## Current shared web release
 
